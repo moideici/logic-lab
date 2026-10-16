@@ -93,6 +93,54 @@ class RulesTests(unittest.TestCase):
 
 
 class NeuralTests(unittest.TestCase):
+    def test_express_planning_proves_minimal_puzzle_paths(self):
+        from logic_arena.neural import NeuralAgent
+        from logic_arena.planner import sliding_distance
+        agent=NeuralAgent()
+        self.assertEqual(agent.level,10)
+        env=make_game('sliding_puzzle')
+        env.board=[[8,6,7],[2,5,4],[3,0,1]]
+        self.assertEqual(sliding_distance(env.board),31)
+        for left in range(31,0,-1):
+            d=agent.choose(env.observation(),env.legal_actions())
+            self.assertEqual(d.info['remaining_moves'],left)
+            self.assertTrue(d.info['optimal'])
+            env.step(d.action)
+        self.assertEqual((env.moves,env.winner),(31,1))
+        for seed in (17,42,91):
+            env=make_game('sudoku',seed)
+            holes=sum(v==0 for row in env.board for v in row)
+            while not env.done and env.moves<100:
+                d=agent.choose(env.observation(),env.legal_actions())
+                self.assertNotIn('undo',d.action)
+                env.step(d.action)
+            self.assertEqual((env.winner,env.moves),(1,holes))
+
+    def test_morpion_takes_the_shortest_forced_win(self):
+        from logic_arena.neural import NeuralAgent
+        env=make_game('tictactoe')
+        env.board=[[1,1,0],[2,2,0],[0,0,0]]
+        d=NeuralAgent().choose(env.observation(),env.legal_actions())
+        self.assertEqual(d.action,{'row':0,'col':2})
+        self.assertEqual(d.info['remaining_moves'],1)
+        self.assertTrue(d.info['optimal'])
+
+    def test_express_2048_takes_a_winning_merge(self):
+        from logic_arena.neural import NeuralAgent
+        env=make_game('2048',42)
+        env.board=[[1024,1024,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+        d=NeuralAgent().choose(env.observation(),env.legal_actions())
+        env.step(d.action)
+        self.assertEqual((env.winner,env.moves),(1,1))
+
+    def test_express_2048_takes_a_winning_merge(self):
+        from logic_arena.neural import NeuralAgent
+        env=make_game('2048',42)
+        env.board=[[1024,1024,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+        d=NeuralAgent().choose(env.observation(),env.legal_actions())
+        env.step(d.action)
+        self.assertEqual((env.winner,env.moves),(1,1))
+
     def test_saved_models_mask_actions_and_share_core(self):
         suite=NeuralSuite.load()
         for name,m in suite.models.items():
@@ -137,7 +185,7 @@ class ProtocolTests(unittest.TestCase):
         self.assertFalse(self.arena.dispatch([])['ok'])
         self.assertFalse(self.arena.dispatch({'op':'step','session_id':sid,'action':{'row':True,'col':0}})['ok'])
         result=self.arena.dispatch({'op':'play','session_id':sid,'expected_revision':0})
-        self.assertTrue(result['ok']);self.assertEqual(result['result']['info']['agent'],'neural')
+        self.assertTrue(result['ok']);self.assertEqual(result['result']['info']['agent'],'neural+planner')
         self.assertEqual(result['result']['revision'],1)
         self.assertFalse(self.arena.dispatch({'op':'play','session_id':sid,'expected_revision':0})['ok'])
 

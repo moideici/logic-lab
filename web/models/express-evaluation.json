@@ -1,0 +1,1034 @@
+{
+  "runtime": "Node v24.19.0",
+  "level": 10,
+  "style": "balanced",
+  "interval_ms": 0,
+  "teacher_used": false,
+  "objective": "win_then_fewest_moves",
+  "note": "Les temps dépendent de la machine. Optimalité globale prouvée pour le taquin et les sudokus résolus sans annulation ; recherches bornées ou hasard pour les autres jeux.",
+  "games": {
+    "2048": {
+      "episodes": 5,
+      "wins": 4,
+      "draws": 0,
+      "losses": 1,
+      "truncated": 0,
+      "mean_moves": 966.4,
+      "mean_ms": 1371.11,
+      "opponent": null,
+      "minimum_verified": 0,
+      "samples": [
+        {
+          "seed": 1000000,
+          "winner": 1,
+          "moves": 987,
+          "minimum": null,
+          "ms": 1306
+        },
+        {
+          "seed": 1000001,
+          "winner": 1,
+          "moves": 970,
+          "minimum": null,
+          "ms": 1320
+        },
+        {
+          "seed": 1000002,
+          "winner": 1,
+          "moves": 957,
+          "minimum": null,
+          "ms": 1358
+        },
+        {
+          "seed": 1000003,
+          "winner": 0,
+          "moves": 936,
+          "minimum": null,
+          "ms": 1447
+        },
+        {
+          "seed": 1000004,
+          "winner": 1,
+          "moves": 982,
+          "minimum": null,
+          "ms": 1424
+        }
+      ]
+    },
+    "tictactoe": {
+      "episodes": 20,
+      "wins": 17,
+      "draws": 3,
+      "losses": 0,
+      "truncated": 0,
+      "mean_moves": 6.35,
+      "mean_ms": 1.21,
+      "opponent": "random_legal",
+      "minimum_verified": 0,
+      "samples": [
+        {
+          "seed": 1000000,
+          "winner": 1,
+          "moves": 5,
+          "minimum": null,
+          "ms": 15
+        },
+        {
+          "seed": 1000001,
+          "winner": 0,
+          "moves": 9,
+          "minimum": null,
+          "ms": 1
+        },
+        {
+          "seed": 1000002,
+          "winner": 1,
+          "moves": 5,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000003,
+          "winner": 2,
+          "moves": 6,
+          "minimum": null,
+          "ms": 1
+        },
+        {
+          "seed": 1000004,
+          "winner": 1,
+          "moves": 5,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000005,
+          "winner": 2,
+          "moves": 6,
+          "minimum": null,
+          "ms": 1
+        },
+        {
+          "seed": 1000006,
+          "winner": 1,
+          "moves": 5,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000007,
+          "winner": 2,
+          "moves": 8,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000008,
+          "winner": 1,
+          "moves": 5,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000009,
+          "winner": 2,
+          "moves": 6,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000010,
+          "winner": 1,
+          "moves": 5,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000011,
+          "winner": 2,
+          "moves": 6,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000012,
+          "winner": 1,
+          "moves": 5,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000013,
+          "winner": 2,
+          "moves": 6,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000014,
+          "winner": 1,
+          "moves": 5,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000015,
+          "winner": 0,
+          "moves": 9,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000016,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000017,
+          "winner": 2,
+          "moves": 8,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000018,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 0
+        },
+        {
+          "seed": 1000019,
+          "winner": 0,
+          "moves": 9,
+          "minimum": null,
+          "ms": 0
+        }
+      ]
+    },
+    "sudoku": {
+      "episodes": 20,
+      "wins": 20,
+      "draws": 0,
+      "losses": 0,
+      "truncated": 0,
+      "mean_moves": 51,
+      "mean_ms": 12.6,
+      "opponent": null,
+      "minimum_verified": 20,
+      "samples": [
+        {
+          "seed": 1000000,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 21
+        },
+        {
+          "seed": 1000001,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000002,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 13
+        },
+        {
+          "seed": 1000003,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 14
+        },
+        {
+          "seed": 1000004,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000005,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 14
+        },
+        {
+          "seed": 1000006,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000007,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000008,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000009,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000010,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 11
+        },
+        {
+          "seed": 1000011,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000012,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 11
+        },
+        {
+          "seed": 1000013,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000014,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 13
+        },
+        {
+          "seed": 1000015,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 13
+        },
+        {
+          "seed": 1000016,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 11
+        },
+        {
+          "seed": 1000017,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 11
+        },
+        {
+          "seed": 1000018,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 12
+        },
+        {
+          "seed": 1000019,
+          "winner": 1,
+          "moves": 51,
+          "minimum": 51,
+          "ms": 11
+        }
+      ]
+    },
+    "connect4": {
+      "episodes": 20,
+      "wins": 20,
+      "draws": 0,
+      "losses": 0,
+      "truncated": 0,
+      "mean_moves": 11.1,
+      "mean_ms": 126.94,
+      "opponent": "random_legal",
+      "minimum_verified": 0,
+      "samples": [
+        {
+          "seed": 1000000,
+          "winner": 1,
+          "moves": 17,
+          "minimum": null,
+          "ms": 215
+        },
+        {
+          "seed": 1000001,
+          "winner": 2,
+          "moves": 12,
+          "minimum": null,
+          "ms": 153
+        },
+        {
+          "seed": 1000002,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 64
+        },
+        {
+          "seed": 1000003,
+          "winner": 2,
+          "moves": 14,
+          "minimum": null,
+          "ms": 154
+        },
+        {
+          "seed": 1000004,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 63
+        },
+        {
+          "seed": 1000005,
+          "winner": 2,
+          "moves": 18,
+          "minimum": null,
+          "ms": 245
+        },
+        {
+          "seed": 1000006,
+          "winner": 1,
+          "moves": 15,
+          "minimum": null,
+          "ms": 184
+        },
+        {
+          "seed": 1000007,
+          "winner": 2,
+          "moves": 8,
+          "minimum": null,
+          "ms": 63
+        },
+        {
+          "seed": 1000008,
+          "winner": 1,
+          "moves": 11,
+          "minimum": null,
+          "ms": 154
+        },
+        {
+          "seed": 1000009,
+          "winner": 2,
+          "moves": 8,
+          "minimum": null,
+          "ms": 63
+        },
+        {
+          "seed": 1000010,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 62
+        },
+        {
+          "seed": 1000011,
+          "winner": 2,
+          "moves": 12,
+          "minimum": null,
+          "ms": 153
+        },
+        {
+          "seed": 1000012,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 63
+        },
+        {
+          "seed": 1000013,
+          "winner": 2,
+          "moves": 8,
+          "minimum": null,
+          "ms": 62
+        },
+        {
+          "seed": 1000014,
+          "winner": 1,
+          "moves": 11,
+          "minimum": null,
+          "ms": 152
+        },
+        {
+          "seed": 1000015,
+          "winner": 2,
+          "moves": 12,
+          "minimum": null,
+          "ms": 153
+        },
+        {
+          "seed": 1000016,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 62
+        },
+        {
+          "seed": 1000017,
+          "winner": 2,
+          "moves": 14,
+          "minimum": null,
+          "ms": 184
+        },
+        {
+          "seed": 1000018,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 63
+        },
+        {
+          "seed": 1000019,
+          "winner": 2,
+          "moves": 20,
+          "minimum": null,
+          "ms": 226
+        }
+      ]
+    },
+    "minesweeper": {
+      "episodes": 50,
+      "wins": 48,
+      "draws": 0,
+      "losses": 2,
+      "truncated": 0,
+      "mean_moves": 15.8,
+      "mean_ms": 3.26,
+      "opponent": null,
+      "minimum_verified": 0,
+      "samples": [
+        {
+          "seed": 1000000,
+          "winner": 1,
+          "moves": 24,
+          "minimum": null,
+          "ms": 10
+        },
+        {
+          "seed": 1000001,
+          "winner": 1,
+          "moves": 13,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000002,
+          "winner": 1,
+          "moves": 19,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000003,
+          "winner": 0,
+          "moves": 10,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000004,
+          "winner": 1,
+          "moves": 13,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000005,
+          "winner": 1,
+          "moves": 12,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000006,
+          "winner": 1,
+          "moves": 7,
+          "minimum": null,
+          "ms": 1
+        },
+        {
+          "seed": 1000007,
+          "winner": 1,
+          "moves": 15,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000008,
+          "winner": 1,
+          "moves": 13,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000009,
+          "winner": 1,
+          "moves": 11,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000010,
+          "winner": 1,
+          "moves": 28,
+          "minimum": null,
+          "ms": 5
+        },
+        {
+          "seed": 1000011,
+          "winner": 1,
+          "moves": 20,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000012,
+          "winner": 1,
+          "moves": 15,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000013,
+          "winner": 1,
+          "moves": 14,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000014,
+          "winner": 1,
+          "moves": 9,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000015,
+          "winner": 1,
+          "moves": 19,
+          "minimum": null,
+          "ms": 5
+        },
+        {
+          "seed": 1000016,
+          "winner": 1,
+          "moves": 18,
+          "minimum": null,
+          "ms": 5
+        },
+        {
+          "seed": 1000017,
+          "winner": 1,
+          "moves": 12,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000018,
+          "winner": 1,
+          "moves": 13,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000019,
+          "winner": 1,
+          "moves": 19,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000020,
+          "winner": 1,
+          "moves": 12,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000021,
+          "winner": 0,
+          "moves": 23,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000022,
+          "winner": 1,
+          "moves": 12,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000023,
+          "winner": 1,
+          "moves": 23,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000024,
+          "winner": 1,
+          "moves": 22,
+          "minimum": null,
+          "ms": 5
+        },
+        {
+          "seed": 1000025,
+          "winner": 1,
+          "moves": 18,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000026,
+          "winner": 1,
+          "moves": 12,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000027,
+          "winner": 1,
+          "moves": 14,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000028,
+          "winner": 1,
+          "moves": 23,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000029,
+          "winner": 1,
+          "moves": 16,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000030,
+          "winner": 1,
+          "moves": 17,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000031,
+          "winner": 1,
+          "moves": 15,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000032,
+          "winner": 1,
+          "moves": 21,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000033,
+          "winner": 1,
+          "moves": 17,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000034,
+          "winner": 1,
+          "moves": 11,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000035,
+          "winner": 1,
+          "moves": 10,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000036,
+          "winner": 1,
+          "moves": 20,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000037,
+          "winner": 1,
+          "moves": 12,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000038,
+          "winner": 1,
+          "moves": 16,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000039,
+          "winner": 1,
+          "moves": 17,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000040,
+          "winner": 1,
+          "moves": 14,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000041,
+          "winner": 1,
+          "moves": 13,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000042,
+          "winner": 1,
+          "moves": 21,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000043,
+          "winner": 1,
+          "moves": 15,
+          "minimum": null,
+          "ms": 4
+        },
+        {
+          "seed": 1000044,
+          "winner": 1,
+          "moves": 15,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000045,
+          "winner": 1,
+          "moves": 16,
+          "minimum": null,
+          "ms": 3
+        },
+        {
+          "seed": 1000046,
+          "winner": 1,
+          "moves": 14,
+          "minimum": null,
+          "ms": 5
+        },
+        {
+          "seed": 1000047,
+          "winner": 1,
+          "moves": 14,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000048,
+          "winner": 1,
+          "moves": 12,
+          "minimum": null,
+          "ms": 2
+        },
+        {
+          "seed": 1000049,
+          "winner": 1,
+          "moves": 21,
+          "minimum": null,
+          "ms": 4
+        }
+      ]
+    },
+    "sliding_puzzle": {
+      "episodes": 20,
+      "wins": 20,
+      "draws": 0,
+      "losses": 0,
+      "truncated": 0,
+      "mean_moves": 19.6,
+      "mean_ms": 1.08,
+      "opponent": null,
+      "minimum_verified": 20,
+      "samples": [
+        {
+          "seed": 1000000,
+          "winner": 1,
+          "moves": 20,
+          "minimum": 20,
+          "ms": 2
+        },
+        {
+          "seed": 1000001,
+          "winner": 1,
+          "moves": 16,
+          "minimum": 16,
+          "ms": 1
+        },
+        {
+          "seed": 1000002,
+          "winner": 1,
+          "moves": 22,
+          "minimum": 22,
+          "ms": 2
+        },
+        {
+          "seed": 1000003,
+          "winner": 1,
+          "moves": 18,
+          "minimum": 18,
+          "ms": 1
+        },
+        {
+          "seed": 1000004,
+          "winner": 1,
+          "moves": 22,
+          "minimum": 22,
+          "ms": 2
+        },
+        {
+          "seed": 1000005,
+          "winner": 1,
+          "moves": 16,
+          "minimum": 16,
+          "ms": 2
+        },
+        {
+          "seed": 1000006,
+          "winner": 1,
+          "moves": 24,
+          "minimum": 24,
+          "ms": 1
+        },
+        {
+          "seed": 1000007,
+          "winner": 1,
+          "moves": 12,
+          "minimum": 12,
+          "ms": 0
+        },
+        {
+          "seed": 1000008,
+          "winner": 1,
+          "moves": 18,
+          "minimum": 18,
+          "ms": 1
+        },
+        {
+          "seed": 1000009,
+          "winner": 1,
+          "moves": 18,
+          "minimum": 18,
+          "ms": 1
+        },
+        {
+          "seed": 1000010,
+          "winner": 1,
+          "moves": 16,
+          "minimum": 16,
+          "ms": 1
+        },
+        {
+          "seed": 1000011,
+          "winner": 1,
+          "moves": 26,
+          "minimum": 26,
+          "ms": 1
+        },
+        {
+          "seed": 1000012,
+          "winner": 1,
+          "moves": 16,
+          "minimum": 16,
+          "ms": 1
+        },
+        {
+          "seed": 1000013,
+          "winner": 1,
+          "moves": 26,
+          "minimum": 26,
+          "ms": 1
+        },
+        {
+          "seed": 1000014,
+          "winner": 1,
+          "moves": 22,
+          "minimum": 22,
+          "ms": 1
+        },
+        {
+          "seed": 1000015,
+          "winner": 1,
+          "moves": 20,
+          "minimum": 20,
+          "ms": 1
+        },
+        {
+          "seed": 1000016,
+          "winner": 1,
+          "moves": 18,
+          "minimum": 18,
+          "ms": 1
+        },
+        {
+          "seed": 1000017,
+          "winner": 1,
+          "moves": 24,
+          "minimum": 24,
+          "ms": 1
+        },
+        {
+          "seed": 1000018,
+          "winner": 1,
+          "moves": 14,
+          "minimum": 14,
+          "ms": 1
+        },
+        {
+          "seed": 1000019,
+          "winner": 1,
+          "moves": 24,
+          "minimum": 24,
+          "ms": 1
+        }
+      ]
+    }
+  }
+}

@@ -245,7 +245,7 @@ _MODELS = {}
 
 
 class NeuralAgent:
-    def __init__(self, level=8, style="balanced", seed=0, time_ms=None, planning=True):
+    def __init__(self, level=10, style="balanced", seed=0, time_ms=None, planning=True):
         ReferenceAgent(level, style, seed, time_ms)
         self.level, self.style, self.seed = level, style, seed
         self.time_ms = time_ms
@@ -277,6 +277,7 @@ class NeuralAgent:
         if self.planning:
             from .planner import plan
             action, plan_info = plan(obs, legal, model, self.level, action, self.time_ms)
+            plan_info["optimal_scope"] = "remaining_from_current_state"
         return Decision(action, {"agent": "neural", "method": "shared_mlp_policy", "level": self.level,
                                  "style": self.style, "time_ms": round((time.monotonic()-started)*1000, 3),
                                  "training_steps": model.steps, "shared_steps": model.core["steps"], **plan_info})

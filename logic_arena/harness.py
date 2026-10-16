@@ -23,11 +23,12 @@ ACTION_SCHEMAS = {
 
 
 def catalog():
+    from .planner import LIMITS, TIMES
     return {"protocol": "logic-arena.v1", "games": [{"id": k, "players": g.players, "action": ACTION_SCHEMAS[k]} for k, g in GAMES.items()],
             "styles": STYLES, "levels": [{"level": i+1, "reference_nodes": n, "reference_time_ms": TIME_LIMITS[i],
-                "neural_temperature": [2.,1.4,1.1,.9,.7,.55,.4,.25,.12,0.][i]} for i, n in enumerate(NODE_LIMITS)],
+                "neural_temperature": [2.,1.4,1.1,.9,.7,.55,.4,.25,.12,0.][i], "planning_nodes": LIMITS[i], "planning_time_ms": TIMES[i]} for i, n in enumerate(NODE_LIMITS)],
             "operations": ["catalog", "create", "observe", "step", "suggest", "play", "run", "stop", "delete"],
-            "realtime": "SSE /sessions/{session_id}/events"}
+            "realtime": "SSE /sessions/{session_id}/events", "default_level": 10, "default_interval_ms": 0, "objective": "win_then_fewest_moves"}
 
 
 def agent_config(config):
@@ -149,7 +150,7 @@ class Arena:
                 return session.apply(decision.action, decision.info)
             if session.game.done:
                 raise ValueError("Partie terminée")
-            limit, interval = req.get("max_steps", 500), req.get("interval_ms", 100)
+            limit, interval = req.get("max_steps", 5000), req.get("interval_ms", 0)
             if type(limit) is not int or not 1 <= limit <= 10000:
                 raise ValueError("max_steps doit être entre 1 et 10000")
             if type(interval) not in (int, float) or not math.isfinite(interval) or not 0 <= interval <= 10000:

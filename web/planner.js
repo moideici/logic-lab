@@ -1,9 +1,10 @@
 // Même file de recherche pour deux jeux : le réseau ordonne les branches,
 // les adaptateurs ne fournissent que transitions publiques et objectif.
 import {candidates,actionIndex,clone} from './engine.js';
+import {exactSliding,exactTictactoe,connectSearch,tileSearch,mineSearch} from './fast-search.js';
 const paths=new Map();
-const LIMITS=[8,20,50,100,250,600,1500,4000,10000,25000];
-const TIMES=[1,2,4,7,12,20,35,55,90,150];
+export const LIMITS=[16,50,150,500,1500,4000,10000,25000,50000,100000];
+export const TIMES=[.5,1,2,3,5,8,12,16,22,30];
 class Heap{
  constructor(){this.a=[];}
  push(v){let i=this.a.length;this.a.push(v);while(i){const p=(i-1)>>1;if(this.a[p].priority<=v.priority)break;this.a[i]=this.a[p];i=p;}this.a[i]=v;}
@@ -21,9 +22,17 @@ function adapter(o){
  };
 }
 export function planDecision(o,legal,model,level,decision){
- if(!['sudoku','sliding_puzzle'].includes(o.game)||o.done)return decision;
- const started=performance.now(),cache=paths.get(key(o));
- if(cache&&legal.some(a=>JSON.stringify(a)===JSON.stringify(cache)))return {action:cache,info:{...decision.info,agent:'neural+planner',method:'shared_search_cached',policy_confidence:decision.info.confidence,confidence:null,time_ms:decision.info.time_ms+performance.now()-started,nodes:0}};
+ if(o.done)return decision;
+ const began=performance.now();
+ if(o.game!=='sudoku'){
+  const logits=model.forward(o).z,budget={nodes:0,depth:level>=8?2:1,tick(){if(this.nodes++>=LIMITS[level-1]||performance.now()-began>=TIMES[level-1])throw Error('budget');}};
+  const solver={tictactoe:exactTictactoe,sliding_puzzle:exactSliding,connect4:connectSearch,'2048':tileSearch,minesweeper:mineSearch}[o.game];
+  if(!solver)return decision;
+  const result=solver(o,legal,logits,budget);
+  return {action:result.action,info:{...decision.info,agent:'neural+planner',policy_confidence:decision.info.confidence,confidence:null,objective:'win_then_fewest_moves',optimal_scope:'remaining_from_current_state',...result.info,time_ms:decision.info.time_ms+performance.now()-began}};
+ }
+ const started=performance.now(),cached=paths.get(key(o)),cache=cached?.action;
+ if(cache&&legal.some(a=>JSON.stringify(a)===JSON.stringify(cache)))return {action:cache,info:{...decision.info,agent:'neural+planner',method:'shared_search_cached',optimal_scope:'remaining_from_current_state',optimal:true,remaining_moves:cached.remaining,solution_found:true,policy_confidence:decision.info.confidence,confidence:null,time_ms:decision.info.time_ms+performance.now()-started,nodes:0}};
  const a=adapter(o),initial={board:clone(o.board),cost:0,path:[],priority:a.distance(o.board)},queue=new Heap(),seen=new Map([[JSON.stringify(o.board),0]]);
  queue.push(initial);let nodes=0,best=decision.action,bestH=a.distance(o.board),solved=null;
  while(queue.a.length&&nodes<LIMITS[level-1]&&performance.now()-started<TIMES[level-1]){
@@ -43,6 +52,7 @@ export function planDecision(o,legal,model,level,decision){
    queue.push({board,cost,path,priority});
   }
  }
- if(solved){for(const p of solved.path)paths.set(key({...o,board:p.board}),p.action);if(paths.size>5000)paths.clear();}
- return {action:best,info:{...decision.info,agent:'neural+planner',method:'shared_best_first',policy_confidence:decision.info.confidence,confidence:null,time_ms:decision.info.time_ms+performance.now()-started,nodes,node_limit:LIMITS[level-1],budget_ms:TIMES[level-1],solution_found:!!solved}};
+ if(solved){solved.path.forEach((p,i)=>paths.set(key({...o,board:p.board}),{action:p.action,remaining:solved.path.length-i}));if(paths.size>5000)paths.clear();}
+ if(!solved&&!queue.a.length&&legal.some(a=>a.undo))best={undo:true};
+ return {action:best,info:{...decision.info,agent:'neural+planner',method:'shared_best_first',policy_confidence:decision.info.confidence,confidence:null,time_ms:decision.info.time_ms+performance.now()-started,nodes,node_limit:LIMITS[level-1],budget_ms:TIMES[level-1],solution_found:!!solved,optimal_scope:'remaining_from_current_state',optimal:!!solved,remaining_moves:solved?.path.length??null,objective:'win_then_fewest_moves'}};
 }
