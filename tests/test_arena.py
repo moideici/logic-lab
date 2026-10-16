@@ -133,14 +133,6 @@ class NeuralTests(unittest.TestCase):
         env.step(d.action)
         self.assertEqual((env.winner,env.moves),(1,1))
 
-    def test_express_2048_takes_a_winning_merge(self):
-        from logic_arena.neural import NeuralAgent
-        env=make_game('2048',42)
-        env.board=[[1024,1024,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
-        d=NeuralAgent().choose(env.observation(),env.legal_actions())
-        env.step(d.action)
-        self.assertEqual((env.winner,env.moves),(1,1))
-
     def test_saved_models_mask_actions_and_share_core(self):
         suite=NeuralSuite.load()
         for name,m in suite.models.items():

@@ -21,11 +21,11 @@ function adapter(o){
   expand:b=>{let cell=null;for(let r=0;r<9;r++)for(let c=0;c<9;c++)if(!b[r][c]){const v=candidates(b,r,c);if(!cell||v.length<cell[0].length)cell=[v,r,c];}if(!cell)return [];const [vals,r,c]=cell;return vals.map(value=>{const child=clone(b);child[r][c]=value;return [{row:r,col:c,value},child];});}
  };
 }
-export function planDecision(o,legal,model,level,decision){
+export function planDecision(o,legal,model,level,decision,preparedLogits=null){
  if(o.done)return decision;
  const began=performance.now();
  if(o.game!=='sudoku'){
-  const logits=model.forward(o).z,budget={nodes:0,depth:level>=8?2:1,tick(){if(this.nodes++>=LIMITS[level-1]||performance.now()-began>=TIMES[level-1])throw Error('budget');}};
+  const logits=preparedLogits??model.forward(o).z,budget={nodes:0,depth:level>=8?2:1,criticalDepth:level>=9?3:level>=8?2:1,tick(){if(this.nodes++>=LIMITS[level-1]||performance.now()-began>=TIMES[level-1])throw Error('budget');}};
   const solver={tictactoe:exactTictactoe,sliding_puzzle:exactSliding,connect4:connectSearch,'2048':tileSearch,minesweeper:mineSearch}[o.game];
   if(!solver)return decision;
   const result=solver(o,legal,logits,budget);
@@ -40,7 +40,7 @@ export function planDecision(o,legal,model,level,decision){
   if(item.path.length&&h<bestH){bestH=h;best=item.path[0].action;}
   if(!h){solved=item;best=item.path[0]?.action||best;break;}
   const children=a.expand(item.board);let logits=null;
-  if(children.length>1)logits=model.forward({...o,board:item.board}).z;
+  if(children.length>1)logits=item.cost===0&&preparedLogits?preparedLogits:model.forward({...o,board:item.board}).z;
   const order=children.sort((x,y)=>logits?logits[actionIndex(o.game,y[0])]-logits[actionIndex(o.game,x[0])]:0);
   for(let i=0;i<order.length;i++){
    const [action,board]=order[i],k=JSON.stringify(board),cost=item.cost+1;

@@ -70,18 +70,20 @@ class Handler(SimpleHTTPRequestHandler):
                         else:
                             events = [e for e in session.events if e["seq"] > cursor]
                         if not events:
-                            if session.deleted:
+                            if session.deleted or session.events[-1]["type"] == "stopped":
                                 break
                             session.condition.wait(10)
-                            self.wfile.write(b": heartbeat\n\n")
-                            self.wfile.flush()
-                            continue
+                        terminal = session.events[-1]["type"] in ("stopped", "deleted")
+                    if not events:
+                        self.wfile.write(b": heartbeat\n\n")
+                        self.wfile.flush()
+                        continue
                     for event in events:
                         data = json.dumps(event, ensure_ascii=False, allow_nan=False)
                         self.wfile.write(f"id: {event['seq']}\nevent: {event['type']}\ndata: {data}\n\n".encode())
                         self.wfile.flush()
                         cursor = event["seq"]
-                    if events[-1]["type"] in ("stopped", "deleted"):
+                    if events[-1]["type"] in ("stopped", "deleted") or (events[-1]["type"] == "resync" and terminal):
                         break
             except (BrokenPipeError, ConnectionResetError):
                 pass

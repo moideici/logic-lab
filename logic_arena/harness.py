@@ -178,7 +178,16 @@ class Arena:
                         reason = "terminal"
                         break
                     agent = agents[session.game.current_player]
-                    choice = agent.choose(session.game.observation(), session.game.legal_actions())
+                    revision = session.revision
+                    observation, legal = session.game.observation(), session.game.legal_actions()
+                # Ne pas bloquer observe/stop pendant toute la réflexion.
+                choice = agent.choose(observation, legal)
+                with session.condition:
+                    if session.cancel.is_set() or session.deleted:
+                        reason = "cancelled"
+                        break
+                    if session.revision != revision:
+                        continue
                     session.apply(choice.action, choice.info)
                     if session.game.done:
                         reason = "terminal"

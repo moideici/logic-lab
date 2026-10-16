@@ -1,4 +1,5 @@
-import {planDecision,LIMITS,TIMES} from './planner.js';
+import {LIMITS,TIMES} from './planner.js';
+import {chooseDecision} from './decision.js';
 import {slidingDistance} from './fast-search.js';
 import {Game,Network,NAMES,SPECS,STYLES,TEMPS,linkNetworks,rng} from './engine.js';
 
@@ -12,22 +13,44 @@ let inferenceWorker=null,requestId=0,runVersion=0,frame=null,startedAt=null,fini
 const pending=new Map(),workerModels=new Map();
 function queueRender(){if(frame!==null)return;frame=requestAnimationFrame(()=>{frame=null;render();renderEvents();});}
 function clockStart(){if(startedAt===null)startedAt=performance.now();}
+function cancelInference(error=new DOMException('Calcul annulé','AbortError'),force=false){
+ if(!pending.size&&!force)return;
+ const instance=inferenceWorker;inferenceWorker=null;workerModels.clear();
+ if(instance)instance.terminate();
+ for(const task of pending.values()){clearTimeout(task.timeout);task.reject(error);}
+ pending.clear();
+}
 function decideAsync(config={}){
  if(!current())return Promise.reject(Error('Le modèle se charge.'));
- if(!inferenceWorker){inferenceWorker=new Worker('./inference-worker.js',{type:'module'});workerModels.clear();
-  inferenceWorker.onmessage=e=>{const task=pending.get(e.data.id);if(!task)return;pending.delete(e.data.id);e.data.error?task.reject(Error(e.data.error)):task.resolve(e.data.result);};
-  inferenceWorker.onerror=e=>{for(const task of pending.values())task.reject(Error(e.message||'Erreur de calcul'));pending.clear();inferenceWorker.terminate();inferenceWorker=null;};
+ if(!inferenceWorker){
+  const instance=new Worker('./inference-worker.js',{type:'module'});
+  inferenceWorker=instance;workerModels.clear();
+  instance.onmessage=e=>{
+   if(inferenceWorker!==instance)return;
+   const task=pending.get(e.data.id);if(!task)return;
+   pending.delete(e.data.id);clearTimeout(task.timeout);
+   e.data.error?task.reject(Error(e.data.error)):task.resolve(e.data.result);
+  };
+  instance.onerror=e=>{
+   if(inferenceWorker!==instance)return;
+   cancelInference(Error(e.message||'Erreur de calcul'),true);
+  };
  }
  const m=current(),previous=workerModels.get(m.game),changed=!previous||previous.model!==m||previous.core!==m.core||previous.steps!==m.steps;
  const id=++requestId,message={id,observation:game.obs(),legal:game.legal(),level:config.level??+$('level').value,style:config.style??$('style').value,planning:config.planning??$('planning').checked,seed:config.seed??((game.seed+revision*2654435761)>>>0)};
- if(changed){message.model=m.export();workerModels.set(m.game,{model:m,core:m.core,steps:m.steps});}
- return new Promise((resolve,reject)=>{pending.set(id,{resolve,reject});inferenceWorker.postMessage(message);});
+ if(changed)message.model=m.export();
+ return new Promise((resolve,reject)=>{
+  const timeout=setTimeout(()=>{if(pending.has(id))cancelInference(Error('Le calcul a dépassé 10 secondes. Vous pouvez le relancer.'));},10000);
+  pending.set(id,{resolve,reject,timeout});
+  try{inferenceWorker.postMessage(message);if(changed)workerModels.set(m.game,{model:m,core:m.core,steps:m.steps});}
+  catch(error){pending.delete(id);clearTimeout(timeout);reject(error);}
+ });
 }
 const fmt=n=>new Intl.NumberFormat('fr-FR').format(n);
 const current=()=>models[game.name];
 const humanTurn=()=>game.multiplayer&&$('mode').value==='human'&&game.player===+$('human-player').value;
 function toast(message){$('toast').textContent=message;$('toast').hidden=false;clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').hidden=true,5000);}
-function errorMessage(error){toast(error.message||String(error));}
+function errorMessage(error){if(error.name!=='AbortError')toast(error.message||String(error));}
 function download(name,text,type='application/json'){const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function openDB(){return new Promise(resolve=>{try{const req=indexedDB.open('logic-lab-v2',1);req.onupgradeneeded=()=>req.result.createObjectStore('models');req.onsuccess=()=>resolve(req.result);req.onerror=()=>resolve(null);}catch{resolve(null);}});}
 function storedModel(name){return new Promise(resolve=>{if(!db)return resolve(null);const r=db.transaction('models').objectStore('models').get(name);r.onsuccess=()=>resolve(r.result||null);r.onerror=()=>resolve(null);});}
@@ -35,10 +58,10 @@ async function persistModels(){if(!db){toast('Stockage indisponible : exportez v
 function setTab(tab){document.querySelectorAll('.tab-panel').forEach(el=>el.hidden=el.id!==`${tab}-tab`);document.querySelectorAll('[data-tab]').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));if(tab!=='arena')pause();if(tab==='protocol')preset();if(tab==='training')drawLoss();}
 function snapshot(){return {session_id:sessionId,revision,running,seed:game.seed,observation:game.obs(),legal_actions:game.legal()};}
 function emit(type,extra={}){const e={protocol:'logic-arena.v1',seq:++sequence,type,timestamp:Date.now()/1000,...snapshot(),...extra};trace.push(e);for(const fn of listeners){try{fn(e);}catch(error){console.error(error);}}window.dispatchEvent(new CustomEvent('logic-arena',{detail:e}));queueRender();return e;}
-function pause(){if(!running)return;running=false;runVersion++;clearTimeout(timer);timer=null;renderControls();emit('stopped',{reason:game.done?'terminal':'cancelled'});}
+function pause(){cancelInference();clearTimeout(timer);timer=null;if(!running)return;running=false;runVersion++;clearTimeout(timer);timer=null;renderControls();emit('stopped',{reason:game.done?'terminal':'cancelled'});}
 function newGame(name=game.name,seed=+$('seed').value,options={}){if(!Number.isInteger(seed))throw Error('La graine doit être un entier');const next=new Game(name,seed,options);pause();game=next;sessionId=crypto.randomUUID();revision=0;sequence=0;trace=[];lastDecision=null;lastAction=null;startedAt=null;finishedAt=null;generation++;emit('created',{});render();if(humanTurn())$('game-hint').textContent='À vous de jouer : cliquez sur une case ou une colonne.';}
 function selectGame(name){if(training){toast('Arrêtez l’entraînement avant de changer de jeu.');return;}newGame(name);preset();}
-function decide(config={}){if(!current())throw Error('Le modèle est encore en cours de chargement');const level=config.level??+$('level').value,style=config.style??$('style').value;const random=Number.isInteger(config.seed)?rng(config.seed):game.random;const obs=game.obs(),legal=game.legal(),d=current().choose(obs,legal,level,style,random);return (config.planning??$('planning').checked)?planDecision(obs,legal,current(),level,d):d;}
+function decide(config={}){if(!current())throw Error('Le modèle est encore en cours de chargement');const level=config.level??+$('level').value,style=config.style??$('style').value;const random=Number.isInteger(config.seed)?rng(config.seed):game.random;return chooseDecision(current(),game.obs(),game.legal(),{level,style,random,planning:config.planning??$('planning').checked});}
 function transition(action,info={}){clockStart();const actor=game.player,reward=game.step(action);revision++;if(game.done)finishedAt=performance.now();lastAction=action;lastDecision=info.agent?.startsWith('neural')?info:null;const e=emit(game.done?'finished':'step',{action,reward,actor,info});return e;}
 async function playOne(){if(game.done)return;if(humanTurn()){toast('C’est votre tour : cliquez sur le plateau.');return;}clockStart();const version=generation,rev=revision,d=await decideAsync();if(version===generation&&rev===revision&&!game.done)transition(d.action,d.info);}
 async function schedule(token){
@@ -53,7 +76,7 @@ async function schedule(token){
   if(version!==generation||rev!==revision){timer=setTimeout(()=>schedule(token),0);return;}
   transition(d.action,d.info);
  }while(+$('speed').value===0&&performance.now()-began<12);
- }catch(error){pause();errorMessage(error);return;}
+ }catch(error){if(!running||token!==runVersion)return;pause();errorMessage(error);return;}
  if(game.done){pause();return;}
  if(running&&token===runVersion)timer=setTimeout(()=>schedule(token),humanTurn()?100:+$('speed').value);
 }
@@ -71,7 +94,7 @@ function drawLoss(){const c=$('loss-chart'),ctx=c.getContext('2d'),w=c.width,h=c
 async function beginTraining(){if(training)return;if(!current())return toast('Les modèles se chargent.');const episodes=+$('episodes').value,seed=+$('seed').value;if(!Number.isInteger(episodes)||episodes<1||episodes>10000||!Number.isInteger(seed))return toast('Choisissez 1 à 10 000 épisodes et une graine entière.');pause();training=true;trainingGame=game.name;lossCurve=[];drawLoss();$('train-start').disabled=true;$('train-stop').disabled=false;$('model-import').disabled=true;$('model-reset').disabled=true;$('training-status').textContent='Apprentissage en cours · répétition inter-jeux activée.';renderGames();worker=new Worker('./trainer.js',{type:'module'});worker.onmessage=async e=>{const d=e.data;if(d.type==='progress'){lossCurve=d.curve;$('train-episodes').textContent=`${d.episode} / ${episodes}`;$('train-examples').textContent=fmt(d.examples);$('train-loss').textContent=d.loss.toFixed(3);$('loss-label').textContent=`Dernier épisode : ${d.episode_loss.toFixed(3)}`;$('training-status').textContent=`${d.episode}/${episodes} épisodes · ${d.rehearsals} rappels sur les autres jeux. Poids appliqués à l’arrêt.`;drawLoss();}else if(d.type==='finished'){for(const data of d.models)models[data.game]=new Network(data);linkNetworks(models);finishTraining();try{await persistModels();}catch(error){errorMessage(error);}$('training-status').textContent=`${d.cancelled?'Arrêté':'Terminé'} · ${fmt(d.examples)} exemples, ${fmt(d.rehearsals)} rappels. Les six jeux utilisent le module mis à jour.`;lastDecision=null;renderNetwork();toast('Le module commun a été mis à jour pour les six jeux.');}else if(d.type==='error'){finishTraining();$('training-status').textContent=d.message;toast(d.message);}};worker.onerror=e=>{finishTraining();toast('Le worker a rencontré une erreur : '+e.message);};worker.postMessage({op:'train',game:trainingGame,models:Object.values(models).map(m=>m.export()),episodes,seed,lr:+$('learning-rate').value});}
 function finishTraining(){training=false;if(worker){worker.terminate();worker=null;}$('train-start').disabled=false;$('train-stop').disabled=true;$('model-import').disabled=false;$('model-reset').disabled=false;renderGames();}
 function preset(){const op=$('request-preset').value;$('json-input').value=JSON.stringify({protocol:'logic-arena.v1',id:'demo-1',op,...(op==='catalog'?{}:{session_id:sessionId}),...(['suggest','play'].includes(op)?{agent:{type:'neural',level:+$('level').value,style:$('style').value}}:{})},null,2);}
-function request(req){let id=req?.id??null;try{if(!req||Array.isArray(req)||typeof req!=='object')throw Error('La requête doit être un objet');if(req.protocol&&req.protocol!=='logic-arena.v1')throw Error('Version inconnue');if(!['catalog','create','observe','suggest','play','step','run','stop'].includes(req.op))throw Error('Opération inconnue');let result;if(req.op==='catalog')result={protocol:'logic-arena.v1',games:Object.keys(NAMES).map(id=>({id,players:['tictactoe','connect4'].includes(id)?2:1})),styles:STYLES,default_level:10,objective:'win_then_fewest_moves',default_interval_ms:0,levels:TEMPS.map((temperature,i)=>({level:i+1,temperature,planning_nodes:LIMITS[i],planning_time_ms:TIMES[i]})),shared_module:{id:current()?.core.id,hidden:48,training_steps:current()?.core.steps}};else if(req.op==='create'){if(training)throw Error('Entraînement en cours');newGame(req.game??'tictactoe',req.seed??0,req.options??{});result=snapshot();}else{if(req.session_id!==sessionId)throw Error('Session inconnue');if(req.expected_revision!==undefined&&req.expected_revision!==revision)throw Error('Révision obsolète');if(running&&['step','play'].includes(req.op))throw Error('Arrêtez la lecture avant une action externe');if(req.op==='observe')result=snapshot();if(req.op==='suggest'){const d=decide(req.agent);result={revision,...d};}if(req.op==='step')result=transition(req.action,{agent:'external'});if(req.op==='play'){const d=decide(req.agent);result=transition(d.action,d.info);}if(req.op==='run'){if(!running)start();result=snapshot();}if(req.op==='stop'){pause();result=snapshot();}}return {protocol:'logic-arena.v1',id,ok:true,result};}catch(error){return {protocol:'logic-arena.v1',id,ok:false,error:{code:'invalid_request',message:error.message}};}}
+function request(req){let id=req?.id??null;try{if(!req||Array.isArray(req)||typeof req!=='object')throw Error('La requête doit être un objet');if(req.protocol&&req.protocol!=='logic-arena.v1')throw Error('Version inconnue');if(!['catalog','create','observe','suggest','play','step','run','stop'].includes(req.op))throw Error('Opération inconnue');let result;if(req.op==='catalog')result={protocol:'logic-arena.v1',games:Object.keys(NAMES).map(id=>({id,players:['tictactoe','connect4'].includes(id)?2:1})),styles:STYLES,default_level:10,objective:'win_then_fewest_moves',default_interval_ms:0,levels:TEMPS.map((temperature,i)=>({level:i+1,temperature,planning_nodes:LIMITS[i],planning_time_ms:TIMES[i]})),shared_module:{id:current()?.core.id,hidden:48,training_steps:current()?.core.steps}};else if(req.op==='create'){if(training)throw Error('Entraînement en cours');newGame(req.game??'tictactoe',req.seed??0,req.options??{});result=snapshot();}else{if(req.session_id!==sessionId)throw Error('Session inconnue');if(req.expected_revision!==undefined&&req.expected_revision!==revision)throw Error('Révision obsolète');if(running&&['step','play'].includes(req.op))throw Error('Arrêtez la lecture avant une action externe');if(req.op==='observe')result=snapshot();if(req.op==='suggest'){const d=decide(req.agent);result={revision,...d};}if(req.op==='step')result=transition(req.action,{agent:'external'});if(req.op==='play'){const d=decide(req.agent);result=transition(d.action,d.info);}if(req.op==='run'){if(!running)start();result=snapshot();}if(req.op==='stop'){pause();result=snapshot();}}return {protocol:'logic-arena.v1',id,ok:true,result};}catch(error){return {protocol:'logic-arena.v1',id,ok:false,error:{code:error.name==='AbortError'?'cancelled':'invalid_request',message:error.message}};}}
 async function requestAsync(req){
  if(!['suggest','play'].includes(req?.op))return request(req);
  const id=req.id??null;
@@ -86,7 +109,7 @@ async function requestAsync(req){
   if(rev!==revision||version!==generation)throw Error('Session modifiée pendant le calcul ; relire l’observation');
   const result=req.op==='play'?transition(decision.action,decision.info):{revision,...decision};
   return {protocol:'logic-arena.v1',id,ok:true,result};
- }catch(error){return {protocol:'logic-arena.v1',id,ok:false,error:{code:'invalid_request',message:error.message}};}
+ }catch(error){return {protocol:'logic-arena.v1',id,ok:false,error:{code:error.name==='AbortError'?'cancelled':'invalid_request',message:error.message}};}
 }
 window.logicArena={request,requestAsync,subscribe(fn){listeners.add(fn);return()=>listeners.delete(fn);},getSnapshot:snapshot};
 document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>setTab(b.dataset.tab));$('open-training').onclick=()=>setTab('training');$('about-link').onclick=e=>{e.preventDefault();$('about').showModal();};$('transfer-info').onclick=()=>$('about').showModal();$('close-about').onclick=()=>$('about').close();$('play').onclick=start;$('step').onclick=()=>playOne().catch(errorMessage);$('new').onclick=()=>{try{$('seed').value=+$('seed').value+1;newGame();}catch(error){errorMessage(error);}};$('mode').onchange=()=>{generation++;clearTimeout(timer);newGame();};$('human-player').onchange=()=>newGame();$('level').oninput=()=>{$('level-label').innerHTML=`${$('level').value}<span> / 10</span>`;};$('planning').onchange=()=>renderControls();$('speed').oninput=()=>{$('speed-label').textContent=+$('speed').value===0?'Express · aucune pause':`${$('speed').value} ms / coup`;renderControls();};$('export-replay').onclick=()=>download(`logic-lab-${game.name}.jsonl`,trace.map(e=>JSON.stringify(e)).join('\n')+'\n','application/x-ndjson');$('train-start').onclick=beginTraining;$('train-stop').onclick=()=>{if(worker){worker.postMessage({op:'stop'});$('train-stop').disabled=true;$('training-status').textContent='Arrêt en cours, conservation des poids appris…';}};$('model-export').onclick=()=>{if(!current())return;download(`logic-lab-suite.json`,JSON.stringify({format:'logic-arena-suite-v1',models:Object.values(models).map(m=>m.export())}));};$('model-import').onclick=()=>$('model-file').click();$('model-file').onchange=async()=>{try{const file=$('model-file').files[0];if(!file)return;if(file.size>15000000)throw Error('Fichier trop volumineux (15 Mo maximum)');const data=JSON.parse(await file.text()),incoming={};for(const d of data.format==='logic-arena-suite-v1'?data.models:[data]){const m=new Network(d);if(m.hidden!==48)throw Error('Cette arène utilise des modules de 48 neurones');incoming[m.game]=m;}if(!Object.keys(incoming).length)throw Error('Aucun modèle');const preferred=Object.values(incoming)[0].core;linkNetworks(incoming,preferred);Object.assign(models,incoming);linkNetworks(models,preferred);pause();lastDecision=null;await persistModels();renderNetwork();toast('Modèles importés. Module commun connecté aux six jeux.');}catch(error){errorMessage(error);}finally{$('model-file').value='';}};$('model-reset').onclick=async()=>{try{pause();const data=await Promise.all(Object.keys(NAMES).map(async name=>{const r=await fetch(`models/${name}.json`);if(!r.ok)throw Error('Chargement du modèle impossible');return new Network(await r.json());}));for(const m of data)models[m.game]=m;linkNetworks(models);lastDecision=null;await persistModels();renderNetwork();toast('Les six modèles initiaux et leur module partagé ont été restaurés.');}catch(error){errorMessage(error);}};$('request-preset').onchange=preset;$('json-send').onclick=async()=>{$('json-send').disabled=true;$('json-output').textContent='Calcul dans le worker…';try{const response=await requestAsync(JSON.parse($('json-input').value));$('json-output').textContent=JSON.stringify(response,null,2);}catch(error){$('json-output').textContent=JSON.stringify({ok:false,error:{message:error.message}},null,2);}finally{$('json-send').disabled=false;}};$('copy-output').onclick=async()=>{try{await navigator.clipboard.writeText($('json-output').textContent);toast('Réponse copiée.');}catch{toast('Sélectionnez le texte pour le copier.');}};

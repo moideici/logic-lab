@@ -5,7 +5,8 @@ import {execFileSync} from 'node:child_process';
 import {Game,Network,NAMES,linkNetworks,encode,actionIndex,slide} from '../web/engine.js';
 import {teacher} from '../web/teachers.js';
 import {planDecision} from '../web/planner.js';
-import {slidingDistance,exactSliding} from '../web/fast-search.js';
+import {slidingDistance,exactSliding,tables2048,spawnExpectation,mineSearch} from '../web/fast-search.js';
+import {chooseDecision} from '../web/decision.js';
 const models=Object.fromEntries(Object.keys(NAMES).map(k=>[k,new Network(JSON.parse(fs.readFileSync(new URL(`../web/models/${k}.json`,import.meta.url))))]));
 linkNetworks(models);
 test('six games: seeded observations, legal neural actions, valid teachers',()=>{
@@ -79,4 +80,47 @@ test('mines planning sees only public observations and finishes a seeded puzzle 
  const g=new Game('minesweeper',42),m=models.minesweeper;
  while(!g.done&&g.moves<64){const o=g.obs(),legal=g.legal(),d=planDecision(o,legal,m,10,m.choose(o,legal,10));assert(!('mines' in o));if(d.info.certain_safe&&g.mines)assert(!g.mines.has(d.action.row*8+d.action.col));g.step(d.action);}
  assert.equal(g.winner,1);assert(g.moves<=20);
+});
+
+test('one neural evaluation is shared by policy and planner',()=>{
+ const g=new Game('tictactoe'),m=models.tictactoe,original=m.forward;
+ let calls=0;
+ m.forward=function(o){calls++;return original.call(this,o);};
+ try{const result=chooseDecision(m,g.obs(),g.legal());assert(result.action);assert.equal(calls,1);}
+ finally{m.forward=original;}
+});
+
+test('analytical spawn expectation equals explicit enumeration',()=>{
+ const tables=tables2048();
+ const columns=rows=>Array.from({length:4},(_,c)=>rows.reduce((s,row,r)=>s|(((row>>>(c*4))&15)<<(r*4)),0));
+ const heuristic=rows=>rows.concat(columns(rows)).reduce((s,row)=>s+tables.value[row],0);
+ const g=new Game('2048',91);
+ for(let sample=0;sample<80;sample++){
+  const rows=Array.from({length:4},()=>Array.from({length:4},()=>Math.floor(g.random()*8)).reduce((s,v,c)=>s|(v<<(4*c)),0));
+  const empty=[];for(let r=0;r<4;r++)for(let c=0;c<4;c++)if(!((rows[r]>>>(c*4))&15))empty.push([r,c]);
+  if(!empty.length)continue;
+  let expected=0;
+  for(const [r,c] of empty)for(const [rank,p] of [[1,.9],[2,.1]]){const child=rows.slice();child[r]|=rank<<(c*4);expected+=p*heuristic(child)/empty.length;}
+  assert(Math.abs(spawnExpectation(rows)-expected)<1e-7);
+ }
+});
+
+test('2048 row tables agree between NumPy and JS',()=>{
+ const codes=[0,0x1111,0x2211,0xaaaa,0xffff,...Array.from({length:80},(_,i)=>(i*7151+4327)%65536)];
+ const script=`import json,sys\nfrom logic_arena.tiles import row_tables\nt=row_tables()\nprint(json.dumps([[table[code] for table in t] for code in json.load(sys.stdin)]))`;
+ const expected=JSON.parse(execFileSync('python',['-c',script],{cwd:new URL('..',import.meta.url),input:JSON.stringify(codes),env:{...process.env,OPENBLAS_NUM_THREADS:'1'}}));
+ const actual=tables2048();
+ codes.forEach((code,i)=>{assert.equal(actual.left[code],expected[i][0]);assert.equal(actual.right[code],expected[i][1]);assert.equal(actual.gain[code],expected[i][2]);assert(Math.abs(actual.value[code]-expected[i][3])<1e-7);});
+});
+
+test('a neural preference never overrides a provably safe mines move',()=>{
+ const g=new Game('minesweeper',42);g.step({row:3,col:3});
+ const logits=new Float32Array(64);
+ // Le moteur reçoit seulement les observations. Le test choisit un a priori
+ // adversarial pour vérifier, après coup, que les mines restent évitées.
+ for(const i of g.mines)logits[i]=1e12;
+ const budget={nodes:0,tick(){if(++this.nodes>100000)throw Error('budget');}};
+ const result=mineSearch(g.obs(),g.legal(),logits,budget);
+ assert(result.info.certain_safe);assert.equal(result.info.risk,0);
+ assert(!g.mines.has(result.action.row*8+result.action.col));
 });

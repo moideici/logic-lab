@@ -6,7 +6,7 @@ Jeux : morpion, 2048, sudoku, puissance 4, démineur 8×8 et taquin 3×3.
 
 ## Démarrage
 
-Python 3.11+ et NumPy. Depuis ce dossier :
+Python 3.11+ et NumPy ; Node.js 22+ pour les tests et benchmarks JavaScript. Depuis ce dossier :
 
 ```bash
 python -m pip install -e .
@@ -57,16 +57,37 @@ Rapport reproductible : `node examples/benchmark_express.mjs`, graines à partir
 
 | Jeu | Résultat | Coups moyens | Calcul moyen / partie |
 |---|---|---:|---:|
-| Taquin | 20/20 résolus au minimum exact | 19,6 | 1,08 ms |
-| Sudoku | 20/20 résolus, aucune annulation | 51 | 12,60 ms |
-| Morpion contre aléatoire | 17 victoires, 3 nuls, 0 défaite | 6,35 | 1,21 ms |
-| Puissance 4 contre aléatoire | 20 victoires / 20 | 11,1 | 126,94 ms |
-| Démineur | 48 réussites / 50 | 15,8 | 3,26 ms |
-| 2048 | 4 réussites / 5 | 966,4 | 1 371,11 ms |
+| Taquin | 20/20 résolus au minimum exact | 19,6 | 0,46 ms |
+| Sudoku | 20/20 résolus, aucune annulation | 51 | 13,13 ms |
+| Morpion contre aléatoire | 17 victoires, 3 nuls, 0 défaite | 6,35 | 1,35 ms |
+| Puissance 4 contre aléatoire | 20 victoires / 20 | 11,2 | 129,88 ms |
+| Démineur | 48 réussites / 50 | 15,8 | 2,62 ms |
+| 2048 | 5 réussites / 5 | 976 | 2 073,06 ms |
 
 Ces petits échantillons ne certifient pas un taux de succès général. Le nombre de coups moyen inclut les défaites ; l’adversaire des duels est aléatoire, pas un solveur expert. Le budget de recherche dépend du temps réel, donc les résultats peuvent varier selon la machine.
 
-Une mesure distincte sous Chromium, graine 42 et interface comprise, a résolu le taquin en **18 coups / 14 ms**, le sudoku en **51 coups / 122 ms**, le démineur en **10 clics / 21 ms** et 2048 en **989 coups / 3,05 s**. Ce sont des mesures locales, pas des délais garantis sur tous les appareils. Le worker laisse l’interface répondre pendant le calcul.
+Une mesure de la première version express sous Chromium, graine 42 et interface comprise, avait résolu le taquin en **18 coups / 14 ms**, le sudoku en **51 coups / 122 ms**, le démineur en **10 clics / 21 ms** et 2048 en **989 coups / 3,05 s**. Ce sont des mesures locales, pas des délais garantis sur tous les appareils. Le worker laisse l’interface répondre pendant le calcul.
+
+## Améliorations de la deuxième version express
+
+- Le moteur 2048 Python utilise désormais les mêmes représentations compactes et la même heuristique de lignes que le moteur web. Les tables NumPy sont construites une seule fois ; les opérations de recherche ne reconstruisent plus les environnements complets.
+- L’espérance de l’évaluation après apparition d’une tuile est calculée par les contributions de la ligne et de la colonne modifiées. Ce calcul est équivalent à l’énumération des apparitions pour cette heuristique additive. Il ne résout pas exactement tout le jeu stochastique. Les espérances intermédiaires sont mémorisées pendant chaque décision.
+- Aux niveaux 9 et 10, la recherche peut approfondir davantage les positions 2048 ayant au plus quatre cases vides, dans le même budget de réflexion. Cela privilégie la réussite dans les situations difficiles ; ce réglage peut prendre plus de temps qu’une recherche superficielle.
+- Un passage du réseau sur le plateau courant est partagé entre politique et planification. Le pipeline commun `web/decision.js` est utilisé dans le worker et l’API synchrone.
+- Chaque agent Python conserve son propre générateur pseudo-aléatoire. Ses tirages avancent au fil des décisions et les agents concurrents ne permutent plus le générateur des modèles partagés. Rejouer la même séquence avec la même graine reproduit les tirages ; un appel isolé répété n’est plus un redémarrage implicite du générateur.
+- Pause annule aussi les calculs lancés coup par coup. Le worker peut être recréé après une erreur de sérialisation ou un dépassement de dix secondes. Les compteurs de demandes et de modèles sont réinitialisés correctement après une annulation.
+- Le serveur calcule les décisions en dehors du verrou de session : `stop` et `observe` restent disponibles pendant la réflexion, puis un dernier contrôle empêche l’application d’un coup annulé.
+- Un flux SSE repris après débordement du journal renvoie `resync` et se ferme lorsque la partie est déjà arrêtée. L’écriture réseau ne conserve plus le verrou de session.
+- La sauvegarde d’un fichier de modèle est atomique : un fichier temporaire est écrit, puis remplacé. Un échec conserve l’ancien fichier. La sauvegarde d’un dossier de six modèles reste constituée de six remplacements individuels.
+- Au démineur, le risque, la taille d’ouverture et la préférence neuronale sont comparés dans cet ordre. Un score neuronal, même extrême, ne peut plus remplacer une case prouvée sûre par un pari.
+
+Le rapport `web/models/backend-evaluation.json` compare le moteur Python précédent au nouveau sur les mêmes cinq graines 42–46 : **0/5 réussites auparavant, 5/5 sur le nouveau moteur** lors de cette mesure locale. Le nouveau moteur recherche davantage et peut prendre plus de temps par partie ; le gain constaté ici porte sur la réussite, pas sur une garantie de latence. La comparaison est reproductible avec un ancien checkout local :
+
+```bash
+python examples/benchmark_backend.py --episodes 5 --seed 42 --baseline /chemin/ancien-checkout --output web/models/backend-evaluation.json
+```
+
+Ce rapport et les petits échantillons web ne constituent pas des garanties de victoire. Les tables de fusion et les logits sont comparés entre NumPy et JavaScript ; les espérances analytiques sont testées contre une énumération indépendante de tous les emplacements possibles.
 
 ## Dix niveaux, six styles
 
@@ -182,7 +203,8 @@ Une vérification réelle sous Chromium contrôle aussi les duels humain/IA, les
 
 - `logic_arena/games.py` : règles et observations.
 - `logic_arena/neural.py` : réseaux, rétropropagation et module partagé.
-- `logic_arena/planner.py` : recherche commune sudoku/taquin.
+- `logic_arena/planner.py` : orchestration des solveurs et chemins exacts.
+- `logic_arena/tiles.py` : moteur 2048 compact et espérances analytiques.
 - `logic_arena/agents.py` : solveurs professeurs et références.
 - `logic_arena/harness.py`, `server.py` : protocole, sessions, HTTP et SSE.
 - `web/` : interface, moteurs JavaScript, réseau interopérable et worker.

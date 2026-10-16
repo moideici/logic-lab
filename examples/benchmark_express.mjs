@@ -1,10 +1,10 @@
 // Évaluation sans professeur des politiques + solveurs express, dans Node.js.
 import fs from 'node:fs';
 import {Game,Network,NAMES} from '../web/engine.js';
-import {planDecision} from '../web/planner.js';
+import {chooseDecision} from '../web/decision.js';
 import {slidingDistance} from '../web/fast-search.js';
 
-const report={runtime:`Node ${process.version}`,level:10,style:'balanced',interval_ms:0,teacher_used:false,
+const report={version:'express-v2',runtime:`Node ${process.version}`,level:10,style:'balanced',interval_ms:0,teacher_used:false,
  objective:'win_then_fewest_moves',note:'Les temps dépendent de la machine. Optimalité globale prouvée pour le taquin et les sudokus résolus sans annulation ; recherches bornées ou hasard pour les autres jeux.',games:{}};
 for(const name of Object.keys(NAMES)){
  const model=new Network(JSON.parse(fs.readFileSync(new URL(`../web/models/${name}.json`,import.meta.url)))),episodes=name==='2048'?5:name==='minesweeper'?50:20;
@@ -12,7 +12,7 @@ for(const name of Object.keys(NAMES)){
  for(let i=0;i<episodes;i++){
   const g=new Game(name,1000000+i),player=g.multiplayer?1+i%2:1,start=performance.now();
   const minimum=name==='sliding_puzzle'?slidingDistance(g.board):name==='sudoku'?g.board.flat().filter(v=>!v).length:null;
-  while(!g.done&&g.moves<2500){const o=g.obs(),legal=g.legal();const a=g.player===player?planDecision(o,legal,model,10,model.choose(o,legal,10)).action:legal[Math.floor(g.random()*legal.length)];g.step(a);}
+  while(!g.done&&g.moves<2500){const o=g.obs(),legal=g.legal();const a=g.player===player?chooseDecision(model,o,legal).action:legal[Math.floor(g.random()*legal.length)];g.step(a);}
   const ms=performance.now()-start;
   stats[g.done?g.winner===player?'wins':g.multiplayer&&g.winner===0?'draws':'losses':'truncated']++;
   if(minimum!==null&&g.winner===1&&g.moves===minimum)stats.minimum_verified++;

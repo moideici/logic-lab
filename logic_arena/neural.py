@@ -2,6 +2,9 @@
 from __future__ import annotations
 
 import json
+import os
+import tempfile
+import threading
 import time
 from pathlib import Path
 
@@ -53,7 +56,9 @@ class NeuralPolicy:
             raise ValueError("Jeu inconnu")
         self.game, self.hidden, self.steps = game, hidden, 0
         ni, no = SPECS[game]
-        self.rng = np.random.default_rng(seed)
+        if type(seed) is not int:
+            raise ValueError("seed doit être un entier")
+        self.rng = np.random.default_rng(seed % (1 << 64))
         self.w1 = (self.rng.standard_normal((ni, hidden))*np.sqrt(2/(ni+hidden))).astype(np.float32)
         self.b1 = np.zeros(hidden, dtype=np.float32)
         self.w2 = (self.rng.standard_normal((hidden, no))*np.sqrt(2/(hidden+no))).astype(np.float32)
@@ -69,12 +74,13 @@ class NeuralPolicy:
         encoded = np.tanh(encode(obs)@self.w1+self.b1)
         return np.tanh(encoded@self.core["w"]+self.core["b"])@self.w2+self.b2
 
-    def choose(self, obs, legal, level=10, style="balanced"):
+    def choose(self, obs, legal, level=10, style="balanced", *, logits=None, rng=None):
         # Validation commune ; la politique utilise les paramètres de difficulté.
         ReferenceAgent(level, style)
         if not legal or obs["done"]:
             raise ValueError("Partie terminée")
-        scores = self.logits(obs)[[action_index(self.game, a) for a in legal]].astype(np.float64)
+        values = self.logits(obs) if logits is None else logits
+        scores = values[[action_index(self.game, a) for a in legal]].astype(np.float64)
         from .policy import style_bias
         scores += np.array([style_bias(obs, a, style) for a in legal])
         temperature = TEMPERATURES[level-1]
@@ -83,7 +89,8 @@ class NeuralPolicy:
         if temperature == 0:
             return legal[int(scores.argmax())]
         p = np.exp(np.clip((scores-scores.max())/temperature, -50, 0))
-        return legal[int(self.rng.choice(len(legal), p=p/p.sum()))]
+        generator = self.rng if rng is None else rng
+        return legal[int(generator.choice(len(legal), p=p/p.sum()))]
 
     def fit(self, x, targets, masks, epochs=20, batch_size=64, lr=.003):
         """Cross-entropie masquée, Adam ; le gradient traverse le module partagé."""
@@ -136,8 +143,17 @@ class NeuralPolicy:
                 "core": {"id": "logic-core-v1", "w": self.core["w"].ravel().tolist(), "b": self.core["b"].tolist(), "steps": self.core["steps"]}}
 
     def save(self, path):
-        Path(path).parent.mkdir(parents=True, exist_ok=True)
-        Path(path).write_text(json.dumps(self.export(), separators=(",", ":"), allow_nan=False), encoding="utf-8")
+        path = Path(path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=path.parent, delete=False) as stream:
+                temporary = Path(stream.name)
+                json.dump(self.export(), stream, separators=(",", ":"), allow_nan=False)
+            os.replace(temporary, path)
+        finally:
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
 
     @classmethod
     def from_dict(cls, data):
@@ -242,46 +258,43 @@ class NeuralSuite:
 
 
 _MODELS = {}
+_MODEL_CACHE_LOCK = threading.Lock()
 
 
 class NeuralAgent:
     def __init__(self, level=10, style="balanced", seed=0, time_ms=None, planning=True):
         ReferenceAgent(level, style, seed, time_ms)
         self.level, self.style, self.seed = level, style, seed
+        if type(seed) is not int:
+            raise ValueError("seed doit être un entier")
+        self.rng = np.random.default_rng(seed % (1 << 64))
+        self._rng_lock = threading.Lock()
         self.time_ms = time_ms
         if type(planning) is not bool:
             raise ValueError("planning doit être un booléen")
         self.planning = planning
 
     def choose(self, obs, legal):
+        started = time.monotonic()
         path = MODEL_DIR/f"{obs['game']}.json"
         if not path.is_file():
             raise ValueError("Poids absents ; lancer examples/bootstrap_models.py")
         stamp = path.stat().st_mtime_ns
-        cached = _MODELS.get(obs["game"])
-        if cached is None or cached[0] != stamp:
-            _MODELS[obs["game"]] = stamp, NeuralPolicy.load(path)
-        # Un RNG par appel rend seed reproductible sans modifier le RNG du modèle partagé.
-        model = _MODELS[obs["game"]][1]
-        # choose() utilise le RNG du modèle : protéger les appels HTTP concurrents.
-        import threading
-        with _MODEL_LOCK:
-            old_rng = model.rng
-            model.rng = np.random.default_rng(self.seed)
-            started = time.monotonic()
-            try:
-                action = model.choose(obs, legal, self.level, self.style)
-            finally:
-                model.rng = old_rng
+        with _MODEL_CACHE_LOCK:
+            cached = _MODELS.get(obs["game"])
+            if cached is None or cached[0] != stamp:
+                _MODELS[obs["game"]] = stamp, NeuralPolicy.load(path)
+            model = _MODELS[obs["game"]][1]
+        logits = model.logits(obs)
+        # Chaque agent avance son propre générateur. Les modèles en cache sont
+        # partagés en lecture seule, sans permutation d'un RNG global.
+        with self._rng_lock:
+            action = model.choose(obs, legal, self.level, self.style, logits=logits, rng=self.rng)
         plan_info = {}
         if self.planning:
             from .planner import plan
-            action, plan_info = plan(obs, legal, model, self.level, action, self.time_ms)
+            action, plan_info = plan(obs, legal, model, self.level, action, self.time_ms, logits=logits)
             plan_info["optimal_scope"] = "remaining_from_current_state"
         return Decision(action, {"agent": "neural", "method": "shared_mlp_policy", "level": self.level,
                                  "style": self.style, "time_ms": round((time.monotonic()-started)*1000, 3),
                                  "training_steps": model.steps, "shared_steps": model.core["steps"], **plan_info})
-
-
-import threading
-_MODEL_LOCK = threading.Lock()

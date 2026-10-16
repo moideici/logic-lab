@@ -52,14 +52,15 @@ def _board_key(obs):
     return tuple(tuple(row) for row in obs["board"])
 
 
-def plan(obs, legal, model, level, fallback, time_ms=None):
+def plan(obs, legal, model, level, fallback, time_ms=None, logits=None):
     game = obs["game"]
     started = time.monotonic()
     budget_ms = TIMES[level-1] if time_ms is None else time_ms
     deadline = started+budget_ms/1000
+    if logits is None:
+        logits = model.logits(obs)
     if game=="tictactoe":
         board=tuple(v for row in obs["board"] for v in row)
-        logits=model.logits(obs)
         options=[]
         for a in legal:
             i=a["row"]*3+a["col"]
@@ -72,7 +73,6 @@ def plan(obs, legal, model, level, fallback, time_ms=None):
         distance=sliding_distance(obs["board"])
         r,c=next((r,c) for r in range(3) for c in range(3) if not obs["board"][r][c])
         options=[]
-        logits=model.logits(obs)
         for a in legal:
             dr,dc={"up":(-1,0),"down":(1,0),"left":(0,-1),"right":(0,1)}[a["direction"]]
             b=[row[:] for row in obs["board"]]
@@ -81,14 +81,17 @@ def plan(obs, legal, model, level, fallback, time_ms=None):
         action=max(options,key=lambda a:logits[action_index(game,a)]) if options else fallback
         return action,{"agent":"neural+planner","method":"exact_shortest_path","optimal":distance!=255,
                        "remaining_moves":distance,"nodes":len(legal),"solution_found":bool(options),"objective":"win_then_fewest_moves"}
-    if game in ("connect4","2048","minesweeper"):
+    if game=="2048":
+        from .agents import Budget
+        from .tiles import search
+        action,info=search(obs,legal,logits,Budget(LIMITS[level-1],budget_ms),max_depth=2 if level>=8 else 1,critical_depth=3 if level>=9 else None)
+        return action,{"agent":"neural+planner","objective":"win_then_fewest_moves",**info}
+    if game in ("connect4","minesweeper"):
         from .agents import Budget, ReferenceAgent
         agent=ReferenceAgent(level,time_ms=budget_ms)
         budget=Budget(LIMITS[level-1],budget_ms)
-        logits=model.logits(obs)
         ordered=sorted(legal,key=lambda a:-logits[action_index(game,a)])
-        if game=="2048":agent.level=min(level,2)  # éviter les approfondissements qui épuisent le délai
-        solver={"connect4":agent.line_game,"2048":agent.tiles,"minesweeper":agent.mines}[game]
+        solver={"connect4":agent.line_game,"minesweeper":agent.mines}[game]
         action=solver(obs,ordered,budget,fallback)
         return action,{"agent":"neural+planner","method":{"connect4":"neural_alpha_beta","2048":"neural_expectimax","minesweeper":"public_constraints_flood"}[game],
                        "optimal":False,"nodes":budget.nodes,"objective":"win_then_fewest_moves"}
@@ -137,8 +140,8 @@ def plan(obs, legal, model, level, fallback, time_ms=None):
             break
         moves=children(board)
         if len(moves)>1:
-            logits=model.logits({**obs,"board":board})
-            moves.sort(key=lambda p:-logits[action_index(game,p[0])])
+            branch_logits=logits if cost==0 else model.logits({**obs,"board":board})
+            moves.sort(key=lambda p:-branch_logits[action_index(game,p[0])])
         for i,(action,b) in enumerate(moves):
             key=json.dumps(b)
             if cost+1>=seen.get(key,float("inf")):continue

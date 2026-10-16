@@ -39,10 +39,24 @@ export function connectSearch(o,legal,logits,budget){
 }
 
 let rowTables=null;
-function tables2048(){if(rowTables)return rowTables;const left=new Uint16Array(65536),right=new Uint16Array(65536),gain=new Uint32Array(65536),value=new Float64Array(65536);const reverse=n=>((n&15)<<12)|((n&240)<<4)|((n>>>4)&240)|(n>>>12);
+export function tables2048(){if(rowTables)return rowTables;const left=new Uint16Array(65536),right=new Uint16Array(65536),gain=new Uint32Array(65536),value=new Float64Array(65536);const reverse=n=>((n&15)<<12)|((n&240)<<4)|((n>>>4)&240)|(n>>>12);
  for(let row=0;row<65536;row++){const v=[row&15,(row>>>4)&15,(row>>>8)&15,row>>>12],nz=v.filter(Boolean),out=[];let score=0;for(let i=0;i<nz.length;i++){if(i+1<nz.length&&nz[i]===nz[i+1]){const rank=Math.min(15,nz[i]+1);out.push(rank);score+=2**rank;i++;}else out.push(nz[i]);}left[row]=out.reduce((s,v,i)=>s|(v<<(4*i)),0);gain[row]=score;let down=0,up=0,merges=0,sum=0;for(let i=0;i<4;i++){sum+=v[i]**3.5;if(i<3){const d=v[i]**4-v[i+1]**4;if(d>0)down+=d;else up-=d;}}for(let i=1;i<nz.length;i++)if(nz[i]===nz[i-1])merges++;value[row]=270*(4-nz.length)+700*merges-47*Math.min(up,down)-11*sum;}
  for(let row=0;row<65536;row++)right[row]=reverse(left[reverse(row)]);
  return rowTables={left,right,gain,value};
+}
+export function spawnExpectation(rows){
+ const value=tables2048().value;
+ const cols=Array.from({length:4},(_,c)=>rows.reduce((s,row,r)=>s|(((row>>>(c*4))&15)<<(r*4)),0));
+ const base=rows.concat(cols).reduce((s,row)=>s+value[row],0);
+ let adjustment=0,count=0;
+ for(let r=0;r<4;r++)for(let c=0;c<4;c++){
+  const row=rows[r],col=cols[c],shift=c*4;
+  if((row>>>shift)&15)continue;
+  const old=value[row]+value[col];
+  adjustment+=.9*(value[row|(1<<shift)]+value[col|(1<<(r*4))]-old)+.1*(value[row|(2<<shift)]+value[col|(2<<(r*4))]-old);
+  count++;
+ }
+ return count?base+adjustment/count:base;
 }
 export function tileSearch(o,legal,logits,budget){
  const {left,right,gain,value}=tables2048(),initial=o.board.map(row=>row.reduce((s,v,c)=>s|((v?Math.log2(v):0)<<(c*4)),0));
@@ -51,12 +65,13 @@ export function tileSearch(o,legal,logits,budget){
  const equal=(a,b)=>a.every((v,i)=>v===b[i]);
  const heuristic=rows=>rows.concat(columns(rows)).reduce((s,row)=>s+value[row],0);
  const isWin=rows=>rows.some(row=>[0,4,8,12].some(shift=>((row>>>shift)&15)>=11));
- const cache=new Map();
- function maxSearch(rows,depth,prob){budget.tick();if(!depth||prob<.0002)return heuristic(rows);const key=rows.join(',')+':'+depth,hit=cache.get(key);if(hit!==undefined)return hit;let best=-1e9;for(const d of ['up','down','left','right']){const [child,g]=move(rows,d);if(!equal(rows,child))best=Math.max(best,isWin(child)?1e9:chance(child,depth,prob)+g*.05);}cache.set(key,best);return best;}
- function chance(rows,depth,prob){budget.tick();if(!depth||prob<.0002)return heuristic(rows);const empty=[];for(let r=0;r<4;r++)for(let c=0;c<4;c++)if(!((rows[r]>>>(c*4))&15))empty.push([r,c]);if(!empty.length)return maxSearch(rows,depth-1,prob);let score=0;for(const [r,c] of empty)for(const [rank,p] of [[1,.9],[2,.1]]){const child=rows.slice();child[r]|=rank<<(c*4);score+=p*maxSearch(child,depth-1,prob*p/empty.length)/empty.length;}return score;}
+ const cache=new Map(),chanceCache=new Map();
+ function maxSearch(rows,depth){budget.tick();if(!depth)return heuristic(rows);const key=rows.join(',')+':'+depth,hit=cache.get(key);if(hit!==undefined)return hit;let best=-1e9;for(const d of ['up','down','left','right']){const [child,g]=move(rows,d);if(!equal(rows,child))best=Math.max(best,isWin(child)?1e9:chance(child,depth)+g*.05);}cache.set(key,best);return best;}
+ function chance(rows,depth){budget.tick();const key=rows.join(',')+':'+depth;if(chanceCache.has(key))return chanceCache.get(key);if(!depth)return heuristic(rows);if(depth===1){const value=spawnExpectation(rows);chanceCache.set(key,value);return value;}const empty=[];for(let r=0;r<4;r++)for(let c=0;c<4;c++)if(!((rows[r]>>>(c*4))&15))empty.push([r,c]);if(!empty.length)return maxSearch(rows,depth-1);let score=0;for(const [r,c] of empty)for(const [rank,p] of [[1,.9],[2,.1]]){const child=rows.slice();child[r]|=rank<<(c*4);score+=p*maxSearch(child,depth-1)/empty.length;}chanceCache.set(key,score);return score;}
  const ordered=legal.slice().sort((a,b)=>logits[actionIndex(o.game,b)]-logits[actionIndex(o.game,a)]);let best=ordered[0],bestValue=-Infinity,depthReached=0;
- for(const a of ordered){const [child,g]=move(initial,a.direction);if(isWin(child))return {action:a,info:{method:'expectimax_goal',optimal:true,remaining_moves:1,nodes:budget.nodes}};const v=heuristic(child)+g*.05;if(v>bestValue){bestValue=v;best=a;}}
- for(let depth=1;depth<=(budget.depth??2);depth++){let candidate=best,value=-Infinity;try{for(const a of ordered){const [child,g]=move(initial,a.direction),score=chance(child,depth,1)+g*.05;if(score>value){value=score;candidate=a;}}best=candidate;depthReached=depth;}catch(error){if(error.message!=='budget')throw error;break;}}
+ for(const a of ordered){const [child,g]=move(initial,a.direction);if(isWin(child))return {action:a,info:{method:'expectimax_goal',optimal:true,remaining_moves:1,nodes:budget.nodes}};const v=heuristic(child)+g*.05;if(v>bestValue+1e-7){bestValue=v;best=a;}}
+ const spaces=initial.reduce((n,row)=>n+[0,4,8,12].filter(s=>!((row>>>s)&15)).length,0),depthLimit=spaces<=4?(budget.criticalDepth??budget.depth??2):(budget.depth??2);
+ for(let depth=1;depth<=depthLimit;depth++){let candidate=best,value=-Infinity;try{for(const a of ordered){const [child,g]=move(initial,a.direction),score=chance(child,depth)+g*.05;if(score>value+1e-7){value=score;candidate=a;}}best=candidate;depthReached=depth;}catch(error){if(error.message!=='budget')throw error;break;}}
  return {action:best,info:{method:'neural_expectimax_tables',optimal:false,depth:depthReached,nodes:budget.nodes}};
 }
 
@@ -87,7 +102,17 @@ export function mineSearch(o,legal,logits,budget){
    if(denom){for(let at=0;at<components.length;at++){const component=components[at],other=components.filter((_,i)=>i!==at).reduce((a,c)=>convolution(a,c.ways,mineCount),[1]);component.vars.forEach((v,i)=>{let numerator=0;for(let k=0;k<component.mineWays[i].length;k++)for(let j=0;j<other.length;j++)numerator+=component.mineWays[i][k]*other[j]*choose(outside.length,mineCount-k-j);risks.set(v,numerator/denom);});}const outsideRisk=all.reduce((s,v,k)=>s+v*choose(outside.length-1,mineCount-k-1),0)/denom;outside.forEach(i=>risks.set(i,outsideRisk));exact=true;}
   }catch(error){if(!['budget','approximate'].includes(error.message))throw error;}
  }
- const available=remaining.length?remaining:hidden;let best=available[0],value=-Infinity;for(const i of available){const risk=risks.get(i)??base,neighbors=nearby(i).filter(j=>b[j]===-1),zero=neighbors.reduce((p,j)=>p*(1-(risks.get(j)??base)),1),flood=zero*(neighbors.length+1),score=-risk*10000+flood+logits[i]*.0001;if(score>value){value=score;best=i;}}
+ const available=remaining.length?remaining:hidden;
+ let best=available[0],bestRisk=Infinity,bestFlood=-Infinity,bestPrior=-Infinity;
+ for(const i of available){
+  const risk=risks.get(i)??base,neighbors=nearby(i).filter(j=>b[j]===-1);
+  const flood=neighbors.reduce((p,j)=>p*(1-(risks.get(j)??base)),1)*(neighbors.length+1);
+  // Comparaison lexicographique : une grande ouverture ou un score neuronal
+  // ne peut jamais remplacer une case prouvée sûre par un pari.
+  if(risk<bestRisk||(risk===bestRisk&&(flood>bestFlood||(flood===bestFlood&&logits[i]>bestPrior)))){
+   best=i;bestRisk=risk;bestFlood=flood;bestPrior=logits[i];
+  }
+ }
  const risk=risks.get(best)??base;
  return {action:{row:Math.floor(best/8),col:best%8},info:{method:exact?'constraint_marginals':'public_constraints_flood',optimal:false,risk,certain_safe:risk===0,probabilities_exact:exact,nodes:budget.nodes}};
 }
