@@ -1,0 +1,32 @@
+{
+  "sudoku": {
+    "game": "sudoku",
+    "episodes": 15,
+    "wins": 15,
+    "losses": 0,
+    "draws": 0,
+    "truncated": 0,
+    "mean_score": 50.999999999999986,
+    "opponent": "random_legal",
+    "seed": 1000000,
+    "level": 10,
+    "style": "balanced",
+    "teacher_used": false,
+    "planning": true
+  },
+  "sliding_puzzle": {
+    "game": "sliding_puzzle",
+    "episodes": 15,
+    "wins": 15,
+    "losses": 0,
+    "draws": 0,
+    "truncated": 0,
+    "mean_score": 0.0,
+    "opponent": "random_legal",
+    "seed": 1000000,
+    "level": 10,
+    "style": "balanced",
+    "teacher_used": false,
+    "planning": true
+  }
+}
