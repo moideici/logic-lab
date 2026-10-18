@@ -62,7 +62,7 @@ Ces tests ne remplacent pas la recette navigateur (boutons, streaming, arrêt, c
 
 - Git : `projets/garry` et `projets/input` ont leurs commits du 18 octobre 2026 (poids, corpus et caches exclus par `.gitignore`). Le Git de Input n'avait aucun commit avant cette date.
 - Les poids (`projets/input/models`, ~14 Go avec caches) ne sont pas versionnés ; seule une copie sur un autre disque ou un service externe les protège. Tout est actuellement sur le disque C:.
-- Les originaux `C:\Users\gabor\code\{playi, text-comprehension, latent-reasoner, latent-reasoner-hrm}` sont identiques aux copies (comparaison du 18 octobre 2026). Ils peuvent être archivés ou supprimés sur décision explicite.
+- Les originaux `C:\Users\gabor\code\{playi, text-comprehension, latent-reasoner, latent-reasoner-hrm}` ont été supprimés le 18 octobre 2026, après contrôle d'identité avec les copies (`work/historique/cmp_originaux.py`). Ce dossier est désormais la seule copie : d'où l'importance d'une sauvegarde externe des poids.
 
 ## Reprise
 
