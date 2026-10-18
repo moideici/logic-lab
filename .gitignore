@@ -21,3 +21,4 @@ training/continuous/**/cases.jsonl
 training-lab/data/
 training-lab/results/
 training-lab/models/
+logic_arena/zero/go9.dll
