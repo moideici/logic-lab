@@ -19,11 +19,11 @@ Note sur 10 par critère, pondérée, total sur 100.
 
 | # | Modèle | Paramètres | Architecture / vocabulaire | Licence | FR | Qual. | Taille | Fork | Lic. | Opt. | **Note /100** |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | **Qwen3-1.7B** | ~1,7 G | Transformeur dense, grand vocabulaire Qwen (~152 k) | Apache 2.0 (nos fichiers : Qwen3-0.6B Apache 2.0) | 8 | 8 | 4 | 10 | 10 | 9 | **78,0** |
-| 2 | **Qwen3-0.6B** (actuel) | ~0,6 G | Transformeur dense, ~152 k tokens, embeddings ≈ un quart du total | Apache 2.0 | 7 | 6 | 7 | 10 | 10 | 9 | **77,5** |
-| 3 | **Qwen3.5-0.8B** | 0,8 G (v) | Hybride Gated DeltaNet / attention 3:1, ~248 k tokens, 24 couches, multimodal, 201 langues (v) | Apache 2.0 (v ; une source dit licence Qwen) | 8 | 8 | 6 | 6 | 10 | 8 | **75,0** |
-| 4 | **Qwen2.5-0.5B** | ~0,5 G | Transformeur dense, ~152 k tokens | Apache 2.0 | 6 | 4 | 8 | 10 | 10 | 9 | **73,0** |
-| 5 | **Pleias-350M (aperçu)** | ~350 M (carte) | Llama, 26 couches, 1024 de large, vocabulaire 65 536 (v), contexte **2 048** (v), base sans chat, 1 T tokens de données ouvertes (v) | **Apache 2.0 (v, confirmé sur la carte)** | 8 | 3 | 9 | 9 | 10 | 5 | **72,5** |
+| 1 | **Pleias-350M (aperçu)** | ~350 M (carte) | Llama, 26 couches, 1024 de large, vocabulaire 65 536 (v), contexte **2 048** (v), base sans chat, 1 T tokens de données ouvertes (v) | **Apache 2.0 (v, confirmé sur la carte)** | 9 | 4 | 10 | 9 | 10 | 5 | **79,0** |
+| 2 | **Qwen3-1.7B** | ~1,7 G | Transformeur dense, grand vocabulaire Qwen (~152 k) | Apache 2.0 (nos fichiers : Qwen3-0.6B Apache 2.0) | 8 | 8 | 4 | 10 | 10 | 9 | **78,0** |
+| 3 | **Qwen3-0.6B** (actuel) | ~0,6 G | Transformeur dense, ~152 k tokens, embeddings ≈ un quart du total | Apache 2.0 | 7 | 6 | 7 | 10 | 10 | 9 | **77,5** |
+| 4 | **Qwen3.5-0.8B** | 0,8 G (v) | Hybride Gated DeltaNet / attention 3:1, ~248 k tokens, 24 couches, multimodal, 201 langues (v) | Apache 2.0 (v ; une source dit licence Qwen) | 8 | 8 | 6 | 6 | 10 | 8 | **75,0** |
+| 5 | **Qwen2.5-0.5B** | ~0,5 G | Transformeur dense, ~152 k tokens | Apache 2.0 | 6 | 4 | 8 | 10 | 10 | 9 | **73,0** |
 | 6 | **Gemma 3 270M** | 270 M, dont ~170 M d'embeddings et ~100 M de blocs (v) | Transformeur, ~262 k tokens, 18 couches, texte seul, contexte 32 k (v) | Conditions Gemma, accès restreint sur HF (v ; une source dit Apache) | 7 | 4 | 9 | 8 | 5 | 8 | **68,5** |
 | 7 | **LFM2-700M** | 742 M (v) | Hybride convolutions courtes (10) + attention (6), 16 couches, contexte 32 k (v) | LFM Open License v1.0 (v) | 7 | 5 | 8 | 5 | 5 | 6 | **62,0** |
 | 8 | **SmolLM2-360M** | 360 M (v) | Transformeur, vocabulaire 49 152 (v, indirect), 4 T tokens (v) | Apache 2.0 (v) | 3 | 4 | 9 | 9 | 10 | 5 | **62,0** |
@@ -56,7 +56,26 @@ Source : [carte officielle](https://huggingface.co/PleIAs/Pleias-350m-Preview) e
 
 **Variante à regarder : Pleias-Pico (Pleias-RAG-350M)**, dérivé du même modèle, Apache 2.0, entraîné pour répondre **à partir de sources, avec raisonnement et citations**, en français entre autres (Pleias annonce des résultats supérieurs aux petits modèles sur HotPotQA et 2wiki en mode « trivial » ; je n'ai pas vérifié). C'est exactement notre faiblesse : « selon le texte », reconnaître l'absence d'information, ne pas inventer. Son format de sortie est un raisonnement suivi d'une réponse avec sources, pas notre JSON.
 
-**Avis :** possible et intéressant. Note révisée de 67,5 à **72,5** (licence confirmée, forkabilité). À tester en deux temps : (1) le modèle de base, fine-tuning complet sur notre format et nos données ; (2) Pleias-Pico comme point de départ pour les cas fondés sur des sources.
+### Mesures sur notre machine (18 octobre 2026)
+
+`projets/input/bench/probe_model.py`, résultats dans `bench/results/sonde-*.json`. Fichiers téléchargés depuis Hugging Face : `PleIAs/Pleias-350m-Preview` (révision f175e52, 707 Mo) et `PleIAs/Pleias-RAG-350M` (révision db001b2, 707 Mo), tous deux Apache 2.0 selon l'API du dépôt, chargés en safetensors sans code distant.
+
+| Mesure | Qwen3-0.6B (actuel) | Pleias-350m-Preview | Pleias-RAG-350M |
+|---|---|---|---|
+| Paramètres | 596 M | **353 M** | 353 M |
+| Mémoire GPU (bf16) | 1 137 Mo | **700 Mo** | 700 Mo |
+| Chargement | 1,5 s | **0,9 s** | 0,9 s |
+| Vitesse de génération (gloutonne, 128 tokens) | 13,9 tokens/s | **20,0 tokens/s** | 20,0 tokens/s |
+| Bits par caractère sur 8 passages français | 0,965 | **0,872** | 1,015 |
+| Caractères par token (français) | 3,61 | **4,03** | 4,03 |
+| Contexte | 40 960 | 2 048 | 4 096 |
+| Gabarit de chat | oui | non | non |
+
+Lecture honnête : la vitesse a été mesurée avec les serveurs Input et Garry actifs sur la même carte, séquentiellement et dans les mêmes conditions ; l'ordre de grandeur (×1,4) compte plus que la valeur. Les bits par caractère portent sur huit courts passages que j'ai rédigés (≈ 3 000 caractères) : indicatif, pas un benchmark. Qwen3-0.6B est la version post-entraînée, ce qui défavorise un peu sa perte sur du texte brut ; la comparaison équitable serait avec Qwen3-0.6B-Base, non téléchargé.
+
+Continuations (base, sans consigne) : Pleias écrit un français fluide et naturel mais invente des faits (« La capitale de la France est un lieu d'attraction… », une omelette « cuite dans un mortier de marbre »). Sur « côtés 3 et 4, angle droit, le troisième côté mesure », il donne bien « 5 » puis divague. Qwen3-0.6B dérive vers un QCM en anglais. Pleias-RAG est un moins bon modèle de langue brut (1,015) car il est spécialisé ; son intérêt est ailleurs (voir plus haut) et ne se juge que sur des cas avec sources.
+
+**Avis :** possible et prometteur. Il est plus petit, plus rapide et meilleur en français brut, mais c'est un modèle de base : tout le comportement de dialogue, de format et de prudence reste à apprendre, et son contexte de 2 048 tokens est une contrainte. Note révisée de 67,5 à **79,0** (français mesuré, taille et vitesse, licence confirmée). Écart avec Qwen3-1.7B (78,0) et Qwen3-0.6B (77,5) non significatif : seule l'adaptation sur notre banc départagera. À tester en deux temps : (1) le modèle de base, fine-tuning complet sur notre format et nos données ; (2) Pleias-Pico comme point de départ pour les cas fondés sur des sources.
 
 ## Proposition de sélection
 
