@@ -193,6 +193,13 @@ Rapport : `outputs/verifications/graine-resultats.md`. Trois jeux, trois graines
 - **Décision proposée** : garder Graine dans le Lab comme visualisation, ne pas insister sur le gain, passer à Loop et au modèle de raisonnement.
 - **Lab en direct** : entraînement visible dans `/lab.html` (réseau, courbe d'accord et de taille, événements, comparaison de la session), API `/api/lab/train/*`, 11 tests.
 
+### Garry : entraînement relancé et orientation (18 octobre 2026)
+
+- **Décision de l'utilisateur :** Garry est le modèle phare ; les autres expériences (Graine, Loop, Pleias, projet code) n'ont pas la même ambition. L'effort se concentre sur Garry.
+- **Entraînement relancé** : session continue de 60 minutes, profil « points faibles » (Go, Hex, Gomoku), par imitation gardée : un candidat n'est promu que s'il fait au moins aussi bien que le champion sur validation et sur positions fraîches. Poids de départ : Garry 0.6.0, empreinte `ae54c06d…`, sauvegardés dans `projets/garry/training-runs/sauvegardes/` et `work/`. Résultats à consigner à la fin de la session.
+- **Jeux réels réparés** : le serveur désigne maintenant le navigateur Playwright du projet (`work/browsers`) ; 2048 (12 coups vérifiés) et Go 9×9 contre COSUMI niveau 1 (10 étapes) fonctionnent depuis l'onglet « Jeux réels ».
+- **Trois modèles ambitieux proposés** (`outputs/rapports/garry/PROPOSITIONS-3-MODELES-AMBITIEUX.md`) : **Garry Zéro** (auto-apprentissage avec recherche, sans professeur, pour dépasser les références ; jalon Puissance 4 puis Hex 7×7), **Garry Règles** (joueur universel qui lit les règles, test sur des jeux écartés), **Garry Délibération** (cœur récurrent dont le niveau est le nombre de passes, appuyé sur le Loop validé). Ordre recommandé : Zéro, Délibération, Règles. Aucune n'est lancée.
+
 ## 11. Projet code (mis de côté, résultats conservés)
 
 Un cœur de code relié à Input (`projets/code`, dépôt Git séparé, banc de code v1.1.0 : Python exécuté, C++ compilé, HTML vérifié).
