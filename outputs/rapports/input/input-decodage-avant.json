@@ -1,0 +1,35 @@
+{
+  "load_seconds": 4.996799100001226,
+  "cases": [
+    {
+      "prompt": "bonjour ! tu fonctionne",
+      "device": "cuda",
+      "tokens": 18,
+      "seconds": 1.529261800002132,
+      "tokens_per_second": 11.770384900724588,
+      "prefix_seconds": 0.0777756000024965,
+      "raw_tail": "'{\"texte\":\"Bonjour ! Je fonctionne.\" , \"valeurs\": {} }'",
+      "answer": "{\"texte\":\"Bonjour ! Je fonctionne.\" , \"valeurs\": {} }"
+    },
+    {
+      "prompt": "hey ! ça va ??",
+      "device": "cuda",
+      "tokens": 18,
+      "seconds": 1.1179702999943402,
+      "tokens_per_second": 16.10060660832504,
+      "prefix_seconds": 0.07849400001578033,
+      "raw_tail": "'{\"texte\":\"Bonjour ! Je fonctionne.\" , \"valeurs\": {} }'",
+      "answer": "{\"texte\":\"Bonjour ! Je fonctionne.\" , \"valeurs\": {} }"
+    },
+    {
+      "prompt": "Quelle est ta phrase préférée ?",
+      "device": "cuda",
+      "tokens": 29,
+      "seconds": 2.402116400000523,
+      "tokens_per_second": 12.072687235303704,
+      "prefix_seconds": 0.18598760001623305,
+      "raw_tail": "'{\"texte\":\"Je suis un assistant local francophone. Je peux t\\'aider à tout moment !\", \"valeurs\": {} }'",
+      "answer": "{\"texte\":\"Je suis un assistant local francophone. Je peux t'aider à tout moment !\", \"valeurs\": {} }"
+    }
+  ]
+}

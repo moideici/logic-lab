@@ -1,0 +1,38 @@
+{
+  "baseline": "c646149",
+  "seed": 1000000,
+  "episodes": 40,
+  "node_limit": 1500,
+  "teacher_used": false,
+  "note": "Diagnostic tactique, pas un taux de victoire en partie. Budgets en nœuds pour reproductibilité ; précontrôle tactique fixe hors budget. Les catégories peuvent se recouper.",
+  "before": {
+    "positions": 602,
+    "immediate_wins": 192,
+    "immediate_wins_taken": 192,
+    "avoidable_losses": 110,
+    "avoidable_losses_prevented": 110,
+    "forced_forks": 20,
+    "forced_forks_taken": 20,
+    "mean_decision_ms": 2.887
+  },
+  "after": {
+    "positions": 602,
+    "immediate_wins": 192,
+    "immediate_wins_taken": 192,
+    "avoidable_losses": 110,
+    "avoidable_losses_prevented": 110,
+    "forced_forks": 20,
+    "forced_forks_taken": 20,
+    "mean_decision_ms": 2.97
+  },
+  "duels": {
+    "episodes": 80,
+    "seed": 1100000,
+    "random_opening_moves": 6,
+    "paired_openings": true,
+    "alternating_sides": true,
+    "after_wins": 41,
+    "before_wins": 32,
+    "draws": 7
+  }
+}

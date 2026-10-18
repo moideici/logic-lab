@@ -1,0 +1,11 @@
+{
+  "game": "tictactoe",
+  "episodes": 1,
+  "epochs": 1,
+  "samples": 9,
+  "rehearsal_samples": 5,
+  "losses": [
+    6.492713928222656
+  ],
+  "shared_steps": 1082904
+}

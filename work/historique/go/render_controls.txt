@@ -1,0 +1,41 @@
+function renderControls(){
+ const policy=gameUiPolicy({game:game.name,mode:$('mode').value,planning:$('planning').checked,level:+$('level').value,levelTwo:+$('level-two').value});
+ const {multi,manualSolo,duel}=policy,human=humanTurn(),busy=pending.size>0;
+ $('ai-controls').hidden=!policy.showAi;
+ $('level-two-options').hidden=!duel;
+ $('level-title').textContent=policy.levelTitle;
+ const labels=game.name==='gomoku'?game.gomokuState.colors.map((c,i)=>c===1?'Noir':c===2?'Blanc':`Joueur ${i+1} · ouverture`):game.name==='hex'?game.hexState.colors.map(c=>c===1?'Bleu · haut / bas':'Orange · gauche / droite'):['draughts','breakthrough'].includes(game.name)?['Blanc','Noir']:['go','reversi'].includes(game.name)?['Noir','Blanc']:game.name==='nim'?['Joueur 1','Joueur 2']:game.name==='connect4'?['Rouge · premier','Jaune · second']:['X · premier','O · second'];
+ [...$('human-player').options].forEach((o,i)=>o.textContent=labels[i]);
+ $('mode').options[0].textContent=multi?'IA contre IA':'IA autonome';
+ $('mode').options[1].disabled=false;$('mode').options[1].textContent=policy.humanLabel;
+ $('mode').disabled=training;$('human-player').disabled=training;
+ $('human-options').hidden=!multi||$('mode').value!=='human';
+ $('style-options').hidden=!policy.showStyles;
+ $('style-note').hidden=manualSolo;$('style-note').textContent=policy.styleHint;
+ const choices=JSON.stringify(policy.styles);
+ if($('style').dataset.choices!==choices){const previous=$('style').value;$('style').replaceChildren(...policy.styles.map(([value,label])=>{const option=document.createElement('option');option.value=value;option.textContent=label;return option;}));if(policy.styles.some(([value])=>value===previous))$('style').value=previous;$('style').dataset.choices=choices;}
+ if(!policy.styles.length){const option=document.createElement('option');option.value='balanced';option.textContent='Équilibré';$('style').replaceChildren(option);}
+ $('play').hidden=manualSolo;$('step').hidden=$('mode').value==='human';
+ $('play').querySelector('span').textContent=running?'Pause':$('mode').value==='human'?'Faire jouer l’IA':multi?'Observer les IA':'Observer l’IA';
+ $('play').firstChild.textContent=running?'Ⅱ ':'▶ ';
+ $('play').disabled=!current()||game.done||training||(!running&&(human||busy));
+ $('play').title=human?'À vous de jouer sur le plateau.':busy?'Calcul du coup en cours.':'';
+ $('step').disabled=game.done||!current()||human||running||busy||training;
+ $('new').disabled=training;$('new').title=training?'Arrêtez l’entraînement du navigateur pour changer la partie.':'Nouvelle partie';
+ const label=labels[game.player-1];
+ $('turn').textContent=game.done?'Partie terminée':human?'À vous de jouer':multi?`Au tour du réseau ${label}`:'Le réseau joue en solo';
+ const bound=game.name==='sliding_puzzle'?game.board.length===3?slidingDistance(game.board):game.distance():game.name==='sudoku'?game.board.flat().filter(v=>!v).length:null;
+ $('move-counter').textContent=`${game.moves} coup${game.moves>1?'s':''}${bound!==null?' · '+bound+' restant'+(bound>1?'s':''):''}`;
+ $('elapsed-counter').textContent=startedAt===null?'0,00 s':`${(((finishedAt??performance.now())-startedAt)/1000).toFixed(2).replace('.',',')} s`;
+ $('game-title').textContent=NAMES[game.name];$('game-category').textContent=multi?'DUEL · 2 JOUEURS':'RÉSOLUTION · 1 JOUEUR';$('train-game').textContent=NAMES[game.name];
+ $('game-hint').textContent=game.name==='2048'?(human?'Utilisez les flèches du clavier ou les boutons de direction. Les coups sans effet sont désactivés.':'Fusionnez les tuiles. Garry continue après 2048 pour augmenter le score.'):game.name==='minesweeper'?(human?'Cliquez sur une case cachée. Le premier clic est protégé ; les nombres indiquent les mines voisines.':'Priorité aux cases sûres et aux grandes ouvertures. Les mines restent cachées.'):
+ human?'Cliquez sur une case libre ou une colonne pour jouer.':'Priorité à la victoire, puis au moins de coups possible dans la recherche.';
+ if(game.name==='connect4'&&lastDecision?.depth!==undefined)$('game-hint').textContent=lastDecision.forced_win?'Victoire forcée trouvée dans la recherche.':`Recherche : ${lastDecision.depth} demi-coups analysés · cible ${lastDecision.target_depth??20}.`;
+ if(extraHints[game.name])$('game-hint').textContent=extraHints[game.name];
+ if(game.name==='gomoku')$('game-hint').textContent=gomokuHint();
+ if(game.name==='draughts'&&game.draughtsState.forced_piece)$('game-hint').textContent='Rafle en cours : continuez avec le pion sélectionné. Les pièces prises seront retirées à la fin.';
+ renderPuzzleControls(game,human,training,lastDecision);renderGoControls(game);
+ $('go-size').disabled=training;$('go-komi').disabled=training;
+ if(!$('planning').checked&&!manualSolo)$('game-hint').textContent+=' Réseau seul : le niveau utilise ses scores appris ; la recherche est désactivée.';
+ if(manualSolo&&game.done)$('turn').textContent=game.winner===1?'Objectif atteint':'Partie terminée';
+}

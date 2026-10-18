@@ -1,0 +1,135 @@
+{
+  "ok": true,
+  "valid_responses": 8,
+  "invalid_requests_rejected": 4,
+  "cases": [
+    {
+      "entree": "Lina donne le livre à Malo.",
+      "affirmation": "Malo reçoit le livre.",
+      "sortie": {
+        "etat": "ok",
+        "type": "confirme",
+        "texte": "Le texte confirme cette affirmation.",
+        "score": 0.47780460119247437,
+        "scores": {
+          "confirme": 0.47780460119247437,
+          "contredit": 0.22986964881420135,
+          "indetermine": 0.29232579469680786
+        },
+        "modele": "scratch"
+      }
+    },
+    {
+      "entree": "Nora n’aime pas les poires.",
+      "affirmation": "Nora aime les poires.",
+      "sortie": {
+        "etat": "ok",
+        "type": "confirme",
+        "texte": "Le texte confirme cette affirmation.",
+        "score": 0.6033013463020325,
+        "scores": {
+          "confirme": 0.6033013463020325,
+          "contredit": 0.11902932077646255,
+          "indetermine": 0.27766934037208557
+        },
+        "modele": "scratch"
+      }
+    },
+    {
+      "entree": "Hugo est à Lille. Ensuite, Hugo rejoint Nantes.",
+      "affirmation": "À la fin, Hugo est à Nantes.",
+      "sortie": {
+        "etat": "ok",
+        "type": "confirme",
+        "texte": "Le texte confirme cette affirmation.",
+        "score": 0.4906601309776306,
+        "scores": {
+          "confirme": 0.4906601309776306,
+          "contredit": 0.21133963763713837,
+          "indetermine": 0.2980002760887146
+        },
+        "modele": "scratch"
+      }
+    },
+    {
+      "entree": "Élodie regarde la pluie.",
+      "affirmation": "Élodie possède un chien.",
+      "sortie": {
+        "etat": "ok",
+        "type": "confirme",
+        "texte": "Le texte confirme cette affirmation.",
+        "score": 0.5044592022895813,
+        "scores": {
+          "confirme": 0.5044592022895813,
+          "contredit": 0.15422745048999786,
+          "indetermine": 0.34131336212158203
+        },
+        "modele": "scratch"
+      }
+    },
+    {
+      "entree": "Lina donne le livre à Malo.",
+      "affirmation": "Malo reçoit le livre.",
+      "sortie": {
+        "etat": "ok",
+        "type": "confirme",
+        "texte": "Le texte confirme cette affirmation.",
+        "score": 0.7150937914848328,
+        "scores": {
+          "confirme": 0.7150937914848328,
+          "contredit": 0.01068978663533926,
+          "indetermine": 0.2742164134979248
+        },
+        "modele": "pretrained"
+      }
+    },
+    {
+      "entree": "Nora n’aime pas les poires.",
+      "affirmation": "Nora aime les poires.",
+      "sortie": {
+        "etat": "ok",
+        "type": "contredit",
+        "texte": "Le texte contredit cette affirmation.",
+        "score": 0.9943640232086182,
+        "scores": {
+          "confirme": 0.0026859671343117952,
+          "contredit": 0.9943640232086182,
+          "indetermine": 0.002949957735836506
+        },
+        "modele": "pretrained"
+      }
+    },
+    {
+      "entree": "Hugo est à Lille. Ensuite, Hugo rejoint Nantes.",
+      "affirmation": "À la fin, Hugo est à Nantes.",
+      "sortie": {
+        "etat": "ok",
+        "type": "confirme",
+        "texte": "Le texte confirme cette affirmation.",
+        "score": 0.9913864135742188,
+        "scores": {
+          "confirme": 0.9913864135742188,
+          "contredit": 0.004258465953171253,
+          "indetermine": 0.004355197306722403
+        },
+        "modele": "pretrained"
+      }
+    },
+    {
+      "entree": "Élodie regarde la pluie.",
+      "affirmation": "Élodie possède un chien.",
+      "sortie": {
+        "etat": "ok",
+        "type": "confirme",
+        "texte": "Le texte confirme cette affirmation.",
+        "score": 0.9929133057594299,
+        "scores": {
+          "confirme": 0.9929133057594299,
+          "contredit": 0.0037749141920357943,
+          "indetermine": 0.003311887616291642
+        },
+        "modele": "pretrained"
+      }
+    }
+  ]
+}

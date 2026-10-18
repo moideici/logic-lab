@@ -1,0 +1,91 @@
+<!DOCTYPE html><html lang="en"><head prefix="og: http://ogp.me/ns#">
+<meta property="og:title" content="Go Browser Game COSUMI - It's Free!">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://www.cosumi.net/image/ogp.png">
+<meta property="og:url" content="https://www.cosumi.net/en/">
+<meta property="og:site_name" content="Go Browser Game COSUMI">
+<meta name="twitter:card" content="summary_large_image">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=728px">
+<link rel="apple-touch-icon" href="https://www.cosumi.net/apple-touch-icon.png">
+<link rel="stylesheet" href="en-smartphone.css?61709" type="text/css" media="(max-device-width: 767px)">
+<link rel="stylesheet" href="en-tablet.css?61709" type="text/css" media="(min-device-width: 768px) and (max-device-width: 1023px)">
+<link rel="stylesheet" href="en.css?61709" type="text/css" media="(min-device-width: 1024px)">
+<title>Go Browser Game COSUMI - It's Free!</title>
+<script src="https://code.jquery.com/jquery-4.0.0.min.js" integrity="sha256-OaVG6prZf4v69dPg6PhVattBXkcOWQB62pdZ3ORyrao=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+
+<!-- adsense h5 -->
+<!--
+<script async 
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7240025902156737"
+    crossorigin="anonymous"
+    data-ad-client="ca-pub-7240025902156737"
+    data-ad-channel="5750555512"
+    data-ad-frequency-hint="900s">
+</script>
+<script>
+    window.adsbygoogle = window.adsbygoogle || [];
+    var adBreak = adConfig = function(o) {adsbygoogle.push(o);};
+</script>
+-->
+
+<script src="../js/play.js?61709"></script>
+<script src="../js/screenfull-5.2.0.js"></script>
+<script src="../js/fullscreen.js?61709"></script>
+
+<!-- Google tag (gtag.js) -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-TYGRDXDEQB"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TYGRDXDEQB');
+</script>
+
+<script async="" src="https://fundingchoicesmessages.google.com/i/pub-7240025902156737?ers=1"></script><script>(function() {function signalGooglefcPresent() {if (!window.frames['googlefcPresent']) {if (document.body) {const iframe = document.createElement('iframe'); iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;'; iframe.style.display = 'none'; iframe.name = 'googlefcPresent'; document.body.appendChild(iframe);} else {setTimeout(signalGooglefcPresent, 0);}}}signalGooglefcPresent();})();</script>
+
+</head>
+<body>
+<div id="all">
+<div id="left">
+<div id="thearea"><canvas id="blackstone" style="display: none;"></canvas><canvas id="whitestone" style="display: none;"></canvas><canvas id="board" width="1384px" height="1384px" style="left: 0px; top: 26px; width: 692px; height: 692px; border-radius: 8px;"></canvas><canvas id="stone" width="1384px" height="1384px" style="left: 0px; top: 26px; width: 692px; height: 692px; border-radius: 8px;"></canvas><canvas id="lastmove" style="display: none;"></canvas><div id="handicapnumber" style="display: none;"></div><div id="clickable" style="left: 0px; top: 26px; width: 692px; height: 692px; border-radius: 8px; background-color: rgb(0, 0, 0); opacity: 0;"></div><div id="darkener" style="left: 0px; top: 26px; width: 692px; height: 692px; border-radius: 8px; background-color: rgb(95, 92, 86); opacity: 0.95;"></div><div id="passbutton" style="left: 90px; top: 728px;"><img id="pass-1" src="/image/play/pass-1.png" width="230px" height="100px" style="left: 0px; top: 0px;"><img id="pass-2" src="/image/play/pass-2.png" width="230px" height="100px" style="left: 0px; top: 0px; display: none;"></div><div id="resignbutton" style="left: 372px; top: 728px;"><img id="resign-1" src="/image/play/resign-1.png" width="230px" height="100px" style="left: 0px; top: 0px;"><img id="resign-2" src="/image/play/resign-2.png" width="230px" height="100px" style="left: 0px; top: 0px; display: none;"></div><div id="soundbutton" style="left: 550px; top: 0px; width: 127px; height: 26px;"><img id="soundoff" src="/image/play/soundoff.png" width="127px" height="26px" style="left: 0px; top: 0px;"><img id="soundon" src="/image/play/soundon.png" width="127px" height="26px" style="left: 0px; top: 0px;"></div><div id="clickbutton" style="left: 432px; top: 0px; width: 81px; height: 26px;"><img id="2click" src="/image/play/2click.png" width="81px" height="26px" style="left: 0px; top: 0px;"><img id="1click" src="/image/play/1click.png" width="81px" height="26px" style="left: 0px; top: 0px;"></div><div id="choicetitle" style="top: 76px; font-size: 60px; width: 692px; color: rgb(238, 238, 255);">Board Size</div><div id="choice-5" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 22px; top: 155px;">5</div><div id="choice-6" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 188px; top: 155px;">6</div><div id="choice-7" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 354px; top: 155px;">7</div><div id="choice-8" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 520px; top: 155px;">8</div><div id="choice-9" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 22px; top: 321px;">9</div><div id="choice-11" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 188px; top: 321px;">11</div><div id="choice-13" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 354px; top: 321px;">13</div><div id="choice-15" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 520px; top: 321px;">15</div><div id="choice-17" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 22px; top: 487px;">17</div><div id="choice-19" class="choice" style="width: 150px; height: 150px; font-size: 130px; line-height: 150px; border-radius: 8px; background-color: rgb(238, 238, 255); color: rgb(100, 95, 85); left: 188px; top: 487px;">19</div></div>
+<div id="info">
+<p>
+Welcome to <span class="cosumi">COSUMI</span>!
+On this site, you can play 5×5 to 19×19 Go(a.k.a. Igo, Baduk, and Weiqi), which is a well-known ancient board game.
+If you do not know how to play Go, please watch <a href="https://www.youtube.com/watch?v=5PTXdR8hLlQ">this video(Go - Basic Rules / YouTube)</a> first, and then try a 5×5 game that is just right for a beginner like you.
+Enjoy!
+</p>
+<div id="rule">
+Japanese Rules(Territory scoring)<br>
+<table>
+<tbody><tr><td class="boardsize">5×5 to 9×9(Level 0)</td><td>No komi, and your color is always black</td></tr>
+<tr><td class="boardsize">9×9(Level 1) to 19×19 Even Game</td><td>Komi is 6.5, and your color will be decided at random</td></tr>
+<tr><td class="boardsize">11×11 to 19×19 Handicap Game</td><td>No komi</td></tr>
+</tbody></table>
+</div>
+<div id="difficulty">
+<a href="../difficulty-en.html" target="_blank"><img src="../image/difficulty-en.png" width="608" height="536" alt=""></a>
+</div>
+<div id="lost">Yeah... COSUMI has lost <span id="lostnumber">113,286,279</span> games already...</div>
+</div>
+<div id="otherlanguage">
+<a href="../zh/">Chinese</a> English <a href="../">Japanese</a> <a href="../ko/">Korean</a>
+</div>
+</div>
+<div id="right">
+<div class="adsense">
+<script async="" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7240025902156737" crossorigin="anonymous"></script>
+<!-- COSUMI EN RESPONSIVE -->
+<ins class="adsbygoogle" style="display:block;max-width:300px;width:100%" data-ad-client="ca-pub-7240025902156737" data-ad-slot="1758751993" data-ad-format="vertical, rectangle" data-full-width-responsive="false"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</div>
+</div>
+</div>
+
+
+<iframe name="googlefcPresent" style="width: 0px; height: 0px; border-width: medium; border-style: none; border-color: currentcolor; border-image: none; z-index: -1000; left: -1000px; top: -1000px; display: none;"></iframe><div id="fullscreenbutton" style="position: absolute; top: 15px; right: 15px; width: 40px; height: 40px;"><canvas id="fullscreen-1" width="120px" height="120px" style="position: absolute; top: 0px; left: 0px; width: 40px; height: 40px;"></canvas><canvas id="fullscreen-2" width="120px" height="120px" style="position: absolute; top: 0px; left: 0px; width: 40px; height: 40px;"></canvas></div></body></html>

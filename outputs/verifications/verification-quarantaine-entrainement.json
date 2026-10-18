@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "job": "5ed011499eae4dac96a63e9c83244eff",
+  "historical_unique_states": 66890,
+  "new_states_checked": 2281,
+  "collisions": [],
+  "partial_line_skipped": 0,
+  "state": "running",
+  "moves_total": 10417,
+  "promotions": 0,
+  "remaining_seconds": 3450.45,
+  "ends_at": "2026-10-17T19:59:13.721529+00:00"
+}

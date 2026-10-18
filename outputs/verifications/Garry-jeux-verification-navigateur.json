@@ -1,0 +1,49 @@
+{
+  "games": 11,
+  "human_play": [
+    "nim",
+    "reversi",
+    "lightsout",
+    "draughts",
+    "breakthrough"
+  ],
+  "reversi_pass": true,
+  "draughts_capture_continuation": true,
+  "lightsout_solved": true,
+  "training_workers": [
+    {
+      "game": "nim",
+      "examples": 13,
+      "rehearsals": 2,
+      "repertoire_size": 4757
+    },
+    {
+      "game": "lightsout",
+      "examples": 20,
+      "rehearsals": 4,
+      "repertoire_size": 4757
+    },
+    {
+      "game": "reversi",
+      "examples": 46,
+      "rehearsals": 8,
+      "repertoire_size": 4757
+    },
+    {
+      "game": "draughts",
+      "examples": 152,
+      "rehearsals": 26,
+      "repertoire_size": 4757
+    },
+    {
+      "game": "breakthrough",
+      "examples": 80,
+      "rehearsals": 14,
+      "repertoire_size": 4757
+    }
+  ],
+  "legacy_import": true,
+  "old_weights_preserved": true,
+  "mobile_overflow": false,
+  "page_errors": []
+}

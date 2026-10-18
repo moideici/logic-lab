@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "current_version": "0.6.0",
+  "legacy_import_version": "6.0.0",
+  "games": 14,
+  "continuous_pid": 7536,
+  "continuous_state": "running",
+  "moves_total": 96294,
+  "promotions": 33,
+  "remaining_seconds": 2203.43,
+  "errors": []
+}

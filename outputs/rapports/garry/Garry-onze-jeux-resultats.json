@@ -1,0 +1,1426 @@
+{
+  "version": "4.0.0",
+  "architecture": [
+    2494,
+    48,
+    48,
+    3617
+  ],
+  "parameters": 299377,
+  "games": [
+    "tictactoe",
+    "connect4",
+    "2048",
+    "sudoku",
+    "minesweeper",
+    "sliding_puzzle",
+    "reversi",
+    "nim",
+    "lightsout",
+    "draughts",
+    "breakthrough"
+  ],
+  "training_steps": {
+    "tictactoe": 497200,
+    "connect4": 220540,
+    "2048": 245000,
+    "sudoku": 306594,
+    "minesweeper": 87698,
+    "sliding_puzzle": 78241,
+    "reversi": 1920,
+    "nim": 4500,
+    "lightsout": 600,
+    "draughts": 4680,
+    "breakthrough": 6120
+  },
+  "repertoire_size": 4757,
+  "tests": {
+    "python": 75,
+    "javascript": 39,
+    "total": 114
+  },
+  "training_first_three": {
+    "version": "4.0.0",
+    "architecture": [
+      2060,
+      48,
+      48,
+      925
+    ],
+    "seed": 1710400,
+    "counts": {
+      "reversi": {
+        "train": 320,
+        "validation": 70,
+        "test": 70
+      },
+      "nim": {
+        "train": 900,
+        "validation": 150,
+        "test": 150
+      },
+      "lightsout": {
+        "train": 600,
+        "validation": 100,
+        "test": 100
+      }
+    },
+    "games": {
+      "reversi": {
+        "epochs_selected": 6,
+        "training_presentations": 1920,
+        "validation_before": {
+          "samples": 70,
+          "soft_cross_entropy": 1.431645393371582,
+          "optimal_choice_rate": 0.35714285714285715,
+          "sound_choice_rate": 0.35714285714285715,
+          "acceptable_target_mass": 0.3414735794067383,
+          "categories": {
+            "endgame": {
+              "samples": 22,
+              "optimal_choice_rate": 0.6363636363636364,
+              "sound_choice_rate": 0.6363636363636364
+            },
+            "middle": {
+              "samples": 38,
+              "optimal_choice_rate": 0.15789473684210525,
+              "sound_choice_rate": 0.15789473684210525
+            },
+            "opening": {
+              "samples": 8,
+              "optimal_choice_rate": 0.375,
+              "sound_choice_rate": 0.375
+            },
+            "pass": {
+              "samples": 2,
+              "optimal_choice_rate": 1.0,
+              "sound_choice_rate": 1.0
+            }
+          }
+        },
+        "validation_after": {
+          "samples": 70,
+          "soft_cross_entropy": 1.0368353128433228,
+          "optimal_choice_rate": 0.6714285714285714,
+          "sound_choice_rate": 0.6714285714285714,
+          "acceptable_target_mass": 0.5060855150222778,
+          "categories": {
+            "endgame": {
+              "samples": 22,
+              "optimal_choice_rate": 0.8181818181818182,
+              "sound_choice_rate": 0.8181818181818182
+            },
+            "middle": {
+              "samples": 38,
+              "optimal_choice_rate": 0.6052631578947368,
+              "sound_choice_rate": 0.6052631578947368
+            },
+            "opening": {
+              "samples": 8,
+              "optimal_choice_rate": 0.5,
+              "sound_choice_rate": 0.5
+            },
+            "pass": {
+              "samples": 2,
+              "optimal_choice_rate": 1.0,
+              "sound_choice_rate": 1.0
+            }
+          }
+        },
+        "test_before": {
+          "samples": 70,
+          "soft_cross_entropy": 1.5647845268249512,
+          "optimal_choice_rate": 0.3142857142857143,
+          "sound_choice_rate": 0.3142857142857143,
+          "acceptable_target_mass": 0.2808447480201721,
+          "categories": {
+            "endgame": {
+              "samples": 20,
+              "optimal_choice_rate": 0.5,
+              "sound_choice_rate": 0.5
+            },
+            "middle": {
+              "samples": 34,
+              "optimal_choice_rate": 0.20588235294117646,
+              "sound_choice_rate": 0.20588235294117646
+            },
+            "opening": {
+              "samples": 16,
+              "optimal_choice_rate": 0.3125,
+              "sound_choice_rate": 0.3125
+            }
+          }
+        },
+        "test_after": {
+          "samples": 70,
+          "soft_cross_entropy": 1.1717040538787842,
+          "optimal_choice_rate": 0.6285714285714286,
+          "sound_choice_rate": 0.6285714285714286,
+          "acceptable_target_mass": 0.4829648733139038,
+          "categories": {
+            "endgame": {
+              "samples": 20,
+              "optimal_choice_rate": 0.75,
+              "sound_choice_rate": 0.75
+            },
+            "middle": {
+              "samples": 34,
+              "optimal_choice_rate": 0.5882352941176471,
+              "sound_choice_rate": 0.5882352941176471
+            },
+            "opening": {
+              "samples": 16,
+              "optimal_choice_rate": 0.5625,
+              "sound_choice_rate": 0.5625
+            }
+          }
+        }
+      },
+      "nim": {
+        "epochs_selected": 5,
+        "training_presentations": 4500,
+        "validation_before": {
+          "samples": 150,
+          "soft_cross_entropy": 2.9797370433807373,
+          "optimal_choice_rate": 0.08,
+          "sound_choice_rate": 0.08,
+          "acceptable_target_mass": 0.06507831811904907,
+          "categories": {
+            "losing": {
+              "samples": 9,
+              "optimal_choice_rate": 0.6666666666666666,
+              "sound_choice_rate": 0.6666666666666666
+            },
+            "winning": {
+              "samples": 141,
+              "optimal_choice_rate": 0.0425531914893617,
+              "sound_choice_rate": 0.0425531914893617
+            }
+          }
+        },
+        "validation_after": {
+          "samples": 150,
+          "soft_cross_entropy": 3.05224871635437,
+          "optimal_choice_rate": 0.10666666666666667,
+          "sound_choice_rate": 0.10666666666666667,
+          "acceptable_target_mass": 0.06518896669149399,
+          "categories": {
+            "losing": {
+              "samples": 9,
+              "optimal_choice_rate": 0.7777777777777778,
+              "sound_choice_rate": 0.7777777777777778
+            },
+            "winning": {
+              "samples": 141,
+              "optimal_choice_rate": 0.06382978723404255,
+              "sound_choice_rate": 0.06382978723404255
+            }
+          }
+        },
+        "test_before": {
+          "samples": 150,
+          "soft_cross_entropy": 3.020139217376709,
+          "optimal_choice_rate": 0.07333333333333333,
+          "sound_choice_rate": 0.07333333333333333,
+          "acceptable_target_mass": 0.06291808933019638,
+          "categories": {
+            "losing": {
+              "samples": 4,
+              "optimal_choice_rate": 0.5,
+              "sound_choice_rate": 0.5
+            },
+            "winning": {
+              "samples": 146,
+              "optimal_choice_rate": 0.06164383561643835,
+              "sound_choice_rate": 0.06164383561643835
+            }
+          }
+        },
+        "test_after": {
+          "samples": 150,
+          "soft_cross_entropy": 3.1745047569274902,
+          "optimal_choice_rate": 0.04666666666666667,
+          "sound_choice_rate": 0.04666666666666667,
+          "acceptable_target_mass": 0.059447430074214935,
+          "categories": {
+            "losing": {
+              "samples": 4,
+              "optimal_choice_rate": 0.5,
+              "sound_choice_rate": 0.5
+            },
+            "winning": {
+              "samples": 146,
+              "optimal_choice_rate": 0.03424657534246575,
+              "sound_choice_rate": 0.03424657534246575
+            }
+          }
+        }
+      },
+      "lightsout": {
+        "epochs_selected": 1,
+        "training_presentations": 600,
+        "validation_before": {
+          "samples": 100,
+          "soft_cross_entropy": 3.218698024749756,
+          "optimal_choice_rate": 0.5,
+          "sound_choice_rate": 0.5,
+          "acceptable_target_mass": 0.45999935269355774,
+          "categories": {
+            "long": {
+              "samples": 73,
+              "optimal_choice_rate": 0.547945205479452,
+              "sound_choice_rate": 0.547945205479452
+            },
+            "short": {
+              "samples": 27,
+              "optimal_choice_rate": 0.37037037037037035,
+              "sound_choice_rate": 0.37037037037037035
+            }
+          }
+        },
+        "validation_after": {
+          "samples": 100,
+          "soft_cross_entropy": 3.2192578315734863,
+          "optimal_choice_rate": 0.56,
+          "sound_choice_rate": 0.56,
+          "acceptable_target_mass": 0.46052825450897217,
+          "categories": {
+            "long": {
+              "samples": 73,
+              "optimal_choice_rate": 0.6164383561643836,
+              "sound_choice_rate": 0.6164383561643836
+            },
+            "short": {
+              "samples": 27,
+              "optimal_choice_rate": 0.4074074074074074,
+              "sound_choice_rate": 0.4074074074074074
+            }
+          }
+        },
+        "test_before": {
+          "samples": 100,
+          "soft_cross_entropy": 3.221238136291504,
+          "optimal_choice_rate": 0.52,
+          "sound_choice_rate": 0.52,
+          "acceptable_target_mass": 0.46584808826446533,
+          "categories": {
+            "long": {
+              "samples": 74,
+              "optimal_choice_rate": 0.5945945945945946,
+              "sound_choice_rate": 0.5945945945945946
+            },
+            "short": {
+              "samples": 26,
+              "optimal_choice_rate": 0.3076923076923077,
+              "sound_choice_rate": 0.3076923076923077
+            }
+          }
+        },
+        "test_after": {
+          "samples": 100,
+          "soft_cross_entropy": 3.223060369491577,
+          "optimal_choice_rate": 0.45,
+          "sound_choice_rate": 0.45,
+          "acceptable_target_mass": 0.465660959482193,
+          "categories": {
+            "long": {
+              "samples": 74,
+              "optimal_choice_rate": 0.527027027027027,
+              "sound_choice_rate": 0.527027027027027
+            },
+            "short": {
+              "samples": 26,
+              "optimal_choice_rate": 0.23076923076923078,
+              "sound_choice_rate": 0.23076923076923078
+            }
+          }
+        }
+      }
+    },
+    "legacy_parameters_preserved": true,
+    "search_memory_preserved": true,
+    "position_head_preserved": true,
+    "elapsed_seconds": 14.39,
+    "repertoire_size": 4397
+  },
+  "training_strategy": {
+    "version": "4.0.0",
+    "architecture": [
+      2494,
+      48,
+      48,
+      3617
+    ],
+    "seed": 1710711,
+    "counts": {
+      "draughts": {
+        "train": 180,
+        "validation": 40,
+        "test": 40
+      },
+      "breakthrough": {
+        "train": 180,
+        "validation": 40,
+        "test": 40
+      }
+    },
+    "games": {
+      "draughts": {
+        "selected_epoch": 26,
+        "training_presentations": 4680,
+        "validation_before": {
+          "samples": 40,
+          "soft_cross_entropy": 1.1887938976287842,
+          "optimal_choice_rate": 0.55,
+          "sound_choice_rate": 0.55,
+          "acceptable_target_mass": 0.6149222254753113,
+          "categories": {
+            "middle": {
+              "samples": 22,
+              "optimal_choice_rate": 0.5,
+              "sound_choice_rate": 0.5
+            },
+            "opening": {
+              "samples": 10,
+              "optimal_choice_rate": 0.3,
+              "sound_choice_rate": 0.3
+            },
+            "rafle": {
+              "samples": 8,
+              "optimal_choice_rate": 1.0,
+              "sound_choice_rate": 1.0
+            }
+          }
+        },
+        "validation_after": {
+          "samples": 40,
+          "soft_cross_entropy": 1.1314154863357544,
+          "optimal_choice_rate": 0.825,
+          "sound_choice_rate": 0.825,
+          "acceptable_target_mass": 0.7117483019828796,
+          "categories": {
+            "middle": {
+              "samples": 22,
+              "optimal_choice_rate": 0.8636363636363636,
+              "sound_choice_rate": 0.8636363636363636
+            },
+            "opening": {
+              "samples": 10,
+              "optimal_choice_rate": 0.6,
+              "sound_choice_rate": 0.6
+            },
+            "rafle": {
+              "samples": 8,
+              "optimal_choice_rate": 1.0,
+              "sound_choice_rate": 1.0
+            }
+          }
+        },
+        "test_before": {
+          "samples": 40,
+          "soft_cross_entropy": 1.267746090888977,
+          "optimal_choice_rate": 0.55,
+          "sound_choice_rate": 0.55,
+          "acceptable_target_mass": 0.5631304979324341,
+          "categories": {
+            "middle": {
+              "samples": 27,
+              "optimal_choice_rate": 0.5555555555555556,
+              "sound_choice_rate": 0.5555555555555556
+            },
+            "opening": {
+              "samples": 7,
+              "optimal_choice_rate": 0.14285714285714285,
+              "sound_choice_rate": 0.14285714285714285
+            },
+            "rafle": {
+              "samples": 6,
+              "optimal_choice_rate": 1.0,
+              "sound_choice_rate": 1.0
+            }
+          }
+        },
+        "test_after": {
+          "samples": 40,
+          "soft_cross_entropy": 1.2895816564559937,
+          "optimal_choice_rate": 0.575,
+          "sound_choice_rate": 0.575,
+          "acceptable_target_mass": 0.6054081916809082,
+          "categories": {
+            "middle": {
+              "samples": 27,
+              "optimal_choice_rate": 0.5185185185185185,
+              "sound_choice_rate": 0.5185185185185185
+            },
+            "opening": {
+              "samples": 7,
+              "optimal_choice_rate": 0.42857142857142855,
+              "sound_choice_rate": 0.42857142857142855
+            },
+            "rafle": {
+              "samples": 6,
+              "optimal_choice_rate": 1.0,
+              "sound_choice_rate": 1.0
+            }
+          }
+        }
+      },
+      "breakthrough": {
+        "selected_epoch": 34,
+        "training_presentations": 6120,
+        "validation_before": {
+          "samples": 40,
+          "soft_cross_entropy": 3.2937729358673096,
+          "optimal_choice_rate": 0.175,
+          "sound_choice_rate": 0.175,
+          "acceptable_target_mass": 0.13389167189598083,
+          "categories": {
+            "middle": {
+              "samples": 25,
+              "optimal_choice_rate": 0.08,
+              "sound_choice_rate": 0.08
+            },
+            "opening": {
+              "samples": 15,
+              "optimal_choice_rate": 0.3333333333333333,
+              "sound_choice_rate": 0.3333333333333333
+            }
+          }
+        },
+        "validation_after": {
+          "samples": 40,
+          "soft_cross_entropy": 2.751347064971924,
+          "optimal_choice_rate": 0.6,
+          "sound_choice_rate": 0.6,
+          "acceptable_target_mass": 0.38159090280532837,
+          "categories": {
+            "middle": {
+              "samples": 25,
+              "optimal_choice_rate": 0.56,
+              "sound_choice_rate": 0.56
+            },
+            "opening": {
+              "samples": 15,
+              "optimal_choice_rate": 0.6666666666666666,
+              "sound_choice_rate": 0.6666666666666666
+            }
+          }
+        },
+        "test_before": {
+          "samples": 40,
+          "soft_cross_entropy": 3.282881498336792,
+          "optimal_choice_rate": 0.125,
+          "sound_choice_rate": 0.125,
+          "acceptable_target_mass": 0.16117966175079346,
+          "categories": {
+            "middle": {
+              "samples": 25,
+              "optimal_choice_rate": 0.08,
+              "sound_choice_rate": 0.08
+            },
+            "opening": {
+              "samples": 15,
+              "optimal_choice_rate": 0.2,
+              "sound_choice_rate": 0.2
+            }
+          }
+        },
+        "test_after": {
+          "samples": 40,
+          "soft_cross_entropy": 3.034917116165161,
+          "optimal_choice_rate": 0.475,
+          "sound_choice_rate": 0.475,
+          "acceptable_target_mass": 0.35328447818756104,
+          "categories": {
+            "middle": {
+              "samples": 25,
+              "optimal_choice_rate": 0.32,
+              "sound_choice_rate": 0.32
+            },
+            "opening": {
+              "samples": 15,
+              "optimal_choice_rate": 0.7333333333333333,
+              "sound_choice_rate": 0.7333333333333333
+            }
+          }
+        }
+      }
+    },
+    "label_scope": "bounded_public_search_600_nodes_depth_3",
+    "previous_nine_modes_preserved": true,
+    "elapsed_seconds": 25.23,
+    "repertoire_size": 4757
+  },
+  "full_games": {
+    "version": "4.0.0",
+    "scope": "Four opening histories, both seats against initialized added modes; two histories, both seats against random at actual level 10. Finite samples, no invincibility claim.",
+    "results": [
+      {
+        "game": "draughts",
+        "kind": "neural_vs_initial",
+        "trial": 0,
+        "seat": 1,
+        "opening": [],
+        "outcome": "win",
+        "steps": 107,
+        "seconds": 0.07
+      },
+      {
+        "game": "draughts",
+        "kind": "neural_vs_initial",
+        "trial": 1,
+        "seat": 2,
+        "opening": [],
+        "outcome": "draw",
+        "steps": 142,
+        "seconds": 0.07
+      },
+      {
+        "game": "draughts",
+        "kind": "neural_vs_initial",
+        "trial": 2,
+        "seat": 1,
+        "opening": [
+          {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              3,
+              8
+            ],
+            "to": [
+              4,
+              9
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 79,
+        "seconds": 0.04
+      },
+      {
+        "game": "draughts",
+        "kind": "neural_vs_initial",
+        "trial": 3,
+        "seat": 2,
+        "opening": [
+          {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              3,
+              8
+            ],
+            "to": [
+              4,
+              9
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 133,
+        "seconds": 0.07
+      },
+      {
+        "game": "draughts",
+        "kind": "neural_vs_initial",
+        "trial": 4,
+        "seat": 1,
+        "opening": [
+          {
+            "from": [
+              6,
+              7
+            ],
+            "to": [
+              5,
+              6
+            ]
+          },
+          {
+            "from": [
+              3,
+              2
+            ],
+            "to": [
+              4,
+              1
+            ]
+          },
+          {
+            "from": [
+              6,
+              5
+            ],
+            "to": [
+              5,
+              4
+            ]
+          },
+          {
+            "from": [
+              3,
+              6
+            ],
+            "to": [
+              4,
+              5
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 66,
+        "seconds": 0.03
+      },
+      {
+        "game": "draughts",
+        "kind": "neural_vs_initial",
+        "trial": 5,
+        "seat": 2,
+        "opening": [
+          {
+            "from": [
+              6,
+              7
+            ],
+            "to": [
+              5,
+              6
+            ]
+          },
+          {
+            "from": [
+              3,
+              2
+            ],
+            "to": [
+              4,
+              1
+            ]
+          },
+          {
+            "from": [
+              6,
+              5
+            ],
+            "to": [
+              5,
+              4
+            ]
+          },
+          {
+            "from": [
+              3,
+              6
+            ],
+            "to": [
+              4,
+              5
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 89,
+        "seconds": 0.05
+      },
+      {
+        "game": "draughts",
+        "kind": "neural_vs_initial",
+        "trial": 6,
+        "seat": 1,
+        "opening": [
+          {
+            "from": [
+              6,
+              7
+            ],
+            "to": [
+              5,
+              6
+            ]
+          },
+          {
+            "from": [
+              3,
+              4
+            ],
+            "to": [
+              4,
+              5
+            ]
+          },
+          {
+            "from": [
+              5,
+              6
+            ],
+            "to": [
+              3,
+              4
+            ]
+          },
+          {
+            "from": [
+              2,
+              3
+            ],
+            "to": [
+              4,
+              5
+            ]
+          },
+          {
+            "from": [
+              7,
+              6
+            ],
+            "to": [
+              6,
+              7
+            ]
+          },
+          {
+            "from": [
+              3,
+              2
+            ],
+            "to": [
+              4,
+              3
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 127,
+        "seconds": 0.07
+      },
+      {
+        "game": "draughts",
+        "kind": "neural_vs_initial",
+        "trial": 7,
+        "seat": 2,
+        "opening": [
+          {
+            "from": [
+              6,
+              7
+            ],
+            "to": [
+              5,
+              6
+            ]
+          },
+          {
+            "from": [
+              3,
+              4
+            ],
+            "to": [
+              4,
+              5
+            ]
+          },
+          {
+            "from": [
+              5,
+              6
+            ],
+            "to": [
+              3,
+              4
+            ]
+          },
+          {
+            "from": [
+              2,
+              3
+            ],
+            "to": [
+              4,
+              5
+            ]
+          },
+          {
+            "from": [
+              7,
+              6
+            ],
+            "to": [
+              6,
+              7
+            ]
+          },
+          {
+            "from": [
+              3,
+              2
+            ],
+            "to": [
+              4,
+              3
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 92,
+        "seconds": 0.05
+      },
+      {
+        "game": "draughts",
+        "kind": "level_10_vs_random",
+        "trial": 0,
+        "seat": 1,
+        "opening": [],
+        "outcome": "win",
+        "steps": 71,
+        "seconds": 6.63
+      },
+      {
+        "game": "draughts",
+        "kind": "level_10_vs_random",
+        "trial": 1,
+        "seat": 2,
+        "opening": [],
+        "outcome": "win",
+        "steps": 82,
+        "seconds": 6.28
+      },
+      {
+        "game": "draughts",
+        "kind": "level_10_vs_random",
+        "trial": 2,
+        "seat": 1,
+        "opening": [
+          {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              3,
+              8
+            ],
+            "to": [
+              4,
+              9
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 68,
+        "seconds": 5.63
+      },
+      {
+        "game": "draughts",
+        "kind": "level_10_vs_random",
+        "trial": 3,
+        "seat": 2,
+        "opening": [
+          {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              3,
+              8
+            ],
+            "to": [
+              4,
+              9
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 82,
+        "seconds": 6.46
+      },
+      {
+        "game": "breakthrough",
+        "kind": "neural_vs_initial",
+        "trial": 0,
+        "seat": 1,
+        "opening": [],
+        "outcome": "win",
+        "steps": 19,
+        "seconds": 0.01
+      },
+      {
+        "game": "breakthrough",
+        "kind": "neural_vs_initial",
+        "trial": 1,
+        "seat": 2,
+        "opening": [],
+        "outcome": "win",
+        "steps": 12,
+        "seconds": 0
+      },
+      {
+        "game": "breakthrough",
+        "kind": "neural_vs_initial",
+        "trial": 2,
+        "seat": 1,
+        "opening": [
+          {
+            "from": [
+              6,
+              2
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              1,
+              7
+            ],
+            "to": [
+              2,
+              7
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 9,
+        "seconds": 0
+      },
+      {
+        "game": "breakthrough",
+        "kind": "neural_vs_initial",
+        "trial": 3,
+        "seat": 2,
+        "opening": [
+          {
+            "from": [
+              6,
+              2
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              1,
+              7
+            ],
+            "to": [
+              2,
+              7
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 10,
+        "seconds": 0.01
+      },
+      {
+        "game": "breakthrough",
+        "kind": "neural_vs_initial",
+        "trial": 4,
+        "seat": 1,
+        "opening": [
+          {
+            "from": [
+              6,
+              5
+            ],
+            "to": [
+              5,
+              5
+            ]
+          },
+          {
+            "from": [
+              1,
+              1
+            ],
+            "to": [
+              2,
+              0
+            ]
+          },
+          {
+            "from": [
+              6,
+              4
+            ],
+            "to": [
+              5,
+              4
+            ]
+          },
+          {
+            "from": [
+              1,
+              3
+            ],
+            "to": [
+              2,
+              4
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 9,
+        "seconds": 0
+      },
+      {
+        "game": "breakthrough",
+        "kind": "neural_vs_initial",
+        "trial": 5,
+        "seat": 2,
+        "opening": [
+          {
+            "from": [
+              6,
+              5
+            ],
+            "to": [
+              5,
+              5
+            ]
+          },
+          {
+            "from": [
+              1,
+              1
+            ],
+            "to": [
+              2,
+              0
+            ]
+          },
+          {
+            "from": [
+              6,
+              4
+            ],
+            "to": [
+              5,
+              4
+            ]
+          },
+          {
+            "from": [
+              1,
+              3
+            ],
+            "to": [
+              2,
+              4
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 10,
+        "seconds": 0
+      },
+      {
+        "game": "breakthrough",
+        "kind": "neural_vs_initial",
+        "trial": 6,
+        "seat": 1,
+        "opening": [
+          {
+            "from": [
+              6,
+              5
+            ],
+            "to": [
+              5,
+              5
+            ]
+          },
+          {
+            "from": [
+              1,
+              4
+            ],
+            "to": [
+              2,
+              3
+            ]
+          },
+          {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              1,
+              1
+            ],
+            "to": [
+              2,
+              0
+            ]
+          },
+          {
+            "from": [
+              7,
+              4
+            ],
+            "to": [
+              6,
+              3
+            ]
+          },
+          {
+            "from": [
+              1,
+              5
+            ],
+            "to": [
+              2,
+              5
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 9,
+        "seconds": 0
+      },
+      {
+        "game": "breakthrough",
+        "kind": "neural_vs_initial",
+        "trial": 7,
+        "seat": 2,
+        "opening": [
+          {
+            "from": [
+              6,
+              5
+            ],
+            "to": [
+              5,
+              5
+            ]
+          },
+          {
+            "from": [
+              1,
+              4
+            ],
+            "to": [
+              2,
+              3
+            ]
+          },
+          {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              1,
+              1
+            ],
+            "to": [
+              2,
+              0
+            ]
+          },
+          {
+            "from": [
+              7,
+              4
+            ],
+            "to": [
+              6,
+              3
+            ]
+          },
+          {
+            "from": [
+              1,
+              5
+            ],
+            "to": [
+              2,
+              5
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 14,
+        "seconds": 0.01
+      },
+      {
+        "game": "breakthrough",
+        "kind": "level_10_vs_random",
+        "trial": 0,
+        "seat": 1,
+        "opening": [],
+        "outcome": "win",
+        "steps": 11,
+        "seconds": 1.14
+      },
+      {
+        "game": "breakthrough",
+        "kind": "level_10_vs_random",
+        "trial": 1,
+        "seat": 2,
+        "opening": [],
+        "outcome": "win",
+        "steps": 16,
+        "seconds": 1.44
+      },
+      {
+        "game": "breakthrough",
+        "kind": "level_10_vs_random",
+        "trial": 2,
+        "seat": 1,
+        "opening": [
+          {
+            "from": [
+              6,
+              2
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              1,
+              7
+            ],
+            "to": [
+              2,
+              7
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 17,
+        "seconds": 1.64
+      },
+      {
+        "game": "breakthrough",
+        "kind": "level_10_vs_random",
+        "trial": 3,
+        "seat": 2,
+        "opening": [
+          {
+            "from": [
+              6,
+              2
+            ],
+            "to": [
+              5,
+              2
+            ]
+          },
+          {
+            "from": [
+              1,
+              7
+            ],
+            "to": [
+              2,
+              7
+            ]
+          }
+        ],
+        "outcome": "win",
+        "steps": 32,
+        "seconds": 2.68
+      }
+    ]
+  },
+  "browser": {
+    "games": 11,
+    "human_play": [
+      "nim",
+      "reversi",
+      "lightsout",
+      "draughts",
+      "breakthrough"
+    ],
+    "reversi_pass": true,
+    "draughts_capture_continuation": true,
+    "lightsout_solved": true,
+    "training_workers": [
+      {
+        "game": "nim",
+        "examples": 13,
+        "rehearsals": 2,
+        "repertoire_size": 4757
+      },
+      {
+        "game": "lightsout",
+        "examples": 20,
+        "rehearsals": 4,
+        "repertoire_size": 4757
+      },
+      {
+        "game": "reversi",
+        "examples": 46,
+        "rehearsals": 8,
+        "repertoire_size": 4757
+      },
+      {
+        "game": "draughts",
+        "examples": 152,
+        "rehearsals": 26,
+        "repertoire_size": 4757
+      },
+      {
+        "game": "breakthrough",
+        "examples": 80,
+        "rehearsals": 14,
+        "repertoire_size": 4757
+      }
+    ],
+    "legacy_import": true,
+    "old_weights_preserved": true,
+    "mobile_overflow": false,
+    "page_errors": []
+  },
+  "model_sha256": "3ee37dd2733b086a1db5728bd8fe6b329f799241b61811e964a32391e6bd607c"
+}

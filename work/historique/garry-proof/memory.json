@@ -1,0 +1,41 @@
+{
+  "format": "garry-search-memory-v1",
+  "game": "connect4",
+  "entries": [
+    {
+      "key": "0000000200000",
+      "column": 2,
+      "guarantee": "experience"
+    },
+    {
+      "key": "0000000608000",
+      "column": 3,
+      "guarantee": "non_loss"
+    },
+    {
+      "key": "0000002608000",
+      "column": 3,
+      "guarantee": "draw"
+    },
+    {
+      "key": "0000002610002",
+      "column": 3,
+      "guarantee": "draw"
+    },
+    {
+      "key": "0000006610000",
+      "column": 3,
+      "guarantee": "win"
+    },
+    {
+      "key": "000000e620000",
+      "column": 2,
+      "guarantee": "win"
+    },
+    {
+      "key": "0040006610002",
+      "column": 4,
+      "guarantee": "draw"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"etat":"ok","reponse":{"texte":"Bonjour ! Présente-toi en une phrase.","valeurs":{"nom":"Lina","age":12}},"modele":"input-0.2.0","base":"Qwen3-0.6B","adapte":false,"temps_ms":10018,"messages_utilises":1,"messages_retires":0}

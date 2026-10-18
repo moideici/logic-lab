@@ -1,0 +1,10 @@
+# Les projets ont leurs propres dépôts ; poids, environnements et outils sont locaux
+projets/
+recherche/
+work/text-env/
+work/python-runtime/
+work/python-deps/
+work/browsers/
+work/compiler/
+__pycache__/
+*.pyc

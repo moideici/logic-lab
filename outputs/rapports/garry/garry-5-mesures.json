@@ -1,0 +1,380 @@
+{
+  "model_version": "5.0.0",
+  "architecture": [
+    3055,
+    48,
+    48,
+    3894
+  ],
+  "previous_eleven_preserved": true,
+  "model_sha256": "84b5d35642a7304a612a3fd28eec0c025ebece6c37c0051b306f18f443d65245",
+  "external": {
+    "full-score-01": {
+      "state": "finished",
+      "site": "https://classic.play2048.co/",
+      "game": "2048",
+      "mode": "garry",
+      "steps": 3277,
+      "score": 71496,
+      "best_tile": 4096,
+      "transition_checks": 3277,
+      "probes": 132,
+      "probe_agreements": 113,
+      "estimated_regret_sum": 2510216.0733391778,
+      "model_sha256": "79160d89bd7a80306f29aff7914231a41ecea493e495480353c7384699f178de",
+      "model_version": "5.0.0",
+      "seed_scope": "decision tie-breaks only; website tile spawning is uncontrolled",
+      "started_at": "2026-10-17T13:38:44.426Z",
+      "board": [
+        [
+          4096,
+          2048,
+          256,
+          4
+        ],
+        [
+          128,
+          512,
+          64,
+          2
+        ],
+        [
+          32,
+          16,
+          4,
+          16
+        ],
+        [
+          2,
+          8,
+          2,
+          8
+        ]
+      ],
+      "last_action": "up",
+      "last_depth": 3,
+      "last_decision_ms": 1.04570000001695,
+      "cookie_choice": "necessary_only",
+      "finished_at": "2026-10-17T13:42:37.638Z",
+      "elapsed_seconds": 233.212,
+      "probe_agreement": 0.8560606060606061,
+      "estimated_regret_mean": 19016.78843438771
+    },
+    "network-01": {
+      "state": "finished",
+      "site": "https://classic.play2048.co/",
+      "game": "2048",
+      "mode": "network",
+      "steps": 118,
+      "score": 1112,
+      "best_tile": 128,
+      "transition_checks": 118,
+      "probes": 5,
+      "probe_agreements": 3,
+      "estimated_regret_sum": 26743.539277349108,
+      "model_sha256": "84b5d35642a7304a612a3fd28eec0c025ebece6c37c0051b306f18f443d65245",
+      "model_version": "5.0.0",
+      "seed_scope": "decision tie-breaks only; website tile spawning is uncontrolled",
+      "started_at": "2026-10-17T13:46:08.407Z",
+      "board": [
+        [
+          4,
+          2,
+          16,
+          2
+        ],
+        [
+          2,
+          16,
+          4,
+          32
+        ],
+        [
+          4,
+          128,
+          8,
+          2
+        ],
+        [
+          2,
+          4,
+          32,
+          4
+        ]
+      ],
+      "last_action": "up",
+      "last_depth": 0,
+      "last_decision_ms": 0.018600000001242734,
+      "cookie_choice": "necessary_only",
+      "finished_at": "2026-10-17T13:46:18.777Z",
+      "elapsed_seconds": 10.37,
+      "probe_agreement": 0.6,
+      "estimated_regret_mean": 5348.707855469822
+    },
+    "random-01": {
+      "state": "finished",
+      "site": "https://classic.play2048.co/",
+      "game": "2048",
+      "mode": "random",
+      "steps": 80,
+      "score": 584,
+      "best_tile": 64,
+      "transition_checks": 80,
+      "probes": 4,
+      "probe_agreements": 0,
+      "estimated_regret_sum": 11103.639779111083,
+      "model_sha256": "84b5d35642a7304a612a3fd28eec0c025ebece6c37c0051b306f18f443d65245",
+      "model_version": "5.0.0",
+      "seed_scope": "decision tie-breaks only; website tile spawning is uncontrolled",
+      "started_at": "2026-10-17T13:46:19.182Z",
+      "board": [
+        [
+          8,
+          2,
+          8,
+          4
+        ],
+        [
+          2,
+          8,
+          64,
+          2
+        ],
+        [
+          32,
+          16,
+          4,
+          16
+        ],
+        [
+          2,
+          4,
+          8,
+          4
+        ]
+      ],
+      "last_action": "right",
+      "last_depth": 0,
+      "last_decision_ms": null,
+      "cookie_choice": "necessary_only",
+      "finished_at": "2026-10-17T13:46:27.143Z",
+      "elapsed_seconds": 7.961,
+      "probe_agreement": 0,
+      "estimated_regret_mean": 2775.9099447777708
+    }
+  },
+  "training": {
+    "version": "5.0.0",
+    "architecture": [
+      3055,
+      48,
+      48,
+      3894
+    ],
+    "counts": {
+      "hex": {
+        "train": 180,
+        "validation": 50,
+        "test": 50
+      },
+      "gomoku": {
+        "train": 180,
+        "validation": 50,
+        "test": 50
+      }
+    },
+    "games": {
+      "hex": {
+        "selected_epoch": 13,
+        "presentations": 2340,
+        "validation_before": {
+          "samples": 50,
+          "soft_cross_entropy": 3.6183319091796875,
+          "optimal_choice_rate": 0.14,
+          "sound_choice_rate": 0.14,
+          "acceptable_target_mass": 0.15076814591884613,
+          "categories": {
+            "middle": {
+              "samples": 33,
+              "optimal_choice_rate": 0.21212121212121213,
+              "sound_choice_rate": 0.21212121212121213
+            },
+            "opening": {
+              "samples": 17,
+              "optimal_choice_rate": 0.0,
+              "sound_choice_rate": 0.0
+            }
+          }
+        },
+        "validation_after": {
+          "samples": 50,
+          "soft_cross_entropy": 3.1368134021759033,
+          "optimal_choice_rate": 0.44,
+          "sound_choice_rate": 0.44,
+          "acceptable_target_mass": 0.20123140513896942,
+          "categories": {
+            "middle": {
+              "samples": 33,
+              "optimal_choice_rate": 0.3939393939393939,
+              "sound_choice_rate": 0.3939393939393939
+            },
+            "opening": {
+              "samples": 17,
+              "optimal_choice_rate": 0.5294117647058824,
+              "sound_choice_rate": 0.5294117647058824
+            }
+          }
+        },
+        "test_before": {
+          "samples": 50,
+          "soft_cross_entropy": 3.5851693153381348,
+          "optimal_choice_rate": 0.24,
+          "sound_choice_rate": 0.24,
+          "acceptable_target_mass": 0.23639488220214844,
+          "categories": {
+            "middle": {
+              "samples": 35,
+              "optimal_choice_rate": 0.3142857142857143,
+              "sound_choice_rate": 0.3142857142857143
+            },
+            "opening": {
+              "samples": 15,
+              "optimal_choice_rate": 0.06666666666666667,
+              "sound_choice_rate": 0.06666666666666667
+            }
+          }
+        },
+        "test_after": {
+          "samples": 50,
+          "soft_cross_entropy": 3.1759955883026123,
+          "optimal_choice_rate": 0.44,
+          "sound_choice_rate": 0.44,
+          "acceptable_target_mass": 0.3011217415332794,
+          "categories": {
+            "middle": {
+              "samples": 35,
+              "optimal_choice_rate": 0.4,
+              "sound_choice_rate": 0.4
+            },
+            "opening": {
+              "samples": 15,
+              "optimal_choice_rate": 0.5333333333333333,
+              "sound_choice_rate": 0.5333333333333333
+            }
+          }
+        }
+      },
+      "gomoku": {
+        "selected_epoch": 29,
+        "presentations": 5220,
+        "validation_before": {
+          "samples": 50,
+          "soft_cross_entropy": 5.2510857582092285,
+          "optimal_choice_rate": 0.02,
+          "sound_choice_rate": 0.02,
+          "acceptable_target_mass": 0.037844058126211166,
+          "categories": {
+            "middle": {
+              "samples": 43,
+              "optimal_choice_rate": 0.023255813953488372,
+              "sound_choice_rate": 0.023255813953488372
+            },
+            "opening": {
+              "samples": 7,
+              "optimal_choice_rate": 0.0,
+              "sound_choice_rate": 0.0
+            }
+          }
+        },
+        "validation_after": {
+          "samples": 50,
+          "soft_cross_entropy": 4.1676812171936035,
+          "optimal_choice_rate": 0.34,
+          "sound_choice_rate": 0.34,
+          "acceptable_target_mass": 0.1587435007095337,
+          "categories": {
+            "middle": {
+              "samples": 43,
+              "optimal_choice_rate": 0.23255813953488372,
+              "sound_choice_rate": 0.23255813953488372
+            },
+            "opening": {
+              "samples": 7,
+              "optimal_choice_rate": 1.0,
+              "sound_choice_rate": 1.0
+            }
+          }
+        },
+        "test_before": {
+          "samples": 50,
+          "soft_cross_entropy": 5.2980499267578125,
+          "optimal_choice_rate": 0.0,
+          "sound_choice_rate": 0.0,
+          "acceptable_target_mass": 0.006222252268344164,
+          "categories": {
+            "middle": {
+              "samples": 44,
+              "optimal_choice_rate": 0.0,
+              "sound_choice_rate": 0.0
+            },
+            "opening": {
+              "samples": 6,
+              "optimal_choice_rate": 0.0,
+              "sound_choice_rate": 0.0
+            }
+          }
+        },
+        "test_after": {
+          "samples": 50,
+          "soft_cross_entropy": 5.764733791351318,
+          "optimal_choice_rate": 0.1,
+          "sound_choice_rate": 0.1,
+          "acceptable_target_mass": 0.05435541272163391,
+          "categories": {
+            "middle": {
+              "samples": 44,
+              "optimal_choice_rate": 0.0,
+              "sound_choice_rate": 0.0
+            },
+            "opening": {
+              "samples": 6,
+              "optimal_choice_rate": 0.8333333333333334,
+              "sound_choice_rate": 0.8333333333333334
+            }
+          }
+        }
+      }
+    },
+    "teacher_scope": "bounded_hex_connections_and_gomoku_tactics",
+    "earlier_eleven_modes_preserved": true,
+    "repertoire_size": 5717,
+    "elapsed_seconds": 40.74
+  },
+  "strategy_selection": {
+    "draughts": {
+      "selected_epoch": 0,
+      "reason": "No candidate passed all retention gates; previous weights kept"
+    },
+    "breakthrough": {
+      "selected_epoch": 0,
+      "reason": "No candidate passed all retention gates; previous weights kept"
+    }
+  },
+  "tests": {
+    "python": 86,
+    "javascript": 48,
+    "browser": {
+      "ok": true,
+      "errors": [],
+      "external_job": "3ee67e3a9e024b53b3cbc70f794e293f",
+      "checks": [
+        "Hex et Gomoku: calcul dans le worker",
+        "Taquin Expert: 31 coups certifiés",
+        "Taquin 5x5: sélection et coup humain",
+        "Sudoku: saisie, annulation et résolution",
+        "2048 réel: historique, capture, lancement et arrêt",
+        "Mobile: pas de débordement horizontal"
+      ]
+    }
+  }
+}

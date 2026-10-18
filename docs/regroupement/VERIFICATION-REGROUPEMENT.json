@@ -1,0 +1,99 @@
+{
+  "verified_utc": "2026-10-18T09:28:51.624839+00:00",
+  "copy_integrity": "every copied file SHA-256 compared with read-back at copy time",
+  "files_copied": 1436,
+  "bytes_copied": 19901714265,
+  "missing_copied_files": [],
+  "external_file_symlinks_in_copies": [],
+  "runtime_model_paths": [
+    {
+      "config": "projets\\input\\models\\chat_base.json",
+      "path": "C:\\Users\\gabor\\Documents\\Codex\\2026-10-16\\tra\\projets\\input\\chat_cache\\models--Qwen--Qwen3-0.6B\\snapshots\\c1899de289a04d12100db370d81485cdf75e47ca",
+      "inside_conversation": true,
+      "exists": true
+    },
+    {
+      "config": "projets\\input\\models\\chat\\active.json",
+      "path": "C:\\Users\\gabor\\Documents\\Codex\\2026-10-16\\tra\\projets\\input\\models\\chat\\focus-20261017-210925\\checkpoint-1000",
+      "inside_conversation": true,
+      "exists": true
+    },
+    {
+      "config": "recherche\\hrm\\fork_manifest.json",
+      "path": "C:\\Users\\gabor\\Documents\\Codex\\2026-10-16\\tra\\recherche\\hrm\\weight_cache\\models--sapientinc--HRM-checkpoint-sudoku-extreme\\snapshots\\fbb4eb883766c31c8e863426460ebaa0ceb1a5f2\\checkpoint",
+      "inside_conversation": true,
+      "exists": true
+    },
+    {
+      "config": "recherche\\hrm\\fork_manifest.json",
+      "path": "C:\\Users\\gabor\\Documents\\Codex\\2026-10-16\\tra\\recherche\\hrm\\weight_cache\\models--sapientinc--HRM-checkpoint-sudoku-extreme\\snapshots\\fbb4eb883766c31c8e863426460ebaa0ceb1a5f2\\all_config.yaml",
+      "inside_conversation": true,
+      "exists": true
+    }
+  ],
+  "corpus_files_present_inside_conversation": 19,
+  "garry_active_weights_identical_to_source": true,
+  "garry_sha256": "ae54c06d4d3f88c535228807959fda0f975d5ea2b65863449977db47fa1526c0",
+  "functional_checks": {
+    "input": {
+      "tests": 21,
+      "status": "passed"
+    },
+    "hrm": {
+      "tests": 3,
+      "status": "passed",
+      "pretrained_model_loaded_in_new_location": true,
+      "public_sudoku_controls": "1 success, 1 existing failure; no general performance claim"
+    },
+    "garry": {
+      "status": "passed",
+      "model_directory": "C:\\Users\\gabor\\Documents\\Codex\\2026-10-16\\tra\\projets\\garry\\web\\models",
+      "games_loaded_and_finite_logits": [
+        "tictactoe",
+        "2048",
+        "sudoku",
+        "connect4",
+        "minesweeper",
+        "sliding_puzzle",
+        "reversi",
+        "nim",
+        "lightsout",
+        "draughts",
+        "breakthrough",
+        "hex",
+        "gomoku",
+        "go"
+      ],
+      "game_count": 14,
+      "bounded_rule_tests": 3,
+      "rule_failures": 0,
+      "full_suite": "stopped after over seven minutes in test_saved_models_mask_actions_and_share_core; not declared passed",
+      "scope": "bounded verification of the relocated copy, not playing-strength evaluation"
+    }
+  },
+  "originals_retained": true,
+  "running_original_servers_restarted": false,
+  "scope": "file consolidation and documentation; no new training or UI implementation",
+  "documentation": {
+    "main_plan": "PLAN-GLOBAL.md",
+    "entry": "README.md",
+    "inventory": "docs/INVENTAIRE-JUSTIFIE.md",
+    "architecture": "docs/ARCHITECTURE.md",
+    "decisions": "docs/DECISIONS.md",
+    "operations": "docs/EXPLOITATION.md",
+    "validation": "docs/VALIDATION.md",
+    "handover": "docs/REPRISE.md"
+  },
+  "documentation_checks": {
+    "documentation_links_ok": true,
+    "catalogue_entries": 30744,
+    "every_catalogue_entry_has_role_and_justification": true,
+    "plan_exists": true,
+    "copied_projects_present": [
+      true,
+      true,
+      true,
+      true
+    ]
+  }
+}

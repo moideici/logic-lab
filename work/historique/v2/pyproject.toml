@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logic-arena"
+version = "1.1.0"
+description = "Harnais JSON pour six jeux logiques, agents et entraînement"
+requires-python = ">=3.11"
+dependencies = ["numpy>=1.24", "wasmtime==49.0.0"]
+
+[project.scripts]
+logic-arena = "logic_arena.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["logic_arena*"]

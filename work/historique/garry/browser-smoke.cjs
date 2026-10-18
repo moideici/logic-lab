@@ -1,0 +1,36 @@
+const {chromium}=require('C:/Users/gabor/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ try{
+  const page=await browser.newPage({viewport:{width:1400,height:1000}}),errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('http://127.0.0.1:8765');await page.waitForFunction(()=>document.getElementById('model-status').textContent.includes('garry v2.0.0'));
+  assert.equal(await page.locator('.game-card').count(),6);
+  const states=await page.evaluate(async()=>{
+   const result=[];
+   for(const game of ['tictactoe','connect4','2048','sudoku','minesweeper','sliding_puzzle']){
+    const created=window.logicArena.request({op:'create',game,seed:42});if(!created.ok)throw Error(JSON.stringify(created));
+    const sid=window.logicArena.getSnapshot().session_id;
+    const reply=await window.logicArena.requestAsync({op:'suggest',session_id:sid,agent:{level:10}});
+    if(!reply.ok)throw Error(JSON.stringify(reply));
+    if(reply.result.info.identity.codename!=='garry')throw Error('Wrong identity');
+    const played=await window.logicArena.requestAsync({op:'play',session_id:sid,agent:{level:10}});
+    if(!played.ok)throw Error(JSON.stringify(played));
+    result.push({game,identity:reply.result.info.identity,runtime:reply.result.info.runtime,revision:window.logicArena.getSnapshot().revision});
+   }
+   return result;
+  });
+  await page.evaluate(()=>window.logicArena.request({op:'create',game:'tictactoe',seed:42}));
+  await page.locator('[data-tab="training"]').click();await page.locator('#episodes').fill('1');await page.locator('#train-start').click();
+  await page.waitForFunction(()=>document.getElementById('training-status').textContent.startsWith('Terminé'),{timeout:30000});
+  const exportPending=page.waitForEvent('download');await page.locator('#model-export').click();const download=await exportPending;
+  const exported=JSON.parse(fs.readFileSync(await download.path(),'utf8'));assert.equal(exported.name,'garry');assert.equal(exported.format,'garry-mlp-v1');assert(!exported.models);assert.equal(exported.input,1912);
+  await page.reload();await page.waitForFunction(()=>document.getElementById('model-status').textContent.includes('garry v2.0.0'));
+  const keys=await page.evaluate(()=>new Promise((resolve,reject)=>{const request=indexedDB.open('logic-lab-garry');request.onsuccess=()=>{const read=request.result.transaction('models').objectStore('models').getAllKeys();read.onsuccess=()=>resolve(read.result);read.onerror=reject;};request.onerror=reject;}));
+  assert.deepEqual(keys,['garry']);assert.deepEqual(errors,[]);
+  await page.locator('[data-tab="arena"]').click();await page.screenshot({path:'C:/Users/gabor/code/logic-lab/work/garry/interface.png',fullPage:true});
+  console.log(JSON.stringify({states,export:{name:exported.name,version:exported.version,architecture:[exported.input,exported.hidden,exported.hidden,exported.output]},indexedDBKeys:keys,errors},null,2));
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

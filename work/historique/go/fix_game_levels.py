@@ -1,0 +1,15 @@
+from pathlib import Path
+import shutil
+R=Path(r'C:\Users\gabor\code\playi');S=Path(__file__).parent
+for f in ('go-ai-policy.js','sliding-levels.js'):shutil.copyfile(S/f,R/'web'/f)
+for f in ('go_ai_policy.py','sliding_levels.py'):shutil.copyfile(S/f,R/'logic_arena'/f)
+p=R/'web/decision.js';t=p.read_text(encoding='utf-8');t="import {goAiActions} from './go-ai-policy.js';\n"+t;t=t.replace(" if(typeof model.forGame", " if(observation.game==='go')legal=goAiActions(observation,legal);\n if(typeof model.forGame");t=t.replace('planDecision(observation,legal,model,level,decision,logits)','planDecision(observation,legal,model,level,decision,logits,random)');p.write_text(t,encoding='utf-8')
+p=R/'web/planner.js';t=p.read_text(encoding='utf-8');t="import {selectSlidingLevel} from './sliding-levels.js';\n"+t;t=t.replace('preparedLogits=null){','preparedLogits=null,random=Math.random){');t=t.replace('const {selected,info}=selectQuality(result.action_values,level,tieLogits,o.game)',"const {selected,info}=o.game==='sliding_puzzle'?selectSlidingLevel(result.action_values,level,tieLogits,random):selectQuality(result.action_values,level,tieLogits,o.game)");p.write_text(t,encoding='utf-8')
+p=R/'logic_arena/planner.py';t=p.read_text(encoding='utf-8').replace("style='balanced'):","style='balanced',rng=None):");t=t.replace("    budget_ms=TIMES[-1]", "    if game=='go':\n        from .go_ai_policy import go_ai_actions\n        legal=go_ai_actions(obs,legal)\n    budget_ms=TIMES[-1]")
+t=t.replace('    selected,ranking=select_quality(values,level,logits,game)',"    if game=='sliding_puzzle':\n        from .sliding_levels import select_sliding_level\n        selected,ranking=select_sliding_level(values,level,logits,rng)\n    else:selected,ranking=select_quality(values,level,logits,game)");p.write_text(t,encoding='utf-8')
+p=R/'logic_arena/neural.py';t=p.read_text(encoding='utf-8').replace('logits=logits, style=self.style)','logits=logits, style=self.style,rng=self.rng)');p.write_text(t,encoding='utf-8')
+p=R/'logic_arena/agents.py';t=p.read_text(encoding='utf-8').replace('self.time_ms,style=self.style)','self.time_ms,style=self.style,rng=self.rng)');p.write_text(t,encoding='utf-8')
+p=R/'web/puzzle-ui.js';t=p.read_text(encoding='utf-8').replace("if(n===3&&game.moves", "if(n===3&&game.moves");needle=" if(sudoku){";t=t.replace(needle," if(sliding&&document.getElementById('level').value!=='10')$('game-hint').textContent+=' Niveaux 1 à 9 : fréquence croissante de coups optimaux ; niveau 0 : pire coup évalué.';\n"+needle);p.write_text(t,encoding='utf-8')
+p=R/'web/go-ui.js';t=p.read_text(encoding='utf-8').replace("$('game-hint').textContent=game.goState.phase==='scoring'?", "$('game-hint').textContent=game.goState.phase==='scoring'?")
+t=t.replace("Les deux joueurs doivent accepter ; en cas de désaccord, reprenez le jeu.","Les deux joueurs doivent accepter ; les IA le font automatiquement. En cas de désaccord humain, reprenez le jeu.");p.write_text(t,encoding='utf-8')
+print('Go endings and sliding-puzzle level progression fixed')

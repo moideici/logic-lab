@@ -1,0 +1,48 @@
+[
+  {
+    "demande": "Quelle est ta phrase préférée ? Réponds en une phrase courte.",
+    "etat": "ok",
+    "reponse": {
+      "texte": "Je suis capable de répondre à toutes tes questions !",
+      "valeurs": {}
+    },
+    "modele": "input-0.2.0",
+    "base": "Qwen3-0.6B",
+    "adapte": true,
+    "materiel": "cuda",
+    "chargement_ms": 5023,
+    "tokens": 21,
+    "generation_ms": 2296,
+    "premier_token_ms": 214,
+    "tokens_par_seconde": 9.1,
+    "decodage_tokens_par_seconde": 9.6,
+    "temps_ms": 7327,
+    "messages_utilises": 1,
+    "messages_retires": 0
+  },
+  {
+    "demande": "J’achète 4 cahiers à 3,25 € chacun. Donne quantite, prix et total dans valeurs.",
+    "etat": "ok",
+    "reponse": {
+      "texte": "Le montant est 13,0 euros.\n",
+      "valeurs": {
+        "quantite": 4,
+        "prix": 3.25,
+        "total": 13.0
+      }
+    },
+    "modele": "input-0.2.0",
+    "base": "Qwen3-0.6B",
+    "adapte": true,
+    "materiel": "cuda",
+    "chargement_ms": 2,
+    "tokens": 39,
+    "generation_ms": 5882,
+    "premier_token_ms": 91,
+    "tokens_par_seconde": 6.6,
+    "decodage_tokens_par_seconde": 6.6,
+    "temps_ms": 5892,
+    "messages_utilises": 1,
+    "messages_retires": 0
+  }
+]

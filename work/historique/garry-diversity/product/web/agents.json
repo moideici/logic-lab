@@ -1,0 +1,38 @@
+{
+  "schema": "logic-arena-agents-v1",
+  "version": "3.1.0",
+  "previous_version": "3.0.0",
+  "agents": {
+    "tictactoe": {
+      "codename": "garry",
+      "version": "3.1.0",
+      "mode": "tictactoe"
+    },
+    "2048": {
+      "codename": "garry",
+      "version": "3.1.0",
+      "mode": "2048"
+    },
+    "sudoku": {
+      "codename": "garry",
+      "version": "3.1.0",
+      "mode": "sudoku"
+    },
+    "connect4": {
+      "codename": "garry",
+      "version": "3.1.0",
+      "mode": "connect4"
+    },
+    "minesweeper": {
+      "codename": "garry",
+      "version": "3.1.0",
+      "mode": "minesweeper"
+    },
+    "sliding_puzzle": {
+      "codename": "garry",
+      "version": "3.1.0",
+      "mode": "sliding_puzzle"
+    }
+  },
+  "name": "garry"
+}

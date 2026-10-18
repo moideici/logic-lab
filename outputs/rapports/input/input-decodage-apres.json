@@ -1,0 +1,100 @@
+[
+  {
+    "demande": "bonjour ! tu fonctionne",
+    "etat": "ok",
+    "reponse": {
+      "texte": "Bonjour ! Je suis là pour t'aider",
+      "valeurs": {
+        "texte": "Bonjour ! Je suis là pour t'aider"
+      }
+    },
+    "modele": "input-0.2.0",
+    "base": "Qwen3-0.6B",
+    "adapte": false,
+    "materiel": "cuda",
+    "chargement_ms": 0,
+    "tokens": 42,
+    "generation_ms": 3426,
+    "premier_token_ms": 74,
+    "tokens_par_seconde": 12.3,
+    "decodage_tokens_par_seconde": 12.2,
+    "temps_ms": 3435,
+    "messages_utilises": 1,
+    "messages_retires": 0
+  },
+  {
+    "demande": "hey ! ça va ??",
+    "etat": "ok",
+    "reponse": {
+      "texte": "Bonjour ! Je suis là pour t'aider",
+      "valeurs": {
+        "texte": "Bonjour ! Je suis là pour t'aider"
+      }
+    },
+    "modele": "input-0.2.0",
+    "base": "Qwen3-0.6B",
+    "adapte": false,
+    "materiel": "cuda",
+    "chargement_ms": 0,
+    "tokens": 35,
+    "generation_ms": 2836,
+    "premier_token_ms": 58,
+    "tokens_par_seconde": 12.3,
+    "decodage_tokens_par_seconde": 12.2,
+    "temps_ms": 2845,
+    "messages_utilises": 3,
+    "messages_retires": 0
+  },
+  {
+    "demande": "quelle est ta phrase préférée ?",
+    "etat": "ok",
+    "reponse": {
+      "texte": "Je suis là pour t'aider",
+      "valeurs": {
+        "texte": "Je suis là pour t'aider"
+      }
+    },
+    "modele": "input-0.2.0",
+    "base": "Qwen3-0.6B",
+    "adapte": false,
+    "materiel": "cuda",
+    "chargement_ms": 0,
+    "tokens": 30,
+    "generation_ms": 2456,
+    "premier_token_ms": 101,
+    "tokens_par_seconde": 12.2,
+    "decodage_tokens_par_seconde": 12.3,
+    "temps_ms": 2465,
+    "messages_utilises": 5,
+    "messages_retires": 0
+  },
+  {
+    "demande": "Je m’appelle Élodie et j’ai 17 ans. Retiens-le.",
+    "etat": "erreur",
+    "texte": "Unterminated string starting at: line 1 column 11 (char 10)"
+  },
+  {
+    "demande": "Quel est mon prénom et mon âge ? Mets les données dans valeurs.",
+    "etat": "ok",
+    "reponse": {
+      "texte": "Je suis là pour t'aider",
+      "valeurs": {
+        "prenom": "Amina",
+        "age": 25
+      }
+    },
+    "modele": "input-0.2.0",
+    "base": "Qwen3-0.6B",
+    "adapte": false,
+    "materiel": "cuda",
+    "chargement_ms": 1,
+    "tokens": 33,
+    "generation_ms": 3006,
+    "premier_token_ms": 55,
+    "tokens_par_seconde": 11.0,
+    "decodage_tokens_par_seconde": 10.8,
+    "temps_ms": 3014,
+    "messages_utilises": 7,
+    "messages_retires": 0
+  }
+]

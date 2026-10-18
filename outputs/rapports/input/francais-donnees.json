@@ -1,0 +1,72 @@
+{
+  "version": "0.1.0",
+  "seed": 17102026,
+  "labels": [
+    "confirme",
+    "contredit",
+    "indetermine"
+  ],
+  "scope": "controlled French inference; not a claim of general text understanding",
+  "splits": {
+    "train": {
+      "cases": 3600,
+      "families": 1200,
+      "sha256": "777ea50fb72ef325baea40445fd3a285962447856ced6149f02c91cdf45d1200",
+      "labels": {
+        "contredit": 1200,
+        "confirme": 1200,
+        "indetermine": 1200
+      }
+    },
+    "validation": {
+      "cases": 600,
+      "families": 200,
+      "sha256": "fd034f4f5a6b8307712c4fb2385f20d01afc379f94be3ea7d1ab3d79f97bd75a",
+      "labels": {
+        "confirme": 200,
+        "indetermine": 200,
+        "contredit": 200
+      }
+    },
+    "test_iid": {
+      "cases": 600,
+      "families": 200,
+      "sha256": "92b6ea95ae594a5b6f384f0d8c93ac512a011ae10e4bb9cb6398d951e9417f8a",
+      "labels": {
+        "contredit": 200,
+        "confirme": 200,
+        "indetermine": 200
+      }
+    },
+    "test_rephrasing": {
+      "cases": 600,
+      "families": 200,
+      "sha256": "85519c8d24cee493f6e2654e87ba2fb30f6f78795d147d02f780730180d45b42",
+      "labels": {
+        "confirme": 200,
+        "indetermine": 200,
+        "contredit": 200
+      }
+    },
+    "test_new_names": {
+      "cases": 600,
+      "families": 200,
+      "sha256": "31a2d14264a36e1afa75f184cded678ccbfcc4296c7620c1dbd3be8b623fee62",
+      "labels": {
+        "confirme": 200,
+        "contredit": 200,
+        "indetermine": 200
+      }
+    },
+    "test_composition": {
+      "cases": 600,
+      "families": 200,
+      "sha256": "9a2c24c93eb70bf8f4f98d8525e1629fe5e8561ac46dc50f3ec27a36d2b19ab5",
+      "labels": {
+        "confirme": 200,
+        "indetermine": 200,
+        "contredit": 200
+      }
+    }
+  }
+}

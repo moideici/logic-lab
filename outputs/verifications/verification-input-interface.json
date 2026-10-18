@@ -1,0 +1,18 @@
+{
+  "first": {
+    "texte": "Bonjour Lina !",
+    "valeurs": {}
+  },
+  "context": {
+    "answer": {
+      "texte": "Bonjour Lina !",
+      "valeurs": {
+        "nom": "Lina"
+      }
+    },
+    "remembers_name": true
+  },
+  "documents": "2 564 646",
+  "ok": true,
+  "errors": []
+}

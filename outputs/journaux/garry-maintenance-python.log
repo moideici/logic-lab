@@ -1,0 +1,28 @@
+.......................................----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 64413)
+..Traceback (most recent call last):
+  File "C:\Users\gabor\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socketserver.py", line 697, in process_request_thread
+    self.finish_request(request, client_address)
+  File "C:\Users\gabor\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Users\gabor\code\playi\logic_arena\server.py", line 24, in __init__
+    super().__init__(*args, directory=str(WEB), **kwargs)
+  File "C:\Users\gabor\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\server.py", line 676, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\Users\gabor\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socketserver.py", line 766, in __init__
+    self.handle()
+  File "C:\Users\gabor\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\server.py", line 442, in handle
+    self.handle_one_request()
+  File "C:\Users\gabor\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\http\server.py", line 428, in handle_one_request
+    method()
+  File "C:\Users\gabor\code\playi\logic_arena\server.py", line 119, in do_GET
+    self.wfile.write(b": heartbeat\n\n")
+  File "C:\Users\gabor\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionAbortedError: [WinError 10053] Une connexion établie a été abandonnée par un logiciel de votre ordinateur hôte
+----------------------------------------
+................................................................
+----------------------------------------------------------------------
+Ran 105 tests in 31.100s
+
+OK

@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "errors": [],
+  "external_job": "87cc84a563da4135bb44a03bb9041e57",
+  "checks": [
+    "Hex et Gomoku: calcul dans le worker",
+    "Taquin Expert: 31 coups certifiés",
+    "Taquin 5x5: sélection et coup humain",
+    "Sudoku: saisie, annulation et résolution",
+    "2048 réel: historique, capture, lancement et arrêt",
+    "Mobile: pas de débordement horizontal"
+  ]
+}

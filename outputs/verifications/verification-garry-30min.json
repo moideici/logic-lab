@@ -1,0 +1,56 @@
+{
+  "ok": true,
+  "job": "8a996a3b756d469aa0ff2be307fb554b",
+  "pid": 12444,
+  "started_at": "2026-10-17T21:01:05.416709+00:00",
+  "ends_at": "2026-10-17T21:31:05.416709+00:00",
+  "duration_seconds": 1800,
+  "state": "running",
+  "stage": "targeted",
+  "moves_total": 17398,
+  "cycles": 84,
+  "promotions": 1,
+  "historical_quarantine": 126042,
+  "checked_new_cases": 4053,
+  "splits": {
+    "test": 664,
+    "train": 3062,
+    "validation": 327
+  },
+  "historical_overlaps": [],
+  "derived_train_cases": 357,
+  "preserved_games": [
+    "tictactoe",
+    "connect4",
+    "2048",
+    "sudoku",
+    "minesweeper",
+    "sliding_puzzle",
+    "reversi",
+    "nim",
+    "lightsout",
+    "draughts",
+    "breakthrough"
+  ],
+  "preservation_exact": true,
+  "active_model_sha256": "aada98916a5434cebe0dd75241d03f73d7f6a25017a72c9598e1e855f113a9b2",
+  "accepted_validations": [
+    {
+      "game": "hex",
+      "accepted": true,
+      "fixed_validation_before": 0.4,
+      "fixed_validation_after": 0.4,
+      "fresh_validation_before": 0.17647058823529413,
+      "fresh_validation_after": 0.29411764705882354,
+      "fixed_loss_before": 2.9356706142425537,
+      "fixed_loss_after": 2.912794589996338,
+      "fresh_loss_before": 3.2377398014068604,
+      "fresh_loss_after": 3.20918869972229,
+      "hard_samples": 359,
+      "pool": 480,
+      "stage": "targeted",
+      "other_game_coefficients_unchanged": true
+    }
+  ],
+  "remaining_seconds": 1505.89
+}

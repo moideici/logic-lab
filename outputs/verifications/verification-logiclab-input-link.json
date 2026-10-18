@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "destination": "http://127.0.0.1:8766/",
+  "same_tab": true,
+  "back_navigation": true,
+  "mobile_visible": true,
+  "garry_version": "0.6.0",
+  "errors": []
+}

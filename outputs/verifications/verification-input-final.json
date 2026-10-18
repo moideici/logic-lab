@@ -1,0 +1,28 @@
+{
+  "ok": true,
+  "chat": "http://127.0.0.1:8766/",
+  "report": "http://127.0.0.1:8766/bilan",
+  "corpus": {
+    "etat": "pret",
+    "phase": "corpus_disponible",
+    "fichiers": 19,
+    "octets": 4681162415,
+    "documents": 2564646
+  },
+  "training": {
+    "etat": "en_cours",
+    "phase": "apprentissage",
+    "etapes": 110,
+    "objectif_etapes": 400,
+    "exemples_vus": 880,
+    "tokens_vus": 102585,
+    "reference_perte": 1.5817356223888654,
+    "meilleure_perte": 1.1133778883929162
+  },
+  "gpu": {
+    "utilisation": 98,
+    "memoire_mo": 7600,
+    "memoire_totale_mo": 8188,
+    "temperature": 54
+  }
+}

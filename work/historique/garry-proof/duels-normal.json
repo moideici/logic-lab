@@ -1,0 +1,5498 @@
+{
+  "seed": 17017000,
+  "pairs": 4,
+  "prefix": 0,
+  "nodes": 3000000,
+  "time_ms": 2000,
+  "baseline": "frozen current 3.1.0 binary and weights, no candidate search code",
+  "opponents": {
+    "legacy1": {
+      "before": {
+        "wins": 8,
+        "losses": 0,
+        "draws": 0
+      },
+      "after": {
+        "wins": 8,
+        "losses": 0,
+        "draws": 0
+      }
+    },
+    "previous": {
+      "before": {
+        "wins": 4,
+        "losses": 4,
+        "draws": 0
+      },
+      "after": {
+        "wins": 4,
+        "losses": 4,
+        "draws": 0
+      }
+    }
+  },
+  "samples": [
+    {
+      "opponent": "legacy1",
+      "seed": 17017000,
+      "player": 1,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 35
+      },
+      "after": {
+        "result": "wins",
+        "moves": 41
+      }
+    },
+    {
+      "opponent": "legacy1",
+      "seed": 17017000,
+      "player": 2,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 34
+      },
+      "after": {
+        "result": "wins",
+        "moves": 40
+      }
+    },
+    {
+      "opponent": "legacy1",
+      "seed": 17017001,
+      "player": 1,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 35
+      },
+      "after": {
+        "result": "wins",
+        "moves": 41
+      }
+    },
+    {
+      "opponent": "legacy1",
+      "seed": 17017001,
+      "player": 2,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 34
+      },
+      "after": {
+        "result": "wins",
+        "moves": 40
+      }
+    },
+    {
+      "opponent": "legacy1",
+      "seed": 17017002,
+      "player": 1,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 35
+      },
+      "after": {
+        "result": "wins",
+        "moves": 41
+      }
+    },
+    {
+      "opponent": "legacy1",
+      "seed": 17017002,
+      "player": 2,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 34
+      },
+      "after": {
+        "result": "wins",
+        "moves": 40
+      }
+    },
+    {
+      "opponent": "legacy1",
+      "seed": 17017003,
+      "player": 1,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 35
+      },
+      "after": {
+        "result": "wins",
+        "moves": 41
+      }
+    },
+    {
+      "opponent": "legacy1",
+      "seed": 17017003,
+      "player": 2,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 34
+      },
+      "after": {
+        "result": "wins",
+        "moves": 40
+      }
+    },
+    {
+      "opponent": "previous",
+      "seed": 17017000,
+      "player": 1,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 37
+      },
+      "after": {
+        "result": "wins",
+        "moves": 39
+      }
+    },
+    {
+      "opponent": "previous",
+      "seed": 17017000,
+      "player": 2,
+      "prefix": [],
+      "before": {
+        "result": "losses",
+        "moves": 37
+      },
+      "after": {
+        "result": "losses",
+        "moves": 37
+      }
+    },
+    {
+      "opponent": "previous",
+      "seed": 17017001,
+      "player": 1,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 37
+      },
+      "after": {
+        "result": "wins",
+        "moves": 39
+      }
+    },
+    {
+      "opponent": "previous",
+      "seed": 17017001,
+      "player": 2,
+      "prefix": [],
+      "before": {
+        "result": "losses",
+        "moves": 37
+      },
+      "after": {
+        "result": "losses",
+        "moves": 37
+      }
+    },
+    {
+      "opponent": "previous",
+      "seed": 17017002,
+      "player": 1,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 37
+      },
+      "after": {
+        "result": "wins",
+        "moves": 39
+      }
+    },
+    {
+      "opponent": "previous",
+      "seed": 17017002,
+      "player": 2,
+      "prefix": [],
+      "before": {
+        "result": "losses",
+        "moves": 37
+      },
+      "after": {
+        "result": "losses",
+        "moves": 37
+      }
+    },
+    {
+      "opponent": "previous",
+      "seed": 17017003,
+      "player": 1,
+      "prefix": [],
+      "before": {
+        "result": "wins",
+        "moves": 37
+      },
+      "after": {
+        "result": "wins",
+        "moves": 39
+      }
+    },
+    {
+      "opponent": "previous",
+      "seed": 17017003,
+      "player": 2,
+      "prefix": [],
+      "before": {
+        "result": "losses",
+        "moves": 37
+      },
+      "after": {
+        "result": "losses",
+        "moves": 37
+      }
+    }
+  ],
+  "before": {
+    "wins": 12,
+    "losses": 4,
+    "draws": 0
+  },
+  "after": {
+    "wins": 12,
+    "losses": 4,
+    "draws": 0
+  },
+  "certificates": {
+    "0": 84,
+    "2": 176,
+    "4": 56
+  },
+  "losses": [
+    {
+      "seed": 17017000,
+      "player": 2,
+      "opponent": "previous",
+      "prefix": [],
+      "trace": [
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 1
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 18,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 3
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 18,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 5
+          },
+          "action": {
+            "column": 1
+          },
+          "proof": 0,
+          "depth": 17,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 7
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 17,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 9
+          },
+          "action": {
+            "column": 1
+          },
+          "proof": 0,
+          "depth": 22,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 11
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 23,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 13
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 22,
+          "nodes": 1784034
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 15
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 20,
+          "nodes": 420728
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 17
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 18,
+          "nodes": 142467
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 19
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 16,
+          "nodes": 27777
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 21
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 14,
+          "nodes": 10402
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 23
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 12,
+          "nodes": 3287
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 25
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 10,
+          "nodes": 932
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 27
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 8,
+          "nodes": 348
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 29
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 6,
+          "nodes": 74
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 31
+          },
+          "action": {
+            "column": 4
+          },
+          "proof": 4,
+          "depth": 0,
+          "nodes": 6
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 33
+          },
+          "action": {
+            "column": 4
+          },
+          "proof": 4,
+          "depth": 0,
+          "nodes": 4
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                2,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                1,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 35
+          },
+          "action": {
+            "column": 2
+          },
+          "proof": 4,
+          "depth": 1,
+          "nodes": 2
+        }
+      ],
+      "eligible_for_training": false
+    },
+    {
+      "seed": 17017001,
+      "player": 2,
+      "opponent": "previous",
+      "prefix": [],
+      "trace": [
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 1
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 18,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 3
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 18,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 5
+          },
+          "action": {
+            "column": 1
+          },
+          "proof": 0,
+          "depth": 17,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 7
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 17,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 9
+          },
+          "action": {
+            "column": 1
+          },
+          "proof": 0,
+          "depth": 22,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 11
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 23,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 13
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 22,
+          "nodes": 1784034
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 15
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 20,
+          "nodes": 420728
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 17
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 18,
+          "nodes": 142467
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 19
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 16,
+          "nodes": 27777
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 21
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 14,
+          "nodes": 10402
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 23
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 12,
+          "nodes": 3287
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 25
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 10,
+          "nodes": 932
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 27
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 8,
+          "nodes": 348
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 29
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 6,
+          "nodes": 74
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 31
+          },
+          "action": {
+            "column": 4
+          },
+          "proof": 4,
+          "depth": 0,
+          "nodes": 6
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 33
+          },
+          "action": {
+            "column": 4
+          },
+          "proof": 4,
+          "depth": 0,
+          "nodes": 4
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                2,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                1,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 35
+          },
+          "action": {
+            "column": 2
+          },
+          "proof": 4,
+          "depth": 1,
+          "nodes": 2
+        }
+      ],
+      "eligible_for_training": false
+    },
+    {
+      "seed": 17017002,
+      "player": 2,
+      "opponent": "previous",
+      "prefix": [],
+      "trace": [
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 1
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 18,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 3
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 18,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 5
+          },
+          "action": {
+            "column": 1
+          },
+          "proof": 0,
+          "depth": 17,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 7
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 17,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 9
+          },
+          "action": {
+            "column": 1
+          },
+          "proof": 0,
+          "depth": 22,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 11
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 23,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 13
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 22,
+          "nodes": 1784034
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 15
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 20,
+          "nodes": 420728
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 17
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 18,
+          "nodes": 142467
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 19
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 16,
+          "nodes": 27777
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 21
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 14,
+          "nodes": 10402
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 23
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 12,
+          "nodes": 3287
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 25
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 10,
+          "nodes": 932
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 27
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 8,
+          "nodes": 348
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 29
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 6,
+          "nodes": 74
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 31
+          },
+          "action": {
+            "column": 4
+          },
+          "proof": 4,
+          "depth": 0,
+          "nodes": 6
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 33
+          },
+          "action": {
+            "column": 4
+          },
+          "proof": 4,
+          "depth": 0,
+          "nodes": 4
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                2,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                1,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 35
+          },
+          "action": {
+            "column": 2
+          },
+          "proof": 4,
+          "depth": 1,
+          "nodes": 2
+        }
+      ],
+      "eligible_for_training": false
+    },
+    {
+      "seed": 17017003,
+      "player": 2,
+      "opponent": "previous",
+      "prefix": [],
+      "trace": [
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 1
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 18,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 3
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 18,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 5
+          },
+          "action": {
+            "column": 1
+          },
+          "proof": 0,
+          "depth": 17,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 7
+          },
+          "action": {
+            "column": 3
+          },
+          "proof": 0,
+          "depth": 17,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                0,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 9
+          },
+          "action": {
+            "column": 1
+          },
+          "proof": 0,
+          "depth": 22,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                0,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 11
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 23,
+          "nodes": 3000000
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 13
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 22,
+          "nodes": 1784034
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 15
+          },
+          "action": {
+            "column": 5
+          },
+          "proof": 4,
+          "depth": 20,
+          "nodes": 420728
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                0,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 17
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 18,
+          "nodes": 142467
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                0
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 19
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 16,
+          "nodes": 27777
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 21
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 14,
+          "nodes": 10402
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 23
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 12,
+          "nodes": 3287
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                0,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                0
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 25
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 10,
+          "nodes": 932
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                0,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 27
+          },
+          "action": {
+            "column": 0
+          },
+          "proof": 4,
+          "depth": 8,
+          "nodes": 348
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                0
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                0
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 29
+          },
+          "action": {
+            "column": 6
+          },
+          "proof": 4,
+          "depth": 6,
+          "nodes": 74
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                0,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 31
+          },
+          "action": {
+            "column": 4
+          },
+          "proof": 4,
+          "depth": 0,
+          "nodes": 6
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                0,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                0,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 33
+          },
+          "action": {
+            "column": 4
+          },
+          "proof": 4,
+          "depth": 0,
+          "nodes": 4
+        },
+        {
+          "observation": {
+            "game": "connect4",
+            "board": [
+              [
+                2,
+                1,
+                0,
+                2,
+                0,
+                1,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                0,
+                1,
+                2
+              ],
+              [
+                1,
+                2,
+                0,
+                2,
+                2,
+                2,
+                1
+              ],
+              [
+                2,
+                1,
+                0,
+                1,
+                1,
+                2,
+                1
+              ],
+              [
+                1,
+                1,
+                0,
+                2,
+                2,
+                1,
+                2
+              ],
+              [
+                2,
+                2,
+                1,
+                1,
+                1,
+                2,
+                2
+              ]
+            ],
+            "current_player": 2,
+            "done": false,
+            "winner": null,
+            "score": 0,
+            "moves": 35
+          },
+          "action": {
+            "column": 2
+          },
+          "proof": 4,
+          "depth": 1,
+          "nodes": 2
+        }
+      ],
+      "eligible_for_training": false
+    }
+  ],
+  "completed": true
+}

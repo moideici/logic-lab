@@ -1,0 +1,22 @@
+export const levelLabels={easy:'Facile',medium:'Moyen',hard:'Difficile',expert:'Expert'};
+let selected=null;
+const $=id=>document.getElementById(id);
+export function puzzleOptions(name){return name==='sudoku'?{difficulty:$('sudoku-difficulty').value}:name==='sliding_puzzle'?{size:+$('sliding-size').value,difficulty:$('sliding-difficulty').value}:{};}
+export function resetPuzzleSelection(){selected=null;}
+export function renderPuzzleControls(game,human,training,lastDecision){
+ const sudoku=game.name==='sudoku',sliding=game.name==='sliding_puzzle',info=game.difficultyInfo;
+ $('sudoku-options').hidden=!sudoku;$('sliding-options').hidden=!sliding;
+ for(const id of ['sudoku-difficulty','sliding-size','sliding-difficulty'])$(id).disabled=training;
+ if(info){if(sudoku)$('sudoku-difficulty').value=info.difficulty;if(sliding){$('sliding-size').value=String(info.size);$('sliding-difficulty').value=info.difficulty;}}
+ if(sliding){const n=game.board.length,detail=info?`${levelLabels[info.difficulty]} · `:'';$('game-hint').textContent=n===3?`${detail}${info?.difficulty==='expert'?'Maximum absolu du 3 × 3 : 31 coups minimum. ':''}Chaque coup de Garry au niveau 10 suit un chemin minimal exact.`:`${detail}${n} × ${n} · Recherche limitée au plateau visible ; la résolution et le chemin minimal ne sont pas garantis. ${lastDecision?.solution_found?'Chemin minimal trouvé : '+lastDecision.remaining_moves+' coups.':''}`;const bound=lastDecision?.solution_found?lastDecision.remaining_moves:null;$('move-counter').textContent=`${game.moves} coups · ${n===3?game.distance()===0?0:info&&game.moves===0?info.exact_distance:'distance exacte affichée par l’analyse':bound===null?'au moins '+game.distance():bound} ${n===3&&game.moves>0?'':'coups restants'}`;if(n===3&&game.moves>0&&lastDecision?.remaining_moves!=null)$('move-counter').textContent=`${game.moves} coups · ${Math.max(0,lastDecision.remaining_moves-1)} restants`;}
+ if(sudoku){$('game-hint').textContent=info?`${levelLabels[info.difficulty]} · Solution unique vérifiée. ${info.difficulty==='expert'?'Record du catalogue selon notre solveur fixe ; aucune difficulté maximale universelle n’est certifiée.':'Difficulté évaluée par un solveur fixe.'}`:'Solution unique. Sélectionnez une case puis un chiffre.';if(human)$('game-hint').textContent+=' Cliquez sur une case vide puis sur un chiffre ; vous pouvez annuler vos saisies.';}
+}
+export function renderPuzzleBoard(game,human,action){
+ const board=$('board');board.className='puzzle-container';board.innerHTML='';const grid=document.createElement('div'),n=game.board.length;grid.className='puzzle-grid '+(game.name==='sudoku'?'sudoku-grid':'sliding-grid');grid.style.gridTemplateColumns=`repeat(${n},1fr)`;
+ const zero=game.board.flat().indexOf(0),zr=Math.floor(zero/n),zc=zero%n,legal=game.legal();
+ game.board.forEach((row,r)=>row.forEach((v,c)=>{const cell=document.createElement('button');cell.className='cell';cell.textContent=v||'';cell.setAttribute('aria-label',`Ligne ${r+1}, colonne ${c+1} : ${v||'vide'}`);let move=null;
+ if(game.name==='sliding_puzzle'){if(!v)cell.classList.add('blank');const dr=r-zr,dc=c-zc;if(Math.abs(dr)+Math.abs(dc)===1)move={direction:dr===-1?'up':dr===1?'down':dc===-1?'left':'right'};cell.disabled=!human||game.done||!move;cell.onclick=()=>action(move);}
+ else{if(game.givens[r][c])cell.classList.add('given');if(selected?.[0]===r&&selected?.[1]===c)cell.classList.add('selected-cell');if(c===2||c===5)cell.classList.add('box-right');if(r===2||r===5)cell.classList.add('box-bottom');cell.disabled=!human||game.done||!!v;cell.onclick=()=>{selected=[r,c];renderPuzzleBoard(game,human,action);};}if(!cell.disabled)cell.classList.add('playable');grid.append(cell);}));board.append(grid);
+ if(game.name==='sudoku'&&human){const digits=document.createElement('div');digits.className='puzzle-digits';for(let v=1;v<=9;v++){const button=document.createElement('button');button.textContent=String(v);button.setAttribute('aria-label',`Saisir ${v}`);const move=selected?{row:selected[0],col:selected[1],value:v}:null;button.disabled=game.done||!move||!legal.some(a=>a.row===move.row&&a.col===move.col&&a.value===v);button.onclick=()=>{selected=null;action(move);};digits.append(button);}const undo=document.createElement('button');undo.textContent='Annuler';undo.disabled=game.done||!game.history.length;undo.onclick=()=>{selected=null;action({undo:true});};digits.append(undo);board.append(digits);}
+ $('game-result').hidden=!game.done;$('game-result').textContent=game.done?'Grille résolue !':'';
+}

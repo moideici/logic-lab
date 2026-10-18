@@ -1,0 +1,57 @@
+
+// Un seul ensemble de matrices ; le jeu conditionne les entrées et le masque.
+export const GARRY_GAMES=['tictactoe','connect4','2048','sudoku','minesweeper','sliding_puzzle'];
+export const GARRY_INPUT_OFFSETS=Object.fromEntries(GARRY_GAMES.map((g,i)=>[g,GARRY_GAMES.slice(0,i).reduce((n,k)=>n+SPECS[k][0],0)]));
+export const GARRY_OUTPUT_OFFSETS=Object.fromEntries(GARRY_GAMES.map((g,i)=>[g,GARRY_GAMES.slice(0,i).reduce((n,k)=>n+SPECS[k][1],0)]));
+export const GARRY_FEATURES=GARRY_GAMES.reduce((n,g)=>n+SPECS[g][0],0),GARRY_INPUT=GARRY_FEATURES+6,GARRY_OUTPUT=GARRY_GAMES.reduce((n,g)=>n+SPECS[g][1],0);
+export function encodeGeneral(o){const x=new Float32Array(GARRY_INPUT);x.set(encode(o),GARRY_INPUT_OFFSETS[o.game]);x[GARRY_FEATURES+GARRY_GAMES.indexOf(o.game)]=1;return x;}
+export class GarryModel{
+ constructor(d){
+  if(d.format!=='garry-mlp-v1'||d.name!=='garry'||d.version!=='2.0.0'||JSON.stringify(d.games)!==JSON.stringify(GARRY_GAMES)||d.input!==GARRY_INPUT||d.output!==GARRY_OUTPUT||!Number.isInteger(d.hidden)||d.hidden<1||d.hidden>256)throw Error('Architecture Garry incompatible');
+  this.input=d.input;this.output=d.output;this.hidden=d.hidden;this.steps=d.steps;this.gameSteps={...d.game_steps};
+  if(!Number.isInteger(this.steps)||this.steps<0||GARRY_GAMES.some(g=>!Number.isInteger(this.gameSteps[g])||this.gameSteps[g]<0))throw Error('Compteurs Garry invalides');
+  const read=(values,n)=>{if(!Array.isArray(values)||values.length!==n||!values.every(v=>typeof v==='number'&&Number.isFinite(v)))throw Error('Poids Garry invalides');return Float32Array.from(values);};
+  for(const [k,n] of [['w1',this.input*this.hidden],['b1',this.hidden],['w2',this.hidden*this.output],['b2',this.output]])this[k]=read(d[k],n);
+  const c=d.core;if(c?.id!=='garry-core-v1'||!Number.isInteger(c.steps)||c.steps<0)throw Error('Module Garry invalide');
+  this.core={id:c.id,steps:c.steps,w:read(c.w,this.hidden*this.hidden),b:read(c.b,this.hidden)};
+ }
+ forward(o){
+  const x=encodeGeneral(o),e=new Float32Array(this.hidden),h=new Float32Array(this.hidden),z=new Float32Array(this.output);
+  for(let j=0;j<this.hidden;j++){let s=this.b1[j];for(let i=0;i<this.input;i++)if(x[i])s+=x[i]*this.w1[i*this.hidden+j];e[j]=Math.tanh(s);}
+  for(let j=0;j<this.hidden;j++){let s=this.core.b[j];for(let i=0;i<this.hidden;i++)s+=e[i]*this.core.w[i*this.hidden+j];h[j]=Math.tanh(s);}
+  for(let k=0;k<this.output;k++){let s=this.b2[k];for(let j=0;j<this.hidden;j++)s+=h[j]*this.w2[j*this.output+k];z[k]=s;}
+  return {x,e,h,z};
+ }
+ forGame(game){if(!SPECS[game])throw Error('Jeu inconnu');return new GarryView(this,game);}
+ export(){const d={format:'garry-mlp-v1',name:'garry',version:'2.0.0',games:GARRY_GAMES.slice(),input:this.input,output:this.output,hidden:this.hidden,steps:this.steps,game_steps:{...this.gameSteps},core:{id:this.core.id,steps:this.core.steps,w:Array.from(this.core.w),b:Array.from(this.core.b)}};for(const k of ['w1','b1','w2','b2'])d[k]=Array.from(this[k]);return d;}
+ train(o,legal,target,lr=.015){
+  if(!Number.isFinite(lr)||lr<=0)throw Error('Taux d’apprentissage invalide');
+  const {x,e,h,z}=this.forward(o),offset=GARRY_OUTPUT_OFFSETS[o.game],ids=legal.map(a=>offset+actionIndex(o.game,a)),ti=offset+actionIndex(o.game,target),targetAt=ids.indexOf(ti);
+  if(targetAt<0)throw Error('Cible illégale');
+  const max=Math.max(...ids.map(k=>z[k])),p=ids.map(k=>Math.exp(z[k]-max)),sum=p.reduce((a,b)=>a+b,0),dh=new Float32Array(this.hidden),de=new Float32Array(this.hidden);
+  const loss=-Math.log(Math.max(1e-12,p[targetAt]/sum));
+  for(let t=0;t<ids.length;t++){const k=ids[t],grad=p[t]/sum-(k===ti?1:0);for(let j=0;j<this.hidden;j++){const at=j*this.output+k;dh[j]+=grad*this.w2[at];this.w2[at]-=lr*h[j]*grad;}this.b2[k]-=lr*grad;}
+  for(let j=0;j<this.hidden;j++){const grad=dh[j]*(1-h[j]*h[j]);this.core.b[j]-=lr*grad;for(let i=0;i<this.hidden;i++){const at=i*this.hidden+j;de[i]+=grad*this.core.w[at];this.core.w[at]-=lr*e[i]*grad;}}
+  for(let j=0;j<this.hidden;j++){const grad=de[j]*(1-e[j]*e[j]);this.b1[j]-=lr*grad;for(let i=0;i<this.input;i++)if(x[i])this.w1[i*this.hidden+j]-=lr*x[i]*grad;}
+  this.steps++;this.gameSteps[o.game]++;this.core.steps++;return loss;
+ }
+ static fuse(data){
+  const old=Object.fromEntries(data.map(d=>{const m=new Network(d);return [m.game,m];}));
+  if(GARRY_GAMES.some(g=>!old[g]))throw Error('La fusion nécessite les six modèles');
+  const first=old[GARRY_GAMES[0]],hidden=first.hidden;
+  if(GARRY_GAMES.some(g=>old[g].hidden!==hidden||!old[g].core.w.every((v,i)=>v===first.core.w[i])||!old[g].core.b.every((v,i)=>v===first.core.b[i])))throw Error('Modules centraux incompatibles');
+  const w1=Array(GARRY_INPUT*hidden).fill(0),w2=Array(hidden*GARRY_OUTPUT).fill(0),b2=Array(GARRY_OUTPUT).fill(0),game_steps={};
+  GARRY_GAMES.forEach((g,i)=>{const m=old[g],a=GARRY_INPUT_OFFSETS[g],b=GARRY_OUTPUT_OFFSETS[g];m.w1.forEach((v,k)=>w1[a*hidden+k]=v);m.b1.forEach((v,k)=>w1[(GARRY_FEATURES+i)*hidden+k]=v);for(let j=0;j<hidden;j++)for(let k=0;k<m.output;k++)w2[j*GARRY_OUTPUT+b+k]=m.w2[j*m.output+k];m.b2.forEach((v,k)=>b2[b+k]=v);game_steps[g]=m.steps;});
+  return new GarryModel({format:'garry-mlp-v1',name:'garry',version:'2.0.0',games:GARRY_GAMES.slice(),input:GARRY_INPUT,output:GARRY_OUTPUT,hidden,steps:Object.values(game_steps).reduce((a,b)=>a+b,0),game_steps,w1,w2,b1:Array(hidden).fill(0),b2,core:{id:'garry-core-v1',steps:Math.max(...GARRY_GAMES.map(g=>old[g].core.steps)),w:Array.from(first.core.w),b:Array.from(first.core.b)}});
+ }
+}
+class GarryView{
+ constructor(model,game){this.model=model;this.game=game;}
+ get input(){return this.model.input;}get output(){return this.model.output;}get hidden(){return this.model.hidden;}
+ get core(){return this.model.core;}get steps(){return this.model.gameSteps[this.game];}
+ get w1(){return this.model.w1;}get b1(){return this.model.b1;}get w2(){return this.model.w2;}get b2(){return this.model.b2;}
+ forward(o){if(o.game!==this.game)throw Error('Jeu incompatible');const f=this.model.forward(o),start=GARRY_OUTPUT_OFFSETS[this.game];return {...f,z:f.z.slice(start,start+SPECS[this.game][1])};}
+ choose(...args){return Network.prototype.choose.apply(this,args);}
+ train(o,legal,target,lr){if(o.game!==this.game)throw Error('Jeu incompatible');return this.model.train(o,legal,target,lr);}
+ export(){return this.model.export();}
+}

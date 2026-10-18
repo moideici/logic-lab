@@ -1,0 +1,13 @@
+{
+  "schema": "logic-arena-agents-v1",
+  "version": "1.1.0",
+  "previous_version": "1.0.0",
+  "agents": {
+    "tictactoe": {"codename": "NEXUS", "version": "1.1.0"},
+    "2048": {"codename": "TITAN", "version": "1.1.0"},
+    "sudoku": {"codename": "ORACLE", "version": "1.1.0"},
+    "connect4": {"codename": "BASTION", "version": "1.1.0"},
+    "minesweeper": {"codename": "SENTINEL", "version": "1.1.0"},
+    "sliding_puzzle": {"codename": "VECTOR", "version": "1.1.0"}
+  }
+}

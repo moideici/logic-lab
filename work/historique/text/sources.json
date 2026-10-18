@@ -1,0 +1,121 @@
+{
+  "Qwen/Qwen3-0.6B": {
+    "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "files": [
+      {
+        "name": "config.json",
+        "bytes": 726
+      },
+      {
+        "name": "generation_config.json",
+        "bytes": 239
+      },
+      {
+        "name": "merges.txt",
+        "bytes": 1671853
+      },
+      {
+        "name": "model.safetensors",
+        "bytes": 1503300328
+      },
+      {
+        "name": "tokenizer.json",
+        "bytes": 11422654
+      },
+      {
+        "name": "tokenizer_config.json",
+        "bytes": 9732
+      },
+      {
+        "name": "vocab.json",
+        "bytes": 2776833
+      }
+    ]
+  },
+  "wikimedia/wikipedia": {
+    "revision": "b04c8d1ceb2f5cd4588862100d08de323dccfbaa",
+    "files": [
+      {
+        "name": "20231101.fr/train-00000-of-00017.parquet",
+        "bytes": 769165548
+      },
+      {
+        "name": "20231101.fr/train-00001-of-00017.parquet",
+        "bytes": 421583910
+      },
+      {
+        "name": "20231101.fr/train-00002-of-00017.parquet",
+        "bytes": 348323642
+      },
+      {
+        "name": "20231101.fr/train-00003-of-00017.parquet",
+        "bytes": 296428023
+      },
+      {
+        "name": "20231101.fr/train-00004-of-00017.parquet",
+        "bytes": 283697339
+      },
+      {
+        "name": "20231101.fr/train-00005-of-00017.parquet",
+        "bytes": 258843380
+      },
+      {
+        "name": "20231101.fr/train-00006-of-00017.parquet",
+        "bytes": 219187256
+      },
+      {
+        "name": "20231101.fr/train-00007-of-00017.parquet",
+        "bytes": 216022856
+      },
+      {
+        "name": "20231101.fr/train-00008-of-00017.parquet",
+        "bytes": 204905052
+      },
+      {
+        "name": "20231101.fr/train-00009-of-00017.parquet",
+        "bytes": 205056704
+      },
+      {
+        "name": "20231101.fr/train-00010-of-00017.parquet",
+        "bytes": 204977310
+      },
+      {
+        "name": "20231101.fr/train-00011-of-00017.parquet",
+        "bytes": 168714731
+      },
+      {
+        "name": "20231101.fr/train-00012-of-00017.parquet",
+        "bytes": 210280297
+      },
+      {
+        "name": "20231101.fr/train-00013-of-00017.parquet",
+        "bytes": 214272535
+      },
+      {
+        "name": "20231101.fr/train-00014-of-00017.parquet",
+        "bytes": 221881001
+      },
+      {
+        "name": "20231101.fr/train-00015-of-00017.parquet",
+        "bytes": 185553661
+      },
+      {
+        "name": "20231101.fr/train-00016-of-00017.parquet",
+        "bytes": 185595041
+      }
+    ]
+  },
+  "OpenAssistant/oasst2": {
+    "revision": "179dd21fc55192153d94adb0e0ce8f69e222bf75",
+    "files": [
+      {
+        "name": "data/train-00000-of-00001-88ba0162028a73fc.parquet",
+        "bytes": 63494018
+      },
+      {
+        "name": "data/validation-00000-of-00001-1deeef95c3248fe0.parquet",
+        "bytes": 3180111
+      }
+    ]
+  }
+}

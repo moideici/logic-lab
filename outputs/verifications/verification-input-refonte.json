@@ -1,0 +1,16 @@
+{
+  "partial_seen_ms": 701,
+  "completed_ms": 6084,
+  "first": "Le total est 13,0 euros.\n\nquantite4prix3.25total13",
+  "values": {
+    "quantite": 4,
+    "prix": 3.25,
+    "total": 13
+  },
+  "stop_cleanup": {
+    "arrete": false
+  },
+  "context": "3 message(s) dans le contexte · adaptation française active",
+  "ok": true,
+  "errors": []
+}

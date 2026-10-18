@@ -1,0 +1,8 @@
+from pathlib import Path
+import json,urllib.request,hashlib,time
+R=Path(r'C:\Users\gabor\code\text-comprehension');out=Path(r'C:\Users\gabor\code\logic-lab\outputs');manifest={'version':'0.2.0','sources':json.loads((R/'sources.json').read_text(encoding='utf-8-sig')),'datasets':{s:hashlib.sha256((R/'chat_data'/f'{s}.jsonl').read_bytes()).hexdigest() for s in ('train','validation','test')},'code':{f:hashlib.sha256((R/f).read_bytes()).hexdigest() for f in ('train_language.py','chat.py','build_chat_data.py')},'training':{'steps':400,'lora_rank':8,'lr':.0001,'gpu_target':80,'note':'Bounded initial cycle; no claim all imported documents have been used.'}};(R/'models/chat/cycle-0.2.0/input-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
+for path in ('/','/bilan','/input.css','/input.js','/bilan.css','/bilan.js'):
+ with urllib.request.urlopen('http://127.0.0.1:8766'+path,timeout=15)as r:assert r.status==200
+with urllib.request.urlopen('http://127.0.0.1:8766/api/progres',timeout=15)as r:status=json.load(r)
+assert status['chat_pret'];assert status['corpus']['documents']==2564646;assert status['entrainement']['etapes']>0;assert status['reference']['generation']['cas']==12
+summary={'ok':True,'chat':'http://127.0.0.1:8766/','report':'http://127.0.0.1:8766/bilan','corpus':status['corpus'],'training':{k:status['entrainement'].get(k) for k in ('etat','phase','etapes','objectif_etapes','exemples_vus','tokens_vus','reference_perte','meilleure_perte')},'gpu':status.get('gpu')};(out/'verification-input-final.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8');print(json.dumps(summary,ensure_ascii=False))

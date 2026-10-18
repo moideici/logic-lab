@@ -1,0 +1,812 @@
+{
+  "trials": {
+    "wins": 2,
+    "losses": 2,
+    "draws": 1
+  },
+  "evidence": [
+    {
+      "entry": {
+        "key": "0000000200000",
+        "column": 2,
+        "guarantee": "experience"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 1
+      },
+      "column": 2,
+      "source": "adversarial opening exploration; no mathematical non-loss claim"
+    },
+    {
+      "entry": {
+        "key": "0000000608000",
+        "column": 3,
+        "guarantee": "non_loss"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 3
+      },
+      "column": 3,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "0000002608000",
+        "column": 3,
+        "guarantee": "draw"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 5
+      },
+      "column": 3,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "0000006610000",
+        "column": 3,
+        "guarantee": "win"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 7
+      },
+      "column": 3,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "000000e620000",
+        "column": 2,
+        "guarantee": "win"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 9
+      },
+      "column": 2,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "0000000608000",
+        "column": 3,
+        "guarantee": "non_loss"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 3
+      },
+      "column": 3,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "0000002608000",
+        "column": 3,
+        "guarantee": "non_loss"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 5
+      },
+      "column": 3,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "0000006610000",
+        "column": 3,
+        "guarantee": "win"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 7
+      },
+      "column": 3,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "000000e620000",
+        "column": 2,
+        "guarantee": "win"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            2,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 9
+      },
+      "column": 4,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "0000002610002",
+        "column": 3,
+        "guarantee": "draw"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            2,
+            1,
+            0,
+            0,
+            0
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 7
+      },
+      "column": 3,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    },
+    {
+      "entry": {
+        "key": "0040006610002",
+        "column": 4,
+        "guarantee": "draw"
+      },
+      "observation": {
+        "game": "connect4",
+        "board": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            2,
+            1,
+            0,
+            0,
+            1
+          ]
+        ],
+        "current_player": 2,
+        "done": false,
+        "winner": null,
+        "score": 0,
+        "moves": 9
+      },
+      "column": 4,
+      "source": "offline exact WDL search, 100M nodes / 10s maximum"
+    }
+  ]
+}

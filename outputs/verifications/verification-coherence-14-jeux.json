@@ -1,0 +1,82 @@
+{
+  "ok": true,
+  "games": [
+    {
+      "game": "2048",
+      "human_action": true,
+      "duel_levels": false
+    },
+    {
+      "game": "tictactoe",
+      "human_action": true,
+      "duel_levels": true
+    },
+    {
+      "game": "sudoku",
+      "human_action": true,
+      "duel_levels": false
+    },
+    {
+      "game": "connect4",
+      "human_action": true,
+      "duel_levels": true
+    },
+    {
+      "game": "minesweeper",
+      "human_action": true,
+      "duel_levels": false
+    },
+    {
+      "game": "sliding_puzzle",
+      "human_action": true,
+      "duel_levels": false
+    },
+    {
+      "game": "reversi",
+      "human_action": true,
+      "duel_levels": true
+    },
+    {
+      "game": "nim",
+      "human_action": true,
+      "duel_levels": true
+    },
+    {
+      "game": "lightsout",
+      "human_action": true,
+      "duel_levels": false
+    },
+    {
+      "game": "draughts",
+      "human_action": true,
+      "duel_levels": true
+    },
+    {
+      "game": "breakthrough",
+      "human_action": true,
+      "duel_levels": true
+    },
+    {
+      "game": "hex",
+      "human_action": true,
+      "duel_levels": true
+    },
+    {
+      "game": "gomoku",
+      "human_action": true,
+      "duel_levels": true
+    },
+    {
+      "game": "go",
+      "human_action": true,
+      "duel_levels": true
+    }
+  ],
+  "go_scoring_ends": true,
+  "taquin_expert_moves": 31,
+  "sudoku_undo": true,
+  "keyboard_2048": true,
+  "mobile_no_overflow": true,
+  "external_go_metrics_coherent": true,
+  "errors": []
+}

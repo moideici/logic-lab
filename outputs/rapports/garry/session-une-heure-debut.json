@@ -1,0 +1,105 @@
+{
+  "state": "running",
+  "phase": "playing",
+  "started_at": "2026-10-17T19:36:53.735403+02:00",
+  "ends_at": "2026-10-17T20:36:53.735404+02:00",
+  "duration_seconds": 3600,
+  "elapsed_seconds": 17.17,
+  "remaining_seconds": 3582.83,
+  "pid": 5312,
+  "cycles": 7,
+  "promotions": 0,
+  "moves_total": 1223,
+  "fresh_samples": 287,
+  "game": "hex",
+  "observation": {
+    "game": "hex",
+    "board": [
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        2,
+        1,
+        0
+      ],
+      [
+        0,
+        2,
+        2,
+        2,
+        1,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "current_player": 2,
+    "done": false,
+    "winner": null,
+    "score": 0,
+    "moves": 13,
+    "hex_state": {
+      "colors": [
+        2,
+        1
+      ],
+      "swap_available": false,
+      "winning_path": []
+    }
+  },
+  "action": {
+    "row": 3,
+    "col": 1
+  },
+  "model_sha256": "01bb4dafe413550443b1705819d8e7f657488d5daf0cbdab7f0f6e67699eada4",
+  "assessment": "bounded_teacher_agreement_not_certified_playing_strength",
+  "updated_at": "2026-10-17T19:37:10.050296+02:00",
+  "episode": 23,
+  "id": "2c34213841c64bc29b19a24651403b5b"
+}

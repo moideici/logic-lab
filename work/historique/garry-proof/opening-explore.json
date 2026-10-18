@@ -1,0 +1,2242 @@
+{
+  "format": "garry-opening-exploration-v1",
+  "opponent": "frozen 3.1.0",
+  "opponent_nodes": 200000000,
+  "opponent_ms": 2000,
+  "oracle_nodes": 100000000,
+  "oracle_ms": 3000,
+  "completed_depth": 2,
+  "nodes": [
+    {
+      "depth": 1,
+      "history": [
+        3,
+        0,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 11890688,
+        "depth": 21,
+        "value": 286
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 31461376,
+        "ms": 3000.3913000000002
+      }
+    },
+    {
+      "depth": 1,
+      "history": [
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 11642880,
+        "depth": 21,
+        "value": 258
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 31252480,
+        "ms": 3000.1628999999994
+      }
+    },
+    {
+      "depth": 1,
+      "history": [
+        3,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12723200,
+        "depth": 23,
+        "value": 180
+      },
+      "oracle": {
+        "state": 1,
+        "nodes": 31498240,
+        "ms": 3000.2436000000016
+      }
+    },
+    {
+      "depth": 1,
+      "history": [
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 11854848,
+        "depth": 21,
+        "value": 56
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 32350208,
+        "ms": 3000.1426999999967
+      }
+    },
+    {
+      "depth": 1,
+      "history": [
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12338176,
+        "depth": 22,
+        "value": 165
+      },
+      "oracle": {
+        "state": 1,
+        "nodes": 32604160,
+        "ms": 3000.109700000001
+      }
+    },
+    {
+      "depth": 1,
+      "history": [
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12666880,
+        "depth": 21,
+        "value": 258
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 32718848,
+        "ms": 3000.2520000000004
+      }
+    },
+    {
+      "depth": 1,
+      "history": [
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12632064,
+        "depth": 21,
+        "value": 286
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 32681984,
+        "ms": 3000.085199999994
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        0,
+        3,
+        0,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 36206,
+        "depth": 11,
+        "value": 999983
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 97018,
+        "ms": 8.653099999995902
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        0,
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12625920,
+        "depth": 21,
+        "value": 480
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 701679,
+        "ms": 47.512399999999616
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        0,
+        3,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12403712,
+        "depth": 21,
+        "value": 350
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1661053,
+        "ms": 119.3798999999999
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12625920,
+        "depth": 21,
+        "value": 301
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 22552576,
+        "ms": 3000.2834000000003
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        0,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 4654080,
+        "depth": 20,
+        "value": 228
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 979130,
+        "ms": 237.78689999999915
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        0,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 4855808,
+        "depth": 18,
+        "value": 309
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 845645,
+        "ms": 203.06169999999838
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        0,
+        3,
+        6,
+        2
+      ],
+      "reply": {
+        "column": 2,
+        "nodes": 874527,
+        "depth": 17,
+        "value": 999981
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 331651,
+        "ms": 62.51499999999942
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        1,
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 5243904,
+        "depth": 19,
+        "value": 287
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 2186844,
+        "ms": 519.341800000002
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        1,
+        3,
+        2,
+        2
+      ],
+      "reply": {
+        "column": 2,
+        "nodes": 7870464,
+        "depth": 20,
+        "value": 331
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 16681317,
+        "ms": 1941.2045999999973
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        1,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 10719232,
+        "depth": 20,
+        "value": 194
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 29339648,
+        "ms": 3000.0740000000005
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        1,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 11745280,
+        "depth": 22,
+        "value": 291
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1666797,
+        "ms": 125.29919999999402
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        1,
+        3,
+        5,
+        1
+      ],
+      "reply": {
+        "column": 1,
+        "nodes": 11404288,
+        "depth": 19,
+        "value": 297
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 9612399,
+        "ms": 850.3552999999956
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        1,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 11848704,
+        "depth": 20,
+        "value": 321
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 2503606,
+        "ms": 191.55939999999828
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        2,
+        3,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 13404160,
+        "depth": 24,
+        "value": 315
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1676506,
+        "ms": 126.85680000000866
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 11532288,
+        "depth": 22,
+        "value": 175
+      },
+      "oracle": {
+        "state": 1,
+        "nodes": 27570176,
+        "ms": 3000.1647999999986
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        2,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 9726976,
+        "depth": 23,
+        "value": 352
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 400940,
+        "ms": 42.614400000005844
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        2,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 9319424,
+        "depth": 21,
+        "value": 294
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 2825512,
+        "ms": 288.74289999999746
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        2,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 11880448,
+        "depth": 22,
+        "value": 317
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 4207726,
+        "ms": 335.8668999999936
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        3,
+        3,
+        0,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12762112,
+        "depth": 22,
+        "value": 344
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 9221400,
+        "ms": 788.5124000000069
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        3,
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12594176,
+        "depth": 20,
+        "value": 195
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 13685927,
+        "ms": 1174.402700000006
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        3,
+        3,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 13053952,
+        "depth": 22,
+        "value": 294
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 28021973,
+        "ms": 2632.404500000004
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12730368,
+        "depth": 20,
+        "value": 24
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 31879168,
+        "ms": 3000.060700000002
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        3,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 13808640,
+        "depth": 22,
+        "value": 294
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 7261471,
+        "ms": 579.5362000000023
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        3,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12568576,
+        "depth": 21,
+        "value": 280
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 10512684,
+        "ms": 914.3981000000058
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        3,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12701696,
+        "depth": 22,
+        "value": 344
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 12071226,
+        "ms": 1062.3225999999995
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        4,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 13145088,
+        "depth": 22,
+        "value": 175
+      },
+      "oracle": {
+        "state": 1,
+        "nodes": 32399360,
+        "ms": 3000.0715000000055
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        4,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 14174208,
+        "depth": 24,
+        "value": 315
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1999088,
+        "ms": 141.08469999999215
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        4,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12642304,
+        "depth": 21,
+        "value": 397
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 719686,
+        "ms": 48.297200000000885
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        4,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12530688,
+        "depth": 21,
+        "value": 350
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1384352,
+        "ms": 94.67999999999302
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        5,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12739584,
+        "depth": 21,
+        "value": 245
+      },
+      "oracle": {
+        "state": 1,
+        "nodes": 32178176,
+        "ms": 3000.017200000002
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        5,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 13082624,
+        "depth": 21,
+        "value": 313
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1544714,
+        "ms": 109.48859999999695
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        5,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12347392,
+        "depth": 20,
+        "value": 426
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 2137038,
+        "ms": 159.35590000000957
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        6,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12849152,
+        "depth": 21,
+        "value": 301
+      },
+      "oracle": {
+        "state": 0,
+        "nodes": 32772096,
+        "ms": 3000.2141999999876
+      }
+    },
+    {
+      "depth": 2,
+      "history": [
+        3,
+        6,
+        3,
+        6,
+        2
+      ],
+      "reply": {
+        "column": 2,
+        "nodes": 34530,
+        "depth": 11,
+        "value": 999983
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 131471,
+        "ms": 9.966199999995297
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        0,
+        4,
+        0,
+        0
+      ],
+      "reply": {
+        "column": 0,
+        "nodes": 0,
+        "depth": 0,
+        "value": 0
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 11884,
+        "ms": 1.3040999999793712
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        0,
+        4,
+        1,
+        5
+      ],
+      "reply": {
+        "column": 5,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999997
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 0,
+        "ms": 0.16889999998966232
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        0,
+        4,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 11113,
+        "depth": 9,
+        "value": 999985
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 84,
+        "ms": 0.17980000001261942
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        0,
+        4,
+        3,
+        5
+      ],
+      "reply": {
+        "column": 5,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999997
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 0,
+        "ms": 0.1688000000140164
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        0,
+        4,
+        4,
+        5
+      ],
+      "reply": {
+        "column": 5,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999997
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 0,
+        "ms": 0.16839999999501742
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        0,
+        4,
+        5,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 9268,
+        "depth": 9,
+        "value": 999985
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1655455,
+        "ms": 119.88349999999627
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        0,
+        4,
+        6,
+        2
+      ],
+      "reply": {
+        "column": 2,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999997
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 0,
+        "ms": 0.1762999999918975
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        1,
+        3,
+        0,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        1,
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        1,
+        3,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        1,
+        3,
+        3,
+        1
+      ],
+      "reply": {
+        "column": 1,
+        "nodes": 13138944,
+        "depth": 20,
+        "value": 476
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 2696954,
+        "ms": 194.03209999998217
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        1,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        1,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        1,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        2,
+        3,
+        0,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        2,
+        3,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        2,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12602368,
+        "depth": 21,
+        "value": 370
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1661051,
+        "ms": 115.21570000000065
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        2,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        2,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        2,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3,
+        0,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 11593096,
+        "depth": 22,
+        "value": 999975
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 5138944,
+        "ms": 410.28310000000056
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12828672,
+        "depth": 20,
+        "value": 360
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 12636764,
+        "ms": 1081.201700000005
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3,
+        2,
+        2
+      ],
+      "reply": {
+        "column": 2,
+        "nodes": 13816832,
+        "depth": 22,
+        "value": 401
+      },
+      "oracle": {
+        "state": 3,
+        "nodes": 30215305,
+        "ms": 2853.8505000000005
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3,
+        3,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 13845504,
+        "depth": 23,
+        "value": 321
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 4672618,
+        "ms": 371.38159999999334
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 13864960,
+        "depth": 22,
+        "value": 296
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 16528201,
+        "ms": 1439.5829999999842
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12517376,
+        "depth": 19,
+        "value": 374
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 10808567,
+        "ms": 927.5268999999971
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 12548096,
+        "depth": 20,
+        "value": 391
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 9201335,
+        "ms": 804.0866999999853
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        4,
+        3,
+        0,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        4,
+        3,
+        3,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 12113920,
+        "depth": 21,
+        "value": 345
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 3897132,
+        "ms": 283.55079999999725
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        4,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        4,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        4,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        5,
+        3,
+        0,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        5,
+        3,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 13053952,
+        "depth": 19,
+        "value": 391
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 845643,
+        "ms": 69.90129999999772
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        5,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        5,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        6,
+        2,
+        1,
+        2
+      ],
+      "reply": {
+        "column": 2,
+        "nodes": 3522,
+        "depth": 7,
+        "value": 999987
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 4816,
+        "ms": 0.6756999999925029
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        6,
+        2,
+        2,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999997
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 0,
+        "ms": 0.1767999999865424
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        6,
+        2,
+        3,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999997
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 0,
+        "ms": 0.17129999998724088
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        6,
+        2,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 314089,
+        "depth": 15,
+        "value": 999983
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 306930,
+        "ms": 23.112600000022212
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        6,
+        2,
+        5,
+        2
+      ],
+      "reply": {
+        "column": 2,
+        "nodes": 3599,
+        "depth": 7,
+        "value": 999987
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 54,
+        "ms": 0.18999999997322448
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        6,
+        2,
+        6,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999997
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 0,
+        "ms": 0.16939999998430721
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        1,
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        1,
+        3,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        1,
+        3,
+        3,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 12118172,
+        "depth": 21,
+        "value": 999977
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 608075,
+        "ms": 41.4256999999925
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        1,
+        3,
+        4,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        1,
+        3,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        1,
+        3,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 0,
+        "depth": 0,
+        "value": 999999
+      },
+      "terminal": true,
+      "winner": 1,
+      "oracle": {
+        "state": 4
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        2,
+        2,
+        0,
+        1
+      ],
+      "reply": {
+        "column": 1,
+        "nodes": 3148,
+        "depth": 7,
+        "value": 999989
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 5980,
+        "ms": 0.7863000000070315
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        2,
+        2,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 10847,
+        "depth": 9,
+        "value": 999987
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1107562,
+        "ms": 72.04809999998542
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        2,
+        2,
+        2,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 17122091,
+        "depth": 25,
+        "value": 999973
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 763201,
+        "ms": 51.36310000001686
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        2,
+        2,
+        3,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 15159296,
+        "depth": 23,
+        "value": 477
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 11327181,
+        "ms": 985.4988000000012
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        2,
+        2,
+        4,
+        4
+      ],
+      "reply": {
+        "column": 4,
+        "nodes": 2650,
+        "depth": 7,
+        "value": 999989
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 29927,
+        "ms": 3.0212999999930616
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        2,
+        2,
+        5,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 15653,
+        "depth": 9,
+        "value": 999987
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 141058,
+        "ms": 11.56960000001709
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        2,
+        2,
+        6,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 14005,
+        "depth": 9,
+        "value": 999987
+      },
+      "oracle": {
+        "state": 4,
+        "nodes": 1474429,
+        "ms": 106.9594999999972
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        3,
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 14107648,
+        "depth": 21,
+        "value": 355
+      },
+      "oracle": {
+        "state": 3,
+        "nodes": 11036289,
+        "ms": 1023.9033000000054
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        3,
+        3,
+        2,
+        1
+      ],
+      "reply": {
+        "column": 1,
+        "nodes": 13383680,
+        "depth": 22,
+        "value": 390
+      },
+      "oracle": {
+        "state": 2,
+        "nodes": 8504431,
+        "ms": 726.1626000000106
+      }
+    }
+  ],
+  "solutions": [
+    {
+      "depth": 3,
+      "history": [
+        3,
+        0,
+        3,
+        3,
+        3,
+        2,
+        2
+      ],
+      "reply": {
+        "column": 2,
+        "nodes": 13816832,
+        "depth": 22,
+        "value": 401
+      },
+      "oracle": {
+        "state": 3,
+        "nodes": 30215305,
+        "ms": 2853.8505000000005
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        3,
+        3,
+        1,
+        3
+      ],
+      "reply": {
+        "column": 3,
+        "nodes": 14107648,
+        "depth": 21,
+        "value": 355
+      },
+      "oracle": {
+        "state": 3,
+        "nodes": 11036289,
+        "ms": 1023.9033000000054
+      }
+    },
+    {
+      "depth": 3,
+      "history": [
+        3,
+        1,
+        3,
+        3,
+        3,
+        2,
+        1
+      ],
+      "reply": {
+        "column": 1,
+        "nodes": 13383680,
+        "depth": 22,
+        "value": 390
+      },
+      "oracle": {
+        "state": 2,
+        "nodes": 8504431,
+        "ms": 726.1626000000106
+      }
+    }
+  ],
+  "started": "2026-10-17T12:18:40.676Z",
+  "state": "found_defences"
+}

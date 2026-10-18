@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "model_directory": "C:\\Users\\gabor\\Documents\\Codex\\2026-10-16\\tra\\projets\\garry\\web\\models",
+  "games_loaded_and_finite_logits": [
+    "tictactoe",
+    "2048",
+    "sudoku",
+    "connect4",
+    "minesweeper",
+    "sliding_puzzle",
+    "reversi",
+    "nim",
+    "lightsout",
+    "draughts",
+    "breakthrough",
+    "hex",
+    "gomoku",
+    "go"
+  ],
+  "game_count": 14,
+  "bounded_rule_tests": 3,
+  "rule_failures": 0,
+  "full_suite": "stopped after over seven minutes in test_saved_models_mask_actions_and_share_core; not declared passed",
+  "scope": "bounded verification of the relocated copy, not playing-strength evaluation"
+}
