@@ -174,3 +174,10 @@ Direction « laboratoire » à côté du lot 4 d'Input. Principe : un **Garry Co
 | **Règles** (C) | Exploration : jouer un jeu jamais vu à partir de ses règles ; en pari, après Loop et Graine. |
 
 Ordre : (1) Garry Core avec **test de parité** exact sur les 14 jeux contre les poids 0.6.0 ; (2) Lab v1 (réseau en direct, chirurgie, retour dans le temps, banc en direct) ; (3) Graine ; (4) Loop et Mind ; (5) Règles ; (6) Prime. Le lot 4 d'Input continue en parallèle ; le Lab y sert à voir ce que l'adaptation change.
+
+### Avancement de la famille Garry (18 octobre 2026)
+
+- **Garry Core** : `projets/garry/logic_arena/core.py`. Réseau en couches nommées (traces d'activation, extinction, suppression et ajout de neurones, comparaison de versions). Parité **exacte** (égalité bit à bit) avec `GarryPolicy` sur les 14 jeux, vérifiée par `tests/test_core.py`. 444 947 paramètres + 32 de la tête de position = les 444 979 annoncés.
+- **Lab v1** : page `/lab.html` du serveur Garry et API `/api/lab/*` (`logic_arena/lab.py`). Réseau en direct, extinction de neurones, importance par neurone, courbe qualité/coût, coups du réseau, du réseau complet ou au hasard. Travaille sur une copie en mémoire : aucun poids n'est modifié. Garry : 130 tests Python verts.
+- **Premier constat du Lab** : sans réentraînement, éteindre des neurones coûte vite cher. Accord avec le réseau complet sur le coup préféré, 4 neurones éteints sur 96 : morpion 100 %, Puissance 4 92 %, Go 92 % ; 16 neurones : 88 %, 65 %, 77 %. Mesure sur positions aléatoires, pas une force de jeu. C'est la motivation de **Graine** : élaguer et faire pousser en réentraînant.
+- **Prochaines étapes** : Lab v1.1 (machine à remonter le temps, banc d'Input en direct, comparaison avant/après de poids), puis Graine.
