@@ -1,6 +1,6 @@
 # Logic Lab — bilan et plan global
 
-Mis à jour le 18 octobre 2026. Ce document est le plan principal de la conversation et remplace l’ordre des priorités des anciens rapports. L’exécution commence par l’interface et l’utilisation. Le projet d’agent producteur de code est écarté.
+Mis à jour le 18 octobre 2026 (fin de journée). Ce document est le plan principal de la conversation et remplace l’ordre des priorités des anciens rapports. **Priorité actuelle : la famille Garry et le Lab (Core entraînable, Graine, Loop), puis un modèle de raisonnement entraîné de zéro. Input est en veille (lot 4 à reprendre) et le projet de cœur de code est mis de côté, avec ses résultats.** Les sections 1 à 8 décrivent l’état de départ ; les sections 9 et suivantes sont l’état à jour.
 
 ## 1. Organisation et état réel
 
@@ -51,15 +51,14 @@ Input doit comprendre une demande française, distinguer objectif, faits, préf�
 
 La communication par représentations internes reste une piste à développer et à mesurer. Le JSON demeure le contrat de sortie et de contrôle. La qualité réelle, le temps et les ressources décident du choix du cœur et du canal.
 
-### Périmètre actif des chantiers (proposé le 18 octobre 2026, à valider)
-
-Pour ne pas disperser un petit modèle et un seul GPU :
+### Périmètre actif des chantiers (mis à jour le 18 octobre 2026)
 
 | Statut | Chantier |
 |---|---|
-| **Actif** | Input : interface (lot 1), puis fiabilité et périmètre (lot 2), contrat JSON/Markdown (lot 3). |
-| **En veille, non lancé** | Garry : maintenance et tests uniquement ; pas de nouvelle campagne avant le lot 6. |
-| **Gelé** | HRM, TRM et canal latent : aucun entraînement avant que les lots 1 à 4 donnent une base mesurée. Le choix du cœur se fait au lot 5, sur le banc de 300 situations. |
+| **Actif** | Famille Garry et Lab : Core entraînable, Graine (croissance et élagage), Loop (cœur récurrent), Lab en direct. Modèle de raisonnement de zéro qui s’appuie sur la même infrastructure. |
+| **En veille** | Input : interface prête (lot 1), banc de régression gelé (lot 2), contrat v2 prêt mais non activé (lot 3) ; il reste le lot 4 (données ciblées). Qwen3-0.6B reste la base : Pleias a été essayé et écarté. |
+| **Mis de côté (projet séparé)** | Cœur de code relié à Input (`projets/code`) : banc, mesures et conclusions conservés, reprise possible (voir §11). |
+| **Références** | HRM et TRM servent de références pour le modèle de raisonnement ; aucun entraînement dédié. |
 
 Le canal latent et le « rapport qualité/coût par neurone » restent des hypothèses à tester, pas des objectifs de livraison.
 
@@ -153,46 +152,67 @@ Le plan ci-dessus est cohérent dans l'ordre et honnête sur les limites, mais i
 7. **Reproductibilité.** Graines, version des dépendances (`work/requirements.lock.txt`) et journal d'expériences (données, configuration, mesures, décision) pour chaque entraînement.
 8. **Règle d'arrêt.** Un cycle d'entraînement sans gain mesuré sur validation après deux essais est abandonné et documenté, pas prolongé.
 
-## 9. État d'avancement
+## 9. État d'avancement (18 octobre 2026)
 
-- **Lot 1 (interface Input) : recette faite le 18 octobre 2026**, voir `outputs/verifications/recette-lot1-input-2026-10-18.md`. Seuils du §8 atteints ; l'attente à froid est corrigée par le préchargement. Reste non couvert : migration des anciennes conversations, page Bilan, copie réelle.
-- **Constat décisif pour la suite :** l'interface est utilisable, le modèle ne l'est pas encore. Il ignore le contexte (prénom), s'effondre sur un gabarit « commande » et rate un planning simple. Le lot 2 (banc de régression) et le lot 4 (données) passent donc avant toute autre piste.
-- **Lot 2 (banc de régression) : fait le 18 octobre 2026**, voir `outputs/verifications/baseline-lot2-input-0.2.0.md`. Banc v1.0.0 gelé (2 × 51 cas, empreintes vérifiées par le lanceur). Baseline Input 0.2.0 : 54,2 % sur dev, 47,7 % sur test ; 86 % de réponses affirmées sur des questions sans réponse. Cibles du lot 4 fixées dans le rapport. Le lot 3 (contrat JSON/Markdown) reste à faire.
+| Chantier | Statut | Résultat clé | Preuve |
+|---|---|---|---|
+| Input, lot 1 (interface) | Fait | Premier texte en 0,5 à 1 s à chaud, arrêt en 53 ms, 0 erreur JavaScript, mobile correct | `outputs/verifications/recette-lot1-input-2026-10-18.md` |
+| Input, lot 2 (banc de régression) | Fait | Banc v1.0.0 gelé (2 × 51 cas). Baseline : 54,2 % (dev), 47,7 % (test) ; 86 % de réponses affirmées sans réponse possible | `outputs/verifications/baseline-lot2-input-0.2.0.md` |
+| Input, lot 3 (contrat v2) | Prêt, non activé | Sans entraînement, 61,4 % en dev mais 17 erreurs, 26 s de latence médiane et un biais de mesure | `outputs/verifications/contrat2-lot3-input.md` |
+| Input, base alternative | Écartée | Pleias-350M adapté : 24,8 % contre 54,2 % pour Qwen3-0.6B | `outputs/rapports/input/COMPARATIF-10-MODELES.md` |
+| Input, lot 4 (données) | À faire | Cibles chiffrées fixées au lot 2 (global ≥ 80 %, contexte ≥ 90 %, limite reconnue ≥ 80 %) | rapport du lot 2 |
+| Garry Core | Fait | Parité exacte avec les poids 0.6.0 sur 14 jeux | `projets/garry/tests/test_core.py` |
+| Lab v1 | Fait | Réseau en direct, extinction, importance par neurone, courbe qualité/coût (`/lab.html`) | `projets/garry/web/lab.html` |
+| Core entraînable (PyTorch) | Fait | `labtrain.py` : réseau à deux couches cachées, croissance et élagage, données de professeur variées ; 6 tests | `projets/garry/logic_arena/labtrain.py` |
+| Graine | En cours | Voir §10 | `projets/garry/training-lab/` |
+| Projet code | Mis de côté | Voir §11 | `outputs/verifications/chaines-code-test-vs-dev.md` |
+| Modèle de raisonnement | À concevoir | Voir §12 | — |
 
-## 10. Famille Garry et Lab (décidé le 18 octobre 2026)
+Garry : 130 tests Python verts (dont Core et Lab), puis 6 tests de l’entraîneur du Lab.
 
-Direction « laboratoire » à côté du lot 4 d'Input. Principe : un **Garry Core** propre (entrées et sorties typées, crochets pour capturer les activations, éteindre un neurone, sauvegarder un checkpoint) et des variantes qui sont des configurations de ce Core, observables dans un onglet **Lab** du site.
+## 10. Famille Garry et Lab
 
-| Variante | Définition retenue |
-|---|---|
-| **Garry Games** | Le Garry actuel, 14 jeux. |
-| **Garry Loop** | Le cœur récurrent : un bloc repassé plusieurs fois sur son propre état, avec arrêt appris. |
-| **Garry Mind** | Pas un modèle séparé : une amélioration du schéma de boucle sur les modèles existants pour qu'ils réfléchissent plus, et à plus de choses (budget de calcul adaptatif, proposer-vérifier-corriger, auto-cohérence). |
-| **Garry Input** | Fork avancé d'un petit modèle de langage (Qwen3-0.6B ou autre, à départager sur le banc de régression), pas un réseau minuscule de zéro. |
-| **Garry Prime** | Routeur plus distillation des variantes : compromis force/taille mesuré, pas de promesse « le plus fort partout ». |
-| **Graine** (B) | Croissance et élagage des neurones, d'abord sur Garry (morpion, Puissance 4, Nim), visible dans le Lab. |
-| **Règles** (C) | Exploration : jouer un jeu jamais vu à partir de ses règles ; en pari, après Loop et Graine. |
+Un **Garry Core** propre (couches nommées, activations capturables, neurones éteignables ou supprimables) et des variantes qui en sont des configurations, observables dans l’onglet **Lab** du site.
 
-Ordre : (1) Garry Core avec **test de parité** exact sur les 14 jeux contre les poids 0.6.0 ; (2) Lab v1 (réseau en direct, chirurgie, retour dans le temps, banc en direct) ; (3) Graine ; (4) Loop et Mind ; (5) Règles ; (6) Prime. Le lot 4 d'Input continue en parallèle ; le Lab y sert à voir ce que l'adaptation change.
+| Variante | Définition retenue | Statut |
+|---|---|---|
+| **Garry Games** | Le Garry actuel, 14 jeux | Existant (0.6.0) |
+| **Graine** | Croissance et élagage de neurones pendant l’apprentissage | En cours |
+| **Garry Loop** | Cœur récurrent : un bloc repassé plusieurs fois sur son état, arrêt appris | À faire |
+| **Garry Mind** | Amélioration du schéma de boucle des modèles existants pour qu’ils réfléchissent plus, et à plus de choses (budget de calcul adaptatif, proposer-vérifier-corriger) | À faire |
+| **Garry Input** | Input rebaptisé dans la famille ; reste Qwen3-0.6B + adaptation | En veille |
+| **Garry Prime** | Routeur plus distillation des variantes ; compromis force/taille mesuré, pas de promesse « le plus fort partout » | Plus tard |
+| **Règles** | Jouer un jeu jamais vu à partir de ses règles | Plus tard (pari) |
 
-### Avancement de la famille Garry (18 octobre 2026)
+### Graine : ce qui est établi
+- Les données doivent être **variées** : un professeur parfait rejoue toujours la même partie. Premier essai avec ce défaut : 4 500 positions, 9 distinctes, un réseau de 71 paramètres atteignait 100 % (résultat sans valeur, corrigé). Désormais : coups aléatoires avec probabilité 0,35 pendant la partie, étiquettes toujours données par le professeur.
+- Résultat intermédiaire au morpion (3 graines, 3 000 pas) : accord avec le professeur de 0,77 (2+2 neurones, 71 paramètres) à 0,99 (48+48, 3 705 paramètres). **Graine A (règles prudentes) est moins bonne qu’un réseau fixe de même taille finale** (0,81 contre 0,87) : sa croissance est trop lente et son élagage précoce retire des neurones utiles. Deux variantes plus agressives (B et C) sont en cours de mesure ; le choix se fait sur la validation, jamais sur le test.
+- Reste à faire : Nim et Puissance 4, puis l’affichage en direct dans le Lab.
 
-- **Garry Core** : `projets/garry/logic_arena/core.py`. Réseau en couches nommées (traces d'activation, extinction, suppression et ajout de neurones, comparaison de versions). Parité **exacte** (égalité bit à bit) avec `GarryPolicy` sur les 14 jeux, vérifiée par `tests/test_core.py`. 444 947 paramètres + 32 de la tête de position = les 444 979 annoncés.
-- **Lab v1** : page `/lab.html` du serveur Garry et API `/api/lab/*` (`logic_arena/lab.py`). Réseau en direct, extinction de neurones, importance par neurone, courbe qualité/coût, coups du réseau, du réseau complet ou au hasard. Travaille sur une copie en mémoire : aucun poids n'est modifié. Garry : 130 tests Python verts.
-- **Premier constat du Lab** : sans réentraînement, éteindre des neurones coûte vite cher. Accord avec le réseau complet sur le coup préféré, 4 neurones éteints sur 96 : morpion 100 %, Puissance 4 92 %, Go 92 % ; 16 neurones : 88 %, 65 %, 77 %. Mesure sur positions aléatoires, pas une force de jeu. C'est la motivation de **Graine** : élaguer et faire pousser en réentraînant.
-- **Prochaines étapes** : Lab v1.1 (machine à remonter le temps, banc d'Input en direct, comparaison avant/après de poids), puis Graine.
+## 11. Projet code (mis de côté, résultats conservés)
 
-### Cœur de code et canal interne (proposé le 18 octobre 2026)
+Un cœur de code relié à Input (`projets/code`, dépôt Git séparé, banc de code v1.1.0 : Python exécuté, C++ compilé, HTML vérifié).
+- **Cœur retenu :** Qwen2.5-Coder-0.5B (base, puis Instruct). Seuls 10 candidats comparés : `outputs/rapports/input/COMPARATIF-10-MODELES-CODE.md`.
+- **Mesures :** cœur de base seul 17/23 (dev) et 15/23 (test) avec la signature dans l’invite ; chaîne texte avec Input qui reformule 12/23, avec extracteur 12 à 13/23, boucle de retour sans effet avec le cœur de base ; avec le cœur Instruct, la boucle de retour répare des cas (+1 en dev, +4 en test).
+- **Surajustement constaté :** la meilleure chaîne de dev (15/23) fait 9/23 sur test. Chaîne retenue : demande directe → cœur Instruct + boucle de retour (28/46). L’extraction par Input est abandonnée comme canal texte. Le split test est consommé.
+- **Conclusion :** le goulot est le cœur de 0,5 G, pas la communication ; le canal interne n’a de marge que s’il égale la demande directe en gagnant ailleurs.
+- **Reprise possible :** banc v2 (tâches inédites), cœur 1,5 G pour le plafond, adaptation du cœur sur paires vérifiées, puis canal interne. Rapports : `outputs/verifications/` (`canal-texte-*`, `boucle-de-retour-dev.md`, `coeur-instruct-chaine-dev.md`, `chaines-code-test-vs-dev.md`).
 
-Retour en grâce, à la demande de l'utilisateur, du cœur de code : un petit modèle (HTML, Python, C++ si possible) qui travaille, et Input réduit à comprendre et à dire. Ordre proposé : (1) choix du cœur sur un banc de code maison (Python exécuté contre des tests, C++ compilé, HTML rendu et vérifié) ; (2) canal de référence en texte (Input écrit la consigne) ; (3) canal latent (projecteur entraîné, modèles figés) comparé au canal texte, avec témoins coupé et permuté ; (4) chemin retour (le cœur renvoie un résumé interne qu'Input verbalise). Critère d'abandon : si le latent ne bat pas le texte à qualité égale, on garde le texte. Le gabarit des candidats est dans `outputs/rapports/input/COMPARATIF-10-MODELES-CODE.md`.
-- **Cœur de code retenu : Qwen2.5-Coder-0.5B** (décision du 18 octobre 2026). Banc de code `projets/code` v1.1.0 : baseline 17/23 (dev) et 15/23 (test), voir `outputs/verifications/code-qwen25coder-0.5b-baseline.md`. Prochaine étape : le canal texte de référence entre Input et le cœur, puis le canal latent.
-- **Pleias n'est pas retenu pour Input** (24,8 % contre 54,2 % pour Qwen3-0.6B sur le banc dev), voir `outputs/rapports/input/COMPARATIF-10-MODELES.md`.
-- **Canal texte de référence mesuré (dev)** : `outputs/verifications/canal-texte-reference-dev.md`. Demande directe 13/23, Input qui reformule 12/23 : un Input de 0,6 G n'apporte rien en reformulant. Piste suivante : Input comme extracteur structuré (langage, nom, textes) et comparaison avec un canal interne ; le split test reste réservé.
-- **Extracteur structuré mesuré (dev)** : `outputs/verifications/canal-texte-extracteur-dev.md`. Extraction + règle de langage : 13/23 (base) et 12/23 (Input), identique à la demande directe (13/23). Le goulot est le cœur de 0,5 G, pas la communication ; plafond de communication ≈ 17/23. Avant tout canal interne : boucle de retour avec les tests, et mesure d'un cœur 1,5 G.
-- **Boucle de retour mesurée (dev)** : `outputs/verifications/boucle-de-retour-dev.md`. Aucune réparation (13/23 avant et après 3 corrections) : le cœur de base recopie son code. Prochaine mesure : Qwen2.5-Coder-0.5B-Instruct (mêmes bancs), puis le canal interne seulement si l'écart de communication le justifie.
-- **Cœur Instruct mesuré (dev)** : `outputs/verifications/coeur-instruct-chaine-dev.md`. Qwen2.5-Coder-0.5B-Instruct + extraction par Input + début de réponse imposé : 15/23, 15 livrables propres sur 15 ; boucle de retour utile seulement avec Instruct (+1). Le canal texte de référence est maintenant celui-là ; le test reste réservé. Suite possible : cœur 1,5 G pour le plafond, puis canal interne à comparer.
-- **Confirmation sur test** : `outputs/verifications/chaines-code-test-vs-dev.md`. La meilleure chaîne de dev (15/23) fait 9/23 sur test : surajustement. Chaîne retenue : demande directe → cœur Instruct + boucle de retour (28/46). L'extraction par Input est abandonnée comme canal texte. Split test consommé ; banc v2 à construire avant toute nouvelle sélection. Pistes avant canal interne : cœur 1,5 G, adaptation du cœur sur paires vérifiées.
+## 12. Modèle de raisonnement entraîné de zéro (idée de l’utilisateur)
 
-### Modèle de raisonnement de zéro (idée de l'utilisateur, précisée le 18 octobre 2026)
+« Modèle de calcul » = modèle qui résout des problèmes et raisonne (pas une calculatrice). Souhait exprimé : **un seul modèle** qui fasse énigmes logiques, découverte de règles et comparaison de scénarios, plutôt que trois.
+- **Piste :** un cœur récurrent (Loop) entraîné de zéro sur une famille de petits problèmes générés à l’infini et vérifiables exactement, avec un format d’entrée commun (grille ou ensemble d’entités et de contraintes) et des têtes ou encodeurs par famille.
+- **Familles, de la plus simple à la plus ambitieuse :** (1) contraintes sur grille (sudoku réduit, n-reines, coloration de graphe) ; (2) planification (ordonnancement, labyrinthes) ; (3) énigmes logiques en tableau (type zèbre) ; (4) règles de grille type ARC simplifié ; (5) comparaison de scénarios avec hypothèses.
+- **Mesures :** exactitude selon la difficulté, nombre de passes de réflexion selon la difficulté, transfert vers une famille jamais vue (tenue en réserve), grille de chaque passe visible dans le Lab.
+- **Risques :** interférence entre tâches (déjà vue avec les 14 jeux de Garry : vérifier la préservation à chaque ajout), et le format commun, qui est le vrai travail ; la comparaison de scénarios exige des nombres et du langage et vient en dernier.
+- **Ordre :** après Graine et la boucle récurrente ; commencer par une ou deux familles qui partagent la même représentation (grilles).
 
-« Modèle de calcul » = modèle qui résout des problèmes et raisonne (pas un calculateur arithmétique). Piste recommandée : un cœur récurrent entraîné de zéro sur une famille de petits problèmes à contraintes générés à l'infini (sudoku réduit, n-reines, coloration de graphe, petits plannings), vérifiés exactement. Mesures : exactitude selon la difficulté et nombre de passes selon la difficulté ; grille de chaque passe visible dans le Lab ; Graine pour chercher le plus petit réseau qui résout encore. Ordre : après le Core entraînable et Graine (infrastructure commune). Autres familles possibles : planification, énigmes logiques, règles de grille (type ARC simplifié), comparaison de scénarios.
+## 13. Prochaines étapes (ordre)
+
+1. Finir Graine : choisir les règles sur la validation, mesurer Nim et Puissance 4 en 3 graines, rapport.
+2. Lab en direct : entraînement visible (courbes, neurones qui naissent et disparaissent, comparaison avec les réseaux fixes).
+3. Garry Loop : cœur récurrent avec poids liés et arrêt appris, d’abord sur un problème à contraintes.
+4. Modèle de raisonnement (§12) sur cette base ; Mind quand le Loop fonctionne.
+5. Reprendre Input (lot 4) et, si l’utilisateur le souhaite, le projet code (§11).
+
+Règles d’hygiène retenues : jamais de sélection sur un split réservé ; toute nouvelle sélection sur un banc neuf ; données de professeur variées ; rapports écrits avant d’annoncer un résultat ; limites et incertitudes annoncées avec les chiffres.
