@@ -165,8 +165,9 @@ Le plan ci-dessus est cohérent dans l'ordre et honnête sur les limites, mais i
 | Lab v1 | Fait | Réseau en direct, extinction, importance par neurone, courbe qualité/coût (`/lab.html`) | `projets/garry/web/lab.html` |
 | Core entraînable (PyTorch) | Fait | `labtrain.py` : réseau à deux couches cachées, croissance et élagage, données de professeur variées ; 6 tests | `projets/garry/logic_arena/labtrain.py` |
 | Graine | Fait (résultat négatif) | À taille égale, un réseau fixe fait aussi bien ou mieux (§10) | `outputs/verifications/graine-resultats.md` |
+| Garry Loop (cœur récurrent) | Premier résultat positif | Sudoku 6×6 : 99,8 % (moyen) et 75 à 89 % (plus dur que l'entraînement) avec 53 254 paramètres ; la récurrence est ce qui compte | `outputs/verifications/loop-sudoku6-resultats.md` |
 | Projet code | Mis de côté | Voir §11 | `outputs/verifications/chaines-code-test-vs-dev.md` |
-| Modèle de raisonnement | À concevoir | Voir §12 | — |
+| Modèle de raisonnement | Démarré (famille 1) | Voir §12 | `projets/garry/logic_arena/reason/` |
 
 Garry : 130 tests Python verts (dont Core et Lab), puis 6 tests de l’entraîneur du Lab.
 
@@ -178,7 +179,7 @@ Un **Garry Core** propre (couches nommées, activations capturables, neurones é
 |---|---|---|
 | **Garry Games** | Le Garry actuel, 14 jeux | Existant (0.6.0) |
 | **Graine** | Croissance et élagage de neurones pendant l’apprentissage | Fait : gain non confirmé, conservée comme visualisation |
-| **Garry Loop** | Cœur récurrent : un bloc repassé plusieurs fois sur son état, arrêt appris | À faire |
+| **Garry Loop** | Cœur récurrent : un bloc repassé plusieurs fois sur son état, arrêt appris | Fait pour le sudoku 6×6 (arrêt encore par vérification) |
 | **Garry Mind** | Amélioration du schéma de boucle des modèles existants pour qu’ils réfléchissent plus, et à plus de choses (budget de calcul adaptatif, proposer-vérifier-corriger) | À faire |
 | **Garry Input** | Input rebaptisé dans la famille ; reste Qwen3-0.6B + adaptation | En veille |
 | **Garry Prime** | Routeur plus distillation des variantes ; compromis force/taille mesuré, pas de promesse « le plus fort partout » | Plus tard |
@@ -210,11 +211,21 @@ Un cœur de code relié à Input (`projets/code`, dépôt Git séparé, banc de 
 - **Risques :** interférence entre tâches (déjà vue avec les 14 jeux de Garry : vérifier la préservation à chaque ajout), et le format commun, qui est le vrai travail ; la comparaison de scénarios exige des nombres et du langage et vient en dernier.
 - **Ordre :** après Graine et la boucle récurrente ; commencer par une ou deux familles qui partagent la même représentation (grilles).
 
+### Premier résultat (18 octobre 2026) : sudoku 6×6
+Rapport : `outputs/verifications/loop-sudoku6-resultats.md`. Un bloc d'attention limité aux voisines de contrainte, repassé avec les mêmes poids (53 254 paramètres), entraîné de zéro sur des sudokus à solution unique générés à l'infini.
+- **La récurrence fait le travail** : une seule passe ne résout presque rien ; un réseau à huit blocs distincts (8× plus gros) fait un peu moins bien sur le dur (0,735 contre 0,749).
+- **Réfléchir plus longtemps qu'à l'entraînement aide** : de 8 à 32 passes à l'inférence, les problèmes durs passent de 0,749 à 0,841 (0,893 pour le Loop entraîné à 16 passes).
+- **La durée de réflexion suit la difficulté** : 1,8 passe (facile), 3,0 (moyen), 6,0 (dur), mesurée avec arrêt par vérificateur exact.
+- **Limite principale** : l'attention ne voit que les voisines de contrainte, la règle est donc dans la structure ; la généralité reste à prouver sur une autre famille de problèmes (coloration de graphe, n-reines) et un transfert vers une famille jamais vue.
+- **Lab** : section « Réflexion en direct » (`/lab.html`), grille proposée à chaque passe avec confiance et cases fausses, API `/api/lab/reason/*`. Modèle régénérable par `training-lab/entrainer_loop.py` (4 minutes).
+- Tests : 155 verts (dont problèmes, modèle, service).
+
 ## 13. Prochaines étapes (ordre)
 
-1. Graine et Lab en direct : faits (Graine : résultat négatif, voir §10).
-2. Garry Loop : cœur récurrent avec poids liés et arrêt appris, d’abord sur un problème à contraintes.
-3. Modèle de raisonnement (§12) sur cette base ; Mind quand le Loop fonctionne.
-4. Reprendre Input (lot 4) et, si l’utilisateur le souhaite, le projet code (§11).
+1. Graine, Lab en direct, Loop sur sudoku 6×6 : faits.
+2. **Deuxième famille sur le même modèle** (coloration de graphe ou n-reines, autre graphe de contraintes) et **test de transfert** vers une famille jamais vue : c'est la question centrale du modèle unique.
+3. Arrêt appris (tête de décision d'arrêt) comparé à l'arrêt par vérificateur ; Mind.
+4. Sudoku 9×9 pour une difficulté réelle ; autres familles (planification, énigmes logiques, règles de grille).
+5. Reprendre Input (lot 4) et, si l'utilisateur le souhaite, le projet code (§11).
 
 Règles d’hygiène retenues : jamais de sélection sur un split réservé ; toute nouvelle sélection sur un banc neuf ; données de professeur variées ; rapports écrits avant d’annoncer un résultat ; limites et incertitudes annoncées avec les chiffres.
