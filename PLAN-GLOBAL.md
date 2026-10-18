@@ -158,3 +158,19 @@ Le plan ci-dessus est cohérent dans l'ordre et honnête sur les limites, mais i
 - **Lot 1 (interface Input) : recette faite le 18 octobre 2026**, voir `outputs/verifications/recette-lot1-input-2026-10-18.md`. Seuils du §8 atteints ; l'attente à froid est corrigée par le préchargement. Reste non couvert : migration des anciennes conversations, page Bilan, copie réelle.
 - **Constat décisif pour la suite :** l'interface est utilisable, le modèle ne l'est pas encore. Il ignore le contexte (prénom), s'effondre sur un gabarit « commande » et rate un planning simple. Le lot 2 (banc de régression) et le lot 4 (données) passent donc avant toute autre piste.
 - **Lot 2 (banc de régression) : fait le 18 octobre 2026**, voir `outputs/verifications/baseline-lot2-input-0.2.0.md`. Banc v1.0.0 gelé (2 × 51 cas, empreintes vérifiées par le lanceur). Baseline Input 0.2.0 : 54,2 % sur dev, 47,7 % sur test ; 86 % de réponses affirmées sur des questions sans réponse. Cibles du lot 4 fixées dans le rapport. Le lot 3 (contrat JSON/Markdown) reste à faire.
+
+## 10. Famille Garry et Lab (décidé le 18 octobre 2026)
+
+Direction « laboratoire » à côté du lot 4 d'Input. Principe : un **Garry Core** propre (entrées et sorties typées, crochets pour capturer les activations, éteindre un neurone, sauvegarder un checkpoint) et des variantes qui sont des configurations de ce Core, observables dans un onglet **Lab** du site.
+
+| Variante | Définition retenue |
+|---|---|
+| **Garry Games** | Le Garry actuel, 14 jeux. |
+| **Garry Loop** | Le cœur récurrent : un bloc repassé plusieurs fois sur son propre état, avec arrêt appris. |
+| **Garry Mind** | Pas un modèle séparé : une amélioration du schéma de boucle sur les modèles existants pour qu'ils réfléchissent plus, et à plus de choses (budget de calcul adaptatif, proposer-vérifier-corriger, auto-cohérence). |
+| **Garry Input** | Fork avancé d'un petit modèle de langage (Qwen3-0.6B ou autre, à départager sur le banc de régression), pas un réseau minuscule de zéro. |
+| **Garry Prime** | Routeur plus distillation des variantes : compromis force/taille mesuré, pas de promesse « le plus fort partout ». |
+| **Graine** (B) | Croissance et élagage des neurones, d'abord sur Garry (morpion, Puissance 4, Nim), visible dans le Lab. |
+| **Règles** (C) | Exploration : jouer un jeu jamais vu à partir de ses règles ; en pari, après Loop et Graine. |
+
+Ordre : (1) Garry Core avec **test de parité** exact sur les 14 jeux contre les poids 0.6.0 ; (2) Lab v1 (réseau en direct, chirurgie, retour dans le temps, banc en direct) ; (3) Graine ; (4) Loop et Mind ; (5) Règles ; (6) Prime. Le lot 4 d'Input continue en parallèle ; le Lab y sert à voir ce que l'adaptation change.
