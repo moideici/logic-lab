@@ -243,6 +243,15 @@ def handle(method, path, query, body):
             from .labtrain_api import JOB
             JOB.stop()
             return 200, {"ok": True, "result": JOB.status()}
+        if method == "GET" and path == "/api/lab/reason/info":
+            from .reason import service
+            return 200, {"ok": True, "result": service.info()}
+        if method == "POST" and path == "/api/lab/reason/new":
+            from .reason import service
+            return 200, {"ok": True, "result": service.new_puzzle(body.get("empties", 18), body.get("seed", 0))}
+        if method == "POST" and path == "/api/lab/reason/solve":
+            from .reason import service
+            return 200, {"ok": True, "result": service.solve(body.get("puzzle"), body.get("passes", 16), body.get("solution"))}
         if method == "POST" and path == "/api/lab/new":
             return 200, {"ok": True, "result": LAB.new_game(body.get("game"), body.get("seed", 0))}
         if method == "POST" and path == "/api/lab/step":

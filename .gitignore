@@ -20,3 +20,4 @@ node_modules/
 training/continuous/**/cases.jsonl
 training-lab/data/
 training-lab/results/
+training-lab/models/

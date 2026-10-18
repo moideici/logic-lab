@@ -46,7 +46,18 @@
 <ul id="train-events" class="events"></ul>
 <h3>Comparaison des entraînements de cette session</h3><table id="train-compare" class="compare"><thead><tr><th>Jeu</th><th>Réseau</th><th>Tailles</th><th>Paramètres</th><th>Accord (test)</th></tr></thead><tbody></tbody></table>
 <p class="muted">Accord = part des positions de test où le réseau choisit le coup du professeur. Positions de test jamais vues à l'entraînement.</p></section>
+
+<section class="lab-card reason-card"><div class="card-head"><h2>Réflexion en direct · Loop</h2><p>Un petit réseau récurrent, entraîné de zéro, résout un sudoku 6×6. À chaque passe il propose une grille ; la couleur dit si la case est juste, l'opacité dit sa confiance. Plus le problème est dur, plus il lui faut de passes.</p><p id="reason-info" class="muted"></p></div>
+<div class="lab-bar train-bar"><label>Cases vides <span id="reason-empties-v">20</span><input id="reason-empties" type="range" min="6" max="27" value="20"></label>
+<label>Graine <input id="reason-seed" type="number" min="0" max="999999999" value="1"></label>
+<label>Passes <select id="reason-passes"><option>8</option><option selected>16</option><option>32</option></select></label>
+<button id="reason-new" class="button">Nouveau problème</button><button id="reason-think" class="button primary">Faire réfléchir</button></div>
+<p id="reason-status" class="muted">…</p>
+<div class="train-grid"><div id="reason-grid" class="rgrid" aria-label="Grille de sudoku 6 par 6"></div><div><svg id="reason-chart" viewBox="0 0 380 150" role="img" aria-label="Cases fausses à chaque passe"></svg>
+<div class="player"><button id="reason-play" class="button" disabled>▶ Rejouer</button><input id="reason-slider" type="range" min="1" max="16" value="1" disabled aria-label="Passe affichée"></div>
+<p class="muted">Vert = case juste, orange = case fausse (par rapport à la solution unique). Cliquer une barre affiche cette passe.</p></div></div></section>
 </main>
 <script type="module" src="lab.js"></script>
 <script type="module" src="lab-train.js"></script>
+<script type="module" src="lab-reason.js"></script>
 </body></html>
