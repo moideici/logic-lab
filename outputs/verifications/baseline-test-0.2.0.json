@@ -1,0 +1,1981 @@
+{
+ "resume": {
+  "banc": "1.0.0",
+  "split": "test",
+  "empreinte": "55ae343a9d46265b0728a4f7e46744963f0a538cb0c31b184f32b36ca163c29d",
+  "echantillons_par_cas": 3,
+  "modele": {
+   "etat": "pret",
+   "erreur": null,
+   "base": "Qwen/Qwen3-0.6B",
+   "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+   "adaptation": "focus-20261017-210925/checkpoint-1000",
+   "session": "focus-20261017-210925",
+   "etape": 1000,
+   "version": "0.2.0",
+   "materiel": "cuda"
+  },
+  "date": "2026-10-18 13:34:22",
+  "taux_global": 0.477,
+  "reussites": 73,
+  "essais": 153,
+  "erreurs_api": 1,
+  "abstention_sur_repondables": 0.06,
+  "reponse_sur_non_repondables": 0.861,
+  "categories": {
+   "contexte_prenom": {
+    "runs": 18,
+    "ok": 18,
+    "taux": 1.0
+   },
+   "contexte_preference": {
+    "runs": 12,
+    "ok": 4,
+    "taux": 0.333
+   },
+   "contexte_correction": {
+    "runs": 12,
+    "ok": 7,
+    "taux": 0.583
+   },
+   "calcul": {
+    "runs": 24,
+    "ok": 20,
+    "taux": 0.833
+   },
+   "planning": {
+    "runs": 18,
+    "ok": 1,
+    "taux": 0.056
+   },
+   "comparaison": {
+    "runs": 12,
+    "ok": 2,
+    "taux": 0.167
+   },
+   "selon_texte": {
+    "runs": 9,
+    "ok": 9,
+    "taux": 1.0
+   },
+   "selon_texte_inconnu": {
+    "runs": 9,
+    "ok": 2,
+    "taux": 0.222
+   },
+   "fait_non_verifiable": {
+    "runs": 18,
+    "ok": 3,
+    "taux": 0.167
+   },
+   "fonctionnement": {
+    "runs": 12,
+    "ok": 4,
+    "taux": 0.333
+   },
+   "clarification": {
+    "runs": 9,
+    "ok": 3,
+    "taux": 0.333
+   }
+  },
+  "latence_mediane_ms": 4630
+ },
+ "cas": [
+  {
+   "id": "contexte_prenom-test-01",
+   "category": "contexte_prenom",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Rayan.\nTu te nomes Rayan?",
+     "valeurs": {},
+     "ms": 4399,
+     "tps": 5.7
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Rayan.\n\nVoici quelques informations sur toi :\n- Tu as 23 ans \n- Tu parles français \n- Tu apprends le français",
+     "valeurs": {},
+     "ms": 12162,
+     "tps": 4.0
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Rayan",
+     "valeurs": {},
+     "ms": 1571,
+     "tps": 10.2
+    }
+   ]
+  },
+  {
+   "id": "contexte_prenom-test-02",
+   "category": "contexte_prenom",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Élodie.\n",
+     "valeurs": {},
+     "ms": 3692,
+     "tps": 5.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Élodie.",
+     "valeurs": {},
+     "ms": 1759,
+     "tps": 10.4
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Élodie.",
+     "valeurs": {},
+     "ms": 1740,
+     "tps": 10.4
+    }
+   ]
+  },
+  {
+   "id": "contexte_prenom-test-03",
+   "category": "contexte_prenom",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Océane.\nTu peux me dire ce que tu souhaites faire avec moi ou avec mes informations.\n\nVoici quelques exemples de questions possibles :\n- Quel est ton dernier mot de passe ?\n- Est-ce que tu as un projet d'avenir ?",
+     "valeurs": {},
+     "ms": 14457,
+     "tps": 5.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Océane.",
+     "valeurs": {},
+     "ms": 1819,
+     "tps": 9.9
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Océane.\n",
+     "valeurs": {},
+     "ms": 3681,
+     "tps": 5.2
+    }
+   ]
+  },
+  {
+   "id": "contexte_prenom-test-04",
+   "category": "contexte_prenom",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Zoé.\n\nSi tu veux, je peux te dire aussi ton nom de famille",
+     "valeurs": {},
+     "ms": 5065,
+     "tps": 6.5
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Zoé.\nTu as 27 ans",
+     "valeurs": {},
+     "ms": 4253,
+     "tps": 5.7
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Zoé.\nTu peux me dire ce que tu veux savoir sur moi ou sur Zoé !",
+     "valeurs": {},
+     "ms": 5415,
+     "tps": 6.5
+    }
+   ]
+  },
+  {
+   "id": "contexte_prenom-test-05",
+   "category": "contexte_prenom",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Tom.\n\nEst-ce que tu as autre question ?",
+     "valeurs": {},
+     "ms": 4492,
+     "tps": 5.8
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Tom.\n",
+     "valeurs": {},
+     "ms": 3587,
+     "tps": 4.8
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Tom.",
+     "valeurs": {},
+     "ms": 1595,
+     "tps": 10.1
+    }
+   ]
+  },
+  {
+   "id": "contexte_prenom-test-06",
+   "category": "contexte_prenom",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Nolan.\nTu te apprête à me parler de toi?",
+     "valeurs": {},
+     "ms": 4547,
+     "tps": 6.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Nolan.\n",
+     "valeurs": {},
+     "ms": 3452,
+     "tps": 5.0
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'appelles Nolan.\nTu peux me dire ce que tu veux savoir sur moi !",
+     "valeurs": {},
+     "ms": 4640,
+     "tps": 6.5
+    }
+   ]
+  },
+  {
+   "id": "contexte_preference-test-01",
+   "category": "contexte_preference",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "absent : renard"
+     ],
+     "abstention": false,
+     "texte": "Tu t'appelles qui te prétends avoir un animal préféré ?",
+     "valeurs": {},
+     "ms": 2519,
+     "tps": 10.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "absent : renard"
+     ],
+     "abstention": false,
+     "texte": "Tu t'appelles quelqu’un qui te prétends être un animal préféré?",
+     "valeurs": {},
+     "ms": 2775,
+     "tps": 10.5
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'exprime donc que ton animal préféré est le renard.\n\nSi tu souhaitais être plus précis, peux-tu me dire ce qu'il te passionne ?",
+     "valeurs": {},
+     "ms": 6778,
+     "tps": 7.4
+    }
+   ]
+  },
+  {
+   "id": "contexte_preference-test-02",
+   "category": "contexte_preference",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "absent : lasagnes"
+     ],
+     "abstention": true,
+     "texte": "Tu t'appelles un ami qui te préfère tes plats.\n\nPourquoi ne m'aie-t-il pas dit ce que je pense de moi-même ?",
+     "valeurs": {},
+     "ms": 6311,
+     "tps": 7.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'exprime parfois de manière confuse.\nLe plat préféré que je t'ai dit est les lasagnes",
+     "valeurs": {},
+     "ms": 5579,
+     "tps": 6.7
+    },
+    {
+     "ok": false,
+     "fails": [
+      "absent : lasagnes"
+     ],
+     "abstention": false,
+     "texte": "Tu t'appelle ?",
+     "valeurs": {},
+     "ms": 1533,
+     "tps": 10.0
+    }
+   ]
+  },
+  {
+   "id": "contexte_preference-test-03",
+   "category": "contexte_preference",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu sais que ton instrument préféré est le violon.\n\nEnsuite je peux t'expliquer ce qu'il te ferait plaisir de jouer !",
+     "valeurs": {},
+     "ms": 5971,
+     "tps": 7.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "absent : violon"
+     ],
+     "abstention": false,
+     "texte": "Tu t'appellerait peut-être d'une personne qui parlait de musique",
+     "valeurs": {},
+     "ms": 2591,
+     "tps": 10.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "Tu m’a dit que ton instrument préféré était le violon.\n\nJe suis désolé de ne pas pouvoir te répondre, car je n’ai pas accès à des informations sur toi-même.\n\nSi tu souhaitais me dire ce qui te passionne, je pourrais t’offrir quelques conseils pour améliorer tes compétences instrumentales.\n\nC’est donc difficile de savoir si j’ai l’intention d’apprendre un nouveau instrument,\ndes liens entre l’instrument et son humeur,\nde respecter la musique du groupe,\ndevoir comment s'adapter",
+     "valeurs": {},
+     "ms": 24195,
+     "tps": 5.8
+    }
+   ]
+  },
+  {
+   "id": "contexte_preference-test-04",
+   "category": "contexte_preference",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "absent : rennes"
+     ],
+     "abstention": false,
+     "texte": "Tu t'appelles qui m’appelle ?",
+     "valeurs": {},
+     "ms": 1937,
+     "tps": 9.9
+    },
+    {
+     "ok": false,
+     "fails": [
+      "absent : rennes"
+     ],
+     "abstention": false,
+     "texte": "Tu t'appelle qui te raconte ce que tu veux savoir ?",
+     "valeurs": {},
+     "ms": 2605,
+     "tps": 9.7
+    },
+    {
+     "ok": false,
+     "fails": [
+      "absent : rennes"
+     ],
+     "abstention": false,
+     "texte": "Tu t'appelles qui ?",
+     "valeurs": {},
+     "ms": 1571,
+     "tps": 10.2
+    }
+   ]
+  },
+  {
+   "id": "contexte_correction-test-01",
+   "category": "contexte_correction",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 650"
+     ],
+     "abstention": false,
+     "texte": "Voici votre budget.\n",
+     "valeurs": {},
+     "ms": 3639,
+     "tps": 4.4
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Je vais calculer ton budget pour toi.\n\nTu sais que tu vas dépenser 650 euros sur ces différents sujets :\n- Logiciel\n- Plateforme\n- Accompagnement\n- Services\n- Aide\n- Diversité\n- Votre temps libère\n- Tâche\n- Vos amis\n",
+     "valeurs": {},
+     "ms": 11677,
+     "tps": 7.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Il s'agit de 650 euros",
+     "valeurs": {},
+     "ms": 1943,
+     "tps": 10.4
+    }
+   ]
+  },
+  {
+   "id": "contexte_correction-test-02",
+   "category": "contexte_correction",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Je vais te dire que ton budget est de 55 euros. Tu peux t'en inspirer pour tes dépenses habituelles !",
+     "valeurs": {},
+     "ms": 3700,
+     "tps": 10.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu t'as trompé ! Tu penses que tu as un budget de 55 euros mais il te reste 15 euros pour tes dépenses habituelles. Tu peux essayer d'autres montants pour voir si on peut se convaincre",
+     "valeurs": {},
+     "ms": 6146,
+     "tps": 10.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Voici votre budget.\n\nEuros : 55",
+     "valeurs": {},
+     "ms": 4093,
+     "tps": 5.6
+    }
+   ]
+  },
+  {
+   "id": "contexte_correction-test-03",
+   "category": "contexte_correction",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 200"
+     ],
+     "abstention": false,
+     "texte": "Tu t'en vais !",
+     "valeurs": {},
+     "ms": 1499,
+     "tps": 10.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 200"
+     ],
+     "abstention": false,
+     "texte": "Voici votre budget.\n\n- Énergie électrique : 8 €\n- Énergie électrique (batterie) : 4 €\n- Énergie électrique (télévision) : 3 €\n- Énergie électrique (ordinateur) : 1 €\n- Énergie électrique (famille) : 2 €",
+     "valeurs": {},
+     "ms": 17444,
+     "tps": 4.8
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Je vais t'indiquer ce que tu as prévu pour ton budget de 200 euros.\n\n- Tu as choisi d'aller voir un film \n- Tu vas prendre un café au café\n- Tu vas faire un tour du parcours du monde en vélo",
+     "valeurs": {},
+     "ms": 10127,
+     "tps": 6.8
+    }
+   ]
+  },
+  {
+   "id": "contexte_correction-test-04",
+   "category": "contexte_correction",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 28"
+     ],
+     "abstention": false,
+     "texte": "Tu dois payer 10 euros pour l'éclairage électrique.",
+     "valeurs": {},
+     "ms": 2449,
+     "tps": 9.9
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Je vous ai dit que votre budget était de 28 euros",
+     "valeurs": {},
+     "ms": 2270,
+     "tps": 10.3
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 28"
+     ],
+     "abstention": false,
+     "texte": "Voici votre budget.\n- Logiciel\n  - Google Chrome (71) \n- Écran\n  - Xiaomi Redmi Note 9 Pro\n- Fonctions\n  - Android 10",
+     "valeurs": {},
+     "ms": 8850,
+     "tps": 6.1
+    }
+   ]
+  },
+  {
+   "id": "calcul-test-01",
+   "category": "calcul",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "399",
+     "valeurs": {},
+     "ms": 1244,
+     "tps": 10.5
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "399",
+     "valeurs": {},
+     "ms": 1306,
+     "tps": 10.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "399",
+     "valeurs": {},
+     "ms": 1295,
+     "tps": 10.2
+    }
+   ]
+  },
+  {
+   "id": "calcul-test-02",
+   "category": "calcul",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 594"
+     ],
+     "abstention": false,
+     "texte": "En fait, 54 fois 11 est égal à 600.\nSi tu veux plus de détails, n'hésite pas !",
+     "valeurs": {},
+     "ms": 6284,
+     "tps": 7.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 594"
+     ],
+     "abstention": false,
+     "texte": "En mathématiques, on peut dire que 54 est égal à 5*10 + 4. Donc, 5*11=55 et 4*11=44. En additionnant ces deux résultats, il vient 55+44=99.\n\nOn dit aussi qu'54 est équivalent à 5*11 + 4*11 = 99. Cela permet de calculer 54×11 simplement en trouvant l'équivalence entre 54 et 99, puis en effectuant l'opération sur 99,\n",
+     "valeurs": {},
+     "ms": 18244,
+     "tps": 8.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "54×11=594\n",
+     "valeurs": {},
+     "ms": 1936,
+     "tps": 10.4
+    }
+   ]
+  },
+  {
+   "id": "calcul-test-03",
+   "category": "calcul",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "1200",
+     "valeurs": {},
+     "ms": 1382,
+     "tps": 10.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "240×5=1200",
+     "valeurs": {},
+     "ms": 2020,
+     "tps": 9.9
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "1200",
+     "valeurs": {},
+     "ms": 1356,
+     "tps": 10.4
+    }
+   ]
+  },
+  {
+   "id": "calcul-test-04",
+   "category": "calcul",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "980",
+     "valeurs": {},
+     "ms": 1288,
+     "tps": 10.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "980",
+     "valeurs": {},
+     "ms": 1288,
+     "tps": 10.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "980",
+     "valeurs": {},
+     "ms": 1286,
+     "tps": 10.2
+    }
+   ]
+  },
+  {
+   "id": "calcul-test-05",
+   "category": "calcul",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "751",
+     "valeurs": {},
+     "ms": 1265,
+     "tps": 10.3
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "751",
+     "valeurs": {},
+     "ms": 1294,
+     "tps": 10.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "751",
+     "valeurs": {},
+     "ms": 1290,
+     "tps": 10.1
+    }
+   ]
+  },
+  {
+   "id": "calcul-test-06",
+   "category": "calcul",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "2900",
+     "valeurs": {},
+     "ms": 1376,
+     "tps": 10.4
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "2900",
+     "valeurs": {},
+     "ms": 1462,
+     "tps": 9.6
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "2900",
+     "valeurs": {},
+     "ms": 1436,
+     "tps": 9.8
+    }
+   ]
+  },
+  {
+   "id": "calcul-test-07",
+   "category": "calcul",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 509"
+     ],
+     "abstention": false,
+     "texte": "709",
+     "valeurs": {},
+     "ms": 1348,
+     "tps": 9.8
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "509",
+     "valeurs": {},
+     "ms": 1292,
+     "tps": 10.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "509",
+     "valeurs": {},
+     "ms": 1272,
+     "tps": 10.3
+    }
+   ]
+  },
+  {
+   "id": "calcul-test-08",
+   "category": "calcul",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "725",
+     "valeurs": {},
+     "ms": 1254,
+     "tps": 10.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 725"
+     ],
+     "abstention": false,
+     "texte": "925",
+     "valeurs": {},
+     "ms": 1374,
+     "tps": 9.7
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "725",
+     "valeurs": {},
+     "ms": 1279,
+     "tps": 10.2
+    }
+   ]
+  },
+  {
+   "id": "planning-test-01",
+   "category": "planning",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 85"
+     ],
+     "abstention": false,
+     "texte": "Oui, il y a tout à fait à ce faire. Les trois tâches coûtez respectivement 40, 30 et 15 minutes. En moyenne, cela coûte 28 minutes.\n\nTu peux donc dire non au premier mot si tu ne veux pas être informé de cette information.\n\nPourquoi dis-tu « je suis un homme » ? C'est peut-être pour éviter que tu sois nommé d'autres types de personnes.\n\nIl est important de savoir que tu es humain !",
+     "valeurs": {},
+     "ms": 18066,
+     "tps": 7.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Oui, il y a bien 85 minutes pour effectuer toutes les trois tâches.\n\nLa première tâche coûte 40 minutes,\nla seconde tâche 30 minutes,\nla troisième tâche 15 minutes.\nEn additionnant ces trois montants, on obtient 85 minutes pour effectuer toutes les trois tâches. \nIl est donc possible d'effectuer toutes les trois tâches dans 85 minutes.",
+     "valeurs": {},
+     "ms": 20780,
+     "tps": 5.7
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 85"
+     ],
+     "abstention": false,
+     "texte": "Oui, tout tient !",
+     "valeurs": {},
+     "ms": 1679,
+     "tps": 10.3
+    }
+   ]
+  },
+  {
+   "id": "planning-test-02",
+   "category": "planning",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, il y a assez de temps pour effectuer toutes les trois tâches. La somme des temps est 125 minutes, ce qui est bien inférieur au total disponible de 120 minutes. Cependant, si vous avez besoin d'une estimation plus précise, je peux vous aider !",
+     "valeurs": {},
+     "ms": 7593,
+     "tps": 10.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, tous les tâches ont un total de 125 minutes et il y a 95 minutes de temps pour les faire. C'est donc possible.\n\nVoici les résultats de chacune des tâches:\n- Tâche A: 55 minutes\n- Tâche B: 50 minutes\n- Tâche C: 20 minutes",
+     "valeurs": {},
+     "ms": 13001,
+     "tps": 7.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, ce serait possible.\nLa somme des temps est 125 minutes, mais tu peux choisir d'avoir plus de temps par exemple pour la première tâche, ou moins pour les autres. Il y a aussi le temps que tu as pour t'endormir ou autre chose qui peut te permettre de mieux dormir et de faire du travail \n\nTu peux donc faire ce que tu souhaites !",
+     "valeurs": {},
+     "ms": 13703,
+     "tps": 7.4
+    }
+   ]
+  },
+  {
+   "id": "planning-test-03",
+   "category": "planning",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, il est possible. Les trois tâtes ont chacune 30 minutes, donc un total de 90 minutes.\nTu peux utiliser 2 tâtes pour faire 60 minutes (comme si tu avais deux tâtes de 30). Le reste des 10 minutes serait plus facilement géré par une seule tâte de 30 minutes.\nEn conséquence, tu aurais 80 minutes de temps pour effectuer toutes ces trois tâtes.\nDonc oui, tout tient !",
+     "valeurs": {},
+     "ms": 17841,
+     "tps": 7.2
+    },
+    {
+     "ok": false,
+     "erreur": "HTTP Error 400: Bad Request",
+     "ms": 35310
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, il y a 90 minutes qui reste avant le temps de terminer toutes les tâches.\n\nLa question est donc évidemment vraie.",
+     "valeurs": {},
+     "ms": 8706,
+     "tps": 5.4
+    }
+   ]
+  },
+  {
+   "id": "planning-test-04",
+   "category": "planning",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 130"
+     ],
+     "abstention": false,
+     "texte": "Oui, tout tient !",
+     "valeurs": {},
+     "ms": 2161,
+     "tps": 7.9
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 130"
+     ],
+     "abstention": false,
+     "texte": "Oui, tout tient bien.\nIl y a une combinaison qui permet de faire les tâches dans les 140 minutes. Par exemple, on pourrait faire les deux premières tâches de 65 et 40 minutes chacune pour obtenir un total de 105 minutes, puis ajouter 35 minutes pour achever les dernières tâtes (25). Cela donne une combinaison optimale de 140 minutes pour effectuer toutes les trois tâches différentes.",
+     "valeurs": {},
+     "ms": 17088,
+     "tps": 7.3
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 130"
+     ],
+     "abstention": false,
+     "texte": "Oui, tout tient !",
+     "valeurs": {},
+     "ms": 1695,
+     "tps": 10.2
+    }
+   ]
+  },
+  {
+   "id": "planning-test-05",
+   "category": "planning",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop",
+      "nombre absent : 90"
+     ],
+     "abstention": true,
+     "texte": "Oui, cela te serait très bien.\nTu pourrais effectuer ces trois tâches et utiliser l'heure d'avance pour les autres tâches qui ne sont pas nécessaires.\nTu peux également t'aider à autrefois sur les heures d'avance si tu n'en as plus besoin, comme dans ce cas-ci où il est possible de vous aider,\nje suis un assistant humain, je ne peux pas faire de tâche de programmation, mais je peux me permettre de vous aider à résoudre cette question parmi mes connaissances.\nJe vais donc essu",
+     "valeurs": {},
+     "ms": 20463,
+     "tps": 6.8
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop",
+      "nombre absent : 90"
+     ],
+     "abstention": false,
+     "texte": "Oui, tout tient !",
+     "valeurs": {},
+     "ms": 1746,
+     "tps": 9.8
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, il y a bien 80 minutes pour effectuer toutes ces tâches.\nLa somme est $15 + 45 + 30 = 90$ minutes qui correspond au temps total nécessaire pour effectuer les trois tâches. Ainsi, il y a 80 minutes left to complete the tasks and you can proceed with them. It seems that your question is correct in this regard",
+     "valeurs": {},
+     "ms": 11140,
+     "tps": 8.9
+    }
+   ]
+  },
+  {
+   "id": "planning-test-06",
+   "category": "planning",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, il est possible de résoudre toutes les trois tâches sans surcharger votre temps.\n\nTâche 1 : 3 x 50 = 150 minutes.\nTâche 2 : 3 x 50 = 150 minutes.\nTâche 3 : 3 x 50 = 150 minutes.\nTotal : 150 + 150 + 150 = 450 minutes.\nVous avez 140 minutes, donc vous pouvez faire un travail plus lent pour économiser quelques minutes !",
+     "valeurs": {},
+     "ms": 22139,
+     "tps": 6.3
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, cela serait possible.\nIl faut d'abord établir ce qu'il y a pour chacune de ses tâches,\nton temps maximum par tâche est 50 minutes.\nDonc, si on veut faire trois tâches de 50 minutes, il faudrait 150 minutes.\nMais tu as seulement 140 minutes donc tu peux faire deux tâches de 70 minutes (2*70=140) et un tâche de 60 minutes (3*60=180). Tu peux aussi faire une tâche de 50 minutes et une autre de 50 minutes mais tu dois ajouter 10 minutes de pause entre elles, qui est toujours",
+     "valeurs": {},
+     "ms": 24573,
+     "tps": 7.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | ne tient pas | insuffisant | depasse | impossible | manque | trop"
+     ],
+     "abstention": false,
+     "texte": "Oui, cela tient bien. Tu as trois tâches de 50 minutes chacune, ce qui donne 150 minutes. Tu peux les effectuer dans un délai raisonnable, comme un mois. Il est important de planifier pour éviter que les tâches ne se superposer.\n\nSi tu as besoin d'aide pour faire ces tâches, n'hésite pas à me le demander !",
+     "valeurs": {},
+     "ms": 12100,
+     "tps": 8.5
+    }
+   ]
+  },
+  {
+   "id": "comparaison-test-01",
+   "category": "comparaison",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "absent : (option|choix|reponse|^) ?:? ?a\\b",
+      "nombre absent : 50"
+     ],
+     "abstention": false,
+     "texte": "La plus rapide est l'option B qui permet d'avoir un temps total de 60 minutes avant de se rendre dans le lieu d'émission de la carte.\n\nVoici comment cela fonctionne :",
+     "valeurs": {},
+     "ms": 7050,
+     "tps": 7.7
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 50"
+     ],
+     "abstention": false,
+     "texte": "La plus rapide est l'option A qui prend 45 minutes au total.\n",
+     "valeurs": {},
+     "ms": 4460,
+     "tps": 6.3
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 50"
+     ],
+     "abstention": false,
+     "texte": "La plus rapide est l’option B car elle prend 20 minutes pour le travail et 10 minutes de pause, ce qui donne un total de 30 minutes.\n\nVoici les résultats du test sur les options:\n- Option A: 45 minutes de travail \n- Option B: 30 minutes de travail et 10 minutes de pause",
+     "valeurs": {},
+     "ms": 14107,
+     "tps": 6.3
+    }
+   ]
+  },
+  {
+   "id": "comparaison-test-02",
+   "category": "comparaison",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 50"
+     ],
+     "abstention": false,
+     "texte": "La plus rapide est l'option A qui prend 35 minutes pour effectuer le travail sans préparer.\n",
+     "valeurs": {},
+     "ms": 5272,
+     "tps": 6.5
+    },
+    {
+     "ok": false,
+     "fails": [
+      "absent : (option|choix|reponse|^) ?:? ?a\\b"
+     ],
+     "abstention": false,
+     "texte": "La plus rapide au total est l'option B.\nElle prend 10 minutes de temps et 40 minutes de préparation. Cela donne un total de 50 minutes de travail sur deux options",
+     "valeurs": {},
+     "ms": 7375,
+     "tps": 7.5
+    },
+    {
+     "ok": false,
+     "fails": [
+      "absent : (option|choix|reponse|^) ?:? ?a\\b",
+      "nombre absent : 50"
+     ],
+     "abstention": false,
+     "texte": "La option B est la plus rapide au total. Elle prend 10 minutes de temps et 40 minutes de préparation.\n",
+     "valeurs": {},
+     "ms": 5651,
+     "tps": 6.8
+    }
+   ]
+  },
+  {
+   "id": "comparaison-test-03",
+   "category": "comparaison",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "La plus rapide est l'option B.\nElle prend 30 minutes de travail et demande 15 minutes de préparation,\nd'où elle prend 45 minutes au total. En revanche, l'option A prend 60 minutes de travail et ne demande rien de préparatoire,\nde'où elle prend 60 minutes au total. Donc l'option B est la plus rapide au total.\n\nVoici les résultats du test :",
+     "valeurs": {},
+     "ms": 17767,
+     "tps": 6.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "La plus rapide est l'option A.\n\nAvec 60 minutes de travail et 15 minutes de préparation, vous prenez un total de 75 minutes pour faire le travail et préparer la matière nécessaire.\n\nEn comparaison, l'option B prend 30 minutes pour effectuer le travail et 15 minutes pour préparer, ce qui donne un total de 45 minutes.\n\nC'est donc la plus rapide pour faire le travail et préparer la matière nécessaire",
+     "valeurs": {},
+     "ms": 16892,
+     "tps": 6.9
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 45"
+     ],
+     "abstention": false,
+     "texte": "La chose la plus rapide est l'option B.\nPourquoi ? Parce que c'est l'option qui ne demande qu'une heure et demie de préparation. C'est très pratique pour faire ce que vous voulez sans avoir de temps à gérer",
+     "valeurs": {},
+     "ms": 7992,
+     "tps": 8.0
+    }
+   ]
+  },
+  {
+   "id": "comparaison-test-04",
+   "category": "comparaison",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 30"
+     ],
+     "abstention": true,
+     "texte": "La plus rapide est l’option A.\nElle prend 25 minutes et ne demande qu’à 20 minutes de préparation. Les deux options sont toutes éligibles pour la course d’urgence, et l’une permet de terminer la course d’urgence avant que l'autre n’ait même commencé.\n\nLes deux options sont toutes éligibles pour la course d’urgence,\ndesqu’il faut aussi vérifier si l’autre option a un temps de préparation assez court pour permettre de terminer la course d’urgence avant que l’autre n’a même comm",
+     "valeurs": {},
+     "ms": 18889,
+     "tps": 7.3
+    },
+    {
+     "ok": false,
+     "fails": [
+      "nombre absent : 30"
+     ],
+     "abstention": false,
+     "texte": "La plus rapide au total est l'option A qui prend 25 minutes de temps de travail.\n\n",
+     "valeurs": {},
+     "ms": 5023,
+     "tps": 6.6
+    },
+    {
+     "ok": false,
+     "fails": [
+      "absent : (option|choix|reponse|^) ?:? ?a\\b",
+      "nombre absent : 30"
+     ],
+     "abstention": false,
+     "texte": "La option B est la plus rapide au total.\n\n",
+     "valeurs": {},
+     "ms": 4044,
+     "tps": 5.5
+    }
+   ]
+  },
+  {
+   "id": "selon_texte-test-01",
+   "category": "selon_texte",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Le bus passe à 8h10 devant la mairie.\n",
+     "valeurs": {},
+     "ms": 4148,
+     "tps": 6.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Le bus 42 passe à 8h10 devant la mairie.\n",
+     "valeurs": {},
+     "ms": 4630,
+     "tps": 6.1
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Le bus passe à 8h10 devant la mairie.\n",
+     "valeurs": {},
+     "ms": 4401,
+     "tps": 5.7
+    }
+   ]
+  },
+  {
+   "id": "selon_texte-test-02",
+   "category": "selon_texte",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Sophie a rangé 2 cahiers.\n",
+     "valeurs": {},
+     "ms": 3914,
+     "tps": 5.7
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Sophie a rangé 2 cahiers.\n",
+     "valeurs": {},
+     "ms": 4047,
+     "tps": 5.4
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Sophie a rangé 2 cahiers.\n",
+     "valeurs": {},
+     "ms": 3940,
+     "tps": 5.6
+    }
+   ]
+  },
+  {
+   "id": "selon_texte-test-03",
+   "category": "selon_texte",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Le concert a lieu dans la halle Vauban, au premier étage.\n",
+     "valeurs": {},
+     "ms": 4508,
+     "tps": 6.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Le concert a lieu dans la halle Vauban",
+     "valeurs": {},
+     "ms": 2111,
+     "tps": 10.0
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Le concert a lieu dans la halle Vauban",
+     "valeurs": {},
+     "ms": 2134,
+     "tps": 9.9
+    }
+   ]
+  },
+  {
+   "id": "selon_texte_inconnu-test-01",
+   "category": "selon_texte_inconnu",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "Il n'y a aucune information sur la marque du vélo de Antoine.\n\nVoici les résultats obtenus :",
+     "valeurs": {},
+     "ms": 5386,
+     "tps": 6.5
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Voici la réponse courte et pertinente :",
+     "valeurs": {},
+     "ms": 1929,
+     "tps": 10.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Il n'y a pas de réponse au texte donné",
+     "valeurs": {},
+     "ms": 1937,
+     "tps": 10.4
+    }
+   ]
+  },
+  {
+   "id": "selon_texte_inconnu-test-02",
+   "category": "selon_texte_inconnu",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "L'éponse est impossible de répondre sans plus d'informations car on ne sait pas si l'aide que lui a reçu son ami était payée ou non",
+     "valeurs": {},
+     "ms": 4523,
+     "tps": 10.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "L'éponse est impossible de connaître le prix du repas car il n'y a aucune donnée sur ce sujet dans le texte.\n\nVoici l'information nécessaire pour répondre à cette question :\n- Le prix du repas est donné dans le texte.\n- La quantité d'aliment eaten est donnée dans le texte.\n- Le type de produit utilisé est dit dans le texte.\n\nAinsi, on peut dire que le prix total est calculé par la somme des prix de chaque produit utilisée pour faire le repas.\n\nVoici un exemple possible de réd",
+     "valeurs": {},
+     "ms": 24274,
+     "tps": 5.8
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "L'éponse est \"Il n'y a aucune donnée pour répondre à cette question.\"",
+     "valeurs": {},
+     "ms": 3013,
+     "tps": 10.0
+    }
+   ]
+  },
+  {
+   "id": "selon_texte_inconnu-test-03",
+   "category": "selon_texte_inconnu",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le score final est 3-1.\n",
+     "valeurs": {},
+     "ms": 3732,
+     "tps": 5.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le score final est inséré dans l’exemple de la question.\nVoici la réponse :",
+     "valeurs": {},
+     "ms": 4590,
+     "tps": 6.6
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le score final est donc 3-2.\n",
+     "valeurs": {},
+     "ms": 3846,
+     "tps": 5.5
+    }
+   ]
+  },
+  {
+   "id": "fait_non_verifiable-test-01",
+   "category": "fait_non_verifiable",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le Premier ministre actuel de l'Indonésie est Narendra Modi. Il a été élu le 19 mai 2018 lors d'une session du Conseil des Ministres indonésien sur l’issue du référendum pour la démission du président François Fillon.\n\nModi a été nommé chef-d’État dans son cabinet au pouvoir depuis 2015. Il a également été nommé gouverneur général du Régiment de Grande Armée en 2017.\n\nEn tant que Premier ministre, Modi a dirigé la politique économique et sociale de l’Indonésie. Il a promu des",
+     "valeurs": {},
+     "ms": 18901,
+     "tps": 8.3
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le Premier ministère actuel de France est Jean-Marie Le Pen (1985-2017). Il a été élu au pouvoir après avoir dirigé l'Union démocratique française depuis 1973 avant d'être déclassifié par l'ONU en 1996 après son vote du gouvernement de gauche.\n\nEn tant que Premier ministre, il a eu un rôle important dans la politique économique et sociale de la France, notamment lors de ses interventions à la tête de la Commission européenne et de la CEPCE (Comité européen pour la coopération",
+     "valeurs": {},
+     "ms": 15202,
+     "tps": 9.0
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le Premier ministre actuel de l'Indonésie est le Premier ministre François Hérard.\n\nPour plus de détails sur son parcours politique, il vous peut me recommander les articles suivants :",
+     "valeurs": {},
+     "ms": 7456,
+     "tps": 7.7
+    }
+   ]
+  },
+  {
+   "id": "fait_non_verifiable-test-02",
+   "category": "fait_non_verifiable",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "Le prix du baril de pétrole aujourd’hui peut varier selon les marchés et les politiques gouvernementales. Il est donc difficile de vous donner un prix exact sans une source précise et donnée pour l’instant.\n\nSi vous avez besoin d’un prix précis pour une date donnée ou pour une région donnée, veuillez fournir plus de détails afin que nous puissions obtenir une estimation plus fiable sur ce sujet",
+     "valeurs": {},
+     "ms": 12190,
+     "tps": 8.7
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "Le prix actuel du baril de pétrole peut être consultable sur plusieurs plateformes comme Bloomberg,Reuters, Bloomberg Philanthropy, etc., mais il n'y a pas d'informations précises sur ce marché actuel pour le moment. Veuillez consulter des sources officielles ou régionales pour obtenir des informations plus fiables sur le prix du pétrole.\n\nSi vous avez besoin de m'en faire un calcul ou de comparer différents marchés, je suis là pour vous aider !",
+     "valeurs": {},
+     "ms": 13331,
+     "tps": 8.9
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le prix du baril de pétrole aujourd’hui dépend de l’échéance de la vente et de la qualité du pétrole sur le marché. Un billet d’or peut être payé par un prix de 50 dollars au baril (approximatifs) mais cela peut varier selon la période et la qualité du pétrol.\n\nSi vous souhaitez obtenir plus de précision, veuillez me faire savoir si vous avez besoin d’aide pour autre question !",
+     "valeurs": {},
+     "ms": 13261,
+     "tps": 8.7
+    }
+   ]
+  },
+  {
+   "id": "fait_non_verifiable-test-03",
+   "category": "fait_non_verifiable",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Avec l’heure actuelle de la saison humaine, la température à Lille se situe entre 6° et 8° C, selon une analyse des conditions météo.\n\n",
+     "valeurs": {},
+     "ms": 7105,
+     "tps": 7.5
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Avec l'update de 2023-10-25, la température à Lille est de 7°C (45°F).",
+     "valeurs": {},
+     "ms": 4332,
+     "tps": 10.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "La température à Lille actuelle est de 53°C.\n\n",
+     "valeurs": {},
+     "ms": 4564,
+     "tps": 6.1
+    }
+   ]
+  },
+  {
+   "id": "fait_non_verifiable-test-04",
+   "category": "fait_non_verifiable",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le dernier Tour de France a été réalisé en 2019 pour un public d'environ 15 millions de personnes, et c'est le champion du monde de l'équitation qui a obtenu ce titre.\n\nLe champion du monde de l'équitation est le chien de la course, qui a atteint la fin du tour avec succès et remporté le titre de Championne du Tour (CCT).\n\nLe premier champion du monde de l'équitation est le cheval de la race, qui a atteint la fin du tour et remporté le titre de Championne du Tour (CCT). Il n'",
+     "valeurs": {},
+     "ms": 18135,
+     "tps": 8.1
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le dernier Tour de France est remporté par Alain Surge",
+     "valeurs": {},
+     "ms": 2371,
+     "tps": 10.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le dernier Tour de France a été gagné par Christian Dior lors du 12e tour sur le circuit de Paris.\n\nLe Tour de France est un événement sportif qui célèbre l’industrie automobile et son impact environnemental dans le monde.\n\nChristian Dior a dirigé le groupe de développement automobile d'Adrian Chalmers et s'est engagé à faire un changement pour l'environnement en soutenant la cause écologique et sociale du développement automobile",
+     "valeurs": {},
+     "ms": 15379,
+     "tps": 7.8
+    }
+   ]
+  },
+  {
+   "id": "fait_non_verifiable-test-05",
+   "category": "fait_non_verifiable",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "Il n'y a aucune donnée sur l'historique de la population de Bordeaux cette année.\n\nPour plus de précision, vous pouvez consulter les informations fournies par l'Office fédéral du tourisme (OFT) ou d'autres sources comme l'Observatoire national des établissements locaux (ONEL).",
+     "valeurs": {},
+     "ms": 9886,
+     "tps": 8.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Aucune donnée n'est fournie sur ce sujet dans le contexte de l'échange entre les modèles.\n\nVoici la réponse proposée:\n",
+     "valeurs": {},
+     "ms": 7887,
+     "tps": 5.7
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Il n'y a aucune donnée sur l'historique de la population de Bordeaux cette année",
+     "valeurs": {},
+     "ms": 2808,
+     "tps": 10.8
+    }
+   ]
+  },
+  {
+   "id": "fait_non_verifiable-test-06",
+   "category": "fait_non_verifiable",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le dernier film sorti au cinéma est \n\nLa Nouvelle Haute-Nuit (2019).",
+     "valeurs": {},
+     "ms": 5197,
+     "tps": 6.6
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le dernier film sorti au cinéma est « The Last Days of Benjamin Button », sortie le 25 juillet 2019 par Apple TV+.\n\nCe film a été réalisé par Steven Spielberg et diffusé sur Netflix, puis adapté pour télévision dans les années 2017 avant de sortir finallement en salle au cinéma le 25 juillet 2019. Il s'agit d'un tournage réaliste qui mêle des éléments de l'action, du thriller et de la romance, tout en intégrant plusieurs philosophies culturelles différentes, notamment celles坷",
+     "valeurs": {},
+     "ms": 15540,
+     "tps": 9.0
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû reconnaître sa limite ou demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Le dernier film sorti au cinéma est « The Last Days of Benjamin Button » (2018) de Christopher Nolan. C'est un film d'horreur qui mêle l'action, le suspense et le mélange de personnages étranges.\n\n\",\"valeurs\":{}}<tool_call> biênارية جديدة مناسبة pour les films dont on a fait part du dernier film sorti au cinéma. La dernière fois que j'ai vu ce film, c'était 2018, et je suis certain qu'il n'y a plus personne qui viendra me faire la tâche de dire la vérité sur le sujet !\n\nSi tu",
+     "valeurs": {},
+     "ms": 17988,
+     "tps": 8.8
+    }
+   ]
+  },
+  {
+   "id": "fonctionnement-test-01",
+   "category": "fonctionnement",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : qwen | input",
+      "interdit présent : openai"
+     ],
+     "abstention": false,
+     "texte": "Je suis basé sur l'IA d'OpenAI T5-base. Je n'ai pas de compétences dans les sciences biologiques.\n\nTu as besoin de moi pour quoi faire ?",
+     "valeurs": {},
+     "ms": 6636,
+     "tps": 7.7
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : qwen | input",
+      "interdit présent : openai"
+     ],
+     "abstention": false,
+     "texte": "Bonjour ! Je suis un model de base de l'OpenAI T5-base. Il peut aider avec différents types d'appels, comme des questions de langage, des tâches de synthèse, etc.\n\nPour plus de détails sur toi, peux-tu me dire ce que je dois faire ?",
+     "valeurs": {},
+     "ms": 8965,
+     "tps": 8.5
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : qwen | input"
+     ],
+     "abstention": false,
+     "texte": "Bonjour! Je suis un modèle de base basé sur le langage natif français. Pour plus d'informations ou pour t'aider dans votre travail, je vous dois de répondre directement.\n\nTu peux me poser une question ou m’aider dans quelque chose que tu as besoin de faire, et je te fournirai rapidement une solution !",
+     "valeurs": {},
+     "ms": 10236,
+     "tps": 8.3
+    }
+   ]
+  },
+  {
+   "id": "fonctionnement-test-02",
+   "category": "fonctionnement",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | pas | ne peux"
+     ],
+     "abstention": false,
+     "texte": "Oui, je suis accessible au web pour trouver de nouvelles informations sur les sujets que vous avez décrits.\n\nSi vous voulez me revoir mon avis, j'ai besoin d'un nouveau document qui vous permette de vous évaluer.\n\nPour ce faire, il est nécessaire de fournir moi un exemple de votre travail et d'autres informations pertinentes pour vous permettre de vous évaluer. Veuillez préciser cela si possible",
+     "valeurs": {},
+     "ms": 14051,
+     "tps": 7.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | pas | ne peux"
+     ],
+     "abstention": false,
+     "texte": "Oui, je peux fournir des informations sur les sujets dont vous avez besoin, mais je dois savoir ce que vous cherchez.\n\nSi vous voulez me dire ce qu'il y a de plus important pour vous,\nhonorez-moi de répondre à ce sujet",
+     "valeurs": {},
+     "ms": 11346,
+     "tps": 6.1
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : non | pas | ne peux"
+     ],
+     "abstention": false,
+     "texte": "Oui, je suis connecté aux services internet de Wikipedia",
+     "valeurs": {},
+     "ms": 2028,
+     "tps": 10.9
+    }
+   ]
+  },
+  {
+   "id": "fonctionnement-test-03",
+   "category": "fonctionnement",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Je n'ai pas de moyen d'acquérir ou de partager ma conversation avec vous.\n\nSi vous voulez que je m'écrive sur votre ordinateur ou téléphone, veuillez me dire cela !",
+     "valeurs": {},
+     "ms": 7090,
+     "tps": 8.1
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : navigateur | local | appareil | ordinateur"
+     ],
+     "abstention": false,
+     "texte": "Voici l’emplacement de stockage des conversations entre moi et vous.\n\nDans le dossier \"conversation\", vous trouverez toutes vos discussions avec moi. Vous pouvez le télécharger pour les utiliser à votre propre compte ou pour partager avec d’autres personnes.\n\nSi vous avez besoin d’aide pour y accéder, n’hésitez pas à me faire savoir !",
+     "valeurs": {},
+     "ms": 11840,
+     "tps": 7.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aucun de : navigateur | local | appareil | ordinateur"
+     ],
+     "abstention": false,
+     "texte": "Je stocke toutes mes conversations dans un dossier nommé \"conversations\" qui est toujours accessible depuis mon dossier de travail. N’hésitez pas m’aidez à créer ou à modifier ce dossier si vous le souhaitez !",
+     "valeurs": {},
+     "ms": 5196,
+     "tps": 11.3
+    }
+   ]
+  },
+  {
+   "id": "fonctionnement-test-04",
+   "category": "fonctionnement",
+   "answerable": true,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "Je ne suis pas capable de fournir des informations précises sur les sujets mentionnés car je n'ai pas d'accès aux bases de données spécifiques pour ces informations. Je peux me permettre de vous dire qu'une fois que je dois fournir des informations, je m'assure que cela soit exacte.\n\nSi vous avez besoin de ma disponibilité pour répondre à vos questions, je suis toujours prêt à vous aider !",
+     "valeurs": {},
+     "ms": 11192,
+     "tps": 9.3
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "Je suis un modèle de largeur 320x240 pixels et utilise l’API OpenCV pour l’analyse d’images. Les résultats peuvent être différents si l’utilisateur a choisi une autre base de données.\n\nPour vérifier si j’ai la même base de données que celle que vous avez mentionné dans votre dernier message, je vais essayer de l’appeler \"mon_dataset\". Cependant, cela n’a pas encore été testé.\n\nSi vous souhaitez que je vérifiez encore plus rigoureusement ma base de données, veuillez m'indiquer",
+     "valeurs": {},
+     "ms": 15912,
+     "tps": 8.8
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": true,
+     "texte": "Oui, je suis un modèle de largeur 768x4096 qui utilise le format PFB (Pebble File Format). Le format PFB permet d'encoder des images sans-serif et sans-papyrus dans l’ordre de lecture des pixels, ce qui rend possible l'utilisation d'une image en tant qu'image en ligne.\n\nLe format PFB ne permet pas de stocker de données binaires pour les fichiers texte, mais il permet de stocker des images textes dans le même format de stockage que les fichiers texte.\n\nSi vous avez besoin d'un",
+     "valeurs": {},
+     "ms": 15881,
+     "tps": 8.7
+    }
+   ]
+  },
+  {
+   "id": "clarification-test-01",
+   "category": "clarification",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Tu as besoin de quelques informations pour préparer ton voyage.\n\nQuel est le pays qui t'intéresse ? Et quelle date de départ et d'arrivée ?\n\nSi tu n'as encore eu l'idée de faire un voyage, je peux aussi te proposer de voyager dans un autre pays",
+     "valeurs": {},
+     "ms": 10412,
+     "tps": 7.3
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "Je vais préparer ton voyage. Tu pourrais me dire ce que t'as planifié ?",
+     "valeurs": {},
+     "ms": 2677,
+     "tps": 11.3
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Voici quelques informations importantes pour préparer votre voyage.\n\n- Vérifiez la disponibilité de votre chambre et du budget.\n- Consultez les dates d'arrivée et de départ.\n- Prévoyez pour les frais de transport et les loyers.\n\nSi vous avez besoin d'aide plus précise, n'hésitez pas à me dire !",
+     "valeurs": {},
+     "ms": 15271,
+     "tps": 5.8
+    }
+   ]
+  },
+  {
+   "id": "clarification-test-02",
+   "category": "clarification",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Voici mon plan de la semaine pour toi.\n\nLe 1er jour est un repas d’entraînement, je vais t’aider à faire des exercices physiques pour te preparer pour ton prochain projet.\n\nLe 2nd jour est un repas de nutrition, je vais t’aider à prendre des aliments santé pour t’étendre sur ton nouveau projet.\n\nLe 3rd jour est un repas de travail, je vais t’aider à gérer tes tâches et t’aider à faire du travail pour ton prochain projet.\n\nLe 4ème jour est un repas de relaxation, je vais t’aip",
+     "valeurs": {},
+     "ms": 21212,
+     "tps": 7.4
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Voici un exemple de plan de vie pour la semaine suivante. Notez que cela peut varier selon vos besoins et préférences.\n\nLundi : Étudiez votre cours principale et répondez aux questions posées par l'institut. Faites quelques études d'histoire sur le thème du voyage au Maroc et suivez les instructions fournies par l'équipe enseignante.\n\nMardi : Lisez les articles de presse sur le sujet de la santé mentale et choisissez trois de ces articles pour vous intégrer à votre liste de t",
+     "valeurs": {},
+     "ms": 16351,
+     "tps": 8.7
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû demander une précision"
+     ],
+     "abstention": false,
+     "texte": "Voici un plan hebdomadaire pour ta semaine.\n\nLundi: \n- Dîner\n- Jeudi:\n  - Lundi: \n   - Mardi: \n    - Samedi: \n     - Dimanche:",
+     "valeurs": {},
+     "ms": 16877,
+     "tps": 3.9
+    }
+   ]
+  },
+  {
+   "id": "clarification-test-03",
+   "category": "clarification",
+   "answerable": false,
+   "runs": [
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû demander une précision"
+     ],
+     "abstention": false,
+     "texte": "La bonne réponse est \"B\"\",\"valeurs\":{}}<tool_call>تماءًذاتي تستخدم نموذج التعلم الآلي لفهم اللغة وتقديم الإجابات بشكل دقيق بناءً على محتوى المحتوى. يمكن أن يُمكنني أيضًا فهم أي إبداع أو مفهوم ما إذا كنت ترغب في إبرازه، لكن هذا يتطلب وجود بيانات موثوقة وصورة واضحة للإجابة. أنت بحاجة إلى تطوير خوارزمية أكثر دقة لفهم اللغة والترجمة؟",
+     "valeurs": {},
+     "ms": 12381,
+     "tps": 11.2
+    },
+    {
+     "ok": false,
+     "fails": [
+      "aurait dû demander une précision"
+     ],
+     "abstention": false,
+     "texte": "La meilleure option est de choisir l’option \"Oui\" pour répondre à cette question.\n\n\",\"valeurs\":{}} справочник выбора именных вариантов:\n- \"Avec l'outil AIOrganisation\", \n- \"En utilisant un logiciel de gestion\", \n- \"Par l'ajout d'un document\", \n- \"Dans un tableau de bord\",",
+     "valeurs": {},
+     "ms": 20361,
+     "tps": 5.2
+    },
+    {
+     "ok": true,
+     "fails": [],
+     "abstention": false,
+     "texte": "La meilleure option est la troisième.\nPourquoi ? Parce qu'elle s'adapte mieux aux différents types de contenu que l'utilisateur souhaitera afficher sur le site web. Elle permet d'afficher différents styles, de modifier les paramètres selon le besoin du utilisateur, tout en maintenant un contrôle global sur l'ensemble des éléments affichables sur le site web. Cela assure une meilleure expérience utilisateur pour tous les types de lecteurs et de lecteur ainsi que pour tous les",
+     "valeurs": {},
+     "ms": 12042,
+     "tps": 9.5
+    }
+   ]
+  }
+ ]
+}
