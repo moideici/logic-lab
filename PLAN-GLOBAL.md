@@ -236,3 +236,5 @@ Rapport : `outputs/verifications/loop-sudoku6-resultats.md`. Un bloc d'attention
 5. Reprendre Input (lot 4) et, si l'utilisateur le souhaite, le projet code (§11).
 
 Règles d’hygiène retenues : jamais de sélection sur un split réservé ; toute nouvelle sélection sur un banc neuf ; données de professeur variées ; rapports écrits avant d’annoncer un résultat ; limites et incertitudes annoncées avec les chiffres.
+- **Modèle de raisonnement : deuxième famille et transfert** (`outputs/verifications/loop-transfert-resultats.md`). Un seul Loop fait aussi bien que deux spécialistes sur sudoku 6×6 et coloration de graphe (1,00 / 0,94 et 0,99 / 0,95), généralise aux graphes plus grands (0,95) ; transfert sudoku vers coloration partiel (0,51), inverse nul, en partie à cause du vocabulaire de valeurs.
+- **Garry Zéro lancé (18 octobre 2026)** : moteur Puissance 4 vectorisé (identique aux règles de Garry sur 60 parties), MCTS par lots, réseau politique-valeur de 304 300 paramètres, auto-apprentissage sans professeur ; première session de 60 minutes en cours. Puis Go 9×9 (moteur de règles rapide à écrire).
