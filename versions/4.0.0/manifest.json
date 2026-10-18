@@ -1,0 +1,20 @@
+{
+  "version": "4.0.0",
+  "architecture": [
+    2494,
+    48,
+    48,
+    3617
+  ],
+  "files": {
+    "agents.json": "a1aac3ce9995e4b09e9d04175f7e24641e31204fb31ea4a0699e8bda41a0704e",
+    "connect4-search.wasm": "90944af5bebac4343e089b20a0be6c3ab1352beaf8cc5d6f57e338b5e0ab052d",
+    "engine.js": "faa68b2bcabc063df527e868f1bdd367ce2773b293a8165cf11318389ec18e46",
+    "garry.json": "3ee37dd2733b086a1db5728bd8fe6b329f799241b61811e964a32391e6bd607c",
+    "general.py": "a5d641bcdc94d9d4281e05da89ffa32664824a5eef1efc92457f4696617612e3",
+    "strategy-games.js": "c88cb98e2545f0a44859be9b60bbae94d8b681a37b2a18b051aceb5ba0d34229",
+    "strategy-planner.js": "668397e291a65b6a1cb34b0dab88932270036ce097a51a6eb891418d196c8931",
+    "strategy_planner.py": "2978d8052f321aedc1fad05ceeb1a1378461cd62a6418ac4b2e1328d539a1472",
+    "strategy_rules.py": "6369932464961f9826f11e0da43d966a27ab2a57245b290f41caadcba4086fed"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "version": "3.1.0",
+  "weights_revision": "20261016-repertoire-02",
+  "sha256": {
+    "garry.json": "4dc2bb549cda1ffac2c149de057cf51ec283c6962d2fa997becd93ec44706692",
+    "connect4-search.wasm": "69baa7e0ce6512fb8766dddeb7dc0d98d7914afb0dd5bab4cd92e23ee968fdef",
+    "connect4-search.ts": "1585876f4404eb10dcc70f311ef5b6f59292d0db3ffcd21e56bac239abd44151",
+    "connect4-runtime.js": "809186ebecda8f13ab343990c4b2bb448d95282fd02553e94a6409775c8cc8be",
+    "connect4_wasm.py": "676b03dffffa7728db09aa5f7615af3787d0560b3db11dda113cb8a76d33f679",
+    "agents.json": "b684543765ecdb0d35b32139c137ecb2f898a5b8a4bd5b3a5dc27dce6b8cc6fb"
+  }
+}

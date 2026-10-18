@@ -1,0 +1,10 @@
+{
+  "operation": "version_alias_normalization",
+  "from_version": "6.0.0",
+  "to_version": "0.6.0",
+  "training_model_sha256": "28d75cf7162668dc53a524eff71eb6ac5510d01742d0fc7a6b7c85d8b946982b",
+  "active_model_sha256": "2ae331c0e74069b0a414dd72973eacd1953f8ad33918b03a421de0cb367fe525",
+  "unchanged": "all bytes except the root version string",
+  "frozen_reference": "latest-accepted.json",
+  "normalized_at": "2026-10-17T18:48:52.575255+00:00"
+}

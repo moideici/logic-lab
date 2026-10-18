@@ -1,3 +1,4 @@
+import {LEGACY_GAMES} from '../web/migration.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -5,12 +6,52 @@ import {execFileSync} from 'node:child_process';
 import {Game,Network,NAMES,linkNetworks,encode,actionIndex,slide} from '../web/engine.js';
 import {teacher} from '../web/teachers.js';
 import {planDecision} from '../web/planner.js';
-import {slidingDistance,exactSliding,tables2048,spawnExpectation,mineSearch} from '../web/fast-search.js';
+import {slidingDistance,exactSliding,tables2048,spawnExpectation,mineSearch,connectSearch} from '../web/fast-search.js';
 import {chooseDecision} from '../web/decision.js';
-const models=Object.fromEntries(Object.keys(NAMES).map(k=>[k,new Network(JSON.parse(fs.readFileSync(new URL(`../web/models/${k}.json`,import.meta.url))))]));
+const models=Object.fromEntries(LEGACY_GAMES.map(k=>[k,new Network(JSON.parse(fs.readFileSync(new URL(`../versions/1.0.0/web/models/${k}.json`,import.meta.url))))]));
 linkNetworks(models);
+const tacticalPositions=JSON.parse(fs.readFileSync(new URL('./fixtures/connect4-positions.json',import.meta.url)));
+const copyConnect=g=>Object.assign(new Game('connect4'),g,{board:g.board.map(row=>row.slice())});
+const winningColumns=(g,player=g.player)=>g.legal().filter(a=>{const child=copyConnect(g);child.player=player;child.step(a);return child.winner===player;}).map(a=>a.column);
+
+test('connect4: endgame choice agrees with exhaustive search through the rules',()=>{
+ const g=new Game('connect4');for(const column of [4,2,0,4,6,4,1,2,2,5,1,0,6,0,4,6,2,4,0,5,5,1,2,0,1,2,5,4,6,6,1,1,0,5])g.step({column});
+ const root=g.player;
+ function value(state){if(state.done)return !state.winner?0:state.winner===root?1:-1;const scores=state.legal().map(a=>{const child=copyConnect(state);child.step(a);return value(child);});return (state.player===root?Math.max:Math.min)(...scores);}
+ const expected=value(g),budget={nodes:0,tick(){if(this.nodes>=100000)throw Error('budget');this.nodes++;}},d=connectSearch(g.obs(),g.legal(),new Float32Array(7),budget);
+ const child=copyConnect(g);child.step(d.action);assert.equal(value(child),expected);assert(d.info.depth>1);
+});
+
+test('connect4: tactical wins, safe fallback and forks survive budget exhaustion',()=>{
+ for(const p of tacticalPositions){
+  const g=new Game('connect4');for(const column of p.history)g.step({column});
+  const before=g.obs(),legal=g.legal(),wins=winningColumns(g),safe=[],forks=[];
+  for(const a of legal){const child=copyConnect(g);child.step(a);if(child.winner===g.player||!winningColumns(child).length){safe.push(a.column);if(!child.done&&winningColumns(child,g.player).length>=2)forks.push(a.column);}}
+  assert.deepEqual(wins,p.immediate);assert.deepEqual(safe,p.safe);assert.deepEqual(forks,p.forks);
+  for(const limit of [0,150]){
+   const budget={nodes:0,tick(){if(this.nodes>=limit)throw Error('budget');this.nodes++;}},logits=Float64Array.from({length:7},(_,i)=>i*1e12);
+   const d=connectSearch(before,legal,logits,budget),column=d.action.column;
+   assert(legal.some(a=>a.column===column));
+   if(wins.length){assert(wins.includes(column));assert.equal(d.info.remaining_moves,1);}
+   else if(forks.length){
+    assert(forks.includes(column));assert.equal(d.info.remaining_moves,3);assert(d.info.optimal);
+    const child=copyConnect(g);child.step(d.action);
+    for(const reply of child.legal()){const response=copyConnect(child);response.step(reply);assert(!response.done);assert(winningColumns(response).length);}
+   }else if(safe.length)assert(safe.includes(column),JSON.stringify(p.history));
+   else assert(!d.info.optimal);
+   assert.deepEqual(g.obs(),before);
+  }
+ }
+});
+
+test('connect4: Python and JavaScript agree with the same priors and node budget',()=>{
+ const inputs=tacticalPositions.map(p=>{const g=new Game('connect4');for(const column of p.history)g.step({column});return {obs:g.obs(),legal:g.legal(),logits:Array.from({length:7},(_,i)=>(i*13%7)/3)};});
+ const script=`import json,sys\nfrom logic_arena.connect4 import search\nfrom logic_arena.agents import Budget\nprint(json.dumps([search(p['obs'],p['legal'],Budget(150,10000),p['logits']) for p in json.load(sys.stdin)]))`;
+ const expected=JSON.parse(execFileSync(process.env.PYTHON??'python',['-c',script],{cwd:new URL('..',import.meta.url),input:JSON.stringify(inputs),env:{...process.env,OPENBLAS_NUM_THREADS:'1'}}));
+ inputs.forEach((p,i)=>{const budget={nodes:0,tick(){if(this.nodes>=150)throw Error('budget');this.nodes++;}},actual=connectSearch(p.obs,p.legal,p.logits,budget);assert.deepEqual(actual.action,expected[i][0],JSON.stringify(tacticalPositions[i].history));assert.equal(actual.info.method,expected[i][1].method);assert.equal(actual.info.remaining_moves,expected[i][1].remaining_moves);});
+});
 test('six games: seeded observations, legal neural actions, valid teachers',()=>{
- for(const name of Object.keys(NAMES)){
+ for(const name of LEGACY_GAMES){
   const a=new Game(name,123),b=new Game(name,123);
   assert.deepEqual(a.obs(),b.obs());
   for(let step=0;step<20&&!a.done;step++){
@@ -31,11 +72,11 @@ test('neural learning changes the actual shared object and another game outputs'
  assert(last<initial,`${last} >= ${initial}`);assert.notDeepEqual(Array.from(b.forward(other.obs()).z),before);
 });
 test('NumPy and JS share identical encodings, logits, styles and deterministic decisions',()=>{
- const observations=Object.keys(NAMES).map(k=>new Game(k,42).obs());
- const script=`import json,sys\nfrom logic_arena.neural import NeuralSuite,encode\ns=NeuralSuite.load()\na=json.load(sys.stdin)\nprint(json.dumps([{'encoding':encode(o).tolist(),'logits':s.models[o['game']].logits(o).tolist()} for o in a]))`;
- const result=JSON.parse(execFileSync('python',['-c',script],{cwd:new URL('..',import.meta.url),input:JSON.stringify(observations),env:{...process.env,OPENBLAS_NUM_THREADS:'1'}}).toString());
+ const observations=LEGACY_GAMES.map(k=>new Game(k,42).obs());
+ const script=`import json,sys\nfrom pathlib import Path\nfrom logic_arena.neural import NeuralPolicy,SPECS,encode\nfrom logic_arena.migration import LEGACY_GAMES\ns={g:NeuralPolicy.load(Path('versions/1.0.0/web/models')/f'{g}.json') for g in LEGACY_GAMES}\na=json.load(sys.stdin)\nprint(json.dumps([{'encoding':encode(o).tolist(),'logits':s[o['game']].logits(o).tolist()} for o in a]))`;
+ const result=JSON.parse(execFileSync(process.env.PYTHON??'python',['-c',script],{cwd:new URL('..',import.meta.url),input:JSON.stringify(observations),env:{...process.env,OPENBLAS_NUM_THREADS:'1'}}).toString());
  for(let i=0;i<observations.length;i++){
-  const o=observations[i],fresh=new Network(JSON.parse(fs.readFileSync(new URL(`../web/models/${o.game}.json`,import.meta.url))));
+  const o=observations[i],fresh=new Network(JSON.parse(fs.readFileSync(new URL(`../versions/1.0.0/web/models/${o.game}.json`,import.meta.url))));
   assert.deepEqual(Array.from(encode(o)),result[i].encoding);
   const js=fresh.forward(o).z;assert(js.every((v,j)=>Math.abs(v-result[i].logits[j])<.00003),o.game+' logits mismatch');
  }
@@ -108,7 +149,7 @@ test('analytical spawn expectation equals explicit enumeration',()=>{
 test('2048 row tables agree between NumPy and JS',()=>{
  const codes=[0,0x1111,0x2211,0xaaaa,0xffff,...Array.from({length:80},(_,i)=>(i*7151+4327)%65536)];
  const script=`import json,sys\nfrom logic_arena.tiles import row_tables\nt=row_tables()\nprint(json.dumps([[table[code] for table in t] for code in json.load(sys.stdin)]))`;
- const expected=JSON.parse(execFileSync('python',['-c',script],{cwd:new URL('..',import.meta.url),input:JSON.stringify(codes),env:{...process.env,OPENBLAS_NUM_THREADS:'1'}}));
+ const expected=JSON.parse(execFileSync(process.env.PYTHON??'python',['-c',script],{cwd:new URL('..',import.meta.url),input:JSON.stringify(codes),env:{...process.env,OPENBLAS_NUM_THREADS:'1'}}));
  const actual=tables2048();
  codes.forEach((code,i)=>{assert.equal(actual.left[code],expected[i][0]);assert.equal(actual.right[code],expected[i][1]);assert.equal(actual.gain[code],expected[i][2]);assert(Math.abs(actual.value[code]-expected[i][3])<1e-7);});
 });

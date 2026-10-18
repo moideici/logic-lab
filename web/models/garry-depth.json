@@ -1,0 +1,433 @@
+{
+  "target_depth": 20,
+  "time_budget_ms": 2000,
+  "node_budget": 200000000,
+  "selection": "Five targeted phases, not a win-rate test",
+  "samples": [
+    {
+      "phase": 0,
+      "board": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      ],
+      "player": 1,
+      "action": {
+        "column": 3
+      },
+      "ms": 2006.0021000000002,
+      "method": "bitboard_alpha_beta",
+      "runtime": "wasm",
+      "nodes": 10635264,
+      "depth": 21,
+      "value": 80,
+      "principal_variation": [
+        3
+      ],
+      "proof": null,
+      "search_complete": false,
+      "learned_value": true,
+      "evaluation_scope": "bounded_adversarial_search",
+      "forced_win": false,
+      "forced_loss": false,
+      "optimal": false
+    },
+    {
+      "phase": 6,
+      "board": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0
+        ]
+      ],
+      "player": 1,
+      "action": {
+        "column": 3
+      },
+      "ms": 2000.5946,
+      "method": "bitboard_alpha_beta",
+      "runtime": "wasm",
+      "nodes": 15501312,
+      "depth": 28,
+      "value": -61,
+      "principal_variation": [
+        3
+      ],
+      "proof": null,
+      "search_complete": false,
+      "learned_value": true,
+      "evaluation_scope": "bounded_adversarial_search",
+      "forced_win": false,
+      "forced_loss": false,
+      "optimal": false
+    },
+    {
+      "phase": 12,
+      "board": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          1,
+          2,
+          0,
+          0
+        ]
+      ],
+      "player": 1,
+      "action": {
+        "column": 2
+      },
+      "ms": 101.13239999999996,
+      "method": "bitboard_alpha_beta",
+      "runtime": "wasm",
+      "nodes": 970265,
+      "depth": 25,
+      "value": 999973,
+      "principal_variation": [
+        2,
+        2
+      ],
+      "proof": "win",
+      "search_complete": true,
+      "learned_value": true,
+      "evaluation_scope": "bounded_adversarial_search",
+      "forced_win": true,
+      "forced_loss": false,
+      "optimal": true
+    },
+    {
+      "phase": 18,
+      "board": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          1,
+          2,
+          2,
+          0
+        ]
+      ],
+      "player": 1,
+      "action": {
+        "column": 5
+      },
+      "ms": 3.79070000000047,
+      "method": "bitboard_alpha_beta",
+      "runtime": "wasm",
+      "nodes": 36595,
+      "depth": 17,
+      "value": 999981,
+      "principal_variation": [
+        5,
+        2,
+        3,
+        2,
+        1,
+        5,
+        5,
+        2,
+        5,
+        4,
+        4,
+        0,
+        5,
+        6,
+        6,
+        6,
+        6
+      ],
+      "proof": "win",
+      "search_complete": true,
+      "learned_value": true,
+      "evaluation_scope": "bounded_adversarial_search",
+      "forced_win": true,
+      "forced_loss": false,
+      "optimal": true
+    },
+    {
+      "phase": 24,
+      "board": [
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          2,
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          2,
+          2,
+          1,
+          0
+        ],
+        [
+          2,
+          2,
+          1,
+          1,
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          2,
+          2,
+          2,
+          1,
+          1,
+          1
+        ]
+      ],
+      "player": 1,
+      "action": {
+        "column": 1
+      },
+      "ms": 2.558799999999792,
+      "method": "bitboard_alpha_beta",
+      "runtime": "wasm",
+      "nodes": 22677,
+      "depth": 14,
+      "value": -999984,
+      "principal_variation": [
+        1,
+        1,
+        5,
+        5,
+        6,
+        2,
+        0,
+        2,
+        6,
+        6,
+        6,
+        4,
+        0,
+        6
+      ],
+      "proof": "loss",
+      "search_complete": true,
+      "learned_value": true,
+      "evaluation_scope": "bounded_adversarial_search",
+      "forced_win": false,
+      "forced_loss": true,
+      "optimal": false
+    }
+  ]
+}

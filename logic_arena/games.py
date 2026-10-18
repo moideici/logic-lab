@@ -157,6 +157,15 @@ class Sudoku(Game):
 
     def __init__(self, seed=0, options=None):
         super().__init__(seed, options)
+        limit=self.options.get('error_limit',0)
+        if type(limit)is not int or limit not in (0,3):raise ValueError('error_limit doit être 0 ou 3')
+        self.sudoku_state={'errors':0,'error_limit':limit,'rejected':[],'last_error':None} if limit else None
+        self._answer=None
+        if 'difficulty' in self.options:
+            from .puzzle_levels import sudoku_level
+            self.board,self.difficulty_info=sudoku_level(seed,self.options['difficulty'])
+            self.givens=deepcopy(self.board);self.history=[]
+            return
         digits = list(range(1, 10))
         self.rng.shuffle(digits)
         groups = list(range(3))
@@ -171,17 +180,25 @@ class Sudoku(Game):
         self.history = []
 
     def observation(self):
-        return {**super().observation(), "givens": deepcopy(self.givens), "history": [list(cell) for cell in self.history]}
+        return {**super().observation(), **({"sudoku_state":deepcopy(self.sudoku_state)} if self.sudoku_state else {}), "givens": deepcopy(self.givens), "history": [list(cell) for cell in self.history], **({"difficulty_info":deepcopy(self.difficulty_info)} if hasattr(self,"difficulty_info") else {})}
 
     def legal_actions(self):
         if self.done:
             return []
         actions = [{"row": r, "col": c, "value": v} for r in range(9) for c in range(9) for v in sudoku_candidates(self.board, r, c)]
-        if self.history:
-            actions.append({"undo": True})
-        return actions
+        if self.history and not self.sudoku_state:
+            actions.append({'undo':True})
+        return [a for a in actions if a not in self.sudoku_state['rejected']] if self.sudoku_state else actions
 
     def apply(self, action):
+        if self.sudoku_state:
+            from .sudoku_rules import solve_sudoku
+            s=self.sudoku_state;s['last_error']=None
+            if self._answer is None:self._answer=solve_sudoku(self.givens,limit=1)[0][0]
+            if self._answer[action['row']][action['col']]!=action['value']:
+                s['errors']+=1;s['rejected'].append(dict(action));s['last_error']=dict(action)
+                if s['errors']>=s['error_limit']:self.done,self.winner=True,0
+                return -1.
         if "undo" in action:
             r, c = self.history.pop()
             self.board[r][c] = 0
@@ -244,6 +261,11 @@ class SlidingPuzzle(Game):
 
     def __init__(self, seed=0, options=None):
         super().__init__(seed, options)
+        if 'size' in self.options or 'difficulty' in self.options:
+            if 'scramble' in self.options:raise ValueError('Choisir difficulté ou scramble, pas les deux')
+            from .puzzle_levels import sliding_level
+            self.board,self.difficulty_info=sliding_level(seed,self.options.get('size',3),self.options.get('difficulty','medium'))
+            return
         scramble = self.options.get("scramble", 30)
         if type(scramble) is not int or not 1 <= scramble <= 200:
             raise ValueError("scramble doit être un entier entre 1 et 200")
@@ -258,17 +280,21 @@ class SlidingPuzzle(Game):
         if self.distance() == 0:
             self.swap("up")
 
+    def observation(self):
+        return {**super().observation(),**({'difficulty_info':deepcopy(self.difficulty_info)} if hasattr(self,'difficulty_info') else {})}
+
     def distance(self):
-        return sum(abs(r-(v-1)//3)+abs(c-(v-1)%3) for r, row in enumerate(self.board) for c, v in enumerate(row) if v)
+        from .puzzle_levels import manhattan
+        return manhattan([v for row in self.board for v in row],len(self.board))
 
     def legal_actions(self):
         if self.done:
             return []
-        r, c = next((r, c) for r in range(3) for c in range(3) if self.board[r][c] == 0)
-        return [{"direction": d} for d, dr, dc in (("up", -1, 0), ("down", 1, 0), ("left", 0, -1), ("right", 0, 1)) if 0 <= r+dr < 3 and 0 <= c+dc < 3]
+        r, c = next((r, c) for r in range(len(self.board)) for c in range(len(self.board)) if self.board[r][c] == 0)
+        return [{"direction": d} for d, dr, dc in (("up", -1, 0), ("down", 1, 0), ("left", 0, -1), ("right", 0, 1)) if 0 <= r+dr < len(self.board) and 0 <= c+dc < len(self.board)]
 
     def swap(self, direction):
-        r, c = next((r, c) for r in range(3) for c in range(3) if not self.board[r][c])
+        r, c = next((r, c) for r in range(len(self.board)) for c in range(len(self.board)) if not self.board[r][c])
         dr, dc = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}[direction]
         self.board[r][c], self.board[r+dr][c+dc] = self.board[r+dr][c+dc], 0
 
@@ -282,7 +308,102 @@ class SlidingPuzzle(Game):
         return 1.0 if self.done else (before-after)*.05-.01
 
 
-GAMES = {g.name: g for g in (TicTacToe, Game2048, Sudoku, Connect4, Minesweeper, SlidingPuzzle)}
+class ExtraGame(Game):
+    def __init__(self, seed=0, options=None):
+        super().__init__(seed, options)
+        from .extra_rules import create_extra
+        self.board=create_extra(self.name,seed)
+        self.score=sum(map(sum,self.board)) if self.name=='nim' else 25-sum(map(sum,self.board)) if self.name=='lightsout' else 0
+    def legal_actions(self):
+        from .extra_rules import legal_extra
+        return [] if self.done else legal_extra(self.name,self.board,self.current_player)
+    def apply(self,action):
+        from .extra_rules import step_extra
+        self.current_player,self.done,self.winner,self.score,reward=step_extra(self.name,self.board,self.current_player,action)
+        return reward
+
+class Reversi(ExtraGame):
+    name='reversi'
+    players=2
+class Nim(ExtraGame):
+    name='nim'
+    players=2
+class LightsOut(ExtraGame):
+    name='lightsout'
+
+class StrategyGame(Game):
+    players=2
+    def __init__(self,seed=0,options=None):
+        super().__init__(seed,options)
+        from .strategy_rules import create_strategy
+        self.board,self.draughts_state=create_strategy(self.name)
+    def observation(self):
+        obs=super().observation()
+        if self.name=='draughts':obs['draughts_state']=deepcopy(self.draughts_state)
+        return obs
+    def legal_actions(self):
+        from .strategy_rules import legal_strategy
+        return [] if self.done else legal_strategy(self.name,self.board,self.current_player,self.draughts_state)
+    def apply(self,action):
+        from .strategy_rules import step_strategy
+        result=step_strategy(self.name,self.board,self.current_player,action,self.draughts_state)
+        self.current_player=result['player'];self.done=result['done'];self.winner=result['winner'];self.score=result['score'];self.draughts_state=result['state']
+        return result['reward']
+class Draughts(StrategyGame):
+    name='draughts'
+class Breakthrough(StrategyGame):
+    name='breakthrough'
+
+class Hex(Game):
+    name='hex'
+    players=2
+    def __init__(self,seed=0,options=None):
+        super().__init__(seed,options)
+        from .hex_rules import new_hex
+        self.board,self.hex_state=new_hex()
+    def observation(self):
+        return {**super().observation(),'hex_state':deepcopy(self.hex_state)}
+    def legal_actions(self):
+        from .hex_rules import legal_hex
+        return [] if self.done else legal_hex(self.board,self.hex_state)
+    def apply(self,action):
+        from .hex_rules import step_hex
+        result=step_hex(self.board,self.current_player,action,self.hex_state)
+        self.current_player=result['player'];self.done=result['done'];self.winner=result['winner'];self.score=result['score'];self.hex_state=result['state']
+        return result['reward']
+
+class Gomoku(Game):
+    name='gomoku'
+    players=2
+    def __init__(self,seed=0,options=None):
+        super().__init__(seed,options)
+        from .gomoku_rules import new_gomoku
+        self.board,self.gomoku_state=new_gomoku()
+    def observation(self):return {**super().observation(),'gomoku_state':deepcopy(self.gomoku_state)}
+    def legal_actions(self):
+        from .gomoku_rules import legal_gomoku
+        return [] if self.done else legal_gomoku(self.board,self.gomoku_state)
+    def apply(self,action):
+        from .gomoku_rules import step_gomoku
+        s=step_gomoku(self.board,self.current_player,action,self.gomoku_state)
+        self.current_player=s['player'];self.done=s['done'];self.winner=s['winner'];self.score=s['score'];self.gomoku_state=s['state'];return s['reward']
+
+class Go(Game):
+    name='go';players=2
+    def __init__(self,seed=0,options=None):
+        super().__init__(seed,options)
+        from .go_rules import new_go
+        self.board,self.go_state=new_go(self.options.get('size',19),self.options.get('komi',7.5))
+    def observation(self):return {**super().observation(),'go_state':deepcopy(self.go_state)}
+    def legal_actions(self):
+        from .go_rules import legal_go
+        return [] if self.done else legal_go(self.board,self.current_player,self.go_state)
+    def apply(self,action):
+        from .go_rules import step_go
+        s=step_go(self.board,self.current_player,action,self.go_state)
+        self.current_player=s['player'];self.done=s['done'];self.winner=s['winner'];self.score=s['score'];self.go_state=s['state'];return s['reward']
+
+GAMES = {g.name: g for g in (TicTacToe, Game2048, Sudoku, Connect4, Minesweeper, SlidingPuzzle, Reversi, Nim, LightsOut, Draughts, Breakthrough, Hex, Gomoku, Go)}
 
 
 def make_game(name, seed=0, options=None):
@@ -291,7 +412,7 @@ def make_game(name, seed=0, options=None):
     options = {} if options is None else options
     if not isinstance(options, dict):
         raise ValueError("options doit être un objet JSON")
-    allowed = {"scramble"} if name == "sliding_puzzle" else set()
+    allowed = {"scramble","size","difficulty"} if name == "sliding_puzzle" else {"difficulty","error_limit"} if name == "sudoku" else {"size","komi"} if name == "go" else set()
     if set(options) - allowed:
         raise ValueError(f"Options inconnues : {sorted(set(options)-allowed)}")
     return GAMES[name](seed, options)

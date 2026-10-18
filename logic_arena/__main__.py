@@ -8,7 +8,7 @@ from .harness import Arena, json_line
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Logic Lab — six jeux et un réseau partagé")
+    parser = argparse.ArgumentParser(description="Logic Lab — treize jeux et un réseau partagé")
     sub = parser.add_subparsers(dest="command", required=True)
     web = sub.add_parser("serve", help="Plateforme web, JSON HTTP et SSE")
     web.add_argument("--host", default="127.0.0.1")

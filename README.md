@@ -1,213 +1,171 @@
-# Logic Lab
+# Logic Lab — Garry 0.6.0
 
-Plateforme web et harnais Python pour **six jeux**, avec un **véritable réseau neuronal partagé**, entraînement, jeu autonome et duel humain/IA.
+Garry utilise un seul modèle neuronal pour **quatorze jeux**, dont le **Go en 9 × 9, 13 × 13 et 19 × 19**. Son architecture est **4 872 → 48 → 48 → 4 259**, soit **444 979 paramètres**, avec des zones propres à chaque jeu et un module central commun. Les modèles figés dans `versions/` restent inchangés.
 
-Jeux : morpion, 2048, sudoku, puissance 4, démineur 8×8 et taquin 3×3.
+La version courante s’appelle désormais **0.6.0** : le projet reste en développement avant sa première version stable. Cette correction de numérotation ne modifie ni les dimensions ni les poids. Les exports historiques **6.0.0** sont compatibles et les prochains exports portent **0.6.0**. Les numéros décrivent les évolutions du code, jamais les performances. Les dossiers et rapports historiques conservent leur nom d’origine.
 
-## Démarrage
+## Jouer et regarder les coups
 
-Python 3.11+ et NumPy ; Node.js 22+ pour les tests et benchmarks JavaScript. Depuis ce dossier :
+Lancer `python -m logic_arena serve --port 8765`, puis ouvrir http://127.0.0.1:8765. En duel, les niveaux de **l’IA 1 et de l’IA 2** sont indépendants, de 0 à 10. Le navigateur affiche chaque transition, y compris au **2048**. Les quatorze jeux disposent d’un mode humain : 2048 utilise les flèches ou ses boutons de direction ; le démineur se joue au clic. Les réglages IA sont masqués quand vous résolvez seul, et les styles sans effet pour le moteur choisi ne sont pas proposés. Le lien **Input** ouvre le projet séparé de français sur http://127.0.0.1:8766/. Les styles changent les préférences stratégiques lorsque plusieurs coups restent admissibles ; une issue prouvée reste prioritaire.
+
+Le Go gère les captures, le suicide interdit, le superko positionnel, le komi et l’abandon. Deux passes ouvrent le comptage ; chaque camp peut marquer les groupes morts, accepter ou reprendre. Les IA évitent les passes tant qu’elles trouvent une pose utile, puis acceptent automatiquement un comptage sans contestation. Une limite d’analyse de deux fois le nombre d’intersections les fait passer et compter : c’est une politique de l’IA, pas une règle ajoutée au Go. La qualité de ce consentement n’est pas une preuve de vie ou de mort des groupes.
+
+Sudoku propose **Facile, Moyen, Difficile, Expert** : 45 grilles à solution unique, classées par un solveur fixe. Expert est le record du catalogue, sans prétendre être le sudoku le plus difficile du monde. En mode IA, Garry a **trois vies** : un chiffre faux laisse la case vide, ne sera pas rejoué à l’identique et coûte une vie ; la troisième erreur termine la partie. Un solveur du plateau public évalue les propositions, sans utiliser une solution privée. Les styles privilégient aussi des cases différentes.
+
+Le taquin propose **3 × 3, 4 × 4 et 5 × 5**, avec quatre difficultés de grille. En 3 × 3, Expert demande exactement **31 coups** au minimum. Les niveaux 1 à 9 suivent le chemin optimal avec une probabilité croissante, de **55 % à 95 %** à chaque décision ; le niveau 10 choisit toujours un meilleur coup évalué, et le niveau 0 le pire. Les grandes grilles sont résolubles, mais leur recherche est bornée et leur difficulté maximale n’est pas certifiée. Sudoku et taquin restent jouables manuellement.
+
+## Entraînement continu et jeux réels
+
+L’onglet **Apprendre** lance une session locale bornée et montre son plateau en direct. Les nouveaux exemples sont séparés par familles entre apprentissage, validation et test. Un candidat doit préserver la validation fixe et récente avant installation ; les tests ne sélectionnent pas les poids. Les gains mesurés sont un accord avec un professeur borné, pas une garantie d’invincibilité. Le module central et les blocs des onze jeux antérieurs sont gelés lors des cycles Go, Hex et Gomoku.
+
+Le premier cycle Go avait augmenté l’accord avec le professeur de **6,25 % à 23,75 %** sur 80 positions réservées. Le répertoire initial de cette étape contient **6 377 épreuves**. Les cycles continus consignent leurs propres exemples et résultats dans `training/continuous/` ; leurs promotions sont distinctes de la version logicielle.
+
+L’onglet **Jeux réels** ouvre [2048 original](https://classic.play2048.co/) ou [COSUMI](https://www.cosumi.net/en/) dans un navigateur et joue avec les contrôles normaux du site. Chaque transition est vérifiée et reproduite en direct dans l’interface ; le navigateur conserve aussi une capture. COSUMI utilise le comptage japonais avec 6,5 points de komi : son résultat final fait foi, distinct du comptage de surface local. Une limite de coups ou une erreur du site ne compte jamais comme une partie terminée ou une victoire.
+
+Pour le harnais réel : `npm ci --prefix tools/real-games`, puis `npx --prefix tools/real-games playwright install chromium`. Définir `PLAYWRIGHT_BROWSERS_PATH` si nécessaire. Le serveur Python est requis pour les routes `/api/external/` et `/api/continuous/` ; les duels locaux restent disponibles sur un hébergement statique.
+
+Les sections ci-dessous conservent les résultats historiques sous leurs numéros d’origine. Elles ne constituent pas une garantie de performance de la version courante.
+
+## Historique de la 4.0.0
+
+### Nouveautés de la 4.0.0
+
+Les cinq nouveaux jeux sont jouables et intégrés à l’apprentissage. Les dames gèrent les rafles maximales obligatoires, les prises arrière des pions, les dames à longue portée, les promotions et les nulles. Percée propose des courses de pions et des captures diagonales. Les nouveaux modes reçoivent leurs propres entrées et actions dans les matrices communes : **2 494 → 48 → 48 → 3 617**, 299 377 paramètres. Cet agrandissement justifie la version majeure.
+
+Les premiers duels du réseau seul contre les nouveaux blocs initialisés donnent 7 victoires et 1 nulle aux dames, puis 8 victoires à Percée. Ce sont des échantillons limités. Les poids utilisés par les modes précédents sont conservés exactement pendant cette première campagne. Les anciens exports sont migrés ; dans l’interface, les nouvelles capacités entraînées sont ajoutées aux modèles personnels. Le répertoire contient 4 757 épreuves.
+
+Le [rapport des nouveaux jeux](docs/GARRY-4-NOUVEAUX-JEUX.md) détaille règles, apprentissages, résultats et limites, notamment les premiers résultats mixtes du réseau seul à Nim et Lights Out. Les niveaux restent réglables de 0 à 10. La suite de vérification compte 114 tests réussis.
+
+Les sections historiques ci-dessous décrivent les étapes précédentes ; leurs duels ne constituent pas une garantie d’invincibilité sur les nouveaux jeux.
+
+## Historique 3.2.0 : zéro défaite depuis le plateau vide
+
+Garry **3.2.0** passe les duels demandés contre la **3.1.0 figée**, dans les deux camps, aux réglages de niveau 10 : **une victoire, une nulle, zéro défaite**. Il gagne aussi les deux duels contre la 1.0.0 originale. Les répétitions et limites sont détaillées dans [le rapport zéro défaite](docs/GARRY-ZERO-DEFAITE.md) ; ce résultat ne promet pas l’invincibilité contre toutes les stratégies ou depuis toutes les positions.
+
+La nouvelle recherche distingue les issues prouvées des estimations, et les coups dont la non-défaite est établie. Sept entrées d’ouverture voyagent dans le fichier du modèle, dont une réponse choisie par expérience et six coups certifiés. Les poids et dimensions du réseau sont préservés. **3.2.0 correspond à ces nouvelles fonctions compatibles**, sans changement d’architecture neuronale.
+
+## Historique : le répertoire de la 3.1.0
+
+La version **3.1.0** propose un magasin de **3,917 épreuves** pour les six jeux, sans changer l’architecture. Le dernier cycle réunit 18,440 positions d’apprentissage, de validation et de test, dont 12,288 nouveaux états pour les cinq jeux autres que le morpion. Les anciens exemples d’apprentissage sont aussi rejoués pour limiter les oublis.
+
+Les poids retenus au cours de ce cycle concernent : taquin. Les candidats qui reculent sur les compétences contrôlées ou sur les parties complètes sont écartés. Le module commun et l’évaluateur de Puissance 4 sont préservés. La révision d’entraînement est **20261016-repertoire-02** ; la version logicielle de ce cycle était **3.1.0**.
+
+Les résultats et limites sont détaillés dans [le dernier rapport d’entraînement](docs/GARRY-ENTRAINEMENT-CYCLE02.md). Le [premier rapport de diversité](docs/GARRY-DIVERSITE.md) conserve les résultats du cycle précédent. Les progrès du réseau seul sont distingués des victoires avec planification. L’entraînement enseigne plusieurs bonnes réponses quand elles existent ; les épreuves réservées restent exclues du magasin et des mises à jour.
+
+## Niveau 10 : recherche renforcée
+
+Garry vise 20 demi-coups au Puissance 4, puis poursuit si le temps le permet, avec deux secondes par décision. Sur les cinq sondes locales, il atteint notamment 21 demi-coups depuis le départ et 28 après six coups. La profondeur effectivement terminée est affichée séparément de la cible.
+
+Sur les mêmes 40 duels, aux mêmes budgets et face à la même référence figée, Garry 2.0.0 obtient 30 victoires, 6 défaites et 4 nuls ; Garry 3.0.0 obtient 32 victoires, 3 défaites et 5 nuls. Sur ces départs imposés historiques, le zéro défaite n’était pas atteint. Les détails, limites et commandes de reproduction sont dans [le rapport de progression](docs/GARRY-3-PROGRESSION.md).
+
+Les niveaux vont de 0 à 10 : le niveau 0 choisit le pire coup évalué, les niveaux intermédiaires sélectionnent des rangs, le niveau 10 recherche directement le meilleur coup. Une recherche bornée ne prouve pas la qualité absolue de tous les coups.
+
+## Architecture historique et fusion
+
+```text
+Observation publique + identifiant du jeu
+                 ↓
+  encodeur unique : 2 494 → 48, tanh
+                 ↓
+  module central : 48 → 48, tanh
+                 ↓
+  sortie unique : 48 → 3 617
+                 ↓
+  masque des actions légales du jeu
+```
+
+Une branche de valeur supplémentaire de 32 coefficients évalue les positions de Puissance 4 dans la recherche. Elle est apprise par distillation d’un moteur figé et sauvegardée dans le même fichier ; la politique principale conserve ses dimensions. Cette architecture historique totalisait 299 377 paramètres.
+
+Les modes sont des vues sur **les mêmes matrices** en mémoire. Un seul encodeur, un seul biais d'entrée, un seul module central, une seule matrice de sortie, un optimiseur Adam pour la politique dans Python et un seul fichier de sauvegarde atomique. Les vues ne possèdent aucun poids autonome. La branche linéaire de valeur est ajustée séparément par régression régularisée.
+
+La fusion historique de la 2.0.0 est algébrique : 1 906 caractéristiques réparties en zones propres aux jeux et six indicateurs de jeu forment l'entrée. Les biais des anciens encodeurs sont intégrés aux lignes correspondant à ces indicateurs. Les sorties sont réunies dans la matrice globale de 818 actions. Le jeu sélectionne les caractéristiques et les actions autorisées. Cette architecture conditionnée conserve les savoirs existants ; elle ne prouve pas une généralisation à un jeu inconnu. Les biais communs et le module central permettent le transfert entre tâches ; l'entraînement répète les autres jeux pour limiter l'oubli.
+
+La vérification de fusion porte sur **1 223 positions** : les 1 223 choix gloutons sont conservés, avec un écart maximal de logits de `3,82e-6`. Aucun réentraînement n'a été effectué pendant la fusion. Rapport : `web/models/garry-fusion.json`.
+
+## Nom et versions
+
+Le modèle s’appelle **garry**, affiché **Garry**, version actuelle **0.6.0** pour quatorze jeux. La série 0.x décrit les étapes de développement avant la version stable. Les évolutions de code et de dimensions déterminent les versions ; les résultats et compteurs d’entraînement restent séparés. L’ancien nom 6.0.0 est accepté comme alias de la même architecture. Les références 1.0.0 à 5.0.0 restent identifiables sous leurs noms historiques.
+
+`versions/3.2.0/` conserve le modèle avant l’agrandissement aux onze jeux. `versions/3.1.0/` conserve le moteur et les poids précédant la recherche certifiée. `versions/3.0.0/` conserve les poids et le moteur avant ce cycle de diversité. `versions/2.0.0/` conserve aussi les poids et le moteur compilé précédents, avec empreintes. `versions/1.0.0/` conserve les IA locales présentes à la fin du travail précédent, avec un manifeste SHA-256 vérifié par les tests.
+
+## Démarrer et apprendre
+
+Python 3.11+, NumPy et Wasmtime ; Node.js 22+ pour les tests JavaScript.
 
 ```bash
 python -m pip install -e .
-OPENBLAS_NUM_THREADS=1 python -m logic_arena serve --port 8000
+python -m logic_arena serve --port 8000
 ```
 
-Ouvrir **http://127.0.0.1:8000**. L’interface s’exécute entièrement dans le navigateur ; les routes `/api` et SSE fournissent en parallèle le harnais Python. Les sessions du navigateur et celles du serveur sont distinctes.
-
-Le site hébergé sert la plateforme statique : inférence, entraînement par Web Worker, stockage IndexedDB et protocole JavaScript local fonctionnent sans serveur Python. Pour l’API HTTP et SSE, lancer le projet Python.
-
-## Réseaux connectés
-
-```text
-Morpion ───── encodeur 18→48 ──┐                ┌─ tête 48→9
-2048 ──────── encodeur 192→48 ─┤                ├─ tête 48→4
-Sudoku ────── encodeur 891→48 ─┤ MODULE COMMUN  ├─ tête 48→730
-Puissance 4 ─ encodeur 84→48 ──┤    48→48       ├─ tête 48→7
-Démineur ──── encodeur 640→48 ─┤     tanh       ├─ tête 48→64
-Taquin ────── encodeur 81→48 ──┘                └─ tête 48→4
-```
-
-Les six politiques partagent **le même objet de poids** pour le module commun. Un entraînement sur un jeu modifie donc les représentations utilisées par les cinq autres. Les encodeurs et les têtes restent propres à chaque jeu. Les masques d’actions légales sont communs à l’inférence et à l’apprentissage.
-
-Les modèles initiaux apprennent par **imitation des solveurs**, avec cross-entropie masquée et rétropropagation : Adam sous NumPy, SGD en ligne dans le navigateur. Pendant l’entraînement web, un exemple principal sur quatre déclenche un exemple de répétition d’un autre jeu, en alternance sur les cinq jeux. Les six modèles sont ensuite sauvegardés ensemble avec leur nouveau module partagé.
-
-Le partage rend le transfert possible ; il ne prouve pas un gain de performance. Il peut aussi provoquer de l’oubli ou du transfert négatif. Le projet fournit des évaluations séparées, sans professeur, pour comparer avant/après.
-
-La **résolution express** est activée par défaut : niveau 10, aucun délai d’animation et décisions dans un Web Worker. Le réseau ordonne les choix, puis les solveurs cherchent d’abord la victoire et réduisent les coups lorsque c’est démontrable :
-
-| Jeu | Résolution express | Garantie sur les coups |
-|---|---|---|
-| Taquin 3×3 | Table de distances calculée par BFS inverse sur les 181 440 positions résolubles | Chemin globalement minimal, y compris les positions à 31 coups |
-| Sudoku | Recherche sur les contraintes, puis cache de la solution complète | Une saisie par case vide dès qu’une solution est planifiée ; 51 coups sur les grilles initiales |
-| Morpion | Minimax exact avec distance de victoire | Meilleure issue contre jeu parfait, victoire forcée la plus courte lorsqu’elle existe |
-| Puissance 4 | Menaces immédiates et alpha-bêta guidé par le réseau | Recherche bornée ; aucune garantie d’optimum global |
-| 2048 | Expectimax, tables de fusion et évaluation des lignes | Objectif 2048 prioritaire ; le hasard empêche de garantir un minimum global |
-| Démineur | Contraintes publiques, probabilités des frontières et préférence pour les grandes ouvertures | Priorité aux coups sûrs ; un pari peut rester nécessaire |
-
-Le même module de planification est accessible aux six jeux, avec des adaptations de règles. Les coups assistés sont identifiés `neural+planner`. Le booléen `optimal` porte sur la décision et le nombre de coups **restant depuis l’état courant**, pas sur tous les coups déjà joués : une victoire immédiate à puissance 4 ne prouve pas que toute la partie a été minimale. `remaining_moves`, lorsqu’il est présent, donne cette distance. Les scores de politique ne sont pas présentés comme les probabilités de la recherche.
-
-Décocher **Planification partagée** permet de comparer avec le réseau seul. Le curseur **Rythme** rétablit une pause si l’on veut observer chaque coup ; zéro ne rajoute aucun délai volontaire. Le rendu est regroupé par image, les événements JSON restent émis pour chaque coup, et une réponse de worker devenue obsolète après Pause ou Nouvelle partie est rejetée.
-
-Les bases de règles et tables exactes restent utiles après un entraînement du réseau : ce sont des accélérateurs du système hybride, pas des poids neuronaux appris. Pour reconstruire la table du taquin : `python examples/build_sliding_table.py`.
-
-## Mesures de la résolution express
-
-Rapport reproductible : `node examples/benchmark_express.mjs`, graines à partir de 1 000 000, niveau 10 équilibré. Temps de calcul moyens observés dans cet environnement Node.js, sans affichage :
-
-| Jeu | Résultat | Coups moyens | Calcul moyen / partie |
-|---|---|---:|---:|
-| Taquin | 20/20 résolus au minimum exact | 19,6 | 0,46 ms |
-| Sudoku | 20/20 résolus, aucune annulation | 51 | 13,13 ms |
-| Morpion contre aléatoire | 17 victoires, 3 nuls, 0 défaite | 6,35 | 1,35 ms |
-| Puissance 4 contre aléatoire | 20 victoires / 20 | 11,2 | 129,88 ms |
-| Démineur | 48 réussites / 50 | 15,8 | 2,62 ms |
-| 2048 | 5 réussites / 5 | 976 | 2 073,06 ms |
-
-Ces petits échantillons ne certifient pas un taux de succès général. Le nombre de coups moyen inclut les défaites ; l’adversaire des duels est aléatoire, pas un solveur expert. Le budget de recherche dépend du temps réel, donc les résultats peuvent varier selon la machine.
-
-Une mesure de la première version express sous Chromium, graine 42 et interface comprise, avait résolu le taquin en **18 coups / 14 ms**, le sudoku en **51 coups / 122 ms**, le démineur en **10 clics / 21 ms** et 2048 en **989 coups / 3,05 s**. Ce sont des mesures locales, pas des délais garantis sur tous les appareils. Le worker laisse l’interface répondre pendant le calcul.
-
-## Améliorations de la deuxième version express
-
-- Le moteur 2048 Python utilise désormais les mêmes représentations compactes et la même heuristique de lignes que le moteur web. Les tables NumPy sont construites une seule fois ; les opérations de recherche ne reconstruisent plus les environnements complets.
-- L’espérance de l’évaluation après apparition d’une tuile est calculée par les contributions de la ligne et de la colonne modifiées. Ce calcul est équivalent à l’énumération des apparitions pour cette heuristique additive. Il ne résout pas exactement tout le jeu stochastique. Les espérances intermédiaires sont mémorisées pendant chaque décision.
-- Aux niveaux 9 et 10, la recherche peut approfondir davantage les positions 2048 ayant au plus quatre cases vides, dans le même budget de réflexion. Cela privilégie la réussite dans les situations difficiles ; ce réglage peut prendre plus de temps qu’une recherche superficielle.
-- Un passage du réseau sur le plateau courant est partagé entre politique et planification. Le pipeline commun `web/decision.js` est utilisé dans le worker et l’API synchrone.
-- Chaque agent Python conserve son propre générateur pseudo-aléatoire. Ses tirages avancent au fil des décisions et les agents concurrents ne permutent plus le générateur des modèles partagés. Rejouer la même séquence avec la même graine reproduit les tirages ; un appel isolé répété n’est plus un redémarrage implicite du générateur.
-- Pause annule aussi les calculs lancés coup par coup. Le worker peut être recréé après une erreur de sérialisation ou un dépassement de dix secondes. Les compteurs de demandes et de modèles sont réinitialisés correctement après une annulation.
-- Le serveur calcule les décisions en dehors du verrou de session : `stop` et `observe` restent disponibles pendant la réflexion, puis un dernier contrôle empêche l’application d’un coup annulé.
-- Un flux SSE repris après débordement du journal renvoie `resync` et se ferme lorsque la partie est déjà arrêtée. L’écriture réseau ne conserve plus le verrou de session.
-- La sauvegarde d’un fichier de modèle est atomique : un fichier temporaire est écrit, puis remplacé. Un échec conserve l’ancien fichier. La sauvegarde d’un dossier de six modèles reste constituée de six remplacements individuels.
-- Au démineur, le risque, la taille d’ouverture et la préférence neuronale sont comparés dans cet ordre. Un score neuronal, même extrême, ne peut plus remplacer une case prouvée sûre par un pari.
-
-Le rapport `web/models/backend-evaluation.json` compare le moteur Python précédent au nouveau sur les mêmes cinq graines 42–46 : **0/5 réussites auparavant, 5/5 sur le nouveau moteur** lors de cette mesure locale. Le nouveau moteur recherche davantage et peut prendre plus de temps par partie ; le gain constaté ici porte sur la réussite, pas sur une garantie de latence. La comparaison est reproductible avec un ancien checkout local :
+Ouvrir http://127.0.0.1:8000. La plateforme fonctionne aussi sur un hébergement statique : calcul et apprentissage restent locaux. Les sessions du navigateur et du serveur Python sont distinctes. IndexedDB utilise une seule clé pour Garry dans une base dédiée. L'export produit un seul fichier `garry-0.6.0.json`. L’import accepte les formats Garry 2.0.0, 3.0.0, 3.1.0, 3.2.0, 4.0.0, 5.0.0, 6.0.0 et 0.6.0, ou une ancienne suite complète de six modèles dont les poids centraux concordent. Les anciennes données du navigateur restent dans leur base d'origine.
 
 ```bash
-python examples/benchmark_backend.py --episodes 5 --seed 42 --baseline /chemin/ancien-checkout --output web/models/backend-evaluation.json
+python -m logic_arena train --game tictactoe --episodes 30 --epochs 10 --output trained-models
+python -m logic_arena evaluate --game tictactoe --models trained-models --episodes 100
+python -m logic_arena evaluate --game sudoku --planning --max-steps 100
+python examples/fuse_garry.py --output training-data/garry-initial.json
 ```
 
-Ce rapport et les petits échantillons web ne constituent pas des garanties de victoire. Les tables de fusion et les logits sont comparés entre NumPy et JavaScript ; les espérances analytiques sont testées contre une énumération indépendante de tous les emplacements possibles.
+L'entraînement sauvegarde `trained-models/garry.json` et son rapport. Les quatorze modes utilisent ensuite les poids mis à jour. `--models` accepte le dossier ou le fichier Garry. La commande de fusion recrée les poids initiaux depuis la référence figée.
 
-## Dix niveaux, six styles
+### Entraînement et révision des poids du 16 octobre 2026
 
-Les niveaux neuronaux modulent la température de sélection, de `2.0` à `0` : le niveau 10 équilibré choisit le score maximal. Les recherches bornées ajoutent des budgets croissants de 16 à 100 000 nœuds et de 0,5 à 30 ms. Les tables exactes du morpion et du taquin ne nécessitent pas de recherche répétée à ce budget. `time_ms` permet un budget de planification explicite côté Python. Les délais sont des budgets coopératifs, pas des garanties de temps réel matériel.
+La politique de la révision `20261016-c4-guarded-01`, entraînée avant la branche de valeur, est conservée dans le modèle actif. Ce premier entraînement ne modifiait pas l’architecture 2.0.0. Sur 200 parties de Puissance 4 contre un adversaire aléatoire, le réseau seul passe de 127 à 144 victoires et de 72 à 56 défaites. Les poids effectifs des cinq autres modes sont strictement préservés. Sur 40 duels de contrôle contre la référence figée, le système avec recherche obtient les mêmes résultats avant/après : 30 victoires, 6 défaites, 4 nuls. Aucun gain du système hybride n'est donc démontré par ce lot.
 
-Styles : `balanced`, `aggressive`, `defensive`, `greedy`, `positional`, `exploratory`. Ils ajoutent de petites préférences explicites aux scores du réseau ; `exploratory` conserve une température minimale de 0,6. La planification privilégie l’objectif du puzzle et peut effacer les différences de style. Ces dix réglages ne constituent pas dix niveaux Elo calibrés.
+Le rapport `web/models/garry-training.json` identifie les poids par leurs empreintes, séparément du numéro de version. Les mesures de fusion ci-dessus décrivent les poids initiaux, avant cet apprentissage. Le diagnostic et le plan d'évolution sont dans `docs/GARRY-PROGRESSION.md`.
 
-Les solveurs de référence (`type: "reference"`) ont leurs propres budgets croissants de recherche, disponibles dans `catalog`.
-
-## Entraîner et évaluer
-
-Dans l’onglet **Apprendre**, choisir le jeu, les épisodes, le taux d’apprentissage et la graine. L’arrêt conserve les poids déjà appris, y compris ceux du module commun et des autres jeux répétés. Exporter la suite JSON pour la conserver ou l’utiliser dans Python.
-
-Depuis Python :
+L'entraînement commun dispose d'un outil dédié avec positions dédupliquées, validation sans chevauchement exact et séparation des symétries du morpion. Il conserve les candidats séparément du modèle actif. L'adaptation ciblée gèle les paramètres des autres jeux ; elle doit ensuite passer les contrôles de jeu avant installation.
 
 ```bash
-OPENBLAS_NUM_THREADS=1 python -m logic_arena train --game tictactoe --episodes 100 --epochs 10 --output trained-models
-OPENBLAS_NUM_THREADS=1 python -m logic_arena evaluate --game tictactoe --models trained-models --episodes 100 --seed 1000000
-OPENBLAS_NUM_THREADS=1 python -m logic_arena evaluate --game sudoku --episodes 15 --planning --max-steps 100
+python examples/train_garry_curriculum.py --output training-runs/session --samples 4096 --validation-samples 512 --epochs 60 --learning-rate 0.0001
+python examples/train_garry_guarded.py --dataset training-runs/session/dataset.npz --output training-runs/guarded --game connect4 --epochs 40
 ```
 
-L’entraînement CLI utilise aussi une répétition sur les autres jeux. `--models` charge une suite préexistante, ce qui permet de poursuivre l’apprentissage. `--output` contient les six fichiers et un rapport.
+Les dossiers contiennent `before.json`, `best.json`, les rapports et le statut. Un dépassement de la limite de coups ne compte pas comme un progrès ; la sélection surveille aussi les scores des jeux non résolus. Le gel ciblé protège les acquis, et ne remplace pas une méthode d'apprentissage commun à long terme.
 
-Les fichiers `web/models/report.json`, `evaluation.json` et `planning-evaluation.json` conservent les pertes d’apprentissage et les évaluations de la première version. `express-evaluation.json` mesure la version express actuelle dans Node.js, sans professeur. Les méthodes Python et JavaScript utilisent des optimisations propres à leur runtime ; leurs budgets muraux peuvent donner des décisions différentes. Les succès pendant l’entraînement mêlent des coups de l’élève et du professeur : ils ne sont pas un taux de victoire du réseau seul.
+## Niveau de jeu et objectif zéro défaite
 
-La politique initiale seule est un **point de départ**, pas un champion des six jeux. L’évaluation initiale sur 100 duels contre un adversaire aléatoire donne 87 victoires, 13 nuls et 0 défaite au morpion, puis 67 victoires et 33 défaites à puissance 4. Sur les autres jeux, les premières politiques seules restent faibles ; les rapports les montrent aussi. Le démineur peut exiger des paris et 2048 contient des apparitions aléatoires. Aucune garantie de victoire universelle.
+Les scores de Garry guident les solveurs locaux : minimax exact au morpion, table exacte des 181 440 taquins résolubles, recherche/cache au sudoku, expectimax à 2048 et contraintes publiques au démineur. Ces solveurs sont des composants du programme, distincts des poids appris.
 
-Pour recréer les modèles, y compris le préentraînement sur les 4 520 états jouables du morpion et la répétition multijeu :
+Puissance 4 utilise une recherche en bitboards compilée en WebAssembly et partagée entre Python et le navigateur : menaces immédiates, coups sûrs, doubles menaces, table de transpositions bornée, approfondissement progressif et prolongement des réponses forcées. Un repli reste disponible sans WebAssembly. Le niveau 10 autorise jusqu'à 30 millions de nœuds et 300 ms coopératives pour ce jeu. Les autres jeux gardent leurs propres budgets. Les workers conservent la réactivité de l'interface.
+
+**L'objectif de 0 % de défaite n'est pas atteint.** Rapport : `web/models/garry-evaluation.json`.
+
+| Jeu | Résultat de Garry sur le lot de 20 |
+|---|---|
+| Morpion contre la référence | 20 nuls, aucune défaite |
+| Puissance 4 contre la référence | 13 victoires, 6 défaites, 1 nul |
+| 2048 | 20 réussites |
+| Sudoku | 20 réussites |
+| Démineur | 18 réussites, 2 échecs |
+| Taquin | 20 réussites |
+
+Les duels alternent les camps et rejouent les ouvertures ; Puissance 4 commence par six coups aléatoires. Le benchmark donne 3 millions de nœuds à Garry et 5 000 à la référence, avec un plafond de sécurité de dix secondes : les budgets diffèrent, ce n'est pas une comparaison à temps égal. Les jeux solo sont rejoués sur les mêmes graines ; leurs échecs sont distingués des régressions de réussite/score par rapport à la référence. Aucune régression solo n'a été observée sur ce lot. Ces petits échantillons ne sont ni un classement Elo ni une garantie pour toutes les positions. Les budgets muraux et les arrondis peuvent modifier les décisions selon la machine.
 
 ```bash
-OPENBLAS_NUM_THREADS=1 PYTHONPATH=. python examples/bootstrap_models.py
+node examples/benchmark_garry.mjs --episodes 20 --seed 1100000 --output web/models/garry-evaluation.json
 ```
 
-## JSON commun
+Les niveaux 1–10, les six styles et l'option de planification restent disponibles ; ils ne constituent pas des niveaux Elo calibrés.
 
-Une requête et une réponse par ligne sur stdin/stdout :
+## Vérifier et reconstruire
 
 ```bash
-python -m logic_arena jsonl
+python -m unittest discover -s tests -v
+node --test tests/web.test.mjs tests/garry.test.mjs
 ```
 
-Créer une session :
+Sous Windows, `PYTHON` peut indiquer aux tests Node le chemin de Python. Les tests couvrent la fusion, les matrices réellement communes, l'apprentissage, la sauvegarde unique, les masques légaux, la parité Python/JavaScript, les tactiques, les règles, HTTP/SSE et les empreintes de la référence.
 
-```json
-{"protocol":"logic-arena.v1","id":"1","op":"create","game":"tictactoe","seed":42}
-```
+Le protocole `logic-arena.v1` reste compatible : `catalog`, `create`, `observe`, `suggest`, `play`, `step`, `run`, `stop`, `delete`, via `python -m logic_arena jsonl` ou `POST /api`. SSE : `/sessions/ID/events`. Le catalogue et les décisions indiquent le nom, la version et le mode de Garry. L'API navigateur expose toujours `window.logicArena.requestAsync`, `getSnapshot` et `subscribe`.
 
-Copier `result.session_id` dans les requêtes suivantes. Demander une décision sans modifier le plateau :
+- `logic_arena/general.py`, `web/engine.js` : modèle général et vues de jeu.
+- `web/models/garry.json` : unique fichier de poids actif.
+- `web/trainer.js`, `web/inference-worker.js` : workers communs.
+- `search/connect4-search.ts`, `web/connect4-search.wasm` : source et moteur Puissance 4.
+- `logic_arena/connect4_wasm.py` : instance du même moteur par thread Python.
+- `versions/1.0.0/` : référence figée indépendante du modèle actif.
 
-```json
-{"id":"2","op":"suggest","session_id":"ID_RETOURNÉ","agent":{"type":"neural","level":8,"style":"balanced","seed":42,"planning":true}}
-```
+Pour reconstruire le moteur : `npm install --ignore-scripts` puis `npm run build` dans `tools/wasm`. Le compilateur [AssemblyScript](https://www.assemblyscript.org/compiler.html) est verrouillé dans le projet ; Python exécute le binaire avec [Wasmtime](https://github.com/bytecodealliance/wasmtime-py). Aucun service distant ne décide des coups.
 
-Appliquer un coup externe avec protection contre une observation périmée :
-
-```json
-{"id":"3","op":"step","session_id":"ID_RETOURNÉ","expected_revision":0,"action":{"row":1,"col":1}}
-```
-
-Réponse type :
-
-```json
-{"protocol":"logic-arena.v1","id":"2","ok":true,"result":{"revision":0,"action":{"row":1,"col":1},"info":{"agent":"neural+planner","method":"exact_minimax_distance","level":8,"style":"balanced","time_ms":0.3,"training_steps":497200,"shared_steps":1082890}}}
-```
-
-Les temps et actions ci-dessus sont illustratifs. `catalog` fournit les noms de jeux, schémas d’actions, styles et réglages de niveau. Les coordonnées commencent à zéro.
-
-| Jeu | Identifiant | Action |
-|---|---|---|
-| Morpion | `tictactoe` | `{"row":0,"col":0}` |
-| 2048 | `2048` | `{"direction":"left"}` |
-| Sudoku | `sudoku` | `{"row":0,"col":2,"value":4}` ou `{"undo":true}` |
-| Puissance 4 | `connect4` | `{"column":3}` |
-| Démineur | `minesweeper` | `{"row":0,"col":0}` |
-| Taquin | `sliding_puzzle` | `{"direction":"up"}` |
-
-Autres opérations : `observe`, `play` (décider et appliquer), `run`, `stop`, `delete`. Au taquin, `options: {"scramble":30}` règle le mélange initial, toujours résoluble. Le sudoku utilise une grille à solution unique transformée par des symétries, plutôt qu’un générateur de grilles arbitraires.
-
-Chaque transition contient `observation`, `legal_actions`, `reward`, `actor`, `revision`. Pour deux joueurs, la récompense appartient à celui qui vient de jouer. `winner` vaut 1/2 pour un gagnant, 0 pour un nul multijoueur ou un échec solo, et `null` pendant la partie. Sudoku permet l’annulation pour récupérer des choix localement valides mais globalement faux.
-
-## HTTP et temps réel
-
-`POST /api` accepte les mêmes requêtes JSON. `GET /api/catalog` retourne le catalogue.
-
-```json
-{"op":"run","session_id":"ID_RETOURNÉ","max_steps":5000,"interval_ms":0,"agents":{"1":{"type":"neural","level":8,"style":"aggressive"},"2":{"type":"neural","level":10,"style":"defensive"}}}
-```
-
-Puis se connecter à `GET /sessions/ID_RETOURNÉ/events` avec `EventSource` ou `curl -N`. Événements SSE : `created`, `started`, `step`, `finished`, `stopped`, `run_error`, `deleted`. Le client peut reprendre avec `Last-Event-ID` ou `?after=N`. Les 256 derniers événements sont conservés ; `resync` fournit une observation complète si le curseur est trop ancien. `stopped` précise `reason` et `truncated` lorsque le budget de coups est épuisé.
-
-L’interface propose aussi :
-
-```js
-const state = window.logicArena.getSnapshot();
-const reply = await window.logicArena.requestAsync({op:'suggest', session_id:state.session_id, agent:{level:10}});
-const unsubscribe = window.logicArena.subscribe(event => console.log(event));
-```
-
-Cette API de navigateur pilote sa session courante. `requestAsync` utilise le worker pour `suggest` et `play` ; `request` reste une variante synchrone pour les intégrations qui en ont besoin. Les sessions autonomes sont plafonnées à 10 000 coups dans le navigateur et à 5 000 par défaut côté Python, avec un intervalle par défaut de 0 ms. L’export JSONL contient les observations publiques, actions et récompenses de la partie. Les graines Python et JavaScript sont reproductibles **dans leur runtime**, mais leurs générateurs aléatoires ne produisent pas les mêmes parties.
-
-## Vérification
-
-```bash
-OPENBLAS_NUM_THREADS=1 python -m unittest discover -s tests -v
-node --test tests/web.test.mjs
-```
-
-Couverture : règles et fins de partie, erreurs sans mutation, observations sans mines cachées, masques légaux, apprentissage et transfert effectif entre jeux, sauvegarde/rechargement, parité des encodages et logits Python/JavaScript, sessions, révisions, HTTP et SSE. Le test HTTP et le lanceur Node nécessitent l’accès au réseau local.
-
-Une vérification réelle sous Chromium contrôle aussi les duels humain/IA, les six moteurs, la résolution des deux puzzles avec planification, le worker d’entraînement, la persistance IndexedDB, le protocole JSON et l’affichage mobile.
-
-## Fichiers
-
-- `logic_arena/games.py` : règles et observations.
-- `logic_arena/neural.py` : réseaux, rétropropagation et module partagé.
-- `logic_arena/planner.py` : orchestration des solveurs et chemins exacts.
-- `logic_arena/tiles.py` : moteur 2048 compact et espérances analytiques.
-- `logic_arena/agents.py` : solveurs professeurs et références.
-- `logic_arena/harness.py`, `server.py` : protocole, sessions, HTTP et SSE.
-- `web/` : interface, moteurs JavaScript, réseau interopérable et worker.
-- `logic_arena/training.py` : Q-learning tabulaire expérimental complémentaire ; il n’est pas l’agent neuronal affiché.
-
-Pas de compte utilisateur ni de stockage cloud des entraînements. Les sessions Python résident en mémoire et disparaissent à l’arrêt du serveur. Les modèles web restent sur l’appareil, sauf export explicite.
+Le [bilan de cohérence 0.6.0](docs/GARRY-0.6-COHERENCE.md) décrit les contrôles disponibles, les vérifications et la protection des évaluations entre sessions.

@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "C:\Users\gabor\code\playi\logic_arena\continuous.py", line 48, in run
+    elif rng.random()<.5:action=champion.for_game(game).choose(obs,legal,10).action
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'action'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\gabor\code\playi\logic_arena\continuous.py", line 84, in <module>
+    p=argparse.ArgumentParser();p.add_argument('--output',required=True,type=Path);p.add_argument('--seconds',type=int,default=3600);args=p.parse_args();run(args.output,args.seconds)
+                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabor\code\playi\logic_arena\continuous.py", line 81, in run
+    emit(True,state='error',phase='failed',error=str(error));raise
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabor\code\playi\logic_arena\continuous.py", line 27, in emit
+    state.update(elapsed_seconds=round(now-start,2),remaining_seconds=max(0,round(deadline-now,2)),updated_at=datetime.now(timezone.utc).isoformat());atomic_json(output/'status.json',state);last_write=now
+                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\gabor\code\playi\logic_arena\continuous.py", line 12, in atomic_json
+    temporary=path.with_suffix('.tmp');temporary.write_text(json.dumps(value,ensure_ascii=False,separators=(',',':')),encoding='utf-8');os.replace(temporary,path)
+                                                                                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Accès refusé: 'C:\\Users\\gabor\\code\\playi\\training\\continuous\\9dd2f500dbff4163990ef57fe98a5368\\status.tmp' -> 'C:\\Users\\gabor\\code\\playi\\training\\continuous\\9dd2f500dbff4163990ef57fe98a5368\\status.json'

@@ -1,0 +1,126 @@
+{
+  "format": "garry-zero-defeat-evaluation-v1",
+  "software_version": "3.2.0",
+  "architecture_changed": false,
+  "policy_weights_revision": "20261016-repertoire-02",
+  "search_revision": "20261017-certified-opening-01",
+  "scope": "Duels depuis le plateau vide contre la version précédente 3.1.0, dans les deux camps, réglages niveau 10 originaux.",
+  "zero_defeats_verified": true,
+  "claim_scope": "observed_duels_at_original_level10_settings",
+  "universal_invincibility_claim": false,
+  "opponents": {
+    "previous": {
+      "before": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 2
+      },
+      "after": {
+        "wins": 1,
+        "losses": 0,
+        "draws": 1
+      },
+      "seats": {
+        "1": {
+          "wins": 0,
+          "losses": 0,
+          "draws": 1
+        },
+        "2": {
+          "wins": 1,
+          "losses": 0,
+          "draws": 0
+        }
+      }
+    },
+    "legacy1": {
+      "before": {
+        "wins": 2,
+        "losses": 0,
+        "draws": 0
+      },
+      "after": {
+        "wins": 2,
+        "losses": 0,
+        "draws": 0
+      },
+      "seats": {
+        "1": {
+          "wins": 1,
+          "losses": 0,
+          "draws": 0
+        },
+        "2": {
+          "wins": 1,
+          "losses": 0,
+          "draws": 0
+        }
+      }
+    }
+  },
+  "default_budget": {
+    "nodes": 200000000,
+    "time_ms": 2000,
+    "max_depth": 42
+  },
+  "full_game_trace_file": "training-runs/garry-zero-20261017/public-api-duels.json",
+  "prototype_stability": {
+    "wins": 2,
+    "losses": 0,
+    "draws": 2,
+    "completed": true
+  },
+  "independent_position_control": {
+    "seed": 17073500,
+    "requested": 256,
+    "nodes": 200000,
+    "before": {
+      "optimal": 249,
+      "errors": 7,
+      "unresolved": 0,
+      "losing_blunders": 4
+    },
+    "after": {
+      "optimal": 253,
+      "errors": 3,
+      "unresolved": 0,
+      "losing_blunders": 1
+    },
+    "paired_known": 256
+  },
+  "validation": {
+    "python_tests": 59,
+    "javascript_tests": 28,
+    "independent_endgame_oracle_cases": 200,
+    "six_game_browser_smoke": true,
+    "browser_migration": {
+      "version": "3.2.0",
+      "memory": 7,
+      "learned_weights_and_steps_preserved": true,
+      "worker_opening": {
+        "column": 2
+      },
+      "worker_proof": "non_loss",
+      "indexedDB": {
+        "version": "3.2.0",
+        "memory": 7
+      },
+      "errors": []
+    },
+    "binary_rebuild_identical": true,
+    "frozen_reference_manifest_verified": true,
+    "all_neural_weights_and_steps_preserved": true
+  },
+  "search_memory_entries": 7,
+  "source_model_sha256": "4dc2bb549cda1ffac2c149de057cf51ec283c6962d2fa997becd93ec44706692",
+  "installed_model_sha256": "747ab285bba25373e5c9fe8055bb0273094a78594726d1e6d4444fd16fbdf9cb",
+  "frozen_wasm_sha256": "69baa7e0ce6512fb8766dddeb7dc0d98d7914afb0dd5bab4cd92e23ee968fdef",
+  "installed_wasm_sha256": "90944af5bebac4343e089b20a0be6c3ab1352beaf8cc5d6f57e338b5e0ab052d",
+  "limitations": [
+    "The empty-board games against a deterministic opponent do not establish universal invincibility against every strategy or arbitrary position.",
+    "The first defensive opening entry is learned from adversarial exploration and has no mathematical non-loss guarantee. The other six entries hold offline win/draw/non-loss proofs.",
+    "A non-loss certificate does not mean a draw is proved, nor that a fastest win is known.",
+    "The independent 256-position low-budget control still contains one losing blunder; those arbitrary starts remain outside the user-confirmed empty-board goal.",
+    "Historical random-prefix defeats and unsuccessful exploration trials remain archived without deletion."
+  ]
+}

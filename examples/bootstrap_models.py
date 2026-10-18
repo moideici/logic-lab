@@ -46,7 +46,7 @@ def ttt_data():
 
 
 def main():
-    directory=Path(__file__).resolve().parents[1]/"web"/"models"
+    directory=Path(__file__).resolve().parents[1]/"training-data"/"legacy-bootstrap"
     directory.mkdir(parents=True,exist_ok=True)
     report={}
     datasets={}
@@ -77,7 +77,9 @@ def main():
         report[game]['training_steps']=model.steps
         report[game]['shared_steps']=core['steps']
     (directory/'report.json').write_text(json.dumps(report,indent=2))
-    print('saved six models with one shared core',flush=True)
+    from logic_arena.general import GarryPolicy
+    GarryPolicy.fuse(models).save(Path(__file__).resolve().parents[1]/'web'/'models'/'garry.json')
+    print('saved Garry as one general model',flush=True)
 
 
 if __name__=="__main__":

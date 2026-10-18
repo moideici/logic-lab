@@ -1,0 +1,516 @@
+{
+  "format": "garry-solo-trials-v1",
+  "seed": 16059000,
+  "episodes": 8,
+  "games": {
+    "2048": {
+      "before": {
+        "wins": 4,
+        "losses": 4,
+        "truncated": 0,
+        "total_score": 146320,
+        "moves": 7834
+      },
+      "after": {
+        "wins": 4,
+        "losses": 4,
+        "truncated": 0,
+        "total_score": 146320,
+        "moves": 7834
+      },
+      "samples": [
+        {
+          "seed": 16059000,
+          "before": {
+            "result": "losses",
+            "score": 7584,
+            "moves": 527
+          },
+          "after": {
+            "result": "losses",
+            "score": 7584,
+            "moves": 527
+          }
+        },
+        {
+          "seed": 16059001,
+          "before": {
+            "result": "losses",
+            "score": 18008,
+            "moves": 1088
+          },
+          "after": {
+            "result": "losses",
+            "score": 18008,
+            "moves": 1088
+          }
+        },
+        {
+          "seed": 16059002,
+          "before": {
+            "result": "wins",
+            "score": 20560,
+            "moves": 987
+          },
+          "after": {
+            "result": "wins",
+            "score": 20560,
+            "moves": 987
+          }
+        },
+        {
+          "seed": 16059003,
+          "before": {
+            "result": "wins",
+            "score": 22212,
+            "moves": 1088
+          },
+          "after": {
+            "result": "wins",
+            "score": 22212,
+            "moves": 1088
+          }
+        },
+        {
+          "seed": 16059004,
+          "before": {
+            "result": "losses",
+            "score": 18820,
+            "moves": 1145
+          },
+          "after": {
+            "result": "losses",
+            "score": 18820,
+            "moves": 1145
+          }
+        },
+        {
+          "seed": 16059005,
+          "before": {
+            "result": "wins",
+            "score": 20204,
+            "moves": 954
+          },
+          "after": {
+            "result": "wins",
+            "score": 20204,
+            "moves": 954
+          }
+        },
+        {
+          "seed": 16059006,
+          "before": {
+            "result": "losses",
+            "score": 18744,
+            "moves": 1097
+          },
+          "after": {
+            "result": "losses",
+            "score": 18744,
+            "moves": 1097
+          }
+        },
+        {
+          "seed": 16059007,
+          "before": {
+            "result": "wins",
+            "score": 20188,
+            "moves": 948
+          },
+          "after": {
+            "result": "wins",
+            "score": 20188,
+            "moves": 948
+          }
+        }
+      ],
+      "passed": true
+    },
+    "sudoku": {
+      "before": {
+        "wins": 8,
+        "losses": 0,
+        "truncated": 0,
+        "total_score": 382,
+        "moves": 382
+      },
+      "after": {
+        "wins": 8,
+        "losses": 0,
+        "truncated": 0,
+        "total_score": 382,
+        "moves": 382
+      },
+      "samples": [
+        {
+          "seed": 16059000,
+          "case_id": "11671f50ac2b58edb2b9a9731ee288d184abdfa4f03239680608c1aa3766edf3",
+          "before": {
+            "result": "wins",
+            "score": 53,
+            "moves": 53
+          },
+          "after": {
+            "result": "wins",
+            "score": 53,
+            "moves": 53
+          }
+        },
+        {
+          "seed": 16059001,
+          "case_id": "c6a2eb0d8a944c6de2e0cc7b0555e498ee44dca4783f726986051f311224e708",
+          "before": {
+            "result": "wins",
+            "score": 41,
+            "moves": 41
+          },
+          "after": {
+            "result": "wins",
+            "score": 41,
+            "moves": 41
+          }
+        },
+        {
+          "seed": 16059002,
+          "case_id": "2e667f12bd321bf5f760798efe69bfbb19ee4e248c828e16e64132ae97b777ee",
+          "before": {
+            "result": "wins",
+            "score": 53,
+            "moves": 53
+          },
+          "after": {
+            "result": "wins",
+            "score": 53,
+            "moves": 53
+          }
+        },
+        {
+          "seed": 16059003,
+          "case_id": "17c035c63563f5cf6c7ea7b48ff989c8f105e0024324a03234edab7eedb965a5",
+          "before": {
+            "result": "wins",
+            "score": 53,
+            "moves": 53
+          },
+          "after": {
+            "result": "wins",
+            "score": 53,
+            "moves": 53
+          }
+        },
+        {
+          "seed": 16059004,
+          "case_id": "4aa4758345637ea04eeadf8cbc6d9daa8f23497b4ca2f6954b6824e512013c6f",
+          "before": {
+            "result": "wins",
+            "score": 47,
+            "moves": 47
+          },
+          "after": {
+            "result": "wins",
+            "score": 47,
+            "moves": 47
+          }
+        },
+        {
+          "seed": 16059005,
+          "case_id": "6d6d85dc90349d321ba97f8cc4f657be8d72002d3ae8a9dd511b4748f31d561f",
+          "before": {
+            "result": "wins",
+            "score": 41,
+            "moves": 41
+          },
+          "after": {
+            "result": "wins",
+            "score": 41,
+            "moves": 41
+          }
+        },
+        {
+          "seed": 16059006,
+          "case_id": "844f7a3bce2cf1578bb402b4f13412e1a435c2d89671eeb64a31ac4e2dd2adb6",
+          "before": {
+            "result": "wins",
+            "score": 53,
+            "moves": 53
+          },
+          "after": {
+            "result": "wins",
+            "score": 53,
+            "moves": 53
+          }
+        },
+        {
+          "seed": 16059007,
+          "case_id": "402ae1d3f3e257f17aa697e690c187e8afb9ba7f960eeeaa5cae926d60be7296",
+          "before": {
+            "result": "wins",
+            "score": 41,
+            "moves": 41
+          },
+          "after": {
+            "result": "wins",
+            "score": 41,
+            "moves": 41
+          }
+        }
+      ],
+      "passed": true
+    },
+    "minesweeper": {
+      "before": {
+        "wins": 6,
+        "losses": 2,
+        "truncated": 0,
+        "total_score": 394,
+        "moves": 132
+      },
+      "after": {
+        "wins": 7,
+        "losses": 1,
+        "truncated": 0,
+        "total_score": 397,
+        "moves": 133
+      },
+      "samples": [
+        {
+          "seed": 16059000,
+          "before": {
+            "result": "wins",
+            "score": 54,
+            "moves": 17
+          },
+          "after": {
+            "result": "wins",
+            "score": 54,
+            "moves": 16
+          }
+        },
+        {
+          "seed": 16059001,
+          "before": {
+            "result": "wins",
+            "score": 54,
+            "moves": 17
+          },
+          "after": {
+            "result": "wins",
+            "score": 54,
+            "moves": 17
+          }
+        },
+        {
+          "seed": 16059002,
+          "before": {
+            "result": "wins",
+            "score": 54,
+            "moves": 23
+          },
+          "after": {
+            "result": "wins",
+            "score": 54,
+            "moves": 23
+          }
+        },
+        {
+          "seed": 16059003,
+          "before": {
+            "result": "wins",
+            "score": 54,
+            "moves": 11
+          },
+          "after": {
+            "result": "wins",
+            "score": 54,
+            "moves": 11
+          }
+        },
+        {
+          "seed": 16059004,
+          "before": {
+            "result": "wins",
+            "score": 54,
+            "moves": 6
+          },
+          "after": {
+            "result": "wins",
+            "score": 54,
+            "moves": 6
+          }
+        },
+        {
+          "seed": 16059005,
+          "before": {
+            "result": "losses",
+            "score": 51,
+            "moves": 27
+          },
+          "after": {
+            "result": "wins",
+            "score": 54,
+            "moves": 29
+          }
+        },
+        {
+          "seed": 16059006,
+          "before": {
+            "result": "losses",
+            "score": 19,
+            "moves": 5
+          },
+          "after": {
+            "result": "losses",
+            "score": 19,
+            "moves": 5
+          }
+        },
+        {
+          "seed": 16059007,
+          "before": {
+            "result": "wins",
+            "score": 54,
+            "moves": 26
+          },
+          "after": {
+            "result": "wins",
+            "score": 54,
+            "moves": 26
+          }
+        }
+      ],
+      "passed": true
+    },
+    "sliding_puzzle": {
+      "before": {
+        "wins": 8,
+        "losses": 0,
+        "truncated": 0,
+        "total_score": 0,
+        "moves": 140
+      },
+      "after": {
+        "wins": 8,
+        "losses": 0,
+        "truncated": 0,
+        "total_score": 0,
+        "moves": 140
+      },
+      "samples": [
+        {
+          "seed": 16059000,
+          "case_id": "ff0ab44f45e211cf301fee9841f22e43e615d0c3f19d340dbc0b66fcd5ac1011",
+          "before": {
+            "result": "wins",
+            "score": 0,
+            "moves": 22
+          },
+          "after": {
+            "result": "wins",
+            "score": 0,
+            "moves": 22
+          }
+        },
+        {
+          "seed": 16059001,
+          "case_id": "fcdd872002567b4411405a627cd22a50c960571c259c770fdf631b76b70f45c6",
+          "before": {
+            "result": "wins",
+            "score": 0,
+            "moves": 16
+          },
+          "after": {
+            "result": "wins",
+            "score": 0,
+            "moves": 16
+          }
+        },
+        {
+          "seed": 16059002,
+          "case_id": "0a5c14efb39dabf742f2680ff0f54879a13c78e9306cf32ac3b0caab459b8085",
+          "before": {
+            "result": "wins",
+            "score": 0,
+            "moves": 11
+          },
+          "after": {
+            "result": "wins",
+            "score": 0,
+            "moves": 11
+          }
+        },
+        {
+          "seed": 16059003,
+          "case_id": "98460fcbc677d55c44418ed840ee77bd7f4c9260d9ac765d2c84f00aae1a38e5",
+          "before": {
+            "result": "wins",
+            "score": 0,
+            "moves": 15
+          },
+          "after": {
+            "result": "wins",
+            "score": 0,
+            "moves": 15
+          }
+        },
+        {
+          "seed": 16059004,
+          "case_id": "0d2ea6ecb980f15bc06cb2e29b9e8d11df96f3d7757023ff9a3df9f8470f7d72",
+          "before": {
+            "result": "wins",
+            "score": 0,
+            "moves": 21
+          },
+          "after": {
+            "result": "wins",
+            "score": 0,
+            "moves": 21
+          }
+        },
+        {
+          "seed": 16059005,
+          "case_id": "4a1e02e14e9ed31548c1a7f60a44d185746c9839803f590d9480c9a24d1cc4af",
+          "before": {
+            "result": "wins",
+            "score": 0,
+            "moves": 25
+          },
+          "after": {
+            "result": "wins",
+            "score": 0,
+            "moves": 25
+          }
+        },
+        {
+          "seed": 16059006,
+          "case_id": "ceb126e2b2c0885c5847d458401ffc80d221e1f118a5ecc3493fc62ab9c24e2e",
+          "before": {
+            "result": "wins",
+            "score": 0,
+            "moves": 21
+          },
+          "after": {
+            "result": "wins",
+            "score": 0,
+            "moves": 21
+          }
+        },
+        {
+          "seed": 16059007,
+          "case_id": "2769df5d0bc7dc231683cf47362095bc5ee0b1dfc3463aa5b60700753c5ce569",
+          "before": {
+            "result": "wins",
+            "score": 0,
+            "moves": 9
+          },
+          "after": {
+            "result": "wins",
+            "score": 0,
+            "moves": 9
+          }
+        }
+      ],
+      "passed": true
+    }
+  },
+  "note": "Eight paired games or held-out puzzles per mode. Fixed node budgets; no time comparison. 2048 has a 2000-move cap; truncations never count as wins."
+}

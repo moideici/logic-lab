@@ -1,0 +1,1636 @@
+{
+  "name": "garry",
+  "version": "2.0.0",
+  "baseline": "1.0.0",
+  "seed": 1100000,
+  "episodes": 20,
+  "node_budgets": {
+    "current": 3000000,
+    "previous": 5000
+  },
+  "runtime": "v24.14.0",
+  "note": "Puissance 4 : budgets en nœuds différents et plafond de sécurité de 10 secondes. Les autres jeux utilisent leurs budgets locaux habituels. Les pertes solo sont distinguées des régressions face à la référence. Les budgets muraux peuvent changer les résultats selon la machine.",
+  "games": {
+    "2048": {
+      "episodes": 20,
+      "wins": 20,
+      "losses": 0,
+      "draws": 0,
+      "regressions": 0,
+      "samples": [
+        {
+          "seed": 1100000,
+          "current": {
+            "won": true,
+            "score": 20148,
+            "moves": 938,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20148,
+            "moves": 938,
+            "truncated": false
+          },
+          "ms": 3687
+        },
+        {
+          "seed": 1100000,
+          "current": {
+            "won": true,
+            "score": 20148,
+            "moves": 938,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20148,
+            "moves": 938,
+            "truncated": false
+          },
+          "ms": 3487
+        },
+        {
+          "seed": 1100001,
+          "current": {
+            "won": true,
+            "score": 20484,
+            "moves": 979,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20484,
+            "moves": 979,
+            "truncated": false
+          },
+          "ms": 4219
+        },
+        {
+          "seed": 1100001,
+          "current": {
+            "won": true,
+            "score": 20484,
+            "moves": 979,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20484,
+            "moves": 979,
+            "truncated": false
+          },
+          "ms": 4258
+        },
+        {
+          "seed": 1100002,
+          "current": {
+            "won": true,
+            "score": 20344,
+            "moves": 972,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20344,
+            "moves": 972,
+            "truncated": false
+          },
+          "ms": 3515
+        },
+        {
+          "seed": 1100002,
+          "current": {
+            "won": true,
+            "score": 20344,
+            "moves": 972,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20344,
+            "moves": 972,
+            "truncated": false
+          },
+          "ms": 3490
+        },
+        {
+          "seed": 1100003,
+          "current": {
+            "won": true,
+            "score": 20436,
+            "moves": 965,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20436,
+            "moves": 965,
+            "truncated": false
+          },
+          "ms": 3118
+        },
+        {
+          "seed": 1100003,
+          "current": {
+            "won": true,
+            "score": 20436,
+            "moves": 965,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20436,
+            "moves": 965,
+            "truncated": false
+          },
+          "ms": 3181
+        },
+        {
+          "seed": 1100004,
+          "current": {
+            "won": true,
+            "score": 20216,
+            "moves": 954,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20216,
+            "moves": 954,
+            "truncated": false
+          },
+          "ms": 3553
+        },
+        {
+          "seed": 1100004,
+          "current": {
+            "won": true,
+            "score": 20216,
+            "moves": 954,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20216,
+            "moves": 954,
+            "truncated": false
+          },
+          "ms": 3562
+        },
+        {
+          "seed": 1100005,
+          "current": {
+            "won": true,
+            "score": 20380,
+            "moves": 969,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20380,
+            "moves": 969,
+            "truncated": false
+          },
+          "ms": 4000
+        },
+        {
+          "seed": 1100005,
+          "current": {
+            "won": true,
+            "score": 20380,
+            "moves": 969,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20380,
+            "moves": 969,
+            "truncated": false
+          },
+          "ms": 3743
+        },
+        {
+          "seed": 1100006,
+          "current": {
+            "won": true,
+            "score": 20216,
+            "moves": 952,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20216,
+            "moves": 952,
+            "truncated": false
+          },
+          "ms": 4003
+        },
+        {
+          "seed": 1100006,
+          "current": {
+            "won": true,
+            "score": 20216,
+            "moves": 952,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20216,
+            "moves": 952,
+            "truncated": false
+          },
+          "ms": 3991
+        },
+        {
+          "seed": 1100007,
+          "current": {
+            "won": true,
+            "score": 20588,
+            "moves": 994,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20588,
+            "moves": 994,
+            "truncated": false
+          },
+          "ms": 4422
+        },
+        {
+          "seed": 1100007,
+          "current": {
+            "won": true,
+            "score": 20588,
+            "moves": 994,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 20588,
+            "moves": 994,
+            "truncated": false
+          },
+          "ms": 4148
+        },
+        {
+          "seed": 1100008,
+          "current": {
+            "won": true,
+            "score": 21304,
+            "moves": 1042,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 21304,
+            "moves": 1042,
+            "truncated": false
+          },
+          "ms": 3991
+        },
+        {
+          "seed": 1100008,
+          "current": {
+            "won": true,
+            "score": 21304,
+            "moves": 1042,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 21304,
+            "moves": 1042,
+            "truncated": false
+          },
+          "ms": 3894
+        },
+        {
+          "seed": 1100009,
+          "current": {
+            "won": true,
+            "score": 21036,
+            "moves": 1024,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 21036,
+            "moves": 1024,
+            "truncated": false
+          },
+          "ms": 4277
+        },
+        {
+          "seed": 1100009,
+          "current": {
+            "won": true,
+            "score": 21036,
+            "moves": 1024,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 21036,
+            "moves": 1024,
+            "truncated": false
+          },
+          "ms": 4253
+        }
+      ],
+      "loss_rate": 0
+    },
+    "tictactoe": {
+      "episodes": 20,
+      "wins": 0,
+      "losses": 0,
+      "draws": 20,
+      "regressions": 0,
+      "samples": [
+        {
+          "seed": 1100000,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 20
+        },
+        {
+          "seed": 1100000,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 8
+        },
+        {
+          "seed": 1100001,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100001,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100002,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100002,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100003,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100003,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100004,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100004,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100005,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100005,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100006,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100006,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100007,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100007,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100008,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100008,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 2
+        },
+        {
+          "seed": 1100009,
+          "player": 1,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100009,
+          "player": 2,
+          "winner": 0,
+          "moves": 9,
+          "ms": 1
+        }
+      ],
+      "loss_rate": 0
+    },
+    "connect4": {
+      "episodes": 20,
+      "wins": 13,
+      "losses": 6,
+      "draws": 1,
+      "regressions": 0,
+      "samples": [
+        {
+          "seed": 1100000,
+          "player": 1,
+          "winner": 1,
+          "moves": 9,
+          "ms": 3
+        },
+        {
+          "seed": 1100000,
+          "player": 2,
+          "winner": 1,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100001,
+          "player": 1,
+          "winner": 1,
+          "moves": 37,
+          "ms": 975
+        },
+        {
+          "seed": 1100001,
+          "player": 2,
+          "winner": 2,
+          "moves": 36,
+          "ms": 700
+        },
+        {
+          "seed": 1100002,
+          "player": 1,
+          "winner": 1,
+          "moves": 29,
+          "ms": 1148
+        },
+        {
+          "seed": 1100002,
+          "player": 2,
+          "winner": 2,
+          "moves": 38,
+          "ms": 666
+        },
+        {
+          "seed": 1100003,
+          "player": 1,
+          "winner": 1,
+          "moves": 41,
+          "ms": 1831
+        },
+        {
+          "seed": 1100003,
+          "player": 2,
+          "winner": 2,
+          "moves": 36,
+          "ms": 1362
+        },
+        {
+          "seed": 1100004,
+          "player": 1,
+          "winner": 1,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100004,
+          "player": 2,
+          "winner": 1,
+          "moves": 9,
+          "ms": 1
+        },
+        {
+          "seed": 1100005,
+          "player": 1,
+          "winner": 2,
+          "moves": 40,
+          "ms": 1622
+        },
+        {
+          "seed": 1100005,
+          "player": 2,
+          "winner": 0,
+          "moves": 42,
+          "ms": 1365
+        },
+        {
+          "seed": 1100006,
+          "player": 1,
+          "winner": 1,
+          "moves": 7,
+          "ms": 0
+        },
+        {
+          "seed": 1100006,
+          "player": 2,
+          "winner": 1,
+          "moves": 7,
+          "ms": 0
+        },
+        {
+          "seed": 1100007,
+          "player": 1,
+          "winner": 2,
+          "moves": 40,
+          "ms": 1236
+        },
+        {
+          "seed": 1100007,
+          "player": 2,
+          "winner": 2,
+          "moves": 34,
+          "ms": 809
+        },
+        {
+          "seed": 1100008,
+          "player": 1,
+          "winner": 1,
+          "moves": 39,
+          "ms": 1216
+        },
+        {
+          "seed": 1100008,
+          "player": 2,
+          "winner": 2,
+          "moves": 38,
+          "ms": 732
+        },
+        {
+          "seed": 1100009,
+          "player": 1,
+          "winner": 1,
+          "moves": 29,
+          "ms": 1114
+        },
+        {
+          "seed": 1100009,
+          "player": 2,
+          "winner": 1,
+          "moves": 33,
+          "ms": 1094
+        }
+      ],
+      "loss_rate": 0.3
+    },
+    "sudoku": {
+      "episodes": 20,
+      "wins": 20,
+      "losses": 0,
+      "draws": 0,
+      "regressions": 0,
+      "samples": [
+        {
+          "seed": 1100000,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 33
+        },
+        {
+          "seed": 1100000,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 23
+        },
+        {
+          "seed": 1100001,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 24
+        },
+        {
+          "seed": 1100001,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 22
+        },
+        {
+          "seed": 1100002,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 22
+        },
+        {
+          "seed": 1100002,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 19
+        },
+        {
+          "seed": 1100003,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 23
+        },
+        {
+          "seed": 1100003,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 19
+        },
+        {
+          "seed": 1100004,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 26
+        },
+        {
+          "seed": 1100004,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 20
+        },
+        {
+          "seed": 1100005,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 23
+        },
+        {
+          "seed": 1100005,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 19
+        },
+        {
+          "seed": 1100006,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 21
+        },
+        {
+          "seed": 1100006,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 20
+        },
+        {
+          "seed": 1100007,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 22
+        },
+        {
+          "seed": 1100007,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 19
+        },
+        {
+          "seed": 1100008,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 21
+        },
+        {
+          "seed": 1100008,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 19
+        },
+        {
+          "seed": 1100009,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 25
+        },
+        {
+          "seed": 1100009,
+          "current": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 51,
+            "moves": 51,
+            "truncated": false
+          },
+          "ms": 20
+        }
+      ],
+      "loss_rate": 0
+    },
+    "minesweeper": {
+      "episodes": 20,
+      "wins": 18,
+      "losses": 2,
+      "draws": 0,
+      "regressions": 0,
+      "samples": [
+        {
+          "seed": 1100000,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 18,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 18,
+            "truncated": false
+          },
+          "ms": 13
+        },
+        {
+          "seed": 1100000,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 18,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 18,
+            "truncated": false
+          },
+          "ms": 9
+        },
+        {
+          "seed": 1100001,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 9,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 9,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100001,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 9,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 9,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100002,
+          "current": {
+            "won": false,
+            "score": 52,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": false,
+            "score": 52,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 8
+        },
+        {
+          "seed": 1100002,
+          "current": {
+            "won": false,
+            "score": 52,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": false,
+            "score": 52,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 12
+        },
+        {
+          "seed": 1100003,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "ms": 6
+        },
+        {
+          "seed": 1100003,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100004,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 19,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 19,
+            "truncated": false
+          },
+          "ms": 6
+        },
+        {
+          "seed": 1100004,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 19,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 19,
+            "truncated": false
+          },
+          "ms": 6
+        },
+        {
+          "seed": 1100005,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 21,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 21,
+            "truncated": false
+          },
+          "ms": 12
+        },
+        {
+          "seed": 1100005,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 21,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 21,
+            "truncated": false
+          },
+          "ms": 8
+        },
+        {
+          "seed": 1100006,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "ms": 5
+        },
+        {
+          "seed": 1100006,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "ms": 5
+        },
+        {
+          "seed": 1100007,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 9,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 9,
+            "truncated": false
+          },
+          "ms": 2
+        },
+        {
+          "seed": 1100007,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 9,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 9,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100008,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "ms": 6
+        },
+        {
+          "seed": 1100008,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 17,
+            "truncated": false
+          },
+          "ms": 6
+        },
+        {
+          "seed": 1100009,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 10,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 10,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100009,
+          "current": {
+            "won": true,
+            "score": 54,
+            "moves": 10,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 54,
+            "moves": 10,
+            "truncated": false
+          },
+          "ms": 2
+        }
+      ],
+      "loss_rate": 0.1
+    },
+    "sliding_puzzle": {
+      "episodes": 20,
+      "wins": 20,
+      "losses": 0,
+      "draws": 0,
+      "regressions": 0,
+      "samples": [
+        {
+          "seed": 1100000,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 5
+        },
+        {
+          "seed": 1100000,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100001,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100001,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "ms": 6
+        },
+        {
+          "seed": 1100002,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100002,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100003,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 26,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 26,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100003,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 26,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 26,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100004,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "ms": 5
+        },
+        {
+          "seed": 1100004,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100005,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100005,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100006,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100006,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100007,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 18,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 18,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100007,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 18,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 18,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100008,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100008,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 20,
+            "truncated": false
+          },
+          "ms": 3
+        },
+        {
+          "seed": 1100009,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 4
+        },
+        {
+          "seed": 1100009,
+          "current": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "previous": {
+            "won": true,
+            "score": 0,
+            "moves": 22,
+            "truncated": false
+          },
+          "ms": 3
+        }
+      ],
+      "loss_rate": 0
+    }
+  },
+  "zero_defeat_target_met": false
+}

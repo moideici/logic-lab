@@ -1,0 +1,27 @@
+{
+  "state": "completed",
+  "fresh_counts": {
+    "draughts": {
+      "train": 300,
+      "validation": 80,
+      "test": 80
+    },
+    "breakthrough": {
+      "train": 300,
+      "validation": 80,
+      "test": 80
+    }
+  },
+  "profiles": [
+    "random",
+    "captures",
+    "policy",
+    "search"
+  ],
+  "teacher_nodes": 2000,
+  "teacher_depth": 4,
+  "quarantine": "board, actor and capture continuation, including role-swap symmetries; history counters ignored conservatively",
+  "old_training_replayed": 360,
+  "fresh_positions": 920,
+  "seconds": 163.31300000000192
+}

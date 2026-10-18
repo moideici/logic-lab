@@ -1,0 +1,11 @@
+import {legalStrategy,stepStrategy,pieceOwner,newDraughtsState} from './strategy-games.js';
+export function evaluateStrategy(name,b,p){let score=0;for(let r=0;r<b.length;r++)for(let c=0;c<b.length;c++){const v=b[r][c];if(!v)continue;const who=pieceOwner(v),advance=who===1?b.length-1-r:r,value=name==='draughts'?(v>2?320:100+advance*3)+Math.min(c,b.length-1-c)*2:100+advance*12+advance*advance*3;score+=(who===p?1:-1)*value;}return score;}
+export function strategyValues(o,legal,budget,{maxDepth=6}={}){
+ const name=o.game,root=o.current_player,state=o.draughts_state??newDraughtsState();let allExact=true;
+ const child=(b,p,a,s)=>{const board=b.map(r=>r.slice()),result=stepStrategy(name,board,p,a,structuredClone(s));return [board,result];};
+ const terminal=(result,p)=>result.winner===0?0:result.winner===p?100000:-100000;
+ function visit(b,p,s,depth,alpha,beta){budget.tick();const actions=legalStrategy(name,b,p,s);if(!actions.length)return -100000;if(depth<=0&&!s.forced_piece){allExact=false;return evaluateStrategy(name,b,p);}actions.sort((a,d)=>Number(!!b[d.to[0]][d.to[1]])-Number(!!b[a.to[0]][a.to[1]])||Math.abs(d.to[0]-d.from[0])-Math.abs(a.to[0]-a.from[0]));let best=-1000000;for(const a of actions){const [board,result]=child(b,p,a,s),value=result.done?terminal(result,p):result.player===p?visit(board,p,result.state,depth,alpha,beta):-visit(board,3-p,result.state,depth-1,-beta,-alpha);best=Math.max(best,value);alpha=Math.max(alpha,value);if(alpha>=beta)break;}return best;}
+ let values=legal.map(action=>{const [b,s]=child(o.board,root,action,state);return {action,quality:[s.done?terminal(s,root):evaluateStrategy(name,b,root)]};}),depth=0,exact=false;
+ for(let d=1;d<=maxDepth;d++){const next=[];allExact=true;try{for(const action of legal){budget.tick();const [b,s]=child(o.board,root,action,state),value=s.done?terminal(s,root):s.player===root?visit(b,root,s.state,d,-1000000,1000000):-visit(b,3-root,s.state,d-1,-1000000,1000000);next.push({action,quality:[value]});}}catch(e){if(e.message!=='budget')throw e;break;}values=next;depth=d;exact=allExact;if(exact)break;}
+ return {action_values:values,info:{method:name+'_alpha_beta',depth,nodes:budget.nodes,analysis_exact:exact,optimal:exact,evaluation_scope:exact?'exact_game_outcome':'bounded_adversarial_search'}};
+}

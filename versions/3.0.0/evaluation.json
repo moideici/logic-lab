@@ -1,0 +1,514 @@
+{
+  "seed": 9200000,
+  "episodes": 40,
+  "new_nodes": 3000000,
+  "opponent_nodes": 5000,
+  "paired_openings": true,
+  "baseline": "frozen Garry 2.0.0 model and WASM",
+  "opponent": "frozen 1.0.0",
+  "before": {
+    "wins": 30,
+    "losses": 6,
+    "draws": 4
+  },
+  "after": {
+    "wins": 32,
+    "losses": 3,
+    "draws": 5
+  },
+  "samples": [
+    {
+      "seed": 9200000,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 25
+      },
+      "after": {
+        "winner": 1,
+        "moves": 37
+      }
+    },
+    {
+      "seed": 9200000,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 30
+      },
+      "after": {
+        "winner": 2,
+        "moves": 36
+      }
+    },
+    {
+      "seed": 9200001,
+      "player": 1,
+      "before": {
+        "winner": 0,
+        "moves": 42
+      },
+      "after": {
+        "winner": 1,
+        "moves": 41
+      }
+    },
+    {
+      "seed": 9200001,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 34
+      },
+      "after": {
+        "winner": 2,
+        "moves": 34
+      }
+    },
+    {
+      "seed": 9200002,
+      "player": 1,
+      "before": {
+        "winner": 2,
+        "moves": 38
+      },
+      "after": {
+        "winner": 2,
+        "moves": 40
+      }
+    },
+    {
+      "seed": 9200002,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 28
+      },
+      "after": {
+        "winner": 2,
+        "moves": 32
+      }
+    },
+    {
+      "seed": 9200003,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 33
+      },
+      "after": {
+        "winner": 1,
+        "moves": 33
+      }
+    },
+    {
+      "seed": 9200003,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 40
+      },
+      "after": {
+        "winner": 2,
+        "moves": 40
+      }
+    },
+    {
+      "seed": 9200004,
+      "player": 1,
+      "before": {
+        "winner": 2,
+        "moves": 40
+      },
+      "after": {
+        "winner": 1,
+        "moves": 41
+      }
+    },
+    {
+      "seed": 9200004,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 36
+      },
+      "after": {
+        "winner": 2,
+        "moves": 38
+      }
+    },
+    {
+      "seed": 9200005,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 35
+      },
+      "after": {
+        "winner": 0,
+        "moves": 42
+      }
+    },
+    {
+      "seed": 9200005,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 36
+      },
+      "after": {
+        "winner": 2,
+        "moves": 40
+      }
+    },
+    {
+      "seed": 9200006,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 37
+      },
+      "after": {
+        "winner": 1,
+        "moves": 37
+      }
+    },
+    {
+      "seed": 9200006,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 40
+      },
+      "after": {
+        "winner": 2,
+        "moves": 40
+      }
+    },
+    {
+      "seed": 9200007,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 33
+      },
+      "after": {
+        "winner": 0,
+        "moves": 42
+      }
+    },
+    {
+      "seed": 9200007,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 34
+      },
+      "after": {
+        "winner": 2,
+        "moves": 34
+      }
+    },
+    {
+      "seed": 9200008,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 29
+      },
+      "after": {
+        "winner": 1,
+        "moves": 29
+      }
+    },
+    {
+      "seed": 9200008,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 22
+      },
+      "after": {
+        "winner": 2,
+        "moves": 20
+      }
+    },
+    {
+      "seed": 9200009,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 33
+      },
+      "after": {
+        "winner": 1,
+        "moves": 29
+      }
+    },
+    {
+      "seed": 9200009,
+      "player": 2,
+      "before": {
+        "winner": 0,
+        "moves": 42
+      },
+      "after": {
+        "winner": 2,
+        "moves": 36
+      }
+    },
+    {
+      "seed": 9200010,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 7
+      },
+      "after": {
+        "winner": 1,
+        "moves": 7
+      }
+    },
+    {
+      "seed": 9200010,
+      "player": 2,
+      "before": {
+        "winner": 1,
+        "moves": 7
+      },
+      "after": {
+        "winner": 1,
+        "moves": 7
+      }
+    },
+    {
+      "seed": 9200011,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 33
+      },
+      "after": {
+        "winner": 1,
+        "moves": 29
+      }
+    },
+    {
+      "seed": 9200011,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 42
+      },
+      "after": {
+        "winner": 2,
+        "moves": 42
+      }
+    },
+    {
+      "seed": 9200012,
+      "player": 1,
+      "before": {
+        "winner": 2,
+        "moves": 38
+      },
+      "after": {
+        "winner": 1,
+        "moves": 39
+      }
+    },
+    {
+      "seed": 9200012,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 38
+      },
+      "after": {
+        "winner": 2,
+        "moves": 38
+      }
+    },
+    {
+      "seed": 9200013,
+      "player": 1,
+      "before": {
+        "winner": 0,
+        "moves": 42
+      },
+      "after": {
+        "winner": 0,
+        "moves": 42
+      }
+    },
+    {
+      "seed": 9200013,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 36
+      },
+      "after": {
+        "winner": 2,
+        "moves": 36
+      }
+    },
+    {
+      "seed": 9200014,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 31
+      },
+      "after": {
+        "winner": 1,
+        "moves": 25
+      }
+    },
+    {
+      "seed": 9200014,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 38
+      },
+      "after": {
+        "winner": 2,
+        "moves": 38
+      }
+    },
+    {
+      "seed": 9200015,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 23
+      },
+      "after": {
+        "winner": 1,
+        "moves": 23
+      }
+    },
+    {
+      "seed": 9200015,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 40
+      },
+      "after": {
+        "winner": 2,
+        "moves": 38
+      }
+    },
+    {
+      "seed": 9200016,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 35
+      },
+      "after": {
+        "winner": 1,
+        "moves": 29
+      }
+    },
+    {
+      "seed": 9200016,
+      "player": 2,
+      "before": {
+        "winner": 0,
+        "moves": 42
+      },
+      "after": {
+        "winner": 2,
+        "moves": 36
+      }
+    },
+    {
+      "seed": 9200017,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 27
+      },
+      "after": {
+        "winner": 0,
+        "moves": 42
+      }
+    },
+    {
+      "seed": 9200017,
+      "player": 2,
+      "before": {
+        "winner": 1,
+        "moves": 37
+      },
+      "after": {
+        "winner": 2,
+        "moves": 36
+      }
+    },
+    {
+      "seed": 9200018,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 7
+      },
+      "after": {
+        "winner": 1,
+        "moves": 7
+      }
+    },
+    {
+      "seed": 9200018,
+      "player": 2,
+      "before": {
+        "winner": 1,
+        "moves": 7
+      },
+      "after": {
+        "winner": 1,
+        "moves": 7
+      }
+    },
+    {
+      "seed": 9200019,
+      "player": 1,
+      "before": {
+        "winner": 1,
+        "moves": 21
+      },
+      "after": {
+        "winner": 1,
+        "moves": 21
+      }
+    },
+    {
+      "seed": 9200019,
+      "player": 2,
+      "before": {
+        "winner": 2,
+        "moves": 42
+      },
+      "after": {
+        "winner": 0,
+        "moves": 42
+      }
+    }
+  ],
+  "note": "Same paired seeds and node budgets for before/after. Different node budgets versus opponent; no universal zero-loss guarantee.",
+  "standard_start": [
+    {
+      "player": 1,
+      "winner": 1,
+      "moves": 35
+    },
+    {
+      "player": 2,
+      "winner": 2,
+      "moves": 34
+    }
+  ]
+}

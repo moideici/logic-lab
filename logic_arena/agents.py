@@ -9,6 +9,7 @@ import time
 from dataclasses import dataclass
 
 from .games import slide_2048, sudoku_candidates
+from .identity import agent_identity
 
 
 STYLES = {
@@ -51,8 +52,8 @@ class Decision:
 
 class ReferenceAgent:
     def __init__(self, level=5, style="balanced", seed=0, time_ms=None):
-        if type(level) is not int or not 1 <= level <= 10:
-            raise ValueError("level doit être un entier entre 1 et 10")
+        if type(level) is not int or not 0 <= level <= 10:
+            raise ValueError("level doit être un entier entre 0 et 10")
         if style not in STYLES:
             raise ValueError(f"style doit être parmi {list(STYLES)}")
         if time_ms is not None and (type(time_ms) not in (int, float) or not math.isfinite(time_ms) or not 0 < time_ms <= 10000):
@@ -60,31 +61,25 @@ class ReferenceAgent:
         self.level, self.style = level, style
         self.weights = STYLES[style]
         self.rng = random.Random(seed)
-        self.time_ms = TIME_LIMITS[level-1] if time_ms is None else time_ms
+        self.time_ms = TIME_LIMITS[-1] if time_ms is None else time_ms
 
     def choose(self, observation, legal_actions):
         if not legal_actions or observation["done"]:
             raise ValueError("Aucun coup disponible")
-        budget = Budget(NODE_LIMITS[self.level-1], self.time_ms)
-        fallback = self.rng.choice(legal_actions)
-        method = "random"
-        action = fallback
-        explore = max((10-self.level)*.025, self.weights["exploration"])
-        if self.level == 1 or self.rng.random() < explore:
-            pass
-        else:
-            name = observation["game"]
-            method = {"tictactoe": "alpha_beta", "connect4": "alpha_beta", "2048": "expectimax",
-                      "sudoku": "mrv_backtracking", "minesweeper": "public_constraints", "sliding_puzzle": "a_star"}[name]
-            solver = {"tictactoe": self.line_game, "connect4": self.line_game, "2048": self.tiles,
-                      "sudoku": self.sudoku, "minesweeper": self.mines, "sliding_puzzle": self.sliding}[name]
-            action = solver(observation, legal_actions, budget, fallback)
-        return Decision(action, {"agent": "reference", "method": method, "level": self.level,
-                                 "style": self.style, "nodes": budget.nodes, "node_limit": budget.limit,
-                                 "time_ms": round((time.monotonic()-budget.start)*1000, 3),
-                                 "budget_ms": self.time_ms})
+        from .planner import plan
+        from .neural import SPECS
+        import numpy as np
+        class Neutral:
+            position_head=None
+            def logits(self,obs):return np.zeros(SPECS[obs['game']][1])
+        started=time.monotonic()
+        action,info=plan(observation,legal_actions,Neutral(),self.level,legal_actions[0],self.time_ms,style=self.style,rng=self.rng)
+        return Decision(action,{**info,'agent':'reference','identity':agent_identity(observation['game']),'style':self.style,'time_ms':round((time.monotonic()-started)*1000,3)})
 
     def line_game(self, obs, actions, budget, fallback):
+        if obs["game"] == "connect4":
+            from .connect4_wasm import search
+            return search(obs, actions, budget, weights=self.weights, max_depth=min(10, self.level))[0]
         board = [r[:] for r in obs["board"]]
         rows, cols = len(board), len(board[0])
         target = 3 if cols == 3 else 4
@@ -319,10 +314,21 @@ class ReferenceAgent:
             area = sum((x, y) in hidden for x in range(max(0, r-1), min(n, r+2)) for y in range(max(0, c-1), min(n, c+2)))
             # Information preference only refines risk; inferred mines are never selected.
             return risk - area*.002*(1+self.weights["risk"]*3)
+        self._mine_values=[]
+        for a in actions:
+            p=(a['row'],a['col'])
+            risk=0. if p in safe else 1. if p in bombs else max([count/len(cells) for cells,count in constraints if p in cells and cells] or [base])
+            area=sum((x,y) in hidden for x in range(max(0,p[0]-1),min(n,p[0]+2)) for y in range(max(0,p[1]-1),min(n,p[1]+2)))
+            if len(hidden)==n*n:risk=0. # protected opening rule
+            self._mine_values.append({'action':a,'quality':[-risk,area],'risk':risk})
         r, c = min(sorted(available), key=value)
         return {"row": r, "col": c}
 
     def sliding(self, obs, actions, budget, fallback):
+        if len(obs['board'])>3:
+            from .large_sliding import large_sliding_values
+            values,info=large_sliding_values(obs,actions,budget)
+            return max(values,key=lambda v:v['quality'])['action']
         initial = tuple(v for row in obs["board"] for v in row)
         goal = (1, 2, 3, 4, 5, 6, 7, 8, 0)
 

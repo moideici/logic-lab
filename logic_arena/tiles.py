@@ -144,25 +144,28 @@ def search(obs, legal, logits, budget, max_depth=2, critical_depth=None):
         return total
 
     best, best_value, depth_reached = ordered[0], -float("inf"), 0
+    root_values=[]
     # Cette passe non récursive fournit toujours un coup évalué, même si le
     # délai expire pendant l'approfondissement ou l'initialisation des tables.
     for action in ordered:
         child, gain = move(initial, action["direction"], tables)
-        if won(child):
-            return action, {"method": "expectimax_goal", "optimal": True, "remaining_moves": 1, "nodes": budget.nodes}
-        value = heuristic(child, tables) + gain*.05
+        value = 1e12 if won(child) else heuristic(child, tables) + gain*.05
+        root_values.append({'action':action,'quality':[value]})
         if value > best_value + 1e-7:
             best, best_value = action, value
     depth_limit = critical_depth if critical_depth and sum(((row >> shift) & 15) == 0 for row in initial for shift in (0,4,8,12)) <= 4 else max_depth
     for depth in range(1, depth_limit+1):
         candidate, value = best, -float("inf")
+        next_values=[]
         try:
             for action in ordered:
                 child, gain = move(initial, action["direction"], tables)
-                score = chance(child, depth) + gain*.05
+                score = 1e12 if won(child) else chance(child, depth) + gain*.05
+                next_values.append({'action':action,'quality':[score]})
                 if score > value + 1e-7:
                     candidate, value = action, score
             best, depth_reached = candidate, depth
+            root_values=next_values
         except Exhausted:
             break
-    return best, {"method": "neural_expectimax_tables", "optimal": False, "depth": depth_reached, "nodes": budget.nodes}
+    return best, {"method": "expectimax_goal" if best_value==1e12 else "neural_expectimax_tables", "optimal":best_value==1e12,"remaining_moves":1 if best_value==1e12 else None,"depth": depth_reached, "nodes": budget.nodes,"action_values":root_values}

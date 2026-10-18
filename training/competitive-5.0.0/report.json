@@ -1,0 +1,187 @@
+{
+  "version": "5.0.0",
+  "architecture": [
+    3055,
+    48,
+    48,
+    3894
+  ],
+  "counts": {
+    "hex": {
+      "train": 180,
+      "validation": 50,
+      "test": 50
+    },
+    "gomoku": {
+      "train": 180,
+      "validation": 50,
+      "test": 50
+    }
+  },
+  "games": {
+    "hex": {
+      "selected_epoch": 13,
+      "presentations": 2340,
+      "validation_before": {
+        "samples": 50,
+        "soft_cross_entropy": 3.6183319091796875,
+        "optimal_choice_rate": 0.14,
+        "sound_choice_rate": 0.14,
+        "acceptable_target_mass": 0.15076814591884613,
+        "categories": {
+          "middle": {
+            "samples": 33,
+            "optimal_choice_rate": 0.21212121212121213,
+            "sound_choice_rate": 0.21212121212121213
+          },
+          "opening": {
+            "samples": 17,
+            "optimal_choice_rate": 0.0,
+            "sound_choice_rate": 0.0
+          }
+        }
+      },
+      "validation_after": {
+        "samples": 50,
+        "soft_cross_entropy": 3.1368134021759033,
+        "optimal_choice_rate": 0.44,
+        "sound_choice_rate": 0.44,
+        "acceptable_target_mass": 0.20123140513896942,
+        "categories": {
+          "middle": {
+            "samples": 33,
+            "optimal_choice_rate": 0.3939393939393939,
+            "sound_choice_rate": 0.3939393939393939
+          },
+          "opening": {
+            "samples": 17,
+            "optimal_choice_rate": 0.5294117647058824,
+            "sound_choice_rate": 0.5294117647058824
+          }
+        }
+      },
+      "test_before": {
+        "samples": 50,
+        "soft_cross_entropy": 3.5851693153381348,
+        "optimal_choice_rate": 0.24,
+        "sound_choice_rate": 0.24,
+        "acceptable_target_mass": 0.23639488220214844,
+        "categories": {
+          "middle": {
+            "samples": 35,
+            "optimal_choice_rate": 0.3142857142857143,
+            "sound_choice_rate": 0.3142857142857143
+          },
+          "opening": {
+            "samples": 15,
+            "optimal_choice_rate": 0.06666666666666667,
+            "sound_choice_rate": 0.06666666666666667
+          }
+        }
+      },
+      "test_after": {
+        "samples": 50,
+        "soft_cross_entropy": 3.1759955883026123,
+        "optimal_choice_rate": 0.44,
+        "sound_choice_rate": 0.44,
+        "acceptable_target_mass": 0.3011217415332794,
+        "categories": {
+          "middle": {
+            "samples": 35,
+            "optimal_choice_rate": 0.4,
+            "sound_choice_rate": 0.4
+          },
+          "opening": {
+            "samples": 15,
+            "optimal_choice_rate": 0.5333333333333333,
+            "sound_choice_rate": 0.5333333333333333
+          }
+        }
+      }
+    },
+    "gomoku": {
+      "selected_epoch": 29,
+      "presentations": 5220,
+      "validation_before": {
+        "samples": 50,
+        "soft_cross_entropy": 5.2510857582092285,
+        "optimal_choice_rate": 0.02,
+        "sound_choice_rate": 0.02,
+        "acceptable_target_mass": 0.037844058126211166,
+        "categories": {
+          "middle": {
+            "samples": 43,
+            "optimal_choice_rate": 0.023255813953488372,
+            "sound_choice_rate": 0.023255813953488372
+          },
+          "opening": {
+            "samples": 7,
+            "optimal_choice_rate": 0.0,
+            "sound_choice_rate": 0.0
+          }
+        }
+      },
+      "validation_after": {
+        "samples": 50,
+        "soft_cross_entropy": 4.1676812171936035,
+        "optimal_choice_rate": 0.34,
+        "sound_choice_rate": 0.34,
+        "acceptable_target_mass": 0.1587435007095337,
+        "categories": {
+          "middle": {
+            "samples": 43,
+            "optimal_choice_rate": 0.23255813953488372,
+            "sound_choice_rate": 0.23255813953488372
+          },
+          "opening": {
+            "samples": 7,
+            "optimal_choice_rate": 1.0,
+            "sound_choice_rate": 1.0
+          }
+        }
+      },
+      "test_before": {
+        "samples": 50,
+        "soft_cross_entropy": 5.2980499267578125,
+        "optimal_choice_rate": 0.0,
+        "sound_choice_rate": 0.0,
+        "acceptable_target_mass": 0.006222252268344164,
+        "categories": {
+          "middle": {
+            "samples": 44,
+            "optimal_choice_rate": 0.0,
+            "sound_choice_rate": 0.0
+          },
+          "opening": {
+            "samples": 6,
+            "optimal_choice_rate": 0.0,
+            "sound_choice_rate": 0.0
+          }
+        }
+      },
+      "test_after": {
+        "samples": 50,
+        "soft_cross_entropy": 5.764733791351318,
+        "optimal_choice_rate": 0.1,
+        "sound_choice_rate": 0.1,
+        "acceptable_target_mass": 0.05435541272163391,
+        "categories": {
+          "middle": {
+            "samples": 44,
+            "optimal_choice_rate": 0.0,
+            "sound_choice_rate": 0.0
+          },
+          "opening": {
+            "samples": 6,
+            "optimal_choice_rate": 0.8333333333333334,
+            "sound_choice_rate": 0.8333333333333334
+          }
+        }
+      }
+    }
+  },
+  "teacher_scope": "bounded_hex_connections_and_gomoku_tactics",
+  "earlier_eleven_modes_preserved": true,
+  "repertoire_size": 5717,
+  "elapsed_seconds": 40.74
+}

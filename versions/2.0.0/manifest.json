@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "description": "Frozen policy weights, learned-policy training report and compiled search engine before the position-value branch",
+  "sha256": {
+    "connect4-search.wasm": "fe8eb01a3e6149275ef05be52bee0d42b70954657841d3665f98778bf62b6116",
+    "garry.json": "3ac7c20b5a88c3054a0f3b3a78bdae9dbbd5b597e0b5ced4e09998cd4fb28eb0",
+    "training.json": "19a34fb88b6205de59a8df1d19a075a3bf63bb2873f3b44462b3bbad9bcd9529"
+  }
+}

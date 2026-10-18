@@ -1,4 +1,11 @@
+import {largeSliding} from './large-sliding.js';
 // Professeurs réservés à l'apprentissage. L'inférence de l'arène utilise Network.
+import {goValues} from './go-planner.js';
+import {gomokuValues} from './gomoku-planner.js';
+import {hexValues} from './hex-planner.js';
+import {strategyValues} from './strategy-planner.js';
+import {extraValues} from './extra-planner.js';
+import {selectQuality} from './quality.js';
 import {Game,DIRS,slide,candidates,clone} from './engine.js';
 const cache=new Map();
 function lineValue(b,p){const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];if(lines.some(l=>b[l[0]]&&l.every(i=>b[i]===b[l[0]])))return -1;if(b.every(Boolean))return 0;const key=b.join('')+p;if(cache.has(key))return cache.get(key);let best=-2;for(let i=0;i<9;i++)if(!b[i]){b[i]=p;best=Math.max(best,-lineValue(b,3-p));b[i]=0;}cache.set(key,best);return best;}
@@ -9,6 +16,12 @@ class Heap{
  pop(){const a=this.a,out=a[0],v=a.pop();if(a.length){let i=0;while(i*2+1<a.length){let c=i*2+1;if(c+1<a.length&&a[c+1][0]<a[c][0])c++;if(v[0]<=a[c][0])break;a[i]=a[c];i=c;}a[i]=v;}return out;}
 }
 export function teacher(o,legal){
+ if(o.game==='go'){const began=performance.now(),budget={nodes:0,tick(){if(this.nodes++>=2||performance.now()-began>=100)throw Error('budget');}},result=goValues(o,legal,budget,{beam:2});return selectQuality(result.action_values,10,Array(365).fill(0),'go').selected.action;}
+ if(o.game==='sliding_puzzle'&&o.board.length>3){const began=performance.now(),budget={nodes:0,tick(){if(this.nodes++>=3000||performance.now()-began>30)throw Error('budget');}},result=largeSliding(o,legal,budget);return selectQuality(result.action_values,10,Array(4).fill(0),o.game).selected.action;}
+ if(o.game==='gomoku'){const began=performance.now(),budget={nodes:0,tick(){if(this.nodes++>=200||performance.now()-began>30)throw Error('budget');}},result=gomokuValues(o,legal,budget);return selectQuality(result.action_values,10,Array(227).fill(0),'gomoku').selected.action;}
+ if(o.game==='hex'){const start=performance.now(),budget={nodes:0,tick(){if(this.nodes++>=300||performance.now()-start>=30)throw Error('budget');}},result=hexValues(o,legal,budget,{maxDepth:2,beam:6});return selectQuality(result.action_values,10,Array(50).fill(0),'hex').selected.action;}
+ if(['draughts','breakthrough'].includes(o.game)){const began=performance.now(),budget={nodes:0,tick(){if(this.nodes++>=2000||performance.now()-began>30)throw Error('budget');}},result=strategyValues(o,legal,budget,{maxDepth:3});return selectQuality(result.action_values,10,Array(3617).fill(0),o.game).selected.action;}
+ if(['reversi','nim','lightsout'].includes(o.game)){const began=performance.now(),budget={nodes:0,tick(){if(this.nodes++>=2000||performance.now()-began>30)throw Error('budget');}},result=extraValues(o,legal,budget);return selectQuality(result.action_values,10,Array(925).fill(0),o.game).selected.action;}
  if(o.game==='tictactoe'){const b=o.board.flat();let best=-Infinity,choice=legal[0];for(const a of legal){const i=a.row*3+a.col;b[i]=o.current_player;const score=-lineValue(b,3-o.current_player)*100+(i===4?2:[0,2,6,8].includes(i)?1:0);b[i]=0;if(score>best){best=score;choice=a;}}return choice;}
  if(o.game==='connect4'){let nodes=0;const root=o.current_player;function value(g,depth,alpha,beta){if(g.done)return g.winner===root?10000+depth:g.winner? -10000-depth:0;if(!depth||++nodes>1600){let v=0;for(const l of g.lines()){const a=l.filter(x=>x===root).length,b=l.filter(x=>x===3-root).length;if(!b)v+=8**a;if(!a)v-=8**b;}return v;}const max=g.player===root;let v=max?-Infinity:Infinity;for(const a of g.legal().sort((a,b)=>Math.abs(a.column-3)-Math.abs(b.column-3))){const child=publicLineGame(g.obs());child.step(a);const score=value(child,depth-1,alpha,beta);v=max?Math.max(v,score):Math.min(v,score);if(max)alpha=Math.max(alpha,v);else beta=Math.min(beta,v);if(beta<=alpha)break;}return v;}let best=-Infinity,choice=legal[0];for(const a of legal){const g=publicLineGame(o);g.step(a);const score=value(g,2,-Infinity,Infinity);if(score>best){best=score;choice=a;}}return choice;}
  if(o.game==='2048'){let best=-Infinity,choice=legal[0];for(const a of legal){const [b,gain]=slide(o.board,a.direction),logs=b.map(row=>row.map(v=>v?Math.log2(v):0));let smooth=0;for(let r=0;r<4;r++)for(let c=0;c<4;c++)for(const [x,y] of [[r+1,c],[r,c+1]])if(x<4&&y<4&&logs[r][c]&&logs[x][y])smooth+=Math.abs(logs[r][c]-logs[x][y]);const largest=Math.max(...logs.flat()),corner=[logs[0][0],logs[0][3],logs[3][0],logs[3][3]].includes(largest)?largest:0;const score=gain+25*b.flat().filter(v=>!v).length-2*smooth+corner*8;if(score>best){best=score;choice=a;}}return choice;}

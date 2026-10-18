@@ -1,0 +1,64 @@
+{
+  "name": "garry",
+  "software_version": "2.0.0",
+  "weights_revision": "20261016-c4-guarded-01",
+  "architecture_changed": false,
+  "source_sha256": "0483519c8db49cac4106f9c5e18250d3f624f98d7103c9dab93ee657582fd5a3",
+  "trained_sha256": "3ac7c20b5a88c3054a0f3b3a78bdae9dbbd5b597e0b5ced4e09998cd4fb28eb0",
+  "training_run": "garry-guarded-20261016-211530",
+  "training_examples": 163840,
+  "game": "connect4",
+  "training_unique_positions": 4096,
+  "other_games_weights_preserved": true,
+  "checkpoint_epoch": 40,
+  "policy_only_evaluation": {
+    "before": {
+      "game": "connect4",
+      "episodes": 200,
+      "wins": 127,
+      "losses": 72,
+      "draws": 1,
+      "truncated": 0,
+      "mean_score": 0.9950000000000008,
+      "opponent": "random_legal",
+      "seed": 9100000,
+      "level": 10,
+      "style": "balanced",
+      "teacher_used": false,
+      "planning": false
+    },
+    "after": {
+      "game": "connect4",
+      "episodes": 200,
+      "wins": 144,
+      "losses": 56,
+      "draws": 0,
+      "truncated": 0,
+      "mean_score": 1.0000000000000007,
+      "opponent": "random_legal",
+      "seed": 9100000,
+      "level": 10,
+      "style": "balanced",
+      "teacher_used": false,
+      "planning": false
+    }
+  },
+  "hybrid_evaluation": {
+    "episodes": 40,
+    "before": {
+      "wins": 30,
+      "losses": 6,
+      "draws": 4
+    },
+    "after": {
+      "wins": 30,
+      "losses": 6,
+      "draws": 4
+    },
+    "current_node_budget": 3000000,
+    "reference_node_budget": 5000
+  },
+  "zero_defeat_target_met": false,
+  "active_model_replaced": true,
+  "note": "Le gain constat\u00e9 porte sur le r\u00e9seau seul contre un adversaire al\u00e9atoire. Le contr\u00f4le hybride ne montre aucun gain de r\u00e9sultat. Les cinq autres modes ont exactement les m\u00eames poids effectifs."
+}

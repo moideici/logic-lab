@@ -10,6 +10,7 @@ import uuid
 
 from .agents import NODE_LIMITS, STYLES, TIME_LIMITS, ReferenceAgent
 from .games import GAMES, make_game
+from .identity import agent_identity, AGENT_VERSION
 
 
 ACTION_SCHEMAS = {
@@ -19,14 +20,22 @@ ACTION_SCHEMAS = {
     "connect4": {"column": "0..6"},
     "minesweeper": {"row": "0..7", "col": "0..7"},
     "sliding_puzzle": {"direction": "up|down|left|right"},
+    "reversi": [{"row":"0..5","col":"0..5"},{"pass":True}],
+    "nim": {"pile":"0..2","take":"1..remaining"},
+    "lightsout": {"row":"0..4","col":"0..4"},
+    "go": [{"row":"0..size-1","col":"0..size-1"},{"pass":True},{"dead":["row","col"]},{"accept":True},{"resume":True},{"resign":True}],
+    "gomoku": [{"row":"0..14","col":"0..14"},{"choose":"black|white"}],
+    "hex": [{"row":"0..6","col":"0..6"},{"swap":True}],
+    "draughts": {"from":["row 0..9","col 0..9"],"to":["row 0..9","col 0..9"]},
+    "breakthrough": {"from":["row 0..7","col 0..7"],"to":["row 0..7","col 0..7"]},
 }
 
 
 def catalog():
     from .planner import LIMITS, TIMES
-    return {"protocol": "logic-arena.v1", "games": [{"id": k, "players": g.players, "action": ACTION_SCHEMAS[k]} for k, g in GAMES.items()],
-            "styles": STYLES, "levels": [{"level": i+1, "reference_nodes": n, "reference_time_ms": TIME_LIMITS[i],
-                "neural_temperature": [2.,1.4,1.1,.9,.7,.55,.4,.25,.12,0.][i], "planning_nodes": LIMITS[i], "planning_time_ms": TIMES[i]} for i, n in enumerate(NODE_LIMITS)],
+    from .connect4_wasm import CONNECT_LIMITS,CONNECT_TIMES
+    return {"protocol": "logic-arena.v1", "agent_version": AGENT_VERSION, "model": {"name":"garry","version":AGENT_VERSION,"format":"garry-mlp-v3","architecture":[4872,48,48,4259],"position_head":{"game":"connect4","features":32,"outputs":1},"files":1}, "games": [{"id": k, "players": g.players, "action": ACTION_SCHEMAS[k], "ai": agent_identity(k)} for k, g in GAMES.items()],
+            "styles": STYLES, "levels": [{"level":i,"quality_quantile":i/10,"reference_nodes":NODE_LIMITS[-1],"reference_time_ms":TIME_LIMITS[-1],"planning_nodes":LIMITS[-1],"planning_time_ms":TIMES[-1],"connect4_nodes":CONNECT_LIMITS[-1],"connect4_time_ms":CONNECT_TIMES[-1],"connect4_target_depth":20} for i in range(11)],
             "operations": ["catalog", "create", "observe", "step", "suggest", "play", "run", "stop", "delete"],
             "realtime": "SSE /sessions/{session_id}/events", "default_level": 10, "default_interval_ms": 0, "objective": "win_then_fewest_moves"}
 

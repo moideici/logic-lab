@@ -1,0 +1,44 @@
+{
+  "name": "garry",
+  "version": "2.0.0",
+  "architecture": [
+    1912,
+    48,
+    48,
+    818
+  ],
+  "method": "algebraic_weight_fusion",
+  "training_performed": false,
+  "games": {
+    "tictactoe": {
+      "samples": 69,
+      "max_logit_error": 3.814697265625e-06,
+      "same_greedy_actions": 69
+    },
+    "connect4": {
+      "samples": 213,
+      "max_logit_error": 1.430511474609375e-06,
+      "same_greedy_actions": 213
+    },
+    "2048": {
+      "samples": 300,
+      "max_logit_error": 1.1920928955078125e-06,
+      "same_greedy_actions": 300
+    },
+    "sudoku": {
+      "samples": 300,
+      "max_logit_error": 2.86102294921875e-06,
+      "same_greedy_actions": 300
+    },
+    "minesweeper": {
+      "samples": 41,
+      "max_logit_error": 7.152557373046875e-07,
+      "same_greedy_actions": 41
+    },
+    "sliding_puzzle": {
+      "samples": 300,
+      "max_logit_error": 9.5367431640625e-07,
+      "same_greedy_actions": 300
+    }
+  }
+}

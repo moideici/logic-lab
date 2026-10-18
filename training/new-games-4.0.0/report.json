@@ -1,0 +1,304 @@
+{
+  "version": "4.0.0",
+  "architecture": [
+    2060,
+    48,
+    48,
+    925
+  ],
+  "seed": 1710400,
+  "counts": {
+    "reversi": {
+      "train": 320,
+      "validation": 70,
+      "test": 70
+    },
+    "nim": {
+      "train": 900,
+      "validation": 150,
+      "test": 150
+    },
+    "lightsout": {
+      "train": 600,
+      "validation": 100,
+      "test": 100
+    }
+  },
+  "games": {
+    "reversi": {
+      "epochs_selected": 6,
+      "training_presentations": 1920,
+      "validation_before": {
+        "samples": 70,
+        "soft_cross_entropy": 1.431645393371582,
+        "optimal_choice_rate": 0.35714285714285715,
+        "sound_choice_rate": 0.35714285714285715,
+        "acceptable_target_mass": 0.3414735794067383,
+        "categories": {
+          "endgame": {
+            "samples": 22,
+            "optimal_choice_rate": 0.6363636363636364,
+            "sound_choice_rate": 0.6363636363636364
+          },
+          "middle": {
+            "samples": 38,
+            "optimal_choice_rate": 0.15789473684210525,
+            "sound_choice_rate": 0.15789473684210525
+          },
+          "opening": {
+            "samples": 8,
+            "optimal_choice_rate": 0.375,
+            "sound_choice_rate": 0.375
+          },
+          "pass": {
+            "samples": 2,
+            "optimal_choice_rate": 1.0,
+            "sound_choice_rate": 1.0
+          }
+        }
+      },
+      "validation_after": {
+        "samples": 70,
+        "soft_cross_entropy": 1.0368353128433228,
+        "optimal_choice_rate": 0.6714285714285714,
+        "sound_choice_rate": 0.6714285714285714,
+        "acceptable_target_mass": 0.5060855150222778,
+        "categories": {
+          "endgame": {
+            "samples": 22,
+            "optimal_choice_rate": 0.8181818181818182,
+            "sound_choice_rate": 0.8181818181818182
+          },
+          "middle": {
+            "samples": 38,
+            "optimal_choice_rate": 0.6052631578947368,
+            "sound_choice_rate": 0.6052631578947368
+          },
+          "opening": {
+            "samples": 8,
+            "optimal_choice_rate": 0.5,
+            "sound_choice_rate": 0.5
+          },
+          "pass": {
+            "samples": 2,
+            "optimal_choice_rate": 1.0,
+            "sound_choice_rate": 1.0
+          }
+        }
+      },
+      "test_before": {
+        "samples": 70,
+        "soft_cross_entropy": 1.5647845268249512,
+        "optimal_choice_rate": 0.3142857142857143,
+        "sound_choice_rate": 0.3142857142857143,
+        "acceptable_target_mass": 0.2808447480201721,
+        "categories": {
+          "endgame": {
+            "samples": 20,
+            "optimal_choice_rate": 0.5,
+            "sound_choice_rate": 0.5
+          },
+          "middle": {
+            "samples": 34,
+            "optimal_choice_rate": 0.20588235294117646,
+            "sound_choice_rate": 0.20588235294117646
+          },
+          "opening": {
+            "samples": 16,
+            "optimal_choice_rate": 0.3125,
+            "sound_choice_rate": 0.3125
+          }
+        }
+      },
+      "test_after": {
+        "samples": 70,
+        "soft_cross_entropy": 1.1717040538787842,
+        "optimal_choice_rate": 0.6285714285714286,
+        "sound_choice_rate": 0.6285714285714286,
+        "acceptable_target_mass": 0.4829648733139038,
+        "categories": {
+          "endgame": {
+            "samples": 20,
+            "optimal_choice_rate": 0.75,
+            "sound_choice_rate": 0.75
+          },
+          "middle": {
+            "samples": 34,
+            "optimal_choice_rate": 0.5882352941176471,
+            "sound_choice_rate": 0.5882352941176471
+          },
+          "opening": {
+            "samples": 16,
+            "optimal_choice_rate": 0.5625,
+            "sound_choice_rate": 0.5625
+          }
+        }
+      }
+    },
+    "nim": {
+      "epochs_selected": 5,
+      "training_presentations": 4500,
+      "validation_before": {
+        "samples": 150,
+        "soft_cross_entropy": 2.9797370433807373,
+        "optimal_choice_rate": 0.08,
+        "sound_choice_rate": 0.08,
+        "acceptable_target_mass": 0.06507831811904907,
+        "categories": {
+          "losing": {
+            "samples": 9,
+            "optimal_choice_rate": 0.6666666666666666,
+            "sound_choice_rate": 0.6666666666666666
+          },
+          "winning": {
+            "samples": 141,
+            "optimal_choice_rate": 0.0425531914893617,
+            "sound_choice_rate": 0.0425531914893617
+          }
+        }
+      },
+      "validation_after": {
+        "samples": 150,
+        "soft_cross_entropy": 3.05224871635437,
+        "optimal_choice_rate": 0.10666666666666667,
+        "sound_choice_rate": 0.10666666666666667,
+        "acceptable_target_mass": 0.06518896669149399,
+        "categories": {
+          "losing": {
+            "samples": 9,
+            "optimal_choice_rate": 0.7777777777777778,
+            "sound_choice_rate": 0.7777777777777778
+          },
+          "winning": {
+            "samples": 141,
+            "optimal_choice_rate": 0.06382978723404255,
+            "sound_choice_rate": 0.06382978723404255
+          }
+        }
+      },
+      "test_before": {
+        "samples": 150,
+        "soft_cross_entropy": 3.020139217376709,
+        "optimal_choice_rate": 0.07333333333333333,
+        "sound_choice_rate": 0.07333333333333333,
+        "acceptable_target_mass": 0.06291808933019638,
+        "categories": {
+          "losing": {
+            "samples": 4,
+            "optimal_choice_rate": 0.5,
+            "sound_choice_rate": 0.5
+          },
+          "winning": {
+            "samples": 146,
+            "optimal_choice_rate": 0.06164383561643835,
+            "sound_choice_rate": 0.06164383561643835
+          }
+        }
+      },
+      "test_after": {
+        "samples": 150,
+        "soft_cross_entropy": 3.1745047569274902,
+        "optimal_choice_rate": 0.04666666666666667,
+        "sound_choice_rate": 0.04666666666666667,
+        "acceptable_target_mass": 0.059447430074214935,
+        "categories": {
+          "losing": {
+            "samples": 4,
+            "optimal_choice_rate": 0.5,
+            "sound_choice_rate": 0.5
+          },
+          "winning": {
+            "samples": 146,
+            "optimal_choice_rate": 0.03424657534246575,
+            "sound_choice_rate": 0.03424657534246575
+          }
+        }
+      }
+    },
+    "lightsout": {
+      "epochs_selected": 1,
+      "training_presentations": 600,
+      "validation_before": {
+        "samples": 100,
+        "soft_cross_entropy": 3.218698024749756,
+        "optimal_choice_rate": 0.5,
+        "sound_choice_rate": 0.5,
+        "acceptable_target_mass": 0.45999935269355774,
+        "categories": {
+          "long": {
+            "samples": 73,
+            "optimal_choice_rate": 0.547945205479452,
+            "sound_choice_rate": 0.547945205479452
+          },
+          "short": {
+            "samples": 27,
+            "optimal_choice_rate": 0.37037037037037035,
+            "sound_choice_rate": 0.37037037037037035
+          }
+        }
+      },
+      "validation_after": {
+        "samples": 100,
+        "soft_cross_entropy": 3.2192578315734863,
+        "optimal_choice_rate": 0.56,
+        "sound_choice_rate": 0.56,
+        "acceptable_target_mass": 0.46052825450897217,
+        "categories": {
+          "long": {
+            "samples": 73,
+            "optimal_choice_rate": 0.6164383561643836,
+            "sound_choice_rate": 0.6164383561643836
+          },
+          "short": {
+            "samples": 27,
+            "optimal_choice_rate": 0.4074074074074074,
+            "sound_choice_rate": 0.4074074074074074
+          }
+        }
+      },
+      "test_before": {
+        "samples": 100,
+        "soft_cross_entropy": 3.221238136291504,
+        "optimal_choice_rate": 0.52,
+        "sound_choice_rate": 0.52,
+        "acceptable_target_mass": 0.46584808826446533,
+        "categories": {
+          "long": {
+            "samples": 74,
+            "optimal_choice_rate": 0.5945945945945946,
+            "sound_choice_rate": 0.5945945945945946
+          },
+          "short": {
+            "samples": 26,
+            "optimal_choice_rate": 0.3076923076923077,
+            "sound_choice_rate": 0.3076923076923077
+          }
+        }
+      },
+      "test_after": {
+        "samples": 100,
+        "soft_cross_entropy": 3.223060369491577,
+        "optimal_choice_rate": 0.45,
+        "sound_choice_rate": 0.45,
+        "acceptable_target_mass": 0.465660959482193,
+        "categories": {
+          "long": {
+            "samples": 74,
+            "optimal_choice_rate": 0.527027027027027,
+            "sound_choice_rate": 0.527027027027027
+          },
+          "short": {
+            "samples": 26,
+            "optimal_choice_rate": 0.23076923076923078,
+            "sound_choice_rate": 0.23076923076923078
+          }
+        }
+      }
+    }
+  },
+  "legacy_parameters_preserved": true,
+  "search_memory_preserved": true,
+  "position_head_preserved": true,
+  "elapsed_seconds": 14.39,
+  "repertoire_size": 4397
+}

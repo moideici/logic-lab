@@ -8,6 +8,10 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
 from .harness import Arena, json_line
+from .external import ExternalArena
+EXTERNAL=ExternalArena()
+from .continuous_service import ContinuousTraining
+CONTINUOUS=ContinuousTraining()
 
 WEB = Path(__file__).resolve().parents[1]/"web"
 
@@ -29,6 +33,29 @@ class Handler(SimpleHTTPRequestHandler):
         self.wfile.write(data)
 
     def do_POST(self):
+        if urlparse(self.path).path.startswith('/api/continuous/'):
+            try:
+                size=int(self.headers.get('Content-Length','0'))
+                if not 0<size<=4096:raise ValueError('Taille JSON invalide')
+                data=json_line(self.rfile.read(size).decode('utf-8'));op=urlparse(self.path).path.rsplit('/',1)[-1]
+                if not isinstance(data,dict):raise ValueError('Objet JSON requis')
+                if op=='start' and set(data)<={'seconds','profile'}:result=CONTINUOUS.start(data.get('seconds',3600),data.get('profile','balanced'))
+                elif op=='stop' and set(data)=={'id'}:result=CONTINUOUS.stop(data['id'])
+                else:raise ValueError('Opération continue invalide')
+                self.send_json({'ok':True,'result':result})
+            except (ValueError,TypeError,UnicodeError) as error:self.send_json({'ok':False,'error':str(error)},400)
+            return
+        if urlparse(self.path).path.startswith('/api/external/'):
+            try:
+                size=int(self.headers.get('Content-Length','0'))
+                if not 0<size<=4096:raise ValueError('Taille JSON invalide')
+                data=json_line(self.rfile.read(size).decode('utf-8'));op=urlparse(self.path).path.rsplit('/',1)[-1]
+                if op=='start':result=EXTERNAL.start(data)
+                elif op=='stop' and isinstance(data,dict):result=EXTERNAL.stop(data.get('id'))
+                else:raise ValueError('Opération externe inconnue')
+                self.send_json({'ok':True,'result':result})
+            except (ValueError,TypeError,UnicodeError) as error:self.send_json({'ok':False,'error':str(error)},400)
+            return
         if urlparse(self.path).path != "/api":
             self.send_json({"ok": False, "error": "Route inconnue"}, 404)
             return
@@ -46,6 +73,20 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
+        if parsed.path=='/api/continuous/status':
+            self.send_json({'ok':True,'result':CONTINUOUS.get()});return
+        if parsed.path.startswith('/api/external/'):
+            try:
+                op=parsed.path.rsplit('/',1)[-1];identifier=parse_qs(parsed.query).get('id',[''])[0]
+                if op=='list':self.send_json({'ok':True,'result':EXTERNAL.list()});return
+                if op=='status':self.send_json({'ok':True,'result':EXTERNAL.get(identifier)});return
+                if op in ('image','trace'):
+                    path=EXTERNAL.image(identifier) if op=='image' else EXTERNAL._path(identifier)/'trace.jsonl'
+                    if not path.is_file():self.send_json({'ok':False,'error':'Partie en préparation'},404);return
+                    raw=path.read_bytes();self.send_response(200);self.send_header('Content-Type','image/png' if op=='image' else 'application/x-ndjson');self.send_header('Content-Length',str(len(raw)));self.send_header('Cache-Control','no-store');self.end_headers();self.wfile.write(raw);return
+                raise ValueError('Opération externe inconnue')
+            except (ValueError,OSError) as error:self.send_json({'ok':False,'error':str(error)},400)
+            return
         parts = parsed.path.strip("/").split("/")
         if len(parts) == 3 and parts[0] == "sessions" and parts[2] == "events":
             try:
@@ -85,7 +126,7 @@ class Handler(SimpleHTTPRequestHandler):
                         cursor = event["seq"]
                     if events[-1]["type"] in ("stopped", "deleted") or (events[-1]["type"] == "resync" and terminal):
                         break
-            except (BrokenPipeError, ConnectionResetError):
+            except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
                 pass
             self.close_connection = True
             return

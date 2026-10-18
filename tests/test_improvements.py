@@ -17,6 +17,7 @@ from logic_arena.agents import Decision
 from logic_arena.games import make_game, slide_2048
 from logic_arena.harness import Arena
 from logic_arena.neural import NeuralAgent, NeuralPolicy
+from logic_arena.general import GarryView
 from logic_arena.server import Handler
 from logic_arena import tiles
 
@@ -52,7 +53,7 @@ class AgentIsolationTests(unittest.TestCase):
         obs = make_game('tictactoe').observation()
         legal = make_game('tictactoe').legal_actions()
         # Des logits égaux isolent le comportement du générateur de l'agent.
-        with patch.object(NeuralPolicy, 'logits', return_value=np.zeros(9)):
+        with patch.object(GarryView, 'logits', return_value=np.zeros(9)):
             a = NeuralAgent(level=1, seed=17, planning=False)
             b = NeuralAgent(level=1, seed=17, planning=False)
             sequence_a = [a.choose(obs,legal).action for _ in range(30)]
@@ -73,7 +74,7 @@ class AgentIsolationTests(unittest.TestCase):
     def test_one_neural_forward_per_current_board(self):
         agent = NeuralAgent(planning=True)
         env = make_game('tictactoe')
-        with patch.object(NeuralPolicy,'logits',return_value=np.zeros(9)) as forward:
+        with patch.object(GarryView,'logits',return_value=np.zeros(9)) as forward:
             agent.choose(env.observation(),env.legal_actions())
         self.assertEqual(forward.call_count,1)
 

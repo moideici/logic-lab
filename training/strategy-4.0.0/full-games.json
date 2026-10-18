@@ -1,0 +1,822 @@
+{
+  "version": "4.0.0",
+  "scope": "Four opening histories, both seats against initialized added modes; two histories, both seats against random at actual level 10. Finite samples, no invincibility claim.",
+  "results": [
+    {
+      "game": "draughts",
+      "kind": "neural_vs_initial",
+      "trial": 0,
+      "seat": 1,
+      "opening": [],
+      "outcome": "win",
+      "steps": 107,
+      "seconds": 0.07
+    },
+    {
+      "game": "draughts",
+      "kind": "neural_vs_initial",
+      "trial": 1,
+      "seat": 2,
+      "opening": [],
+      "outcome": "draw",
+      "steps": 142,
+      "seconds": 0.07
+    },
+    {
+      "game": "draughts",
+      "kind": "neural_vs_initial",
+      "trial": 2,
+      "seat": 1,
+      "opening": [
+        {
+          "from": [
+            6,
+            3
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            3,
+            8
+          ],
+          "to": [
+            4,
+            9
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 79,
+      "seconds": 0.04
+    },
+    {
+      "game": "draughts",
+      "kind": "neural_vs_initial",
+      "trial": 3,
+      "seat": 2,
+      "opening": [
+        {
+          "from": [
+            6,
+            3
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            3,
+            8
+          ],
+          "to": [
+            4,
+            9
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 133,
+      "seconds": 0.07
+    },
+    {
+      "game": "draughts",
+      "kind": "neural_vs_initial",
+      "trial": 4,
+      "seat": 1,
+      "opening": [
+        {
+          "from": [
+            6,
+            7
+          ],
+          "to": [
+            5,
+            6
+          ]
+        },
+        {
+          "from": [
+            3,
+            2
+          ],
+          "to": [
+            4,
+            1
+          ]
+        },
+        {
+          "from": [
+            6,
+            5
+          ],
+          "to": [
+            5,
+            4
+          ]
+        },
+        {
+          "from": [
+            3,
+            6
+          ],
+          "to": [
+            4,
+            5
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 66,
+      "seconds": 0.03
+    },
+    {
+      "game": "draughts",
+      "kind": "neural_vs_initial",
+      "trial": 5,
+      "seat": 2,
+      "opening": [
+        {
+          "from": [
+            6,
+            7
+          ],
+          "to": [
+            5,
+            6
+          ]
+        },
+        {
+          "from": [
+            3,
+            2
+          ],
+          "to": [
+            4,
+            1
+          ]
+        },
+        {
+          "from": [
+            6,
+            5
+          ],
+          "to": [
+            5,
+            4
+          ]
+        },
+        {
+          "from": [
+            3,
+            6
+          ],
+          "to": [
+            4,
+            5
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 89,
+      "seconds": 0.05
+    },
+    {
+      "game": "draughts",
+      "kind": "neural_vs_initial",
+      "trial": 6,
+      "seat": 1,
+      "opening": [
+        {
+          "from": [
+            6,
+            7
+          ],
+          "to": [
+            5,
+            6
+          ]
+        },
+        {
+          "from": [
+            3,
+            4
+          ],
+          "to": [
+            4,
+            5
+          ]
+        },
+        {
+          "from": [
+            5,
+            6
+          ],
+          "to": [
+            3,
+            4
+          ]
+        },
+        {
+          "from": [
+            2,
+            3
+          ],
+          "to": [
+            4,
+            5
+          ]
+        },
+        {
+          "from": [
+            7,
+            6
+          ],
+          "to": [
+            6,
+            7
+          ]
+        },
+        {
+          "from": [
+            3,
+            2
+          ],
+          "to": [
+            4,
+            3
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 127,
+      "seconds": 0.07
+    },
+    {
+      "game": "draughts",
+      "kind": "neural_vs_initial",
+      "trial": 7,
+      "seat": 2,
+      "opening": [
+        {
+          "from": [
+            6,
+            7
+          ],
+          "to": [
+            5,
+            6
+          ]
+        },
+        {
+          "from": [
+            3,
+            4
+          ],
+          "to": [
+            4,
+            5
+          ]
+        },
+        {
+          "from": [
+            5,
+            6
+          ],
+          "to": [
+            3,
+            4
+          ]
+        },
+        {
+          "from": [
+            2,
+            3
+          ],
+          "to": [
+            4,
+            5
+          ]
+        },
+        {
+          "from": [
+            7,
+            6
+          ],
+          "to": [
+            6,
+            7
+          ]
+        },
+        {
+          "from": [
+            3,
+            2
+          ],
+          "to": [
+            4,
+            3
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 92,
+      "seconds": 0.05
+    },
+    {
+      "game": "draughts",
+      "kind": "level_10_vs_random",
+      "trial": 0,
+      "seat": 1,
+      "opening": [],
+      "outcome": "win",
+      "steps": 71,
+      "seconds": 6.63
+    },
+    {
+      "game": "draughts",
+      "kind": "level_10_vs_random",
+      "trial": 1,
+      "seat": 2,
+      "opening": [],
+      "outcome": "win",
+      "steps": 82,
+      "seconds": 6.28
+    },
+    {
+      "game": "draughts",
+      "kind": "level_10_vs_random",
+      "trial": 2,
+      "seat": 1,
+      "opening": [
+        {
+          "from": [
+            6,
+            3
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            3,
+            8
+          ],
+          "to": [
+            4,
+            9
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 68,
+      "seconds": 5.63
+    },
+    {
+      "game": "draughts",
+      "kind": "level_10_vs_random",
+      "trial": 3,
+      "seat": 2,
+      "opening": [
+        {
+          "from": [
+            6,
+            3
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            3,
+            8
+          ],
+          "to": [
+            4,
+            9
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 82,
+      "seconds": 6.46
+    },
+    {
+      "game": "breakthrough",
+      "kind": "neural_vs_initial",
+      "trial": 0,
+      "seat": 1,
+      "opening": [],
+      "outcome": "win",
+      "steps": 19,
+      "seconds": 0.01
+    },
+    {
+      "game": "breakthrough",
+      "kind": "neural_vs_initial",
+      "trial": 1,
+      "seat": 2,
+      "opening": [],
+      "outcome": "win",
+      "steps": 12,
+      "seconds": 0
+    },
+    {
+      "game": "breakthrough",
+      "kind": "neural_vs_initial",
+      "trial": 2,
+      "seat": 1,
+      "opening": [
+        {
+          "from": [
+            6,
+            2
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            1,
+            7
+          ],
+          "to": [
+            2,
+            7
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 9,
+      "seconds": 0
+    },
+    {
+      "game": "breakthrough",
+      "kind": "neural_vs_initial",
+      "trial": 3,
+      "seat": 2,
+      "opening": [
+        {
+          "from": [
+            6,
+            2
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            1,
+            7
+          ],
+          "to": [
+            2,
+            7
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 10,
+      "seconds": 0.01
+    },
+    {
+      "game": "breakthrough",
+      "kind": "neural_vs_initial",
+      "trial": 4,
+      "seat": 1,
+      "opening": [
+        {
+          "from": [
+            6,
+            5
+          ],
+          "to": [
+            5,
+            5
+          ]
+        },
+        {
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            2,
+            0
+          ]
+        },
+        {
+          "from": [
+            6,
+            4
+          ],
+          "to": [
+            5,
+            4
+          ]
+        },
+        {
+          "from": [
+            1,
+            3
+          ],
+          "to": [
+            2,
+            4
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 9,
+      "seconds": 0
+    },
+    {
+      "game": "breakthrough",
+      "kind": "neural_vs_initial",
+      "trial": 5,
+      "seat": 2,
+      "opening": [
+        {
+          "from": [
+            6,
+            5
+          ],
+          "to": [
+            5,
+            5
+          ]
+        },
+        {
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            2,
+            0
+          ]
+        },
+        {
+          "from": [
+            6,
+            4
+          ],
+          "to": [
+            5,
+            4
+          ]
+        },
+        {
+          "from": [
+            1,
+            3
+          ],
+          "to": [
+            2,
+            4
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 10,
+      "seconds": 0
+    },
+    {
+      "game": "breakthrough",
+      "kind": "neural_vs_initial",
+      "trial": 6,
+      "seat": 1,
+      "opening": [
+        {
+          "from": [
+            6,
+            5
+          ],
+          "to": [
+            5,
+            5
+          ]
+        },
+        {
+          "from": [
+            1,
+            4
+          ],
+          "to": [
+            2,
+            3
+          ]
+        },
+        {
+          "from": [
+            6,
+            3
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            2,
+            0
+          ]
+        },
+        {
+          "from": [
+            7,
+            4
+          ],
+          "to": [
+            6,
+            3
+          ]
+        },
+        {
+          "from": [
+            1,
+            5
+          ],
+          "to": [
+            2,
+            5
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 9,
+      "seconds": 0
+    },
+    {
+      "game": "breakthrough",
+      "kind": "neural_vs_initial",
+      "trial": 7,
+      "seat": 2,
+      "opening": [
+        {
+          "from": [
+            6,
+            5
+          ],
+          "to": [
+            5,
+            5
+          ]
+        },
+        {
+          "from": [
+            1,
+            4
+          ],
+          "to": [
+            2,
+            3
+          ]
+        },
+        {
+          "from": [
+            6,
+            3
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            1,
+            1
+          ],
+          "to": [
+            2,
+            0
+          ]
+        },
+        {
+          "from": [
+            7,
+            4
+          ],
+          "to": [
+            6,
+            3
+          ]
+        },
+        {
+          "from": [
+            1,
+            5
+          ],
+          "to": [
+            2,
+            5
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 14,
+      "seconds": 0.01
+    },
+    {
+      "game": "breakthrough",
+      "kind": "level_10_vs_random",
+      "trial": 0,
+      "seat": 1,
+      "opening": [],
+      "outcome": "win",
+      "steps": 11,
+      "seconds": 1.14
+    },
+    {
+      "game": "breakthrough",
+      "kind": "level_10_vs_random",
+      "trial": 1,
+      "seat": 2,
+      "opening": [],
+      "outcome": "win",
+      "steps": 16,
+      "seconds": 1.44
+    },
+    {
+      "game": "breakthrough",
+      "kind": "level_10_vs_random",
+      "trial": 2,
+      "seat": 1,
+      "opening": [
+        {
+          "from": [
+            6,
+            2
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            1,
+            7
+          ],
+          "to": [
+            2,
+            7
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 17,
+      "seconds": 1.64
+    },
+    {
+      "game": "breakthrough",
+      "kind": "level_10_vs_random",
+      "trial": 3,
+      "seat": 2,
+      "opening": [
+        {
+          "from": [
+            6,
+            2
+          ],
+          "to": [
+            5,
+            2
+          ]
+        },
+        {
+          "from": [
+            1,
+            7
+          ],
+          "to": [
+            2,
+            7
+          ]
+        }
+      ],
+      "outcome": "win",
+      "steps": 32,
+      "seconds": 2.68
+    }
+  ]
+}

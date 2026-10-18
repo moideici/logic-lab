@@ -1,0 +1,81 @@
+{
+  "schema": "logic-arena-agents-v1",
+  "version": "0.6.0",
+  "previous_version": "5.0.0",
+  "agents": {
+    "tictactoe": {
+      "codename": "garry",
+      "version": "0.6.0",
+      "mode": "tictactoe"
+    },
+    "2048": {
+      "codename": "garry",
+      "version": "0.6.0",
+      "mode": "2048"
+    },
+    "sudoku": {
+      "codename": "garry",
+      "version": "0.6.0",
+      "mode": "sudoku"
+    },
+    "connect4": {
+      "codename": "garry",
+      "version": "0.6.0",
+      "mode": "connect4"
+    },
+    "minesweeper": {
+      "codename": "garry",
+      "version": "0.6.0",
+      "mode": "minesweeper"
+    },
+    "sliding_puzzle": {
+      "codename": "garry",
+      "version": "0.6.0",
+      "mode": "sliding_puzzle"
+    },
+    "reversi": {
+      "codename": "garry",
+      "mode": "reversi",
+      "version": "0.6.0"
+    },
+    "nim": {
+      "codename": "garry",
+      "mode": "nim",
+      "version": "0.6.0"
+    },
+    "lightsout": {
+      "codename": "garry",
+      "mode": "lightsout",
+      "version": "0.6.0"
+    },
+    "draughts": {
+      "codename": "garry",
+      "mode": "draughts",
+      "version": "0.6.0"
+    },
+    "breakthrough": {
+      "codename": "garry",
+      "mode": "breakthrough",
+      "version": "0.6.0"
+    },
+    "hex": {
+      "codename": "garry",
+      "mode": "hex",
+      "version": "0.6.0"
+    },
+    "gomoku": {
+      "codename": "garry",
+      "version": "0.6.0",
+      "mode": "gomoku"
+    },
+    "go": {
+      "codename": "garry",
+      "version": "0.6.0",
+      "mode": "go"
+    }
+  },
+  "name": "garry",
+  "version_aliases": [
+    "6.0.0"
+  ]
+}

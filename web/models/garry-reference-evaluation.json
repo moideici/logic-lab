@@ -1,0 +1,258 @@
+{
+  "game": "connect4",
+  "version": "3.0.0",
+  "opponent": "frozen 1.0.0",
+  "episodes": 40,
+  "seed": 7900000,
+  "new_nodes": 3000000,
+  "old_nodes": 5000,
+  "time_safety_ms": 10000,
+  "target_depth": 20,
+  "wins": 35,
+  "losses": 3,
+  "draws": 2,
+  "depth_max": 20,
+  "samples": [
+    {
+      "seed": 7900000,
+      "player": 1,
+      "winner": 1,
+      "moves": 35
+    },
+    {
+      "seed": 7900000,
+      "player": 2,
+      "winner": 2,
+      "moves": 30
+    },
+    {
+      "seed": 7900001,
+      "player": 1,
+      "winner": 1,
+      "moves": 29
+    },
+    {
+      "seed": 7900001,
+      "player": 2,
+      "winner": 2,
+      "moves": 40
+    },
+    {
+      "seed": 7900002,
+      "player": 1,
+      "winner": 1,
+      "moves": 33
+    },
+    {
+      "seed": 7900002,
+      "player": 2,
+      "winner": 2,
+      "moves": 34
+    },
+    {
+      "seed": 7900003,
+      "player": 1,
+      "winner": 1,
+      "moves": 27
+    },
+    {
+      "seed": 7900003,
+      "player": 2,
+      "winner": 2,
+      "moves": 40
+    },
+    {
+      "seed": 7900004,
+      "player": 1,
+      "winner": 2,
+      "moves": 36
+    },
+    {
+      "seed": 7900004,
+      "player": 2,
+      "winner": 2,
+      "moves": 40
+    },
+    {
+      "seed": 7900005,
+      "player": 1,
+      "winner": 1,
+      "moves": 39
+    },
+    {
+      "seed": 7900005,
+      "player": 2,
+      "winner": 2,
+      "moves": 32
+    },
+    {
+      "seed": 7900006,
+      "player": 1,
+      "winner": 1,
+      "moves": 9
+    },
+    {
+      "seed": 7900006,
+      "player": 2,
+      "winner": 1,
+      "moves": 9
+    },
+    {
+      "seed": 7900007,
+      "player": 1,
+      "winner": 1,
+      "moves": 33
+    },
+    {
+      "seed": 7900007,
+      "player": 2,
+      "winner": 2,
+      "moves": 40
+    },
+    {
+      "seed": 7900008,
+      "player": 1,
+      "winner": 1,
+      "moves": 33
+    },
+    {
+      "seed": 7900008,
+      "player": 2,
+      "winner": 2,
+      "moves": 34
+    },
+    {
+      "seed": 7900009,
+      "player": 1,
+      "winner": 1,
+      "moves": 23
+    },
+    {
+      "seed": 7900009,
+      "player": 2,
+      "winner": 1,
+      "moves": 33
+    },
+    {
+      "seed": 7900010,
+      "player": 1,
+      "winner": 1,
+      "moves": 35
+    },
+    {
+      "seed": 7900010,
+      "player": 2,
+      "winner": 2,
+      "moves": 32
+    },
+    {
+      "seed": 7900011,
+      "player": 1,
+      "winner": 1,
+      "moves": 33
+    },
+    {
+      "seed": 7900011,
+      "player": 2,
+      "winner": 2,
+      "moves": 34
+    },
+    {
+      "seed": 7900012,
+      "player": 1,
+      "winner": 1,
+      "moves": 33
+    },
+    {
+      "seed": 7900012,
+      "player": 2,
+      "winner": 2,
+      "moves": 36
+    },
+    {
+      "seed": 7900013,
+      "player": 1,
+      "winner": 1,
+      "moves": 35
+    },
+    {
+      "seed": 7900013,
+      "player": 2,
+      "winner": 0,
+      "moves": 42
+    },
+    {
+      "seed": 7900014,
+      "player": 1,
+      "winner": 1,
+      "moves": 33
+    },
+    {
+      "seed": 7900014,
+      "player": 2,
+      "winner": 2,
+      "moves": 28
+    },
+    {
+      "seed": 7900015,
+      "player": 1,
+      "winner": 1,
+      "moves": 33
+    },
+    {
+      "seed": 7900015,
+      "player": 2,
+      "winner": 2,
+      "moves": 40
+    },
+    {
+      "seed": 7900016,
+      "player": 1,
+      "winner": 1,
+      "moves": 25
+    },
+    {
+      "seed": 7900016,
+      "player": 2,
+      "winner": 2,
+      "moves": 40
+    },
+    {
+      "seed": 7900017,
+      "player": 1,
+      "winner": 1,
+      "moves": 37
+    },
+    {
+      "seed": 7900017,
+      "player": 2,
+      "winner": 2,
+      "moves": 42
+    },
+    {
+      "seed": 7900018,
+      "player": 1,
+      "winner": 1,
+      "moves": 31
+    },
+    {
+      "seed": 7900018,
+      "player": 2,
+      "winner": 2,
+      "moves": 34
+    },
+    {
+      "seed": 7900019,
+      "player": 1,
+      "winner": 1,
+      "moves": 39
+    },
+    {
+      "seed": 7900019,
+      "player": 2,
+      "winner": 0,
+      "moves": 42
+    }
+  ],
+  "note": "Budgets différents, ouvertures jumelées six coups, camps alternés. Ce contrôle ne prouve pas une absence universelle de défaites."
+}

@@ -1,0 +1,8 @@
+{
+  "version": "3.0.0",
+  "sha256": {
+    "connect4-search.wasm": "69baa7e0ce6512fb8766dddeb7dc0d98d7914afb0dd5bab4cd92e23ee968fdef",
+    "evaluation.json": "1f9d88a8f6f61e5d9059f1de8919da4608f54dc72670ca111a2e5755dc785b72",
+    "garry.json": "fcfeb6d68097623ca74bfa97ae0302e9293967b373243812be3e718e6c8a2014"
+  }
+}

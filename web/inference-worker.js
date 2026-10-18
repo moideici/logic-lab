@@ -1,13 +1,14 @@
-import {Network,rng} from './engine.js';
+import {GarryModel,rng} from './engine.js';
 import {chooseDecision} from './decision.js';
-const models=new Map();
-self.onmessage=e=>{
+import {connectReady} from './connect4-runtime.js';
+let general=null;
+self.onmessage=async e=>{
  const {id,model,observation,legal,level,style,planning,seed}=e.data;
  try{
-  if(model)models.set(model.game,new Network(model));
-  const network=models.get(observation.game);
-  if(!network)throw Error('Modèle non initialisé dans le worker');
-  const result=chooseDecision(network,observation,legal,{level,style,planning,random:rng(seed)});
+  await connectReady;
+  if(model)general=new GarryModel(model);
+  if(!general)throw Error('Garry non initialisé');
+  const result=chooseDecision(general.forGame(observation.game),observation,legal,{level,style,planning,random:rng(seed)});
   self.postMessage({id,result});
  }catch(error){self.postMessage({id,error:error.message});}
 };

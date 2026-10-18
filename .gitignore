@@ -8,3 +8,13 @@ qa/
 dist/
 *.zip
 *.tar.gz
+
+node_modules/
+
+training-runs/
+
+# Local browser adapter dependencies
+node_modules/
+
+# Journaux d'entraînement continu (plusieurs Go, reproductibles)
+training/continuous/**/cases.jsonl

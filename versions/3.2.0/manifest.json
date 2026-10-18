@@ -1,0 +1,21 @@
+{
+  "name": "garry",
+  "version": "3.2.0",
+  "games": 6,
+  "architecture": [
+    1912,
+    48,
+    48,
+    818
+  ],
+  "files": {
+    "agents.json": "004ba6d5cae7950cfbff1d26a926817a7e54aca23b2d1472ea695b3165b0104d",
+    "connect4-search.ts": "f9fb11deecc07c146a9a7b02e28a5c9d5ce77156d5c21108cf0e5e9f9e1bb571",
+    "connect4-search.wasm": "90944af5bebac4343e089b20a0be6c3ab1352beaf8cc5d6f57e338b5e0ab052d",
+    "engine.js": "8391a4ce8b2da1a174f649d9503d2506443e7d0180e7dfe83241ce894d26da97",
+    "garry.json": "747ab285bba25373e5c9fe8055bb0273094a78594726d1e6d4444fd16fbdf9cb",
+    "general.py": "499911f4ad7933ff4cf9e1ecfd407c499561449e9f1c06fc9efcea1e85eba12b",
+    "search-memory.js": "bf177b873805fe7a4c9b554c97106f8b4d30cce7837fd32c9d41e86acb46db8a",
+    "search_memory.py": "3704e0ac0e47eca05142a9d862fc2426880f8728e10f85b2d2596e2af5a5dd57"
+  }
+}

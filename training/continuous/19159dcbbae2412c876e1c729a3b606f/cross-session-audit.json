@@ -1,0 +1,54 @@
+{
+  "prior_cases": {
+    "2c34213841c64bc29b19a24651403b5b": 60096,
+    "59b6b9193edd45c5beb8e8f71b1b3348": 157,
+    "73716e5db7a1498fb3a3599a2d540fbf": 158
+  },
+  "current_cases": 6176,
+  "overlaps": {
+    "train->train": 140,
+    "train->test": 18,
+    "validation->train": 19,
+    "test->train": 20,
+    "train->validation": 13,
+    "test->test": 3,
+    "validation->test": 2,
+    "validation->validation": 1
+  },
+  "heldout_to_train_examples": [
+    {
+      "id": "13bb5447f838bc6866496165b591b9654dab0f57f78f36ecc4f589e8997512a9",
+      "old_split": "validation",
+      "current_split": "train",
+      "game": "hex"
+    },
+    {
+      "id": "d0a0c817ccd76526fb67cb40f1490808a4a5e83298ed6e978f18049d6018abd5",
+      "old_split": "test",
+      "current_split": "train",
+      "game": "gomoku"
+    },
+    {
+      "id": "013e192a81d66c070db1b24684d7f627ee03e25255c0bae509590d18585b3e14",
+      "old_split": "test",
+      "current_split": "train",
+      "game": "hex"
+    },
+    {
+      "id": "79066fa74aebe0188f6b7fc128b05d99bdaf192a518bd67ddf6b3ddee9624cfa",
+      "old_split": "test",
+      "current_split": "train",
+      "game": "gomoku"
+    },
+    {
+      "id": "772505f5ee541f34a55b6c6eb5aa319eaea935ab7ddfea54d088d6726ab22c05",
+      "old_split": "validation",
+      "current_split": "train",
+      "game": "gomoku"
+    }
+  ],
+  "operation": "reject_cross_session_overlap_and_restore_initial",
+  "rejected_model_sha256": "ca8b17b9b9308e8c3479ceb3cb7260f609b7d4b31e0bbb19bc56a5e3fc586327",
+  "restored_model_sha256": "2ae331c0e74069b0a414dd72973eacd1953f8ad33918b03a421de0cb367fe525",
+  "at": "2026-10-17T18:58:37.934438+00:00"
+}

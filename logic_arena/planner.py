@@ -23,6 +23,9 @@ def _sliding_table():
 
 
 def sliding_distance(board):
+    if len(board)>3:
+        from .puzzle_levels import manhattan
+        return manhattan([v for row in board for v in row],len(board))
     b=tuple(v for row in board for v in row)
     rank=sum(sum(v<b[i] for v in b[i+1:])*_FACT[8-i] for i in range(8))
     return _sliding_table()[rank]
@@ -52,103 +55,68 @@ def _board_key(obs):
     return tuple(tuple(row) for row in obs["board"])
 
 
-def plan(obs, legal, model, level, fallback, time_ms=None, logits=None):
-    game = obs["game"]
-    started = time.monotonic()
-    budget_ms = TIMES[level-1] if time_ms is None else time_ms
-    deadline = started+budget_ms/1000
-    if logits is None:
-        logits = model.logits(obs)
-    if game=="tictactoe":
-        board=tuple(v for row in obs["board"] for v in row)
-        options=[]
+def plan(obs, legal, model, level, fallback, time_ms=None, logits=None, style='balanced',rng=None):
+    from .quality import select_quality, sudoku_values
+    from .agents import Budget, ReferenceAgent
+    from .neural import SPECS
+    game=obs['game'];logits=model.logits(obs) if logits is None else logits
+    if game=='go':
+        from .go_ai_policy import go_ai_actions
+        legal=go_ai_actions(obs,legal)
+    budget_ms=TIMES[-1] if time_ms is None else time_ms
+    budget=Budget(LIMITS[-1],budget_ms);info={}
+    if game=='tictactoe':
+        board=tuple(v for row in obs['board'] for v in row);values=[]
         for a in legal:
-            i=a["row"]*3+a["col"]
-            value,plies=_ttt_value(board[:i]+(obs["current_player"],)+board[i+1:],3-obs["current_player"])
-            options.append(((-value,plies+1),float(logits[i]),a))
-        value,_,action=max(options,key=lambda p:(_ttt_key(p[0]),p[1]))
-        return action,{"agent":"neural+planner","method":"exact_minimax_distance","optimal":True,
-                       "outcome":value[0],"remaining_moves":value[1],"objective":"win_then_fewest_moves"}
-    if game=="sliding_puzzle":
-        distance=sliding_distance(obs["board"])
-        r,c=next((r,c) for r in range(3) for c in range(3) if not obs["board"][r][c])
-        options=[]
+            i=a['row']*3+a['col'];v,n=_ttt_value(board[:i]+(obs['current_player'],)+board[i+1:],3-obs['current_player']);v=-v;n+=1
+            values.append({'action':a,'quality':[v,n if v==-1 else -n],'outcome':v,'remaining_moves':n})
+        info={'method':'exact_minimax_distance','optimal':True,'analysis_exact':True}
+    elif game=='sliding_puzzle' and len(obs['board'])>3:
+        from .large_sliding import large_sliding_values
+        values,info=large_sliding_values(obs,legal,Budget(30000,200 if time_ms is None else time_ms))
+    elif game=='sliding_puzzle':
+        r,c=next((r,c) for r in range(3) for c in range(3) if not obs['board'][r][c]);values=[]
         for a in legal:
-            dr,dc={"up":(-1,0),"down":(1,0),"left":(0,-1),"right":(0,1)}[a["direction"]]
-            b=[row[:] for row in obs["board"]]
-            b[r][c],b[r+dr][c+dc]=b[r+dr][c+dc],0
-            if sliding_distance(b)==distance-1:options.append(a)
-        action=max(options,key=lambda a:logits[action_index(game,a)]) if options else fallback
-        return action,{"agent":"neural+planner","method":"exact_shortest_path","optimal":distance!=255,
-                       "remaining_moves":distance,"nodes":len(legal),"solution_found":bool(options),"objective":"win_then_fewest_moves"}
-    if game=="2048":
-        from .agents import Budget
+            dr,dc={'up':(-1,0),'down':(1,0),'left':(0,-1),'right':(0,1)}[a['direction']];b=[row[:] for row in obs['board']];b[r][c],b[r+dr][c+dc]=b[r+dr][c+dc],0;d=sliding_distance(b)
+            values.append({'action':a,'quality':[-d if d!=255 else -1000],'remaining_moves':d+1})
+        info={'method':'exact_shortest_path','optimal':sliding_distance(obs['board'])!=255,'analysis_exact':True,'solution_found':True}
+    elif game=='connect4':
+        from .connect4_wasm import search,CONNECT_LIMITS,CONNECT_TIMES
+        _,info=search(obs,legal,Budget(CONNECT_LIMITS[-1],CONNECT_TIMES[-1] if time_ms is None else time_ms),logits=logits,analyze=level!=10,max_depth=42 if level==10 else 20,position_head=getattr(model,'position_head',None),search_memory=getattr(model,'search_memory',None))
+        if level==10:return _,{'agent':'neural+planner',**info,'level':level,'selected_is_best':True,'selected_is_worst':False,'level_semantics':'strongest_completed_search','target_depth':20,'depth_target_reached':info.get('depth',0)>=20,'quality':[info.get('value',0)]}
+        values=info.pop('action_values')
+    elif game=='go':
+        from .go_planner import go_values
+        values,info=go_values(obs,legal,Budget(1000,250 if time_ms is None else time_ms))
+    elif game=='gomoku':
+        from .gomoku_planner import gomoku_values
+        values,info=gomoku_values(obs,legal,Budget(20000,200 if time_ms is None else time_ms))
+    elif game=='hex':
+        from .hex_planner import hex_values
+        values,info=hex_values(obs,legal,Budget(4000,200 if time_ms is None else time_ms))
+    elif game in ('draughts','breakthrough'):
+        from .strategy_planner import strategy_values
+        values,info=strategy_values(obs,legal,Budget(30000,200 if time_ms is None else time_ms))
+    elif game in ('reversi','nim','lightsout'):
+        from .extra_planner import extra_values
+        values,info=extra_values(obs,legal,Budget(100000,150 if time_ms is None else time_ms))
+    elif game=='2048':
         from .tiles import search
-        action,info=search(obs,legal,logits,Budget(LIMITS[level-1],budget_ms),max_depth=2 if level>=8 else 1,critical_depth=3 if level>=9 else None)
-        return action,{"agent":"neural+planner","objective":"win_then_fewest_moves",**info}
-    if game in ("connect4","minesweeper"):
-        from .agents import Budget, ReferenceAgent
-        agent=ReferenceAgent(level,time_ms=budget_ms)
-        budget=Budget(LIMITS[level-1],budget_ms)
-        ordered=sorted(legal,key=lambda a:-logits[action_index(game,a)])
-        solver={"connect4":agent.line_game,"minesweeper":agent.mines}[game]
-        action=solver(obs,ordered,budget,fallback)
-        return action,{"agent":"neural+planner","method":{"connect4":"neural_alpha_beta","2048":"neural_expectimax","minesweeper":"public_constraints_flood"}[game],
-                       "optimal":False,"nodes":budget.nodes,"objective":"win_then_fewest_moves"}
-    if game!="sudoku":return fallback,{}
-    cache=_PATHS.get(_board_key(obs))
-    if cache and cache[0] in legal:
-        return cache[0],{"agent":"neural+planner","method":"shared_search_cached","optimal":True,"remaining_moves":cache[1],"nodes":0,"solution_found":True}
-
-    def distance(board):
-        if game == "sudoku":
-            return sum(v == 0 for row in board for v in row)
-        return sum(abs(r-(v-1)//3)+abs(c-(v-1)%3) for r,row in enumerate(board) for c,v in enumerate(row) if v)
-
-    def children(board):
-        if game == "sudoku":
-            cells = [(sudoku_candidates(board,r,c),r,c) for r in range(9) for c in range(9) if not board[r][c]]
-            if not cells:return []
-            vals,r,c = min(cells,key=lambda x:len(x[0]))
-            out=[]
-            for value in vals:
-                b=[row[:] for row in board];b[r][c]=value
-                out.append(({"row":r,"col":c,"value":value},b))
-            return out
-        r,c=next((r,c) for r in range(3) for c in range(3) if not board[r][c])
-        out=[]
-        for d,dr,dc in (("up",-1,0),("down",1,0),("left",0,-1),("right",0,1)):
-            if 0<=r+dr<3 and 0<=c+dc<3:
-                b=[row[:] for row in board];b[r][c],b[r+dr][c+dc]=b[r+dr][c+dc],0
-                out.append(({"direction":d},b))
-        return out
-
-    serial=itertools.count()
-    queue=[(distance(obs["board"]),next(serial),0,obs["board"],None,[])]
-    seen={json.dumps(obs["board"]):0}
-    best,best_h,nodes,solved=fallback,distance(obs["board"]),0,False
-    while queue and nodes<LIMITS[level-1] and time.monotonic()<deadline:
-        _,_,cost,board,first,path=heapq.heappop(queue)
-        nodes+=1
-        h=distance(board)
-        if first and h<best_h:
-            best,best_h=first,h
-        if not h:
-            solved=True;best=first or best
-            if len(_PATHS)>5000:_PATHS.clear()
-            for i,(state,action) in enumerate(path):_PATHS[tuple(tuple(row) for row in state)]=(action,len(path)-i)
-            break
-        moves=children(board)
-        if len(moves)>1:
-            branch_logits=logits if cost==0 else model.logits({**obs,"board":board})
-            moves.sort(key=lambda p:-branch_logits[action_index(game,p[0])])
-        for i,(action,b) in enumerate(moves):
-            key=json.dumps(b)
-            if cost+1>=seen.get(key,float("inf")):continue
-            seen[key]=cost+1
-            priority=distance(b)+(0 if game=="sudoku" else cost+1)+i*.001
-            heapq.heappush(queue,(priority,next(serial),cost+1,b,first or action,path+[(board,action)]))
-    if not solved and not queue and {"undo":True} in legal:best={"undo":True}
-    return best,{"agent":"neural+planner","method":"shared_best_first","nodes":nodes,"node_limit":LIMITS[level-1],
-                 "budget_ms":budget_ms,"planning_ms":(time.monotonic()-started)*1000,"solution_found":solved,
-                 "optimal":solved,"remaining_moves":distance(obs["board"]) if solved else None,"objective":"win_then_fewest_moves"}
+        _,info=search(obs,legal,logits,budget,max_depth=2,critical_depth=3);values=info.pop('action_values')
+    elif game=='sudoku':values,info=sudoku_values(obs,legal,logits,budget)
+    elif game=='minesweeper':
+        agent=ReferenceAgent(10,time_ms=budget_ms);agent.mines(obs,legal,budget,fallback);values=agent._mine_values
+        info={'method':'public_constraints_ranking','optimal':False,'nodes':budget.nodes}
+    else:return fallback,{}
+    from .strategic_styles import apply_styles
+    values,changed=apply_styles(obs,values,style,info.get('analysis_exact',False));info['style_effect']='strategic_evaluation' if changed else 'equal_quality_tiebreak'
+    if game in ('sliding_puzzle','sudoku'):
+        from .sliding_levels import select_sliding_level
+        selected,ranking=select_sliding_level(values,level,logits,rng,game)
+    else:selected,ranking=select_quality(values,level,logits,game)
+    extra={k:v for k,v in selected.items() if k not in ('action','quality')}
+    if game=='connect4':
+        v=selected['quality'][0];extra.update(value=v,forced_win=v>999957,forced_loss=v< -999957,remaining_moves=1000000-abs(v) if abs(v)>999957 else None)
+        info['optimal']=v in (999999,999997) or info.get('optimal',False)
+    return selected['action'],{'agent':'neural+planner',**info,**extra,**ranking,'optimal':ranking['selected_is_best'] and info.get('optimal',False),
+                              'evaluation_scope':'exact_legal_move_values' if info.get('analysis_exact') else info.get('evaluation_scope','bounded_public_analysis'),'objective':'win_then_fewest_moves'}

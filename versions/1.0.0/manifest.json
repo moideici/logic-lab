@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "description": "IA locales à la fin du travail précédent, conservées avant la génération 2",
+  "files": {
+    "logic_arena/__init__.py": "0059f56618f8bac6258cd4483fd85bf8eeab1bfd1a8056680d0d49b12fd56ceb",
+    "logic_arena/__main__.py": "d4cf67972fedd97cd1f03ca798710d85df48440c4a10b46a948d3aa0e6d87178",
+    "logic_arena/agents.py": "ad6e6492288ae8249a4ace2019abac1febcb9ca4d2813ce227dfcc1d024bf77c",
+    "logic_arena/connect4.py": "cd093d2c2c331b4ccb43d0bf42532996a60041b4ec55dec222925442f39d3c76",
+    "logic_arena/evaluation.py": "7573e8ac266d46f0d945b919b55f1fc8dd68c34506b56c8d9f530d3da278a1b0",
+    "logic_arena/games.py": "473b54128e6e5c953194d01f19ab7ec9d569f496fbd98ae2a21bbbddd7ead077",
+    "logic_arena/harness.py": "1a2ba161178675e62138fb1ef75a0d815443136cad4937a1fc17fc6def670027",
+    "logic_arena/neural.py": "dd8b340b498c9429be5fcd6c38d5dbd1ee063ceda35b617a4c8b2d4979ee3342",
+    "logic_arena/planner.py": "ef1a86cd19635d83e76b1ac04d041f1d625af1cc58ab1a0bf7d7d7bbe2537c4d",
+    "logic_arena/policy.py": "1e21b1700aeacb8828d69896a9416db69cfea782acd4af8f17abcfd928b05e39",
+    "logic_arena/server.py": "6bb8bec8bd27547b096c7b4ad57ea596d7cf5b5e779017d4870face8636d9824",
+    "logic_arena/tiles.py": "0db99a2f8e3fad8706b8230cfed01f1c985f641574ba11a8c0a9777ac707a1c4",
+    "logic_arena/training.py": "1fe8a5da0969c894a05e1a5a53ed58af69dcf3754d603b552d6af656dced90d6",
+    "web/decision.js": "b1a52a824221f3fc38c1f3ebc59af11b04b54edb86a3481a9d2a1a9ca3dad5b4",
+    "web/engine.js": "7acbbb791872b5807b7c25af53ce51e70b8f1e5147c20de499fc002efb61048d",
+    "web/fast-search.js": "a62caf5dc43d17e9177b4d984f2d237bcb2b30d48a2a37487fb920d9e65117e9",
+    "web/package.json": "8b83b57368d4877f9b4951a03efa6f23473ab4bd23fa9abef3403c62811df518",
+    "web/planner.js": "dda8610421d080ec8de9ab813933d237e42dda446f13552b945cf3541344e0c7",
+    "web/teachers.js": "25d321d4b78446a9c4eac80a0328606f75df61fab50a8dda30201dd09f57ea62",
+    "web/models/2048.json": "4157e33386b0c04f4e1c43fd7f4f5f0de9d819d38f2ff7d811cd47417e12fc2f",
+    "web/models/connect4.json": "947a2da8231f977ecf86b7eaea9282027b0d4059c6c999b37bda954e68ae689d",
+    "web/models/minesweeper.json": "7eecd97a902aaf33d17cff5ef4d674be8bbd72fe8fd20fc5f81b8eabb2f8b442",
+    "web/models/sliding_puzzle.json": "e900d3bfbde9e1690d50f5c66e39fb75bc2e04dbd8fe7351668e8bd7756c61a8",
+    "web/models/sliding-distances.json": "a0dc8feb3d6b2502c7d5e860dfc00fea6484c0b8701d30a1202b0e957c7bce8f",
+    "web/models/sudoku.json": "e6d4df8dfb5f830e921f49e85abfca9ac6c7b3f7c248368e4b8f2e1d8247aab9",
+    "web/models/tictactoe.json": "e14ffe9c512ac667c5f5d4277ac6c9a8c27783e20e6863ac4fc5563a226b3ac4"
+  }
+}

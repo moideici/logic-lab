@@ -18,7 +18,7 @@ def style_bias(obs, action, style):
         if "undo" in action:
             return 0.
         n = len(sudoku_candidates(board, action["row"], action["col"]))
-        return -.1*n if style in ("defensive", "positional") else .02*action["value"]
+        return -.1*n if style in ('defensive','positional') else .1*n if style in ('aggressive','greedy') else .02*action['value']
     if game == "minesweeper":
         r, c = action["row"], action["col"]
         known = sum(board[x][y] >= 0 for x in range(max(0, r-1), min(8, r+2)) for y in range(max(0, c-1), min(8, c+2)))

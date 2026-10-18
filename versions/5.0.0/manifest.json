@@ -1,0 +1,20 @@
+{
+  "version": "5.0.0",
+  "architecture": [
+    3055,
+    48,
+    48,
+    3894
+  ],
+  "files": {
+    "garry.json": "84b5d35642a7304a612a3fd28eec0c025ebece6c37c0051b306f18f443d65245",
+    "agents.json": "3f7f178b57c5a48f55c2e069ff40e9ffa3f3dcbb156d81cacf2679acdba45664",
+    "engine.js": "0e755d30d044f693324dafb8eae43cf375441a64c8422ce8e9ba115a7c0d5888",
+    "general.py": "7fa569f432a0ff345f960f9c48fed9ca373178aa37675c0127e87483fcdd991b",
+    "planner.py": "9cce85a29f6d398086379be313128fa993d9686edb46471ec228bbaa26ae562b",
+    "planner.js": "841086b3b23140110794b0db8ed58c79e6a9c814f56379bae68d0e326edd13b7",
+    "migration.py": "d164a831bc1003cc439be310831c4910613dc027ceb68e5055bd9082eb83549c",
+    "migration.js": "c6201f522ee7c0213bc0bc490998cf451e730ccfae8483ac26bf20e6661d309a",
+    "connect4-search.wasm": "90944af5bebac4343e089b20a0be6c3ab1352beaf8cc5d6f57e338b5e0ab052d"
+  }
+}

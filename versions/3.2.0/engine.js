@@ -1,0 +1,121 @@
+import {validateSearchMemory} from './search-memory.js';
+import {defaultPositionHead,validatePositionHead,positionFeatures} from './value.js';
+import {selectQuality} from './quality.js';
+import {agentIdentity,AGENT_VERSION} from './agents.js';
+export const NAMES={tictactoe:'Morpion','2048':'2048',sudoku:'Sudoku',connect4:'Puissance 4',minesweeper:'Démineur',sliding_puzzle:'Taquin'};
+export const DIRS=['up','down','left','right'];
+export const SPECS={tictactoe:[18,9],connect4:[84,7],'2048':[192,4],sudoku:[891,730],minesweeper:[640,64],sliding_puzzle:[81,4]};
+export const STYLES=['balanced','aggressive','defensive','greedy','positional','exploratory'];
+export const TEMPS=[2,1.4,1.1,.9,.7,.55,.4,.25,.12,0];
+export const clone=x=>JSON.parse(JSON.stringify(x));
+export function rng(seed=0){let s=seed>>>0;return()=>{s=(s+0x6D2B79F5)>>>0;let t=Math.imul(s^(s>>>15),1|s);t^=t+Math.imul(t^(t>>>7),61|t);return ((t^(t>>>14))>>>0)/4294967296;};}
+const pick=(a,r)=>a[Math.floor(r()*a.length)];
+const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+export function candidates(b,r,c){if(b[r][c])return [];const used=new Set(b[r]);for(let i=0;i<9;i++)used.add(b[i][c]);for(let x=r-r%3;x<r-r%3+3;x++)for(let y=c-c%3;y<c-c%3+3;y++)used.add(b[x][y]);return [1,2,3,4,5,6,7,8,9].filter(x=>!used.has(x));}
+export function slide(b,d){const out=Array.from({length:4},()=>[0,0,0,0]);let gain=0;for(let i=0;i<4;i++){const coords=Array.from({length:4},(_,j)=>d==='left'?[i,j]:d==='right'?[i,3-j]:d==='up'?[j,i]:[3-j,i]);const vals=coords.map(([r,c])=>b[r][c]).filter(Boolean), merged=[];for(let j=0;j<vals.length;j++){if(j+1<vals.length&&vals[j]===vals[j+1]){merged.push(vals[j]*2);gain+=vals[j]*2;j++;}else merged.push(vals[j]);}coords.forEach(([r,c],j)=>out[r][c]=merged[j]||0);}return [out,gain];}
+export class Game{
+ constructor(name,seed=0,options={}){if(!NAMES[name])throw Error('Jeu inconnu');if(!Number.isInteger(seed))throw Error('La graine doit être un entier');if(!options||typeof options!=='object'||Array.isArray(options))throw Error('Options invalides');if(Object.keys(options).some(k=>name!=='sliding_puzzle'||k!=='scramble'))throw Error('Option inconnue');this.name=name;this.seed=seed;this.random=rng(seed);this.player=1;this.done=false;this.winner=null;this.moves=0;this.score=0;this.history=[];this.mines=null;
+ const shapes={tictactoe:[3,3],connect4:[6,7],'2048':[4,4],sudoku:[9,9],minesweeper:[8,8],sliding_puzzle:[3,3]};const [h,w]=shapes[name];this.board=Array.from({length:h},()=>Array(w).fill(name==='minesweeper'?-1:0));
+ if(name==='2048'){this.spawn();this.spawn();}
+ if(name==='sudoku'){const p='530070000600195000098000060800060003400803001700020006060000280000419005000080079';const digits=[1,2,3,4,5,6,7,8,9];for(let i=8;i>0;i--){const j=Math.floor(this.random()*(i+1));[digits[i],digits[j]]=[digits[j],digits[i]];}this.board=Array.from({length:9},(_,r)=>Array.from({length:9},(_,c)=>+p[r*9+c]?digits[+p[r*9+c]-1]:0));this.givens=clone(this.board);}
+ if(name==='sliding_puzzle'){const count=options.scramble??30;if(!Number.isInteger(count)||count<1||count>200)throw Error('scramble doit être entre 1 et 200');this.board=[[1,2,3],[4,5,6],[7,8,0]];let previous='';for(let i=0;i<count;i++){const a=pick(this.legal().filter(a=>a.direction!==previous),this.random);this.swap(a.direction);previous={up:'down',down:'up',left:'right',right:'left'}[a.direction];}if(!this.distance())this.swap('up');}
+ }
+ get multiplayer(){return ['tictactoe','connect4'].includes(this.name);}
+ obs(){return {game:this.name,board:clone(this.board),current_player:this.player,done:this.done,winner:this.winner,score:this.score,moves:this.moves,...(this.givens?{givens:clone(this.givens),history:clone(this.history)}:{}),...(this.name==='minesweeper'?{mine_count:10}:{})};}
+ neighbors(r,c){const a=[];for(let x=Math.max(0,r-1);x<Math.min(8,r+2);x++)for(let y=Math.max(0,c-1);y<Math.min(8,c+2);y++)if(x!==r||y!==c)a.push([x,y]);return a;}
+ legal(){if(this.done)return [];const b=this.board,out=[];if(this.name==='connect4')return b[0].flatMap((v,c)=>!v?[{column:c}]:[]);if(this.name==='2048')return DIRS.filter(d=>!same(slide(b,d)[0],b)).map(direction=>({direction}));if(this.name==='sliding_puzzle'){const i=b.flat().indexOf(0),r=Math.floor(i/3),c=i%3;return DIRS.filter(d=>d==='up'?r>0:d==='down'?r<2:d==='left'?c>0:c<2).map(direction=>({direction}));}for(let r=0;r<b.length;r++)for(let c=0;c<b[0].length;c++){if(this.name==='sudoku'){for(const v of candidates(b,r,c))out.push({row:r,col:c,value:v});}else if(b[r][c]===(this.name==='minesweeper'?-1:0))out.push({row:r,col:c});}if(this.name==='sudoku'&&this.history.length)out.push({undo:true});return out;}
+ lines(){const b=this.board,n=this.name==='connect4'?4:3,out=[];for(let r=0;r<b.length;r++)for(let c=0;c<b[0].length;c++)for(const [dr,dc] of [[0,1],[1,0],[1,1],[1,-1]]){const cells=Array.from({length:n},(_,i)=>[r+i*dr,c+i*dc]);if(cells.every(([x,y])=>x>=0&&x<b.length&&y>=0&&y<b[0].length))out.push(cells.map(([x,y])=>b[x][y]));}return out;}
+ spawn(){const empty=[];this.board.forEach((row,r)=>row.forEach((v,c)=>{if(!v)empty.push([r,c]);}));if(empty.length){const [r,c]=pick(empty,this.random);this.board[r][c]=this.random()<.9?2:4;}}
+ distance(){return this.board.flat().reduce((s,v,i)=>s+(v?Math.abs(Math.floor(i/3)-Math.floor((v-1)/3))+Math.abs(i%3-(v-1)%3):0),0);}
+ swap(d){const i=this.board.flat().indexOf(0),r=Math.floor(i/3),c=i%3,[dr,dc]={up:[-1,0],down:[1,0],left:[0,-1],right:[0,1]}[d];this.board[r][c]=this.board[r+dr][c+dc];this.board[r+dr][c+dc]=0;}
+ step(a){const sorted=x=>JSON.stringify(x,Object.keys(x).sort());if(!this.legal().some(x=>sorted(x)===sorted(a)))throw Error('Action illégale');this.moves++;let reward=0;const b=this.board;
+ if(this.multiplayer){const c=a.column??a.col,r=a.row??b.map(row=>row[c]).lastIndexOf(0);b[r][c]=this.player;if(this.lines().some(l=>l.every(v=>v===this.player))){this.done=true;this.winner=this.player;this.score=1;reward=1;}else if(b.flat().every(Boolean)){this.done=true;this.winner=0;}if(!this.done)this.player=3-this.player;}
+ else if(this.name==='2048'){let gain;[this.board,gain]=slide(b,a.direction);this.score+=gain;this.spawn();if(Math.max(...this.board.flat())>=2048){this.done=true;this.winner=1;}else if(!this.legal().length){this.done=true;this.winner=0;}reward=gain/2048+(this.winner===1?1:0);}
+ else if(this.name==='sudoku'){if(a.undo){const [r,c]=this.history.pop();b[r][c]=0;this.score--;reward=-.02;}else{b[a.row][a.col]=a.value;this.history.push([a.row,a.col]);this.score++;if(b.flat().every(Boolean)){this.done=true;this.winner=1;}reward=this.done?1:.01;}}
+ else if(this.name==='sliding_puzzle'){const before=this.distance();this.swap(a.direction);const after=this.distance();this.score=-after;if(!after){this.done=true;this.winner=1;}reward=this.done?1:(before-after)*.05-.01;}
+ else{const {row:r,col:c}=a,key=(r,c)=>r*8+c;if(!this.mines){const safe=new Set([key(r,c),...this.neighbors(r,c).map(([x,y])=>key(x,y))]);const cells=Array.from({length:64},(_,i)=>i).filter(i=>!safe.has(i));this.mines=new Set();while(this.mines.size<10){const i=Math.floor(this.random()*cells.length);this.mines.add(cells.splice(i,1)[0]);}}if(this.mines.has(key(r,c))){b[r][c]=-2;this.done=true;this.winner=0;reward=-1;}else{const before=this.score,stack=[[r,c]];while(stack.length){const [x,y]=stack.pop();if(b[x][y]!==-1)continue;const n=this.neighbors(x,y),count=n.filter(([u,v])=>this.mines.has(key(u,v))).length;b[x][y]=count;this.score++;if(!count)stack.push(...n.filter(([u,v])=>b[u][v]===-1));}if(this.score===54){this.done=true;this.winner=1;}reward=(this.score-before)/54+(this.done?1:0);}}
+ return reward;
+ }
+}
+export function encode(o){const x=new Float32Array(SPECS[o.game][0]);o.board.flat().forEach((v,i)=>{if(['tictactoe','connect4'].includes(o.game)){if(v)x[i*2+(v===o.current_player?0:1)]=1;}else if(o.game==='2048'){if(v)x[i*12+Math.min(11,Math.floor(Math.log2(v)))]=1;}else if(o.game==='sudoku'){x[i*10+v]=1;x[810+i]=o.givens[Math.floor(i/9)][i%9]?1:0;}else if(o.game==='minesweeper')x[i*10+Math.max(0,v+1)]=1;else x[i*9+v]=1;});return x;}
+export function actionIndex(game,a){return game==='sudoku'?a.undo?729:(a.row*9+a.col)*9+a.value-1:game==='connect4'?a.column:['2048','sliding_puzzle'].includes(game)?DIRS.indexOf(a.direction):a.row*(game==='tictactoe'?3:8)+a.col;}
+export function styleBias(o,a,style){if(['balanced','exploratory'].includes(style))return 0;const sign=['positional','defensive'].includes(style)?1:-.5;if(['tictactoe','connect4'].includes(o.game)){const c=a.column??a.col;return sign*.15*(1-Math.abs(c-(o.board[0].length-1)/2));}if(o.game==='2048'){const [b,g]=slide(o.board,a.direction);return ['defensive','positional'].includes(style)?.1*b.flat().filter(v=>!v).length:.03*g;}if(o.game==='sudoku')return a.undo?0:['defensive','positional'].includes(style)?-.1*candidates(o.board,a.row,a.col).length:.02*a.value;if(o.game==='minesweeper'){let n=0;for(let x=Math.max(0,a.row-1);x<Math.min(8,a.row+2);x++)for(let y=Math.max(0,a.col-1);y<Math.min(8,a.col+2);y++)if(o.board[x][y]>=0)n++;return sign*.08*n;}if(o.game==='sliding_puzzle'){const i=o.board.flat().indexOf(0),r=Math.floor(i/3),c=i%3,[dr,dc]={up:[-1,0],down:[1,0],left:[0,-1],right:[0,1]}[a.direction],v=o.board[r+dr][c+dc],tr=Math.floor((v-1)/3),tc=(v-1)%3,delta=Math.abs(r+dr-tr)+Math.abs(c+dc-tc)-Math.abs(r-tr)-Math.abs(c-tc);return style==='greedy'?.2*delta:style==='positional'?.15*Number(r===tr&&c===tc):style==='defensive'?-.15*Number(r+dr===tr&&c+dc===tc):.1*delta+.02*v;}return 0;}
+export class Network{
+ constructor(data){const shape=SPECS[data.game];if(data.format!=='logic-arena-mlp-v2'||!shape||!Number.isInteger(data.hidden)||data.hidden<1||data.hidden>256||data.input!==shape[0]||data.output!==shape[1])throw Error('Architecture de modèle incompatible');if(!Number.isInteger(data.steps)||data.steps<0)throw Error('Compteur invalide');this.game=data.game;this.input=data.input;this.output=data.output;this.hidden=data.hidden;this.steps=data.steps;for(const [k,n] of [['w1',this.input*this.hidden],['b1',this.hidden],['w2',this.hidden*this.output],['b2',this.output]]){if(!Array.isArray(data[k])||data[k].length!==n||!data[k].every(v=>typeof v==='number'&&Number.isFinite(v)))throw Error('Poids invalides : '+k);this[k]=Float32Array.from(data[k]);}const c=data.core;if(c?.id!=='logic-core-v1'||!Number.isInteger(c.steps)||c.steps<0||!Array.isArray(c.w)||c.w.length!==this.hidden*this.hidden||!Array.isArray(c.b)||c.b.length!==this.hidden||![...c.w,...c.b].every(v=>typeof v==='number'&&Number.isFinite(v)))throw Error('Module partagé invalide');this.core={id:c.id,steps:c.steps,w:Float32Array.from(c.w),b:Float32Array.from(c.b)};}
+ forward(o){if(o.game!==this.game)throw Error('Modèle incompatible');const x=encode(o),e=new Float32Array(this.hidden),h=new Float32Array(this.hidden),z=new Float32Array(this.output);for(let j=0;j<this.hidden;j++){let s=this.b1[j];for(let i=0;i<this.input;i++)if(x[i])s+=x[i]*this.w1[i*this.hidden+j];e[j]=Math.tanh(s);}for(let j=0;j<this.hidden;j++){let s=this.core.b[j];for(let i=0;i<this.hidden;i++)s+=e[i]*this.core.w[i*this.hidden+j];h[j]=Math.tanh(s);}for(let k=0;k<this.output;k++){let s=this.b2[k];for(let j=0;j<this.hidden;j++)s+=h[j]*this.w2[j*this.output+k];z[k]=s;}return {x,e,h,z};}
+ choose(o,legal,level=10,style='balanced',random=Math.random,preparedLogits=null){
+  if(!Number.isInteger(level)||level<0||level>10||!STYLES.includes(style))throw Error('Niveau ou style invalide');
+  if(!legal.length||o.done)throw Error('Partie terminée');
+  const start=performance.now(),z=preparedLogits??this.forward(o).z;
+  const scores=legal.map(a=>z[actionIndex(this.game,a)]),values=legal.map((action,i)=>({action,quality:[scores[i]]}));
+  const ranked=selectQuality(values,level,z,this.game),equal=values.filter(v=>v.quality[0]===ranked.selected.quality[0]),bestBias=Math.max(...equal.map(v=>styleBias(o,v.action,style))),ties=equal.filter(v=>styleBias(o,v.action,style)===bestBias),selected=ties[Math.min(ties.length-1,Math.floor(random()*ties.length))],info=ranked.info,max=Math.max(...scores),p=scores.map(v=>Math.exp(Math.max(-50,v-max))),sum=p.reduce((a,b)=>a+b,0),at=legal.indexOf(selected.action);
+  return {action:selected.action,info:{agent:'neural',identity:agentIdentity(this.game),...info,style,confidence:p[at]/sum,optimal:false,evaluation_scope:'policy_scores',time_ms:performance.now()-start,training_steps:this.steps,parameters:this.w1.length+this.w2.length+this.b1.length+this.b2.length+this.core.w.length+this.core.b.length+(this.positionHead?.weights.length??0)}};
+ }
+
+ train(o,legal,target,lr=.015){const {x,e,h,z}=this.forward(o),ids=legal.map(a=>actionIndex(this.game,a)),ti=actionIndex(this.game,target),max=Math.max(...ids.map(k=>z[k])),p=ids.map(k=>Math.exp(z[k]-max)),sum=p.reduce((a,b)=>a+b,0),dh=new Float32Array(this.hidden),de=new Float32Array(this.hidden);const targetAt=ids.indexOf(ti);if(targetAt<0)throw Error('Cible illégale');const loss=-Math.log(Math.max(1e-12,p[targetAt]/sum));for(let t=0;t<ids.length;t++){const k=ids[t],grad=p[t]/sum-(k===ti?1:0);for(let j=0;j<this.hidden;j++){const idx=j*this.output+k;dh[j]+=grad*this.w2[idx];this.w2[idx]-=lr*h[j]*grad;}this.b2[k]-=lr*grad;}for(let j=0;j<this.hidden;j++){const grad=dh[j]*(1-h[j]*h[j]);this.core.b[j]-=lr*grad;for(let i=0;i<this.hidden;i++){const idx=i*this.hidden+j;de[i]+=grad*this.core.w[idx];this.core.w[idx]-=lr*e[i]*grad;}}for(let j=0;j<this.hidden;j++){const grad=de[j]*(1-e[j]*e[j]);this.b1[j]-=lr*grad;for(let i=0;i<this.input;i++)if(x[i])this.w1[i*this.hidden+j]-=lr*x[i]*grad;}this.steps++;this.core.steps++;return loss;}
+ export(){const d={identity:agentIdentity(this.game),format:'logic-arena-mlp-v2',game:this.game,input:this.input,output:this.output,hidden:this.hidden,steps:this.steps,core:{id:this.core.id,steps:this.core.steps,w:Array.from(this.core.w),b:Array.from(this.core.b)}};for(const k of ['w1','b1','w2','b2'])d[k]=Array.from(this[k]);return d;}
+}
+export function linkNetworks(models,preferred){const a=Object.values(models);if(!a.length)return;const core=preferred||a.reduce((best,m)=>m.core.steps>best.steps?m.core:best,a[0].core);for(const m of a){if(m.hidden!==core.b.length)throw Error('Dimensions partagées incompatibles');m.core=core;}return core;}
+
+// Un seul ensemble de matrices ; le jeu conditionne les entrées et le masque.
+export const GARRY_GAMES=['tictactoe','connect4','2048','sudoku','minesweeper','sliding_puzzle'];
+export const GARRY_INPUT_OFFSETS=Object.fromEntries(GARRY_GAMES.map((g,i)=>[g,GARRY_GAMES.slice(0,i).reduce((n,k)=>n+SPECS[k][0],0)]));
+export const GARRY_OUTPUT_OFFSETS=Object.fromEntries(GARRY_GAMES.map((g,i)=>[g,GARRY_GAMES.slice(0,i).reduce((n,k)=>n+SPECS[k][1],0)]));
+export const GARRY_FEATURES=GARRY_GAMES.reduce((n,g)=>n+SPECS[g][0],0),GARRY_INPUT=GARRY_FEATURES+6,GARRY_OUTPUT=GARRY_GAMES.reduce((n,g)=>n+SPECS[g][1],0);
+export function encodeGeneral(o){const x=new Float32Array(GARRY_INPUT);x.set(encode(o),GARRY_INPUT_OFFSETS[o.game]);x[GARRY_FEATURES+GARRY_GAMES.indexOf(o.game)]=1;return x;}
+export class GarryModel{
+ constructor(d){
+  if(!((d.format==='garry-mlp-v1'&&d.version==='2.0.0')||(d.format==='garry-mlp-v2'&&['3.0.0','3.1.0','3.2.0'].includes(d.version)))||d.name!=='garry'||JSON.stringify(d.games)!==JSON.stringify(GARRY_GAMES)||d.input!==GARRY_INPUT||d.output!==GARRY_OUTPUT||!Number.isInteger(d.hidden)||d.hidden<1||d.hidden>256)throw Error('Architecture Garry incompatible');
+  this.positionHead=validatePositionHead(d.position_head??(d.format==='garry-mlp-v1'?defaultPositionHead():null));
+  this.searchMemory=validateSearchMemory(d.search_memory);
+  this.input=d.input;this.output=d.output;this.hidden=d.hidden;this.steps=d.steps;this.gameSteps={...d.game_steps};
+  if(!Number.isInteger(this.steps)||this.steps<0||GARRY_GAMES.some(g=>!Number.isInteger(this.gameSteps[g])||this.gameSteps[g]<0))throw Error('Compteurs Garry invalides');
+  const read=(values,n)=>{if(!Array.isArray(values)||values.length!==n||!values.every(v=>typeof v==='number'&&Number.isFinite(v)))throw Error('Poids Garry invalides');return Float32Array.from(values);};
+  for(const [k,n] of [['w1',this.input*this.hidden],['b1',this.hidden],['w2',this.hidden*this.output],['b2',this.output]])this[k]=read(d[k],n);
+  const c=d.core;if(c?.id!=='garry-core-v1'||!Number.isInteger(c.steps)||c.steps<0)throw Error('Module Garry invalide');
+  this.core={id:c.id,steps:c.steps,w:read(c.w,this.hidden*this.hidden),b:read(c.b,this.hidden)};
+ }
+ forward(o){
+  const x=encodeGeneral(o),e=new Float32Array(this.hidden),h=new Float32Array(this.hidden),z=new Float32Array(this.output);
+  for(let j=0;j<this.hidden;j++){let s=this.b1[j];for(let i=0;i<this.input;i++)if(x[i])s+=x[i]*this.w1[i*this.hidden+j];e[j]=Math.tanh(s);}
+  for(let j=0;j<this.hidden;j++){let s=this.core.b[j];for(let i=0;i<this.hidden;i++)s+=e[i]*this.core.w[i*this.hidden+j];h[j]=Math.tanh(s);}
+  for(let k=0;k<this.output;k++){let s=this.b2[k];for(let j=0;j<this.hidden;j++)s+=h[j]*this.w2[j*this.output+k];z[k]=s;}
+  return {x,e,h,z};
+ }
+ forGame(game){if(!SPECS[game])throw Error('Jeu inconnu');return new GarryView(this,game);}
+ choose(o,legal,level=10,style='balanced',random=Math.random,logits=null){const start=GARRY_OUTPUT_OFFSETS[o.game],local=logits?.length===this.output?logits.slice(start,start+SPECS[o.game][1]):logits;return this.forGame(o.game).choose(o,legal,level,style,random,local);}
+ positionValue(o){if(o.game!==this.positionHead.game)return null;return positionFeatures(o).reduce((s,v,i)=>s+v*this.positionHead.weights[i],0);}
+ export(){const d={format:'garry-mlp-v2',name:'garry',version:AGENT_VERSION,position_head:structuredClone(this.positionHead),search_memory:structuredClone(this.searchMemory),games:GARRY_GAMES.slice(),input:this.input,output:this.output,hidden:this.hidden,steps:this.steps,game_steps:{...this.gameSteps},core:{id:this.core.id,steps:this.core.steps,w:Array.from(this.core.w),b:Array.from(this.core.b)}};for(const k of ['w1','b1','w2','b2'])d[k]=Array.from(this[k]);return d;}
+ train(o,legal,target,lr=.015){
+  if(!Number.isFinite(lr)||lr<=0)throw Error('Taux d’apprentissage invalide');
+  const {x,e,h,z}=this.forward(o),offset=GARRY_OUTPUT_OFFSETS[o.game],ids=legal.map(a=>offset+actionIndex(o.game,a)),ti=offset+actionIndex(o.game,target),targetAt=ids.indexOf(ti);
+  if(targetAt<0)throw Error('Cible illégale');
+  const max=Math.max(...ids.map(k=>z[k])),p=ids.map(k=>Math.exp(z[k]-max)),sum=p.reduce((a,b)=>a+b,0),dh=new Float32Array(this.hidden),de=new Float32Array(this.hidden);
+  const loss=-Math.log(Math.max(1e-12,p[targetAt]/sum));
+  for(let t=0;t<ids.length;t++){const k=ids[t],grad=p[t]/sum-(k===ti?1:0);for(let j=0;j<this.hidden;j++){const at=j*this.output+k;dh[j]+=grad*this.w2[at];this.w2[at]-=lr*h[j]*grad;}this.b2[k]-=lr*grad;}
+  for(let j=0;j<this.hidden;j++){const grad=dh[j]*(1-h[j]*h[j]);this.core.b[j]-=lr*grad;for(let i=0;i<this.hidden;i++){const at=i*this.hidden+j;de[i]+=grad*this.core.w[at];this.core.w[at]-=lr*e[i]*grad;}}
+  for(let j=0;j<this.hidden;j++){const grad=de[j]*(1-e[j]*e[j]);this.b1[j]-=lr*grad;for(let i=0;i<this.input;i++)if(x[i])this.w1[i*this.hidden+j]-=lr*x[i]*grad;}
+  this.steps++;this.gameSteps[o.game]++;this.core.steps++;return loss;
+ }
+ static fuse(data){
+  const old=Object.fromEntries(data.map(d=>{const m=new Network(d);return [m.game,m];}));
+  if(GARRY_GAMES.some(g=>!old[g]))throw Error('La fusion nécessite les six modèles');
+  const first=old[GARRY_GAMES[0]],hidden=first.hidden;
+  if(GARRY_GAMES.some(g=>old[g].hidden!==hidden||!old[g].core.w.every((v,i)=>v===first.core.w[i])||!old[g].core.b.every((v,i)=>v===first.core.b[i])))throw Error('Modules centraux incompatibles');
+  const w1=Array(GARRY_INPUT*hidden).fill(0),w2=Array(hidden*GARRY_OUTPUT).fill(0),b2=Array(GARRY_OUTPUT).fill(0),game_steps={};
+  GARRY_GAMES.forEach((g,i)=>{const m=old[g],a=GARRY_INPUT_OFFSETS[g],b=GARRY_OUTPUT_OFFSETS[g];m.w1.forEach((v,k)=>w1[a*hidden+k]=v);m.b1.forEach((v,k)=>w1[(GARRY_FEATURES+i)*hidden+k]=v);for(let j=0;j<hidden;j++)for(let k=0;k<m.output;k++)w2[j*GARRY_OUTPUT+b+k]=m.w2[j*m.output+k];m.b2.forEach((v,k)=>b2[b+k]=v);game_steps[g]=m.steps;});
+  return new GarryModel({format:'garry-mlp-v1',name:'garry',version:'2.0.0',games:GARRY_GAMES.slice(),input:GARRY_INPUT,output:GARRY_OUTPUT,hidden,steps:Object.values(game_steps).reduce((a,b)=>a+b,0),game_steps,w1,w2,b1:Array(hidden).fill(0),b2,core:{id:'garry-core-v1',steps:Math.max(...GARRY_GAMES.map(g=>old[g].core.steps)),w:Array.from(first.core.w),b:Array.from(first.core.b)}});
+ }
+}
+class GarryView{
+ constructor(model,game){this.model=model;this.game=game;}
+ get input(){return this.model.input;}get output(){return this.model.output;}get hidden(){return this.model.hidden;}
+ get positionHead(){return this.model.positionHead;}
+ get searchMemory(){return this.model.searchMemory;}
+ get core(){return this.model.core;}get steps(){return this.model.gameSteps[this.game];}
+ get w1(){return this.model.w1;}get b1(){return this.model.b1;}get w2(){return this.model.w2;}get b2(){return this.model.b2;}
+ forward(o){if(o.game!==this.game)throw Error('Jeu incompatible');const f=this.model.forward(o),start=GARRY_OUTPUT_OFFSETS[this.game];return {...f,z:f.z.slice(start,start+SPECS[this.game][1])};}
+ choose(...args){return Network.prototype.choose.apply(this,args);}
+ train(o,legal,target,lr){if(o.game!==this.game)throw Error('Jeu incompatible');return this.model.train(o,legal,target,lr);}
+ export(){return this.model.export();}
+}
