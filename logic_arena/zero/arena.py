@@ -37,7 +37,7 @@ class GarryOpponent:
         return self.agent.choose(obs, legal).action
 
 
-def match(rules, net, make_opponent, games=40, sims=200, device="cpu", seed=1000, game_name="connect4", options=None):
+def match(rules, net, make_opponent, games=40, sims=200, device="cpu", seed=1000, game_name="connect4", options=None, opening_plies=0):
     """`games` parties depuis le plateau vide, Zéro jouant alternativement premier et second. Score : victoire 1, nul 0,5, défaite 0.
 
     Les règles de Garry arbitrent : Zéro ne peut jouer que les coups que Garry juge légaux (superko compris). Au Go, la phase de comptage
@@ -47,6 +47,14 @@ def match(rules, net, make_opponent, games=40, sims=200, device="cpu", seed=1000
     envs = [make_game(game_name, seed + g, options) for g in range(games)]
     zero_is = [1 + g % 2 for g in range(games)]
     opponents = [make_opponent(seed + g) for g in range(games)]
+    # ouvertures aléatoires identiques par paire de parties (mêmes coups, camps échangés) : évite de rejouer cent fois la même partie
+    for g, e in enumerate(envs):
+        rng = np.random.default_rng(seed + g // 2)
+        for _ in range(opening_plies):
+            legal = [a for a in e.legal_actions() if "pass" not in a and "resign" not in a]
+            if not legal or e.done:
+                break
+            e.step(legal[int(rng.integers(len(legal)))])
     guard = 0
     while not all(e.done for e in envs) and guard < 400:
         guard += 1
