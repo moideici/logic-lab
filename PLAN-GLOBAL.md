@@ -139,3 +139,16 @@ L’objectif « chaque neurone rentable à 100 % » devient une exigence expéri
 ## 7. Reprise du travail
 
 La prochaine action de développement est de finir la recette du lot 1 et de présenter l’interface utilisable. Le présent regroupement des fichiers ne constitue pas une reprise des entraînements ou l’activation d’un nouveau cœur. Les anciens rapports dans `outputs/` restent des archives et peuvent décrire des orientations désormais remplacées par ce plan.
+
+## 8. Points ajoutés après revue (18 octobre 2026)
+
+Le plan ci-dessus est cohérent dans l'ordre et honnête sur les limites, mais il lui manquait de quoi décider qu'un lot est terminé et de quoi ne pas perdre le travail. Ajouts :
+
+1. **Sauvegarde externe avant tout nouvel entraînement.** Les poids (~14 Go) ne sont pas dans Git et ce dossier est la seule copie. Copier `projets/*/models` et les caches vers un autre support, avec les empreintes déjà consignées.
+2. **Banc de référence figé avant de changer le modèle.** Geler les tests réservés (liste et empreinte) et mesurer l'état actuel : c'est la ligne de base de toute comparaison. Le banc de régression du lot 2 doit exister avant le lot 4, pas après.
+3. **Seuils chiffrés par lot.** « Utilisable » doit se mesurer. Lot 1 : premier texte visible en moins de 3 s à chaud, arrêt effectif en moins de 1 s, 0 erreur JavaScript sur le parcours complet, reprise après erreur et rechargement sans perte d'historique. Lots suivants : seuils fixés avant la mesure, jamais après.
+4. **Justifier la taille du modèle.** Comparer Qwen3-0.6B à au moins une base plus grande et une plus petite sur le même banc, matériel et coût, avant d'investir dans de nouveaux entraînements.
+5. **Provenance et licences des données.** Consigner pour chaque corpus (Wikipédia, OpenAssistant, lexique) licence, date d'import et filtrage ; vérifier l'absence de recouvrement avec les tests réservés.
+6. **Sécurité locale d'Input.** Écoute sur 127.0.0.1 uniquement, tailles de requête bornées, aucune donnée de conversation envoyée hors de la machine.
+7. **Reproductibilité.** Graines, version des dépendances (`work/requirements.lock.txt`) et journal d'expériences (données, configuration, mesures, décision) pour chaque entraînement.
+8. **Règle d'arrêt.** Un cycle d'entraînement sans gain mesuré sur validation après deux essais est abandonné et documenté, pas prolongé.
