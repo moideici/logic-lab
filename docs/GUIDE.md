@@ -74,3 +74,7 @@ Règles de continuité :
 - Trois usages : contraintes, plans, comparaison de scénarios ; JSON strict, Markdown seulement dans `texte` et `justification`.
 - Ne pas relancer un ancien script ou un entraînement parce qu'il existe : lire le plan, figer les données, séparer apprentissage, validation et test.
 - Les scripts de `work/historique/` sont des archives (voir son README).
+
+## Jeux réels (2048 et COSUMI)
+
+L'onglet « Jeux réels » lance un navigateur Chromium sans fenêtre (Playwright) sur les sites 2048 et COSUMI. Le navigateur du projet est dans `work/browsers` ; le serveur le désigne tout seul (`PLAYWRIGHT_BROWSERS_PATH`). Si les parties échouent avec « Executable doesn't exist », c'est que ce dossier manque ou que la révision de Playwright a changé : relancer `npx playwright install chromium` dans `projets/garry/tools/real-games` avec `PLAYWRIGHT_BROWSERS_PATH` pointant vers `work/browsers`. Vérifié le 18 octobre 2026 : 12 coups de 2048 (12 transitions vérifiées) et 10 étapes de Go 9×9 contre COSUMI niveau 1.
