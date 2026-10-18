@@ -152,3 +152,8 @@ Le plan ci-dessus est cohérent dans l'ordre et honnête sur les limites, mais i
 6. **Sécurité locale d'Input.** Écoute sur 127.0.0.1 uniquement, tailles de requête bornées, aucune donnée de conversation envoyée hors de la machine.
 7. **Reproductibilité.** Graines, version des dépendances (`work/requirements.lock.txt`) et journal d'expériences (données, configuration, mesures, décision) pour chaque entraînement.
 8. **Règle d'arrêt.** Un cycle d'entraînement sans gain mesuré sur validation après deux essais est abandonné et documenté, pas prolongé.
+
+## 9. État d'avancement
+
+- **Lot 1 (interface Input) : recette faite le 18 octobre 2026**, voir `outputs/verifications/recette-lot1-input-2026-10-18.md`. Seuils du §8 atteints ; l'attente à froid est corrigée par le préchargement. Reste non couvert : migration des anciennes conversations, page Bilan, copie réelle.
+- **Constat décisif pour la suite :** l'interface est utilisable, le modèle ne l'est pas encore. Il ignore le contexte (prénom), s'effondre sur un gabarit « commande » et rate un planning simple. Le lot 2 (banc de régression) et le lot 4 (données) passent donc avant toute autre piste.
