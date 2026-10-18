@@ -37,21 +37,34 @@ class GarryOpponent:
         return self.agent.choose(obs, legal).action
 
 
-def match(rules, net, make_opponent, games=40, sims=200, device="cpu", seed=1000, game_name="connect4"):
-    """`games` parties depuis le plateau vide, Zéro jouant alternativement premier et second. Score : victoire 1, nul 0,5, défaite 0."""
+def match(rules, net, make_opponent, games=40, sims=200, device="cpu", seed=1000, game_name="connect4", options=None):
+    """`games` parties depuis le plateau vide, Zéro jouant alternativement premier et second. Score : victoire 1, nul 0,5, défaite 0.
+
+    Les règles de Garry arbitrent : Zéro ne peut jouer que les coups que Garry juge légaux (superko compris). Au Go, la phase de comptage
+    est acceptée par les deux camps sans retirer de pierres (surface de Tromp-Taylor, comme à l'entraînement).
+    """
     mcts = BatchedMCTS(rules, net, device, sims=sims, seed=seed)
-    envs = [make_game(game_name, seed + g) for g in range(games)]
+    envs = [make_game(game_name, seed + g, options) for g in range(games)]
     zero_is = [1 + g % 2 for g in range(games)]
     opponents = [make_opponent(seed + g) for g in range(games)]
     guard = 0
-    while not all(e.done for e in envs) and guard < 200:
+    while not all(e.done for e in envs) and guard < 400:
         guard += 1
+        for e in envs:  # comptage du Go : on accepte tout de suite
+            while not e.done and getattr(e, "go_state", None) and e.go_state["phase"] == "scoring":
+                e.step({"accept": True})
         mine = [g for g, e in enumerate(envs) if not e.done and e.observation()["current_player"] == zero_is[g]]
         if mine:
             states = np.concatenate([rules.from_observation(envs[g].observation()) for g in mine])
             visits, _ = mcts.search(states, noise=False)
             for k, g in enumerate(mine):
-                envs[g].step(rules.action_to_garry(int(visits[k].argmax())))
+                allowed = {rules.garry_index(a) for a in envs[g].legal_actions()} - {None}
+                order = np.argsort(-visits[k], kind="stable")
+                pick = next((int(i) for i in order if int(i) in allowed), None)
+                if pick is None:
+                    envs[g].step({"resign": True} if game_name == "go" else envs[g].legal_actions()[0])
+                else:
+                    envs[g].step(rules.action_to_garry(pick))
         for g, e in enumerate(envs):
             if not e.done and e.observation()["current_player"] != zero_is[g]:
                 obs, legal = e.observation(), e.legal_actions()

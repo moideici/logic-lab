@@ -49,3 +49,6 @@ class Connect4Rules:
 
     def action_to_garry(self, action):
         return {"column": int(action)}
+
+    def garry_index(self, a):
+        return a["column"] if "column" in a else None
