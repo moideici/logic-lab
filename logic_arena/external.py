@@ -3,6 +3,16 @@ import json,os,subprocess,threading,uuid,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 ACTIVE={'starting','running'}
+def browser_environment():
+    """Environnement du processus Node : Playwright trouve son navigateur dans `work/browsers` du dossier du projet si rien n'est précisé.
+
+    Sans cela, Playwright cherche dans %LOCALAPPDATA%\ms-playwright et échoue (« Executable doesn't exist ») quand le projet a été déplacé.
+    """
+    env=dict(os.environ)
+    if 'PLAYWRIGHT_BROWSERS_PATH' not in env:
+        local=ROOT.parents[1]/'work'/'browsers'
+        if local.is_dir():env['PLAYWRIGHT_BROWSERS_PATH']=str(local)
+    return env
 class ExternalArena:
     def __init__(self,directory=None):self.directory=Path(directory or ROOT/'training/external');self.lock=threading.RLock();self.processes={}
     def _path(self,identifier):
@@ -43,7 +53,7 @@ class ExternalArena:
             command=['node',str(ROOT/('tools/real-games/external-go.mjs' if game=='go' else 'tools/real-games/external-2048.mjs')),'--job-dir',str(folder),'--max-steps',str(steps),'--mode',mode]
             if game=='go':command+=['--size',str(size),'--opponent-level',str(opponent)]
             try:
-                with (folder/'process.log').open('wb') as stream:self.processes[identifier]=subprocess.Popen(command,cwd=ROOT,stdin=subprocess.DEVNULL,stdout=stream,stderr=subprocess.STDOUT,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
+                with (folder/'process.log').open('wb') as stream:self.processes[identifier]=subprocess.Popen(command,cwd=ROOT,env=browser_environment(),stdin=subprocess.DEVNULL,stdout=stream,stderr=subprocess.STDOUT,creationflags=getattr(subprocess,'CREATE_NO_WINDOW',0))
             except OSError as error:raise ValueError('Impossible de lancer le navigateur : '+str(error)) from error
             return self.get(identifier)
     def stop(self,identifier):

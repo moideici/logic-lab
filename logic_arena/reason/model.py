@@ -26,30 +26,40 @@ class Block(nn.Module):
 
 
 class RecurrentSolver(nn.Module):
-    def __init__(self, n_values, max_cells, d=64, heads=4, passes=8, tied=True):
+    def __init__(self, n_values, max_cells, d=64, heads=4, passes=8, tied=True, use_position=True):
         super().__init__()
-        self.n_values, self.passes, self.tied = n_values, passes, tied
+        self.n_values, self.passes, self.tied, self.heads, self.use_position = n_values, passes, tied, heads, use_position
         self.digit = nn.Embedding(n_values + 1, d)  # 0 = vide
-        self.cell = nn.Embedding(max_cells, d)
+        self.cell = nn.Embedding(max_cells, d) if use_position else None
         self.blocks = nn.ModuleList([Block(d, heads) for _ in range(1 if tied else passes)])
         self.norm = nn.LayerNorm(d)
         self.head = nn.Linear(d, n_values)
 
-    def forward(self, grid, peers, passes=None, return_states=False):
-        """grid : (B, N) entiers ; peers : (N, N) booléen. Retourne les logits de chaque passe : (T, B, N, n_values)."""
+    def forward(self, grid, peers, passes=None, return_states=False, domain=None):
+        """grid : (B, N) entiers ; peers : (N, N) ou (B, N, N) booléen (graphe propre à chaque exemple).
+        domain : (B,) nombre de valeurs permises par exemple (couleurs) ; les autres valeurs reçoivent une probabilité nulle.
+        Retourne les logits de chaque passe : (T, B, N, n_values)."""
         B, N = grid.shape
         steps = self.passes if passes is None else passes
         if not self.tied and steps > len(self.blocks):
             raise ValueError("un réseau à poids non liés ne peut pas faire plus de passes qu'il n'a de blocs")
         allowed = peers | torch.eye(N, dtype=torch.bool, device=peers.device)
         mask = ~allowed  # True = interdit, convention de PyTorch
-        x = self.digit(grid) + self.cell(torch.arange(N, device=grid.device))[None]
+        if mask.dim() == 3:
+            mask = mask.repeat_interleave(self.heads, dim=0)  # (B*têtes, N, N)
+        x = self.digit(grid)
+        if self.cell is not None:
+            x = x + self.cell(torch.arange(N, device=grid.device))[None]
         z = x
         outputs, states = [], []
         for t in range(steps):
             block = self.blocks[0] if self.tied else self.blocks[t]
             z = block(z + x, mask)
-            outputs.append(self.head(self.norm(z)))
+            out_t = self.head(self.norm(z))
+            if domain is not None:
+                forbidden = torch.arange(self.n_values, device=grid.device)[None, :] >= domain[:, None]
+                out_t = out_t.masked_fill(forbidden[:, None, :], -1e9)
+            outputs.append(out_t)
             if return_states:
                 states.append(z.detach())
         out = torch.stack(outputs)
@@ -59,11 +69,12 @@ class RecurrentSolver(nn.Module):
         return sum(p.numel() for p in self.parameters())
 
 
-def loss_over_passes(logits, solution, puzzle):
-    """Entropie croisée moyenne sur les passes, uniquement sur les cases vides. solution : chiffres 1..n (donc cible - 1)."""
+def loss_over_passes(logits, solution, puzzle, nodes=None):
+    """Entropie croisée moyenne sur les passes, uniquement sur les cases vides (et les nœuds réels). solution : 1..n (cible - 1)."""
     T, B, N, V = logits.shape
-    empty = (puzzle == 0)
-    target = (solution - 1)[None].expand(T, B, N)
+    empty = (puzzle == 0) if nodes is None else (puzzle == 0) & nodes
+    target_all = torch.where(solution > 0, solution - 1, torch.zeros_like(solution))
+    target = target_all[None].expand(T, B, N)
     ce = nn.functional.cross_entropy(logits.reshape(-1, V), target.reshape(-1), reduction="none").reshape(T, B, N)
     w = empty[None].float().expand(T, B, N)
     return (ce * w).sum() / w.sum().clamp(min=1)
