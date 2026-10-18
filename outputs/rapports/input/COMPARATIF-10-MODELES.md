@@ -77,6 +77,32 @@ Continuations (base, sans consigne) : Pleias écrit un français fluide et natur
 
 **Avis :** possible et prometteur. Il est plus petit, plus rapide et meilleur en français brut, mais c'est un modèle de base : tout le comportement de dialogue, de format et de prudence reste à apprendre, et son contexte de 2 048 tokens est une contrainte. Note révisée de 67,5 à **79,0** (français mesuré, taille et vitesse, licence confirmée). Écart avec Qwen3-1.7B (78,0) et Qwen3-0.6B (77,5) non significatif : seule l'adaptation sur notre banc départagera. À tester en deux temps : (1) le modèle de base, fine-tuning complet sur notre format et nos données ; (2) Pleias-Pico comme point de départ pour les cas fondés sur des sources.
 
+## Résultat de l'adaptation de Pleias-350m-Preview (18 octobre 2026)
+
+Même données et même format que l'adaptation de Qwen (7 598 exemples, perte pondérée identique), même banc dev (51 cas, 3 essais, contrat 1). Pleias est un modèle de base : il faut lui apprendre le dialogue en plus du format. `train_sft.py`, `prompting.py`, résultats dans `projets/input/bench/results/pleias-*-dev.json`.
+
+| Mesure (dev) | Qwen3-0.6B + LoRA (actuel) | Pleias LoRA r=8, attention | Pleias LoRA r=32, toutes couches |
+|---|---|---|---|
+| Réussite globale | **54,2 %** | 15,0 % | 24,8 % |
+| Paramètres entraînés | 1,1 M (r=8) | 1,5 M | 14,9 M |
+| Perte de validation (format) | non comparable | 0,740 | 0,689 (pas 1600 ; remonte ensuite) |
+| Durée d'entraînement | 30 min (plusieurs cycles) | 11 min | 57 min |
+| Latence médiane | 4,5 s | **2,0 s** | 8,6 s (carte en partage) |
+| Prénom retenu | 100 % | 56 % | 100 % |
+| Préférence retenue | 17 % | 42 % | **58 %** |
+| Correction d'une valeur | 75 % | 17 % | 8 % |
+| Calcul | **88 %** | 0 % | 0 % |
+| Planning, comparaison | 28 %, 33 % | 0 %, 0 % | 0 %, 0 % |
+| Selon un texte donné | 67 % | 44 % | 33 % |
+| Information absente, fait non vérifiable | 22 %, 22 % | 0 %, 0 % | 0 %, 11 % |
+| Réponse affirmée sans réponse possible (invention) | 83 % | 89 % | 89 % |
+
+**Diagnostic** (essai hors banc, génération libre sans décodage contraint) : sur une consigne identique à celles de l'entraînement (« Calcule 679 × 3… »), Pleias r=32 écrit exactement le bon JSON avec `a`=679, `b`=3 et un résultat de **2147 au lieu de 2037**. Il a donc appris le format, mais ni l'arithmétique ni la généralisation : sur « Combien font 17 fois 23 ? », il produit un texte creux et `valeurs` vide. Un modèle de base de 350 M n'a pas, à ce niveau d'adaptation, le calcul que Qwen3-0.6B (post-entraîné) apporte déjà.
+
+**Conclusion :** à données égales, Pleias est nettement moins bon que Qwen3-0.6B sur ce banc, et plus rapide seulement quand la carte n'est pas partagée. Il n'est pas retenu pour Input dans l'état. Son bon français brut (0,872 bit/caractère contre 0,965) ne se transforme pas en réponses justes avec nos données, qui sont pauvres et très gabaritées (aucun exemple de prudence, de planning ni de comparaison). Les fichiers et les scripts sont conservés : si le cœur de code prend en charge le raisonnement (voir `COMPARATIF-10-MODELES-CODE.md`), Input n'aura plus à calculer ni à raisonner et la question se reposera sur une tâche plus simple (comprendre une demande, la reformuler, répondre en français), où Pleias pourrait suffire. À refaire alors, avec de meilleures données.
+
+Limites : une graine, 51 cas, 3 essais corrélés ; r=32 mesuré au meilleur point de validation (pas 1600), non au dernier ; pas d'entraînement complet (non LoRA), que la carte recommande et que nous n'avons pas essayé.
+
 ## Proposition de sélection
 
 Passer sur notre banc de régression (même recette d'adaptation, mêmes données, même matériel) :
