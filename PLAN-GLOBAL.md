@@ -164,7 +164,7 @@ Le plan ci-dessus est cohérent dans l'ordre et honnête sur les limites, mais i
 | Garry Core | Fait | Parité exacte avec les poids 0.6.0 sur 14 jeux | `projets/garry/tests/test_core.py` |
 | Lab v1 | Fait | Réseau en direct, extinction, importance par neurone, courbe qualité/coût (`/lab.html`) | `projets/garry/web/lab.html` |
 | Core entraînable (PyTorch) | Fait | `labtrain.py` : réseau à deux couches cachées, croissance et élagage, données de professeur variées ; 6 tests | `projets/garry/logic_arena/labtrain.py` |
-| Graine | En cours | Voir §10 | `projets/garry/training-lab/` |
+| Graine | Fait (résultat négatif) | À taille égale, un réseau fixe fait aussi bien ou mieux (§10) | `outputs/verifications/graine-resultats.md` |
 | Projet code | Mis de côté | Voir §11 | `outputs/verifications/chaines-code-test-vs-dev.md` |
 | Modèle de raisonnement | À concevoir | Voir §12 | — |
 
@@ -177,17 +177,20 @@ Un **Garry Core** propre (couches nommées, activations capturables, neurones é
 | Variante | Définition retenue | Statut |
 |---|---|---|
 | **Garry Games** | Le Garry actuel, 14 jeux | Existant (0.6.0) |
-| **Graine** | Croissance et élagage de neurones pendant l’apprentissage | En cours |
+| **Graine** | Croissance et élagage de neurones pendant l’apprentissage | Fait : gain non confirmé, conservée comme visualisation |
 | **Garry Loop** | Cœur récurrent : un bloc repassé plusieurs fois sur son état, arrêt appris | À faire |
 | **Garry Mind** | Amélioration du schéma de boucle des modèles existants pour qu’ils réfléchissent plus, et à plus de choses (budget de calcul adaptatif, proposer-vérifier-corriger) | À faire |
 | **Garry Input** | Input rebaptisé dans la famille ; reste Qwen3-0.6B + adaptation | En veille |
 | **Garry Prime** | Routeur plus distillation des variantes ; compromis force/taille mesuré, pas de promesse « le plus fort partout » | Plus tard |
 | **Règles** | Jouer un jeu jamais vu à partir de ses règles | Plus tard (pari) |
 
-### Graine : ce qui est établi
-- Les données doivent être **variées** : un professeur parfait rejoue toujours la même partie. Premier essai avec ce défaut : 4 500 positions, 9 distinctes, un réseau de 71 paramètres atteignait 100 % (résultat sans valeur, corrigé). Désormais : coups aléatoires avec probabilité 0,35 pendant la partie, étiquettes toujours données par le professeur.
-- Résultat intermédiaire au morpion (3 graines, 3 000 pas) : accord avec le professeur de 0,77 (2+2 neurones, 71 paramètres) à 0,99 (48+48, 3 705 paramètres). **Graine A (règles prudentes) est moins bonne qu’un réseau fixe de même taille finale** (0,81 contre 0,87) : sa croissance est trop lente et son élagage précoce retire des neurones utiles. Deux variantes plus agressives (B et C) sont en cours de mesure ; le choix se fait sur la validation, jamais sur le test.
-- Reste à faire : Nim et Puissance 4, puis l’affichage en direct dans le Lab.
+### Graine : résultat (18 octobre 2026)
+Rapport : `outputs/verifications/graine-resultats.md`. Trois jeux, trois graines, trois règles de croissance et d'élagage, comparées à des réseaux fixes de même taille finale.
+- **Hypothèse non confirmée** : à taille égale, Graine perd 1 à 6 points d'accord avec le professeur contre un réseau fixe (morpion : 0,812 / 0,924 / 0,940 contre 0,873 / 0,939 / 0,981 ; Nim : 0,711 / 0,911 / 0,941 contre 0,787 / 0,920 / 0,961). Elle trouve une taille raisonnable seule, mais une recherche sur quelques tailles fixes donne autant.
+- **Puissance 4 inconclusif** (accord 0,35 à 0,39 pour toutes les tailles) : jeu trop dur pour 6 129 positions et un professeur borné en temps.
+- **Données** : un professeur parfait rejoue toujours la même partie (un premier essai avec 9 positions distinctes donnait 100 % à un réseau de 71 paramètres, résultat sans valeur) ; correction : coups aléatoires avec probabilité 0,35, étiquettes du professeur.
+- **Décision proposée** : garder Graine dans le Lab comme visualisation, ne pas insister sur le gain, passer à Loop et au modèle de raisonnement.
+- **Lab en direct** : entraînement visible dans `/lab.html` (réseau, courbe d'accord et de taille, événements, comparaison de la session), API `/api/lab/train/*`, 11 tests.
 
 ## 11. Projet code (mis de côté, résultats conservés)
 
@@ -209,10 +212,9 @@ Un cœur de code relié à Input (`projets/code`, dépôt Git séparé, banc de 
 
 ## 13. Prochaines étapes (ordre)
 
-1. Finir Graine : choisir les règles sur la validation, mesurer Nim et Puissance 4 en 3 graines, rapport.
-2. Lab en direct : entraînement visible (courbes, neurones qui naissent et disparaissent, comparaison avec les réseaux fixes).
-3. Garry Loop : cœur récurrent avec poids liés et arrêt appris, d’abord sur un problème à contraintes.
-4. Modèle de raisonnement (§12) sur cette base ; Mind quand le Loop fonctionne.
-5. Reprendre Input (lot 4) et, si l’utilisateur le souhaite, le projet code (§11).
+1. Graine et Lab en direct : faits (Graine : résultat négatif, voir §10).
+2. Garry Loop : cœur récurrent avec poids liés et arrêt appris, d’abord sur un problème à contraintes.
+3. Modèle de raisonnement (§12) sur cette base ; Mind quand le Loop fonctionne.
+4. Reprendre Input (lot 4) et, si l’utilisateur le souhaite, le projet code (§11).
 
 Règles d’hygiène retenues : jamais de sélection sur un split réservé ; toute nouvelle sélection sur un banc neuf ; données de professeur variées ; rapports écrits avant d’annoncer un résultat ; limites et incertitudes annoncées avec les chiffres.
