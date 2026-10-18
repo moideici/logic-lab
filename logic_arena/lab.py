@@ -232,6 +232,17 @@ def handle(method, path, query, body):
             return 200, {"ok": True, "result": LAB.importance(query.get("game", ["tictactoe"])[0])}
         if method == "GET" and path == "/api/lab/prune-curve":
             return 200, {"ok": True, "result": LAB.prune_curve(query.get("game", ["tictactoe"])[0])}
+        if method == "GET" and path == "/api/lab/train/status":
+            from .labtrain_api import JOB
+            return 200, {"ok": True, "result": JOB.status()}
+        if method == "POST" and path == "/api/lab/train/start":
+            from .labtrain_api import JOB
+            JOB.start(body.get("game"), body.get("mode", ""), body.get("steps", 3000), body.get("pause_ms", 4))
+            return 200, {"ok": True, "result": JOB.status()}
+        if method == "POST" and path == "/api/lab/train/stop":
+            from .labtrain_api import JOB
+            JOB.stop()
+            return 200, {"ok": True, "result": JOB.status()}
         if method == "POST" and path == "/api/lab/new":
             return 200, {"ok": True, "result": LAB.new_game(body.get("game"), body.get("seed", 0))}
         if method == "POST" and path == "/api/lab/step":

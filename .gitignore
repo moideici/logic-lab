@@ -18,3 +18,5 @@ node_modules/
 
 # Journaux d'entraînement continu (plusieurs Go, reproductibles)
 training/continuous/**/cases.jsonl
+training-lab/data/
+training-lab/results/

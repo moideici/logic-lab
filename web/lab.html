@@ -35,6 +35,18 @@
 <section class="lab-card curve-card"><div class="card-head"><h2>Courbe qualité / coût</h2><p>On éteint les neurones les moins sensibles d’abord : combien de paramètres retire-t-on avant que le réseau choisisse autre chose que le réseau complet ?</p></div>
 <div class="net-foot"><button id="curve-run" class="button">Tracer la courbe pour ce jeu</button><span id="curve-note" class="muted"></span></div>
 <svg id="curve" viewBox="0 0 760 260" role="img" aria-label="Accord avec le réseau complet selon le nombre de paramètres"></svg></section>
+
+<section class="lab-card train-card"><div class="card-head"><h2>Entraînement en direct</h2><p>Un petit réseau apprend à jouer comme le professeur. En mode <b>Graine</b>, il commence à 2 + 2 neurones, en gagne quand il stagne et en perd quand ils ne servent à rien. Comparez avec un réseau de taille fixe.</p></div>
+<div class="lab-bar train-bar"><label>Jeu <select id="train-game"><option value="tictactoe">tictactoe</option><option value="nim">nim</option><option value="connect4">connect4</option></select></label>
+<label>Réseau <select id="train-mode"><option value="graine-A">Graine A · prudente</option><option value="graine-B" selected>Graine B · croît vite, élague à la fin</option><option value="graine-C">Graine C · croît seule</option><option value="fixe-4">Fixe 4 + 4</option><option value="fixe-8">Fixe 8 + 8</option><option value="fixe-16">Fixe 16 + 16</option><option value="fixe-48">Fixe 48 + 48</option></select></label>
+<label>Pas <input id="train-steps" type="number" min="200" max="20000" step="100" value="3000"></label>
+<button id="train-start" class="button primary">Lancer</button><button id="train-stop" class="button" disabled>Arrêter</button></div>
+<p id="train-status" class="muted">Aucun entraînement.</p>
+<div class="train-grid"><svg id="train-net" viewBox="0 0 380 300" role="img" aria-label="Réseau en cours d'entraînement"></svg><svg id="train-chart" viewBox="0 0 380 300" role="img" aria-label="Accord avec le professeur et taille du réseau au fil des pas"></svg></div>
+<ul id="train-events" class="events"></ul>
+<h3>Comparaison des entraînements de cette session</h3><table id="train-compare" class="compare"><thead><tr><th>Jeu</th><th>Réseau</th><th>Tailles</th><th>Paramètres</th><th>Accord (test)</th></tr></thead><tbody></tbody></table>
+<p class="muted">Accord = part des positions de test où le réseau choisit le coup du professeur. Positions de test jamais vues à l'entraînement.</p></section>
 </main>
 <script type="module" src="lab.js"></script>
+<script type="module" src="lab-train.js"></script>
 </body></html>
