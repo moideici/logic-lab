@@ -1,0 +1,13 @@
+.lab-intro{padding:30px 0 10px}.lab-intro h1{margin:6px 0 10px}.lab-intro h1 span{color:#6a8f5a}.lab-intro .subtitle{max-width:640px;line-height:1.5}
+.lab-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:14px 0 18px}.lab-bar label{display:grid;gap:4px;font-size:11px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}.lab-bar select,.lab-bar input{padding:9px 10px;border-radius:8px;background:var(--white);color:var(--ink);min-width:140px}.lab-bar input{min-width:90px;width:110px}
+.lab-bar .button{padding:10px 14px;border-radius:8px;background:var(--white);font-size:13px}.lab-bar .button.primary{background:var(--dark);color:#fff;border-color:var(--dark)}
+.lab-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,1fr);gap:18px;align-items:start}
+.lab-card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:18px}.card-head h2{margin:0 0 4px;font-size:18px}.card-head p{margin:0 0 10px;font-size:13px;color:var(--muted)}.lab-card h3{margin:16px 0 6px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted);font-size:13px}.net-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px}.net-foot .button{padding:9px 12px;border-radius:8px;background:var(--white);font-size:13px}
+#net,#curve{width:100%;height:auto;display:block}
+.neuron{cursor:pointer;stroke:#c9d2c4;stroke-width:1}.neuron:hover{stroke:var(--dark);stroke-width:2}.neuron.sel{stroke:var(--dark);stroke-width:3}.neuron.off{fill:#e8e8e4!important;stroke:#999;stroke-dasharray:2 2}
+.ring{fill:none;stroke:var(--orange);pointer-events:none}.col-label{font-size:11px;fill:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.lab-board{display:grid;gap:2px;font-family:var(--mono);font-size:11px;background:var(--paper);padding:6px;border-radius:8px;overflow:auto;max-height:260px}.lab-board span{min-width:1.4em;text-align:center;line-height:1.5}
+.actions{margin:0;padding-left:20px;font-size:13px}.actions li{margin:3px 0}.actions .chosen{font-weight:700}.actions .flag{color:var(--orange);font-size:11px;margin-left:6px}
+#neuron-info b{color:var(--ink)}
+@media(max-width:900px){.lab-grid{grid-template-columns:1fr}}

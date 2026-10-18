@@ -11,6 +11,7 @@ from .harness import Arena, json_line
 from .external import ExternalArena
 EXTERNAL=ExternalArena()
 from .continuous_service import ContinuousTraining
+from . import lab as lab_api
 CONTINUOUS=ContinuousTraining()
 
 WEB = Path(__file__).resolve().parents[1]/"web"
@@ -32,7 +33,26 @@ class Handler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(data)
 
+    def lab(self, method):
+        parsed = urlparse(self.path)
+        body = {}
+        if method == "POST":
+            try:
+                size = int(self.headers.get("Content-Length", "0"))
+                if not 0 <= size <= 4096:
+                    raise ValueError("Taille JSON invalide")
+                body = json_line(self.rfile.read(size).decode("utf-8")) if size else {}
+                if not isinstance(body, dict):
+                    raise ValueError("Objet JSON requis")
+            except (ValueError, UnicodeError) as error:
+                self.send_json({"ok": False, "error": str(error)}, 400)
+                return
+        status, payload = lab_api.handle(method, parsed.path, parse_qs(parsed.query), body)
+        self.send_json(payload, status)
+
     def do_POST(self):
+        if urlparse(self.path).path.startswith('/api/lab/'):
+            self.lab("POST");return
         if urlparse(self.path).path.startswith('/api/continuous/'):
             try:
                 size=int(self.headers.get('Content-Length','0'))
@@ -73,6 +93,8 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         parsed = urlparse(self.path)
+        if parsed.path.startswith('/api/lab/'):
+            self.lab('GET');return
         if parsed.path=='/api/continuous/status':
             self.send_json({'ok':True,'result':CONTINUOUS.get()});return
         if parsed.path.startswith('/api/external/'):
