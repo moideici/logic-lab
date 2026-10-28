@@ -33,6 +33,7 @@ def load_player(name, sims):
         opp = GarryOpponent(level, time_ms=100) if name.startswith("garry") else TeacherOpponent(level, time_ms=100)
         return lambda env, obs, legal: opp.choose(obs, legal)["column"]
     import torch
+    raw = name.startswith("raw")
     from logic_arena.zero.mcts import BatchedMCTS
     from logic_arena.zero.net import PolicyValueNet
     from logic_arena.zero.rules import Connect4Rules
@@ -45,6 +46,12 @@ def load_player(name, sims):
     mcts = BatchedMCTS(rules, net, "cpu", sims=sims, seed=1)
 
     def choose(env, obs, legal):
+        if raw:  # réseau seul, sans recherche
+            x = torch.tensor(c4.planes(*[np.array([v], dtype=np.uint64) for v in c4.from_board(obs["board"], obs["current_player"])]))
+            with torch.no_grad():
+                logits = net(x)[0][0].numpy()
+            allowed = {a["column"] for a in legal}
+            return max(allowed, key=lambda c: logits[c])
         visits, _ = mcts.search(rules.from_observation(obs), noise=False)
         allowed = {a["column"] for a in legal}
         return next(int(i) for i in np.argsort(-visits[0], kind="stable") if int(i) in allowed)
