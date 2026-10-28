@@ -31,3 +31,10 @@ Lecture : aucun des trois ne joue parfaitement ; sur une partie de ~12 coups cha
 1. Livre d'ouverture de Puissance 4 (stratégie gagnante du premier joueur, réponses correctes du second) + test « Garry ne perd jamais une position gagnée ».
 2. Distillation du solveur dans un Garry agrandi (nouveau jeu `connect4` dans le réseau commun, entrée enrichie par des neurones de menaces écrits à la main), avec contrôle de non-régression sur les 13 autres jeux et sauvegarde des poids actuels.
 3. Même schéma pour Allumettes (Nim) et Morpion (déjà parfaits côté `multi`), puis M1 : Dames, Échecs (perft), Petits chevaux, Oie ; M2, M3, M4 dans l'ordre de la liste.
+
+## Étape 2 : première distillation du solveur (28 octobre, fin de journée)
+51 194 positions étiquetées (solveur exact, parties mi-aléatoires mi-optimales, à partir du 6e coup), réseau résiduel de 1,0 million de paramètres, 20 minutes sur GPU.
+- Précision sur 4 095 positions réservées : **94,4 % de coups optimaux au mieux (pas 2 000)**, puis **surapprentissage** (90,8 % à la fin des 56 000 pas). Le point de contrôle retenu est donc celui du pas 2 000.
+- Mesure contre le jeu parfait (même protocole, réseau seul sans recherche, 40 parties) : 9 coups fautifs sur 361, soit **2,5 %**, résultat théorique atteint dans 80 % des parties. Ce n'est **pas meilleur** que Zéro (1,8 %) ni que le professeur (1,6 %).
+- Conclusion honnête : le goulot est la quantité de données, pas le réseau. Étiqueter coûte ~0,4 s par position et par cœur ; 50 000 positions ne suffisent pas à un réseau d'un million de paramètres. Rien n'est promu dans Garry.
+- Pistes : (1) plus de données avec un solveur plus rapide (meilleur ordre des coups, table plus grosse, étiquettes de score exact pour plus de signal par position) ; (2) combiner réseau + recherche courte au lieu du réseau seul ; (3) livre d'ouverture pour les 5 premiers coups.
