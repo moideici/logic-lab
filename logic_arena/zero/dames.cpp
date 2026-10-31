@@ -305,3 +305,64 @@ int dames_scores(const i8* cells, int seat, int quiet, int depth, long long budg
     return n;
 }
 }
+
+// ---------------------------------------------------------------------------------------------------------------------------------
+// Fonctions par lots pour l'auto-apprentissage (MCTS par lots en Python). Un état = 66 octets : 64 cases, joueur au trait, compteur de coups de dame sans prise.
+// Indice d'un coup = case de départ (0..31) * 32 + case d'arrivée (0..31), cases foncées numérotées dans l'ordre, du point de vue du joueur au trait
+// (plateau tourné de 180 degrés pour le joueur 1). Deux coups de même départ et même arrivée partagent un indice : le premier est joué.
+namespace batch {
+int sq32_table[64];
+bool ready = false;
+void init() {
+    if (ready) return;
+    int k = 0;
+    for (int i = 0; i < 64; i++) sq32_table[i] = ((i / 8 + i % 8) % 2 == 1) ? k++ : -1;
+    ready = true;
+}
+inline int move_index(const i8* rec, int next) {
+    int a = rec[2], b = rec[2 + rec[0] - 1];
+    if (next == 1) { a = 63 - a; b = 63 - b; }
+    return sq32_table[a] * 32 + sq32_table[b];
+}
+}  // namespace batch
+
+extern "C" {
+void dames_legal_batch(const i8* states, int n, uint8_t* mask) {
+    batch::init();
+    static i8 moves[MAXMOVES * REC];
+    for (int s = 0; s < n; s++) {
+        const i8* st = states + s * 66;
+        int cnt = dames_moves(st, st[64], moves);
+        uint8_t* m = mask + (size_t)s * 1024;
+        std::memset(m, 0, 1024);
+        for (int i = 0; i < cnt; i++) m[batch::move_index(moves + i * REC, st[64])] = 1;
+    }
+}
+
+// Joue l'action `actions[s]` (supposée légale). terminal : 1 si le joueur maintenant au trait n'a plus de coup (value = -1) ou si la nullité par compteur est atteinte (value = 0).
+void dames_step_batch(const i8* states, const int* actions, int n, i8* out_states, uint8_t* terminal, float* value) {
+    batch::init();
+    static i8 moves[MAXMOVES * REC], moves2[MAXMOVES * REC];
+    for (int s = 0; s < n; s++) {
+        const i8* st = states + s * 66;
+        i8* out = out_states + s * 66;
+        int cnt = dames_moves(st, st[64], moves);
+        int pick = 0;
+        for (int i = 0; i < cnt; i++) if (batch::move_index(moves + i * REC, st[64]) == actions[s]) { pick = i; break; }
+        search::Pos p, q;
+        std::memcpy(p.cells, st, 64);
+        p.next = st[64];
+        p.quiet = st[65];
+        search::apply_move(p, moves + pick * REC, q);
+        std::memcpy(out, q.cells, 64);
+        out[64] = (i8)q.next;
+        out[65] = (i8)std::min(q.quiet, 100);
+        terminal[s] = 0;
+        value[s] = 0.f;
+        if (cnt == 0) { terminal[s] = 1; value[s] = -1.f; continue; }
+        int cnt2 = dames_moves(q.cells, q.next, moves2);
+        if (cnt2 == 0) { terminal[s] = 1; value[s] = -1.f; }
+        else if (q.quiet >= 20) { terminal[s] = 1; value[s] = 0.f; }
+    }
+}
+}

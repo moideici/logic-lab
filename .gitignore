@@ -22,3 +22,8 @@ training-lab/data/
 training-lab/results/
 training-lab/models/
 logic_arena/zero/go9.dll
+logic_arena/zero/*.dll
+universel/data/*.pkl
+universel/models/*.pt
+universel/models/*.log
+universel/models/*.jsonl
