@@ -141,6 +141,27 @@ int solve_position(const Position& P, bool weak) {
     return mn;
 }
 
+// Recherche tactique à profondeur limitée : 1 si le joueur au trait gagne de force en au plus `depth` demi-coups, -1 s'il perd de force, 0 sinon.
+int tactical(const Position& P, int depth) {
+    if (P.moves == W * H) return 0;
+    if (P.can_win_next()) return depth >= 1 ? 1 : 0;
+    if (depth <= 1) return 0;
+    u64 nl = P.non_losing();
+    if (nl == 0) return -1;  // l'adversaire gagne au prochain coup quoi qu'on joue
+    if (depth <= 2) return 0;
+    bool all_lose = true;
+    for (int i = 0; i < W; i++) {
+        u64 m = nl & col_mask(ORDER[i]);
+        if (!m) continue;
+        Position Q = P;
+        Q.play(m);
+        int r = -tactical(Q, depth - 1);
+        if (r == 1) return 1;
+        if (r == 0) all_lose = false;
+    }
+    return all_lose ? -1 : 0;
+}
+
 inline Position make(u64 pos, u64 mask) { return Position{pos, mask, __builtin_popcountll(mask)}; }
 }  // namespace
 
@@ -148,6 +169,19 @@ extern "C" {
 void c4s_init() { if (!table) table = new Table(); }
 void c4s_reset() { c4s_init(); table->clear(); nodes = 0; }
 long long c4s_nodes() { return nodes; }
+
+// Verdict tactique de chaque colonne (1 gain forcé, -1 perte forcée, 0 inconnu dans la limite de profondeur), point de vue du joueur au trait ; -1000 si pleine.
+void c4s_tactical(u64 pos, u64 mask, int depth, int* out) {
+    Position P = make(pos, mask);
+    for (int c = 0; c < W; c++) {
+        u64 m = (mask + ((u64)1 << (c * (H + 1)))) & col_mask(c);
+        if (!(m & BOARD) || (mask & ((u64)1 << (c * (H + 1) + H - 1)))) { out[c] = -1000; continue; }
+        if (winning_cells(pos, mask) & m) { out[c] = 1; continue; }
+        Position Q = P;
+        Q.play(m);
+        out[c] = Q.moves == W * H ? 0 : -tactical(Q, depth - 1);
+    }
+}
 
 // Score de la position pour le joueur au trait (weak = 1 : seulement le signe, plus rapide).
 int c4s_solve(u64 pos, u64 mask, int weak) {

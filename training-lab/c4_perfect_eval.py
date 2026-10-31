@@ -33,7 +33,8 @@ def load_player(name, sims):
         opp = GarryOpponent(level, time_ms=100) if name.startswith("garry") else TeacherOpponent(level, time_ms=100)
         return lambda env, obs, legal: opp.choose(obs, legal)["column"]
     import torch
-    raw = name.startswith("raw")
+    raw = name.startswith(("raw", "safe"))
+    depth = int(name.split(":")[0][4:] or 12) if name.startswith("safe") else 0
     from logic_arena.zero.mcts import BatchedMCTS
     from logic_arena.zero.net import PolicyValueNet
     from logic_arena.zero.rules import Connect4Rules
@@ -51,6 +52,14 @@ def load_player(name, sims):
             with torch.no_grad():
                 logits = net(x)[0][0].numpy()
             allowed = {a["column"] for a in legal}
+            if depth:  # réseau + recherche tactique : gain forcé d'abord, jamais une perte forcée si on peut l'éviter
+                pos, mask = c4.from_board(obs["board"], obs["current_player"])
+                t = c4solver.tactical(int(pos), int(mask), depth)
+                wins = [c for c in allowed if t[c] == 1]
+                if wins:
+                    return max(wins, key=lambda c: logits[c])
+                safe = [c for c in allowed if t[c] != -1] or list(allowed)
+                return max(safe, key=lambda c: logits[c])
             return max(allowed, key=lambda c: logits[c])
         visits, _ = mcts.search(rules.from_observation(obs), noise=False)
         allowed = {a["column"] for a in legal}

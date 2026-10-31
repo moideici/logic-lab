@@ -51,6 +51,15 @@ def scores(pos, mask, weak=False):
     return out
 
 
+def tactical(pos, mask, depth=10):
+    """Verdict par colonne d'une recherche à profondeur limitée : 1 gain forcé, -1 perte forcée, 0 inconnu ; -1000 si la colonne est pleine."""
+    out = np.zeros(7, dtype=np.int32)
+    lib = library()
+    lib.c4s_tactical.argtypes = [ctypes.c_uint64, ctypes.c_uint64, ctypes.c_int, ctypes.c_void_p]
+    lib.c4s_tactical(int(pos), int(mask), int(depth), out.ctypes.data_as(ctypes.c_void_p))
+    return out
+
+
 def optimal_columns(pos, mask, weak=True):
     """Colonnes qui préservent le meilleur résultat théorique (gain si possible, sinon nul, sinon la défaite la plus longue si pas `weak`)."""
     s = scores(pos, mask, weak)
