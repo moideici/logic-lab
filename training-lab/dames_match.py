@@ -1,5 +1,5 @@
 """Duels de dames (règles de multi) entre deux joueurs de recherche, ouvertures aléatoires identiques par paire (camps échangés).
-Joueurs : multi-facile|multi-normal|multi-difficile (copie du bot de multi, la facile joue au hasard 35 % du temps), fort-D-B (mode renforcé : profondeur D, budget B nœuds).
+Joueurs : reseau-FICHIER.pt (réseau seul, sans recherche), multi-facile|multi-normal|multi-difficile (copie du bot de multi, la facile joue au hasard 35 % du temps), fort-D-B (mode renforcé : profondeur D, budget B nœuds).
 Usage : python training-lab/dames_match.py A B [--games 40] [--opening 4]"""
 import argparse
 import json
@@ -23,6 +23,13 @@ def make_player(name, rng):
                 return moves[int(rng.integers(len(moves)))]
             return dames.search(state.cells, state.next, state.quiet, depth, budget, 0)[0]
         return choose
+    if name.startswith("reseau-"):
+        import torch
+        from logic_arena.zero import dames_net as dn
+        blob = torch.load(Path(__file__).resolve().parent / "models" / "dames" / name.split("-", 1)[1], map_location="cpu", weights_only=True)
+        net = dn.build_net(blob["channels"], blob["blocks"])
+        net.load_state_dict(blob["net"])
+        return dn.NetPlayer(net).choose
     _, depth, budget = name.split("-")
 
     def choose(state):

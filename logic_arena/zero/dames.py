@@ -123,3 +123,16 @@ def search(cells, seat, quiet=0, depth=7, budget=20000, mode=0):
     if i < 0:
         return None, 0
     return legal_moves(cells, seat)[i], score.value
+
+
+def scores(cells, seat, quiet=0, depth=6, budget=2_000_000, mode=1):
+    """Score (point de vue de `seat`) de chaque coup légal, dans l'ordre de `legal_moves`."""
+    lib = library()
+    if not getattr(lib, "_scores_bound", False):
+        lib.dames_scores.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int, ctypes.c_int, ctypes.c_longlong, ctypes.c_int, ctypes.c_void_p]
+        lib.dames_scores.restype = ctypes.c_int
+        lib._scores_bound = True
+    arr = np.asarray(cells, dtype=np.int8)
+    out = np.zeros(256, dtype=np.int32)
+    n = lib.dames_scores(arr.ctypes.data_as(ctypes.c_void_p), int(seat), int(quiet), int(depth), int(budget), int(mode), out.ctypes.data_as(ctypes.c_void_p))
+    return out[:n].copy()

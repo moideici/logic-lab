@@ -281,3 +281,27 @@ int dames_search(const i8* cells, int seat, int quiet, int max_depth, long long 
     return chosen;
 }
 }
+
+extern "C" {
+// Score de chaque coup racine (même ordre que dames_moves), recherche à fenêtre complète de profondeur `depth` ; renvoie le nombre de coups.
+int dames_scores(const i8* cells, int seat, int quiet, int depth, long long budget, int mode, int* scores) {
+    using namespace search;
+    init_zob();
+    static i8 moves[MAXMOVES * REC];
+    int n = dames_moves(cells, seat, moves);
+    Pos root;
+    std::memcpy(root.cells, cells, 64);
+    root.next = seat;
+    root.quiet = quiet;
+    Ctx cx;
+    cx.mode = mode;
+    cx.budget = budget;
+    for (int i = 0; i < n; i++) {
+        Pos q;
+        apply_move(root, moves + i * REC, q);
+        scores[i] = -negamax(cx, q, depth - 1, -INF, INF, 1);
+        if (cx.exhausted) { for (int j = i; j < n; j++) scores[j] = -INF; break; }
+    }
+    return n;
+}
+}
