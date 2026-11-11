@@ -242,3 +242,18 @@ Règles d’hygiène retenues : jamais de sélection sur un split réservé ; to
 - **Résultats des entraînements (19 octobre 2026)** : `outputs/verifications/entrainements-garry-zero-2026-10-19.md`. Garry 0.6 réentraîné 60 min : 16 promotions, Go sans gain (14,62 % → 14,46 %), Hex +1,6 point, Gomoku +3,5 points, 174 + 65 tests verts, poids `a604d324…` (anciens sauvegardés). Zéro Puissance 4 : 0,50 contre le professeur niveau 10 et 0,425 contre Garry 0.6.0 niveau 10 (100 parties, ouvertures aléatoires) après une heure ; la première lecture à 100 % était un artefact de parties répétées. Zéro Go 9×9 : 20/20 contre Garry niveau 1 et 4, test COSUMI à faire.
 
 - **Programme Garry × multi (28 octobre 2026)** : voir `outputs/rapports/garry/GARRY-MULTI-PROGRAMME.md`. Fait : solveur exact de Puissance 4 (C++, testé) et mesure de l'écart à la perfection (Garry 0.6.0 niveau 10 : 2,4 % de coups fautifs ; professeur niveau 10 : 1,6 % ; Zéro : 1,8 %). Suite : livre d'ouverture, distillation du solveur dans un Garry agrandi, puis Allumettes, Morpion et la liste M1 à M4 un jeu à la fois. Go hors périmètre.
+
+## 14. Maths : réseau qui calcule pas à pas (31 octobre 2026)
+
+Projet de l'utilisateur, branché sur la même infrastructure que le Loop : `projets/garry/logic_arena/maths/`. Protocole : `outputs/verifications/maths-protocole.md` ; premiers résultats : `maths-vague1-resultats.md` ; résultat final de la vague 1 : `maths-vague1-fin.md` ; protocole de la vague 2 : `maths-protocole-vague2.md`.
+- **Vague 1 (atteinte)** : un Transformer de 812 416 paramètres, entraîné de zéro, écrit l'étape suivante d'un calcul (une opération à la fois) pour six niveaux : additions et soustractions, multiplications, divisions exactes, priorités, parenthèses, équations à une inconnue. `recette-D` : problème résolu 1,000 sur les six niveaux du test (118/118 à 500/500), étape exacte 1,000 sauf N1 (0,999) et N5 (0,998). Chemin : mélange plat, plages d'entraînement élargies pour N1 à N3, quatre réglages sur la validation.
+- **Limites** : hors distribution toujours faible (nombres à 4 chiffres : ~0 %), tests N2/N3 très petits (118 et 66 états), une seule trajectoire de graines, test regardé plusieurs fois sur les mêmes états (banc neuf nécessaire pour affirmer davantage).
+- **Décision de l'utilisateur** : on augmente la difficulté une fois le 1/1 atteint. **Suite** : vague 2 (exposants, fractions, racines, équations de ces trois), puis extrapolation (nombres plus longs), puis carte « Maths en direct » dans le Lab.
+
+## 15. Jeu « à la main » sans entraînement (9 novembre 2026)
+
+Gomoku (0,938 contre l'ancien planificateur, 0 défaite sur 96) et Hex (≈ 0,75 sur 384) : moteurs à tables de motifs / distances à ponts et recherche, intégrés au navigateur. Rapport : `outputs/rapports/garry/GARRY-A-LA-MAIN-GOMOKU-HEX.md`. Non fait : port Python, Swap2, Go, Dames/Reversi. Ces moteurs sont les futurs professeurs d'un modèle unique multi-jeux (demande de l’utilisateur ; cadrage : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-CADRAGE.md`).
+
+**Modèle unique multi-jeux : P0 terminée (9 novembre 2026).** Encodage commun, professeurs, juges et base de mesures figée : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-P0.md`. Prochaine étape : pilote P1 (aucun entraînement fait à ce jour).
+
+**Modèle unique multi-jeux : P1 terminé (9 novembre 2026).** Pas de gain démontré du multi-jeux, mais parité avec moitié moins de paramètres ; le réseau seul égale Garry 0.6.0 au Puissance 4. Rapport : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-P1.md`.

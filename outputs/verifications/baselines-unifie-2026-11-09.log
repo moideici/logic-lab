@@ -1,0 +1,10 @@
+random tictactoe 0s {"vs_perfect": {"w": 0, "d": 4, "l": 16}, "vs_random": {"w": 9, "d": 2, "l": 9}, "losses_vs_perfect": 16}
+random connect4 227s {"games": 20, "moves": 150, "error_rate": 0.0733, "theory_reached": 0.5, "score_vs_perfect": 0.05, "w": 1, "d": 0, "l": 19}
+random hex 11s {"games": 20, "w": 0, "d": 0, "l": 20, "score": 0.0, "ms": 100}
+random gomoku 6s {"games": 20, "w": 0, "d": 0, "l": 20, "score": 0.0, "ms": 100}
+random dames 1s {"normal": {"games": 20, "w": 0, "d": 0, "l": 20, "score": 0.0, "level": "normal"}, "difficile": {"games": 20, "w": 0, "d": 0, "l": 20, "score": 0.0, "level": "difficile"}}
+teacher tictactoe 0s {"vs_perfect": {"w": 0, "d": 20, "l": 0}, "vs_random": {"w": 20, "d": 0, "l": 0}, "losses_vs_perfect": 0}
+teacher connect4 176s {"games": 20, "moves": 159, "error_rate": 0.0, "theory_reached": 1.0, "score_vs_perfect": 0.5, "w": 9, "d": 2, "l": 9}
+teacher hex 36s {"games": 20, "w": 9, "d": 0, "l": 11, "score": 0.45, "ms": 100}
+teacher gomoku 46s {"games": 20, "w": 10, "d": 0, "l": 10, "score": 0.5, "ms": 100}
+teacher dames 4s {"normal": {"games": 20, "w": 17, "d": 3, "l": 0, "score": 0.925, "level": "normal"}, "difficile": {"games": 20, "w": 13, "d": 4, "l": 3, "score": 0.75, "level": "difficile"}}
