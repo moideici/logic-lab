@@ -1,4 +1,4 @@
-# Modèle unique multi-jeux — pilote P1 (9 novembre 2026)
+# Garry Optimus 0.1 (modèle unique multi-jeux) — pilote P1 (9 novembre 2026)
 
 Cadrage : `GARRY-MODELE-UNIQUE-CADRAGE.md` ; P0 : `GARRY-MODELE-UNIQUE-P0.md`. Question : à budget égal en exemples par jeu, un réseau multi-jeux fait-il mieux qu'un réseau par jeu ?
 

@@ -1,6 +1,6 @@
 # Logic Lab — bilan et plan global
 
-Mis à jour le 18 octobre 2026 (fin de journée). Ce document est le plan principal de la conversation et remplace l’ordre des priorités des anciens rapports. **Priorité actuelle : la famille Garry et le Lab (Core entraînable, Graine, Loop), puis un modèle de raisonnement entraîné de zéro. Input est en veille (lot 4 à reprendre) et le projet de cœur de code est mis de côté, avec ses résultats.** Les sections 1 à 8 décrivent l’état de départ ; les sections 9 et suivantes sont l’état à jour.
+Mis à jour le 11 novembre 2026 (sections 14 et 15 ajoutées après le 18 octobre). Ce document est le plan principal de la conversation et remplace l’ordre des priorités des anciens rapports. **Priorité actuelle : la famille Garry et le Lab (Core entraînable, Graine, Loop), puis un modèle de raisonnement entraîné de zéro. Input est en veille (lot 4 à reprendre) et le projet de cœur de code est mis de côté, avec ses résultats.** Les sections 1 à 8 décrivent l’état de départ ; les sections 9 et suivantes sont l’état à jour.
 
 ## 1. Organisation et état réel
 
@@ -252,8 +252,8 @@ Projet de l'utilisateur, branché sur la même infrastructure que le Loop : `pro
 
 ## 15. Jeu « à la main » sans entraînement (9 novembre 2026)
 
-Gomoku (0,938 contre l'ancien planificateur, 0 défaite sur 96) et Hex (≈ 0,75 sur 384) : moteurs à tables de motifs / distances à ponts et recherche, intégrés au navigateur. Rapport : `outputs/rapports/garry/GARRY-A-LA-MAIN-GOMOKU-HEX.md`. Non fait : port Python, Swap2, Go, Dames/Reversi. Ces moteurs sont les futurs professeurs d'un modèle unique multi-jeux (demande de l’utilisateur ; cadrage : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-CADRAGE.md`).
+Gomoku (0,938 contre l'ancien planificateur, 0 défaite sur 96) et Hex (≈ 0,75 sur 384) : moteurs à tables de motifs / distances à ponts et recherche, intégrés au navigateur. Rapport : `outputs/rapports/garry/GARRY-A-LA-MAIN-GOMOKU-HEX.md`. Non fait : port Python, Swap2, Go, Dames/Reversi. Ces moteurs sont les futurs professeurs de Garry Optimus 0.1, le modèle unique multi-jeux (demande de l’utilisateur ; cadrage : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-CADRAGE.md`).
 
-**Modèle unique multi-jeux : P0 terminée (9 novembre 2026).** Encodage commun, professeurs, juges et base de mesures figée : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-P0.md`. Prochaine étape : pilote P1 (aucun entraînement fait à ce jour).
+**Garry Optimus 0.1 (modèle unique multi-jeux) : P0 terminée (9 novembre 2026).** Encodage commun, professeurs, juges et base de mesures figée : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-P0.md`. Prochaine étape : pilote P1 (aucun entraînement fait à ce jour).
 
-**Modèle unique multi-jeux : P1 terminé (9 novembre 2026).** Pas de gain démontré du multi-jeux, mais parité avec moitié moins de paramètres ; le réseau seul égale Garry 0.6.0 au Puissance 4. Rapport : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-P1.md`.
+**Garry Optimus 0.1 (modèle unique multi-jeux) : P1 terminé (9 novembre 2026).** Pas de gain démontré du multi-jeux, mais parité avec moitié moins de paramètres ; le réseau seul égale Garry 0.6.0 au Puissance 4. Rapport : `outputs/rapports/garry/GARRY-MODELE-UNIQUE-P1.md`.

@@ -1,5 +1,7 @@
 # Garry : un seul gros modèle pour tous les jeux — cadrage (9 novembre 2026)
 
+> Nom retenu : **Garry Optimus 0.1** (9–11 novembre 2026).
+
 Demande : un modèle « gros » unique pour tous les jeux, dont le fait d'être multi-jeux le rende **meilleur** à chaque jeu ; plusieurs jeux de poids acceptés si utile.
 
 ## 1. Ce qu'on sait déjà (preuves du projet)

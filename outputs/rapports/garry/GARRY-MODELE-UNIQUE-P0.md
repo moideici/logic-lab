@@ -1,4 +1,4 @@
-# Modèle unique multi-jeux — phase P0 terminée (9 novembre 2026)
+# Garry Optimus 0.1 (modèle unique multi-jeux) — phase P0 terminée (9 novembre 2026)
 
 Cadrage : `GARRY-MODELE-UNIQUE-CADRAGE.md`. P0 = infrastructure commune, professeurs, juges, base de mesures. **Aucun réseau n'est entraîné dans cette phase.**
 
