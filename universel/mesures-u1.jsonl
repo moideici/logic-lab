@@ -1,0 +1,16 @@
+{"modele": "u1.pt", "jeu": "morpion", "contre": "random", "victoires": 86, "nuls": 12, "defaites": 2, "score": 0.92}
+{"modele": "u1.pt", "jeu": "morpion", "contre": "uct50", "victoires": 39, "nuls": 40, "defaites": 21, "score": 0.59}
+{"modele": "u1.pt", "jeu": "puissance-4", "contre": "random", "victoires": 82, "nuls": 0, "defaites": 18, "score": 0.82}
+{"modele": "u1.pt", "jeu": "puissance-4", "contre": "uct50", "victoires": 25, "nuls": 0, "defaites": 75, "score": 0.25}
+{"modele": "u1.pt", "jeu": "othello", "contre": "random", "victoires": 92, "nuls": 1, "defaites": 7, "score": 0.925}
+{"modele": "u1.pt", "jeu": "othello", "contre": "uct50", "victoires": 45, "nuls": 2, "defaites": 53, "score": 0.46}
+{"modele": "u1.pt", "jeu": "dames", "contre": "random", "victoires": 98, "nuls": 0, "defaites": 2, "score": 0.98}
+{"modele": "u1.pt", "jeu": "dames", "contre": "uct50", "victoires": 7, "nuls": 12, "defaites": 81, "score": 0.13}
+{"modele": "u1.pt", "jeu": "allumettes", "contre": "random", "victoires": 97, "nuls": 0, "defaites": 3, "score": 0.97}
+{"modele": "u1.pt", "jeu": "allumettes", "contre": "uct50", "victoires": 66, "nuls": 0, "defaites": 34, "score": 0.66}
+{"modele": "u1.pt", "jeu": "morpion-ultime", "contre": "random", "victoires": 42, "nuls": 25, "defaites": 33, "score": 0.545}
+{"modele": "u1.pt", "jeu": "morpion-ultime", "contre": "uct50", "victoires": 1, "nuls": 7, "defaites": 92, "score": 0.045}
+{"modele": "u1.pt", "jeu": "moulin", "contre": "random", "victoires": 27, "nuls": 50, "defaites": 23, "score": 0.52}
+{"modele": "u1.pt", "jeu": "moulin", "contre": "uct50", "victoires": 3, "nuls": 15, "defaites": 82, "score": 0.105}
+{"modele": "u1.pt", "jeu": "awale", "contre": "random", "victoires": 60, "nuls": 8, "defaites": 32, "score": 0.64}
+{"modele": "u1.pt", "jeu": "awale", "contre": "uct50", "victoires": 1, "nuls": 1, "defaites": 98, "score": 0.015}

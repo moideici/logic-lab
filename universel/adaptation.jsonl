@@ -1,0 +1,10 @@
+{"jeu": "awale", "parties_prof": 300, "exemples": 25710, "init": "pretrained", "pas": 4000, "graine": 0, "accord_uct_val": 0.4163, "random": 0.915, "uct50": 0.105}
+{"jeu": "morpion-ultime", "parties_prof": 300, "exemples": 14613, "init": "pretrained", "pas": 4000, "graine": 0, "accord_uct_val": 0.2032, "random": 0.595, "uct50": 0.102}
+{"jeu": "awale", "parties_prof": 300, "exemples": 25710, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.4228, "random": 0.922, "uct50": 0.29}
+{"jeu": "moulin", "parties_prof": 300, "exemples": 16991, "init": "pretrained", "pas": 4000, "graine": 0, "accord_uct_val": 0.1572, "random": 0.575, "uct50": 0.055}
+{"jeu": "awale", "parties_prof": 100, "exemples": 9009, "init": "pretrained", "pas": 4000, "graine": 0, "accord_uct_val": 0.4, "random": 0.825, "uct50": 0.043}
+{"jeu": "awale", "parties_prof": 100, "exemples": 9009, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.3667, "random": 0.93, "uct50": 0.21}
+{"jeu": "awale", "parties_prof": 1000, "exemples": 89336, "init": "pretrained", "pas": 4000, "graine": 0, "accord_uct_val": 0.419, "random": 0.92, "uct50": 0.235}
+{"jeu": "awale", "parties_prof": 1000, "exemples": 89336, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.42, "random": 0.983, "uct50": 0.26}
+{"jeu": "moulin", "parties_prof": 300, "exemples": 16991, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.1493, "random": 0.5, "uct50": 0.085}
+{"jeu": "morpion-ultime", "parties_prof": 300, "exemples": 14613, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.1735, "random": 0.68, "uct50": 0.107}

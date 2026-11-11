@@ -1,0 +1,10 @@
+{"pas": 500, "perte_politique": 2.0101, "accord_uct": 0.1575, "ce_val": 2.0025}
+{"pas": 1000, "perte_politique": 1.9253, "accord_uct": 0.1941, "ce_val": 2.0023}
+{"pas": 1500, "perte_politique": 1.98, "accord_uct": 0.1667, "ce_val": 2.0025}
+{"pas": 2000, "perte_politique": 1.9875, "accord_uct": 0.1667, "ce_val": 2.0025}
+{"pas": 2500, "perte_politique": 1.9021, "accord_uct": 0.1826, "ce_val": 2.0026}
+{"pas": 3000, "perte_politique": 1.9384, "accord_uct": 0.1758, "ce_val": 2.0026}
+{"pas": 3500, "perte_politique": 2.1196, "accord_uct": 0.1689, "ce_val": 2.0026}
+{"pas": 4000, "perte_politique": 2.0297, "accord_uct": 0.1735, "ce_val": 2.0026}
+{"jeu": "morpion-ultime", "parties_prof": 300, "exemples": 14613, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.1735, "random": 0.68, "uct50": 0.107}
+{"pas": 500, "perte_politique": 2.1404, "accord_uct": 0.175, "ce_val": 1.9211}

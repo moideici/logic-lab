@@ -1,0 +1,11 @@
+{"pas": 500, "perte_politique": 2.1092, "accord_uct": 0.1375, "ce_val": 2.247}
+{"pas": 1000, "perte_politique": 2.1024, "accord_uct": 0.1316, "ce_val": 2.247}
+{"pas": 1500, "perte_politique": 2.039, "accord_uct": 0.1473, "ce_val": 2.2469}
+{"pas": 2000, "perte_politique": 2.2639, "accord_uct": 0.1415, "ce_val": 2.2469}
+{"pas": 2500, "perte_politique": 2.2164, "accord_uct": 0.1473, "ce_val": 2.2469}
+{"pas": 3000, "perte_politique": 2.3232, "accord_uct": 0.1375, "ce_val": 2.247}
+{"pas": 3500, "perte_politique": 2.1646, "accord_uct": 0.1434, "ce_val": 2.2469}
+{"pas": 4000, "perte_politique": 2.0996, "accord_uct": 0.1493, "ce_val": 2.2469}
+{"jeu": "moulin", "parties_prof": 300, "exemples": 16991, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.1493, "random": 0.5, "uct50": 0.085}
+{"pas": 500, "perte_politique": 2.2434, "accord_uct": 0.17, "ce_val": 2.1496}
+{"pas": 1000, "perte_politique": 2.2058, "accord_uct": 0.14, "ce_val": 2.1495}

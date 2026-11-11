@@ -1,0 +1,27 @@
+{"pas": 500, "perte_politique": 1.1517, "accord_uct": 0.3852, "ce_val": 1.1978}
+{"pas": 1000, "perte_politique": 1.0901, "accord_uct": 0.4037, "ce_val": 1.1968}
+{"pas": 1500, "perte_politique": 1.1097, "accord_uct": 0.3667, "ce_val": 1.1976}
+{"pas": 2000, "perte_politique": 1.1596, "accord_uct": 0.3667, "ce_val": 1.1978}
+{"pas": 2500, "perte_politique": 1.195, "accord_uct": 0.3593, "ce_val": 1.1985}
+{"pas": 3000, "perte_politique": 1.0776, "accord_uct": 0.3593, "ce_val": 1.1978}
+{"pas": 3500, "perte_politique": 1.2496, "accord_uct": 0.3667, "ce_val": 1.1981}
+{"pas": 4000, "perte_politique": 1.1466, "accord_uct": 0.3667, "ce_val": 1.1983}
+{"jeu": "awale", "parties_prof": 100, "exemples": 9009, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.3667, "random": 0.93, "uct50": 0.21}
+{"pas": 500, "perte_politique": 1.2248, "accord_uct": 0.395, "ce_val": 1.227}
+{"pas": 1000, "perte_politique": 1.0428, "accord_uct": 0.412, "ce_val": 1.2269}
+{"pas": 1500, "perte_politique": 1.1806, "accord_uct": 0.415, "ce_val": 1.2265}
+{"pas": 2000, "perte_politique": 1.2491, "accord_uct": 0.409, "ce_val": 1.2264}
+{"pas": 2500, "perte_politique": 1.2238, "accord_uct": 0.397, "ce_val": 1.2265}
+{"pas": 3000, "perte_politique": 1.1172, "accord_uct": 0.408, "ce_val": 1.2263}
+{"pas": 3500, "perte_politique": 1.1912, "accord_uct": 0.41, "ce_val": 1.2263}
+{"pas": 4000, "perte_politique": 1.214, "accord_uct": 0.414, "ce_val": 1.2263}
+{"jeu": "awale", "parties_prof": 1000, "exemples": 89336, "init": "pretrained", "pas": 4000, "graine": 0, "accord_uct_val": 0.419, "random": 0.92, "uct50": 0.235}
+{"pas": 500, "perte_politique": 1.2269, "accord_uct": 0.416, "ce_val": 1.2268}
+{"pas": 1000, "perte_politique": 1.0431, "accord_uct": 0.421, "ce_val": 1.2268}
+{"pas": 1500, "perte_politique": 1.1805, "accord_uct": 0.44, "ce_val": 1.2257}
+{"pas": 2000, "perte_politique": 1.2491, "accord_uct": 0.432, "ce_val": 1.2257}
+{"pas": 2500, "perte_politique": 1.2242, "accord_uct": 0.417, "ce_val": 1.2254}
+{"pas": 3000, "perte_politique": 1.1123, "accord_uct": 0.423, "ce_val": 1.2255}
+{"pas": 3500, "perte_politique": 1.1905, "accord_uct": 0.417, "ce_val": 1.2253}
+{"pas": 4000, "perte_politique": 1.2135, "accord_uct": 0.421, "ce_val": 1.2253}
+{"jeu": "awale", "parties_prof": 1000, "exemples": 89336, "init": "scratch", "pas": 4000, "graine": 0, "accord_uct_val": 0.42, "random": 0.983, "uct50": 0.26}
