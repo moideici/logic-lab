@@ -1,6 +1,6 @@
 # Garry 3.1.0 : un répertoire plus varié
 
-Travail appliqué le 16 octobre 2026 dans `C:\Users\gabor\code\playi`.
+Travail appliqué le 16 octobre 2026 dans `%USERPROFILE%\code\playi`.
 
 Garry dispose maintenant d’un magasin de **2 523 épreuves d’entraînement** couvrant les six jeux. Il les rejoue automatiquement pendant l’entraînement dans l’application, en mélangeant les catégories et en donnant davantage de place aux erreurs. Les exemples peuvent enseigner plusieurs bons coups dans une même position.
 

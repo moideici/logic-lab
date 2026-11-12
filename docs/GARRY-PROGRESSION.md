@@ -2,7 +2,7 @@
 
 # Garry : entraînement réalisé et prochain cap
 
-État au 16 octobre 2026. Projet : `C:\Users\gabor\code\playi`.
+État au 16 octobre 2026. Projet : `%USERPROFILE%\code\playi`.
 
 Garry a été entraîné et un candidat ciblé sur Puissance 4 a été installé. L'architecture et le code d'inférence restent ceux de **Garry 2.0.0**. Les poids portent la révision `20261016-c4-guarded-01` ; les performances ne déterminent pas le numéro de version.
 

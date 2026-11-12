@@ -2,7 +2,7 @@
 
 # Garry : priorité à la force au niveau 10
 
-Travail appliqué dans `C:\Users\gabor\code\playi`, le 16 octobre 2026.
+Travail appliqué dans `%USERPROFILE%\code\playi`, le 16 octobre 2026.
 
 Garry cherche désormais au moins 20 demi-coups au niveau 10 de Puissance 4 et poursuit plus loin si le budget le permet. Un demi-coup est une action d’un joueur ; 20 demi-coups couvrent donc dix coups de Garry et dix réponses adverses. La cible est un objectif de recherche, pas une profondeur annoncée artificiellement.
 

@@ -169,3 +169,7 @@ Le protocole `logic-arena.v1` reste compatible : `catalog`, `create`, `observe`,
 Pour reconstruire le moteur : `npm install --ignore-scripts` puis `npm run build` dans `tools/wasm`. Le compilateur [AssemblyScript](https://www.assemblyscript.org/compiler.html) est verrouillé dans le projet ; Python exécute le binaire avec [Wasmtime](https://github.com/bytecodealliance/wasmtime-py). Aucun service distant ne décide des coups.
 
 Le [bilan de cohérence 0.6.0](docs/GARRY-0.6-COHERENCE.md) décrit les contrôles disponibles, les vérifications et la protection des évaluations entre sessions.
+
+## Licence
+
+Code publié sous [licence MIT](LICENSE). Historique des versions : [CHANGELOG.md](CHANGELOG.md).
