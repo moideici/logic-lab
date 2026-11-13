@@ -32,6 +32,11 @@ class Handler(SimpleHTTPRequestHandler):
     def end_headers(self):
         if not getattr(self, "_cc", False):  # fichiers statiques : toujours revalider (sinon un ancien module JS reste en cache)
             super().send_header("Cache-Control", "no-cache")
+            # Une seule fois par navigateur : purge les anciens fichiers gardés en cache avant ce correctif (ils pouvaient rester « frais » des jours).
+            page = self.path.split("?")[0] in ("/", "/index.html", "/lab.html", "/atelier.html")
+            if page and "cache-purged=2" not in (self.headers.get("Cookie") or ""):
+                super().send_header("Clear-Site-Data", '"cache"')
+                super().send_header("Set-Cookie", "cache-purged=2; Path=/; Max-Age=31536000; SameSite=Lax")
         self._cc = False
         super().end_headers()
 

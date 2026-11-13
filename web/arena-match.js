@@ -18,6 +18,9 @@ function options(n){
  for(const p of list)o.push(['ai:'+p.id,p.label]);
  return o;
 }
+const badge=document.createElement('div');badge.id='whoplays';badge.className='whoplays';
+document.querySelector('.play-panel .board-stage')?.before(badge);
+const who_label=n=>{const w=who[n];if(w==='human')return 'Vous';const id=w.replace('ai:','');return label(id)+(id==='garry'?` niv. ${$('pc'+n+'-range').value}`:'');};
 function render(){
  const g=gameName(),duel=isDuel();
  $('pc2').hidden=!duel;document.querySelector('#match .vs').hidden=!duel;
@@ -34,6 +37,7 @@ function render(){
   $('phint'+n).textContent=who[n]==='human'?'Vous jouez ce camp.':CATALOG.find(p=>p.id===id)?.hint||'';
   document.getElementById('pc'+n).classList.toggle('me',who[n]==='human');
  }
+ badge.textContent=duel?`Joueur 1 · ${who_label(1)}   contre   Joueur 2 · ${who_label(2)}`:`Joueur · ${who_label(1)}`;
 }
 function apply(){
  const duel=isDuel();

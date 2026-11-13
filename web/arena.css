@@ -54,3 +54,4 @@ header{border-bottom:1px solid var(--line-d)}.wordmark{color:var(--ink-l)}.statu
 .turn{font-size:10px}
 .control-head h3,.panel-head h2{color:#eaf2e3}
 .board-2048{background:#a9b89f!important}.board-sliding_puzzle{background:#a9b89f!important}.board-sudoku{background:#9fb095!important}
+.whoplays{padding:0 24px 10px;font:11px var(--mono);letter-spacing:.04em;color:#a9c8a1;white-space:pre}
