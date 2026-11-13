@@ -1,0 +1,16 @@
+/* Atelier : la charte du Lab ; les widgets (réseau, entraînement, Loop) restent dans des cartes papier, lisibles et sobres. */
+.slim{grid-template-columns:1fr;padding:38px 0 18px}.slim h1{font-size:clamp(38px,4.6vw,64px)}
+.pill{display:inline-flex;align-items:center;gap:8px;margin:20px 0 0;padding:8px 13px;border:1px solid var(--line);border-radius:999px;font:10px var(--mono);color:var(--muted)}.pill i{width:6px;height:6px;border-radius:50%;background:#90be6a}
+.tabs{display:flex;gap:6px;margin:6px 0 18px;border-bottom:1px solid var(--line)}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:12px 16px;color:var(--muted);font-size:13px;transition:.2s}.tabs button:hover{color:var(--ink)}.tabs button.on{color:var(--lime);border-color:var(--lime)}
+.tabpane{animation:rise .5s cubic-bezier(.2,.8,.2,1) backwards}
+.atelier .lab-card{--ink:#14352e;--muted:#6f7f74;--white:#fff;--line:#dfe3da;--dark:#14352e;--paper:#f6f5f0;background:var(--paper);color:var(--ink);border:1px solid #ffffff14;border-radius:12px;margin-bottom:14px}
+.atelier .lab-card h2{color:var(--dark);font-size:18px}.atelier .lab-card .muted{color:#6f7f74}
+.atelier .lab-card svg{background:#fbfbf7;border-radius:10px}
+.atelier .lab-bar{--ink:var(--ink);margin:0 0 16px}.atelier .lab-bar label{color:var(--muted)}
+.atelier .lab-bar select,.atelier .lab-bar input{background:var(--card);color:var(--ink);border:1px solid var(--line)}
+.atelier .lab-bar .button{background:#ffffff08;color:var(--ink);border:1px solid var(--line)}.atelier .lab-bar .button.primary{background:var(--lime);color:#14352e;border-color:var(--lime);font-weight:700}
+.atelier .lab-card .lab-bar select,.atelier .lab-card .lab-bar input{background:#fff;color:#14352e;border-color:#dfe3da}.atelier .lab-card .lab-bar .button{background:#fff;color:#14352e;border-color:#dfe3da}.atelier .lab-card .lab-bar .button.primary{background:#14352e;color:#fff;border-color:#14352e}.atelier .lab-card .lab-bar label{color:#6f7f74}
+.atelier .net-foot .button{background:#fff;color:#14352e;border:1px solid #dfe3da;border-radius:8px}
+.atelier .compare td,.atelier .compare th{color:#14352e}
+@media(max-width:900px){.atelier .lab-grid,.atelier .train-grid{grid-template-columns:1fr}}

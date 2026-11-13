@@ -8,7 +8,7 @@ export const CONF = {
 
 export const MODELS = [
   {
-    id: 'garry', short: 'Garry', name: 'Garry', version: '0.6.0', page: 'modele-garry.html', scene: 'garry', hue: 218,
+    id: 'garry', short: 'Garry', name: 'Garry', version: '0.6.0', page: 'modele-garry.html', scene: 'garry', hue: 96, glyph: '✳',
     role: 'Le joueur généraliste',
     tagline: 'Un seul réseau, quatorze jeux, une recherche qui prouve ce qu’elle peut.',
     summary: 'Garry est le modèle historique de Logic Lab : un perceptron à deux couches cachées de 48 neurones, partagé entre quatorze jeux, qui propose des coups ; une recherche (alpha-bêta, expectimax, solveurs de fin de partie) les confirme ou les corrige. Il apprend en imitant un professeur borné et n’est promu que s’il ne régresse sur aucun jeu.',
@@ -40,7 +40,7 @@ export const MODELS = [
     games: ['Morpion', '2048', 'Sudoku', 'Puissance 4', 'Démineur', 'Taquin', 'Reversi', 'Nim', 'Lights Out', 'Dames', 'Percée', 'Hex', 'Gomoku', 'Go'],
   },
   {
-    id: 'optimus', short: 'Optimus', name: 'Garry Optimus', version: '0.1', page: 'modele-optimus.html', scene: 'optimus', hue: 232,
+    id: 'optimus', short: 'Optimus', name: 'Garry Optimus', version: '0.1', page: 'modele-optimus.html', scene: 'optimus', hue: 25, glyph: '⌘',
     role: 'Le modèle unique multi-jeux',
     tagline: 'Un tronc partagé, des professeurs écrits à la main : la compacité avant la force.',
     summary: 'Optimus est le projet d’un seul grand modèle pour tous les jeux, entraîné par distillation de professeurs exacts ou de recherche (solveur de Puissance 4, moteurs Gomoku et Hex, recherche aux dames). Le pilote P1 montre qu’un réseau multi-jeux tient avec la moitié des paramètres de cinq réseaux séparés ; il n’a pas encore démontré qu’il améliore les jeux.',
@@ -73,7 +73,7 @@ export const MODELS = [
     src: ['GARRY-MODELE-UNIQUE-P0.md', 'GARRY-MODELE-UNIQUE-P1.md', 'GARRY-MODELE-UNIQUE-CADRAGE.md'],
   },
   {
-    id: 'zero', short: 'Zéro', name: 'Garry Zéro', version: 'auto-apprentissage', page: 'modele-zero.html', scene: 'zero', hue: 206,
+    id: 'zero', short: 'Zéro', name: 'Garry Zéro', version: 'auto-apprentissage', page: 'modele-zero.html', scene: 'zero', hue: 150, glyph: '○',
     role: 'L’élève sans professeur',
     tagline: 'Il joue contre lui-même. Aucune partie humaine, aucun coup imité.',
     summary: 'Zéro apprend par auto-jeu : une recherche arborescente (MCTS) guidée par un réseau politique-valeur, qui s’améliore en jouant. Au Puissance 4, il égale en une heure le professeur de niveau 10 sans l’avoir jamais vu.',
@@ -104,7 +104,7 @@ export const MODELS = [
     src: ['entrainements-garry-zero-2026-10-19.md'],
   },
   {
-    id: 'maths', short: 'Maths', name: 'Maths', version: 'vague 1', page: 'modele-maths.html', scene: 'maths', hue: 248,
+    id: 'maths', short: 'Maths', name: 'Maths', version: 'vague 1', page: 'modele-maths.html', scene: 'maths', hue: 205, glyph: '2ⁿ',
     role: 'Le réseau qui calcule pas à pas',
     tagline: 'Un Transformer de zéro, qui écrit l’étape suivante d’un calcul. Rien de plus.',
     summary: 'Un Transformer décodeur de 812 416 paramètres reçoit un état de calcul et écrit l’étape suivante (une opération à la fois). Un évaluateur indépendant vérifie chaque étape. Sur les six niveaux du test, tous les problèmes sont résolus ; hors distribution, il échoue.',
@@ -131,7 +131,7 @@ export const MODELS = [
     src: ['maths-protocole.md', 'maths-vague1-fin.md', 'maths-protocole-vague2.md'],
   },
   {
-    id: 'loop', short: 'Loop', name: 'Loop', version: 'cœur récurrent', page: 'modele-loop.html', scene: 'loop', hue: 196,
+    id: 'loop', short: 'Loop', name: 'Loop', version: 'cœur récurrent', page: 'modele-loop.html', scene: 'loop', hue: 55, glyph: '↻',
     role: 'Le réseau qui réfléchit',
     tagline: 'Les mêmes poids, repassés encore et encore : plus c’est dur, plus il pense longtemps.',
     summary: 'Loop est un bloc d’attention limité aux cases voisines, repassé plusieurs fois avec les mêmes poids, entraîné de zéro sur des problèmes à solution unique. Il décide seul du nombre de passes en vérifiant sa grille, et le même modèle sait résoudre sudokus et colorations de graphes.',
@@ -158,7 +158,7 @@ export const MODELS = [
     src: ['loop-sudoku6-resultats.md', 'loop-transfert-resultats.md'],
   },
   {
-    id: 'graine', short: 'Graine', name: 'Graine', version: 'croissance et élagage', page: 'modele-graine.html', scene: 'graine', hue: 214,
+    id: 'graine', short: 'Graine', name: 'Graine', version: 'croissance et élagage', page: 'modele-graine.html', scene: 'graine', hue: 130, glyph: '⌁',
     role: 'L’expérience qui pousse',
     tagline: 'Un réseau qui commence à 2 + 2 neurones, en gagne, en perd. Verdict : le fixe fait mieux.',
     summary: 'Graine fait pousser et élaguer un réseau pendant l’entraînement. L’expérience compare trois règles à des réseaux fixes de même taille finale sur trois jeux. Le résultat est négatif, et c’est une réponse utile.',
@@ -184,7 +184,7 @@ export const MODELS = [
     src: ['graine-resultats.md'],
   },
   {
-    id: 'moteurs', short: 'Moteurs', name: 'Moteurs à la main', version: 'Gomoku · Hex · solveur', page: 'modele-moteurs.html', scene: 'moteurs', hue: 262,
+    id: 'moteurs', short: 'Moteurs', name: 'Moteurs à la main', version: 'Gomoku · Hex · solveur', page: 'modele-moteurs.html', scene: 'moteurs', hue: 285, glyph: '⬡',
     role: 'Les professeurs et les juges',
     tagline: 'Pas d’entraînement : des tables de motifs, des ponts, une recherche. Ils enseignent et ils jugent.',
     summary: 'Gomoku, Hex et Puissance 4 ont des moteurs écrits à la main, sans aucun entraînement. Ils servent de professeurs (les positions et les coups) et de juges indépendants (le réseau seul les affronte). Ils sont aussi un adversaire fort dans l’arène.',

@@ -1,4 +1,5 @@
 import {gameUiPolicy} from './game-ui-policy.js';
+import {altDecision} from './arena-players.js';
 import {AGENTS,AGENT_VERSION,agentIdentity} from './agents.js';
 import {CONNECT_LIMITS,CONNECT_TIMES} from './connect4-runtime.js';
 import {LIMITS,TIMES} from './planner.js';
@@ -28,6 +29,7 @@ function cancelInference(error=new DOMException('Calcul annulé','AbortError'),f
  pending.clear();
 }
 function decideAsync(config={}){
+ const alt=altDecision(game,game.multiplayer?game.player:1);if(alt)return alt;
  if(!current())return Promise.reject(Error('Le modèle se charge.'));
  if(!inferenceWorker){
   const instance=new Worker('./inference-worker.js',{type:'module'});

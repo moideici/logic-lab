@@ -20,7 +20,7 @@ function garry(ctx, w, h, t, S, H) {
   for (const q of S.pulses) { q.p += .018; const A = pos[q.i][q.a], B = pos[q.i + 1][q.b], x = A[0] + (B[0] - A[0]) * q.p, y = A[1] + (B[1] - A[1]) * q.p; line(ctx, A, [x, y], hsl(H, 80, 70, .5), 1.4); glow(ctx, x, y, 12, hsl(H, 90, 70, .8)); }
   pos.forEach((col, i) => col.forEach((p, j) => { const act = .5 + .5 * Math.sin(t * 1.7 + j * .8 + i * 1.3); ctx.fillStyle = hsl(H, 70, 35 + act * 40); ctx.beginPath(); ctx.arc(p[0], p[1], i === 1 || i === 2 ? 5.5 : 3.6, 0, TAU); ctx.fill(); }));
   labels.forEach((l, i) => text(ctx, l, w * xs[i], h * .07, 12, hsl(H, 60, 75)));
-  text(ctx, ['entrée', 'cœur', 'cœur', 'coups'][0], w * xs[0], h * .94, 10, '#7a85a6'); text(ctx, 'module commun', w * .5, h * .94, 10, '#7a85a6'); text(ctx, 'coups légaux', w * xs[3], h * .94, 10, '#7a85a6');
+  text(ctx, ['entrée', 'cœur', 'cœur', 'coups'][0], w * xs[0], h * .94, 10, '#8fb09f'); text(ctx, 'module commun', w * .5, h * .94, 10, '#8fb09f'); text(ctx, 'coups légaux', w * xs[3], h * .94, 10, '#8fb09f');
   const g = S.games[Math.floor(t / 1.1) % S.games.length], k = (t / 1.1) % 1;
   text(ctx, g, w * .5, h * .5, Math.min(w, h) * .07, hsl(H, 80, 80, Math.sin(k * Math.PI) * .55));
 }
@@ -45,14 +45,14 @@ function optimus(ctx, w, h, t, S, H) {
     ctx.strokeStyle = hsl(H, 50, 55, .25); ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(bx + bs, sy); ctx.bezierCurveTo(w * .3, sy, w * .3, h * .5, tx - w * .08, h * .5); ctx.stroke();
     const u = ph, x = (1 - u) ** 3 * (bx + bs) + 3 * (1 - u) ** 2 * u * w * .3 + 3 * (1 - u) * u * u * w * .3 + u ** 3 * (tx - w * .08), yy = (1 - u) ** 3 * sy + 3 * (1 - u) ** 2 * u * sy + 3 * (1 - u) * u * u * h * .5 + u ** 3 * h * .5;
     glow(ctx, x, yy, 10, hsl(H, 90, 65, .9));
-    board(i, bx, sy); text(ctx, names[i], bx, sy + bs * .72, 10, '#8d98ba');
+    board(i, bx, sy); text(ctx, names[i], bx, sy + bs * .72, 10, '#9fbfae');
   });
   // tronc : 6 blocs résiduels
   for (let k = 0; k < 6; k++) { const bxk = tx - w * .08 + k * (w * .032), act = clamp(Math.sin(t * 2.2 - k * .7) * .5 + .6), bh = h * .44; ctx.fillStyle = hsl(H, 70, 25 + act * 35); ctx.fillRect(bxk, h * .5 - bh / 2, w * .024, bh); }
   text(ctx, 'tronc partagé · 6 × 64', tx + w * .02, h * .5 + h * .28, 11, hsl(H, 70, 78));
   // têtes
-  ys.forEach((y, i) => { const sy = h * y; ctx.strokeStyle = hsl(H, 50, 55, .25); ctx.beginPath(); ctx.moveTo(tx + w * .12, h * .5); ctx.bezierCurveTo(w * .72, h * .5, w * .72, sy, hx - w * .04, sy); ctx.stroke(); const act = clamp(Math.sin(t * 2 - i) * .5 + .5); ctx.fillStyle = hsl(H, 80, 40 + act * 35); ctx.beginPath(); ctx.roundRect(hx - w * .04, sy - 9, w * .09, 18, 5); ctx.fill(); text(ctx, 'coup', hx + w * .005, sy, 9, '#05070d'); });
-  text(ctx, '5 jeux, 1 réseau', w * .5, h * .94, 11, '#7a85a6');
+  ys.forEach((y, i) => { const sy = h * y; ctx.strokeStyle = hsl(H, 50, 55, .25); ctx.beginPath(); ctx.moveTo(tx + w * .12, h * .5); ctx.bezierCurveTo(w * .72, h * .5, w * .72, sy, hx - w * .04, sy); ctx.stroke(); const act = clamp(Math.sin(t * 2 - i) * .5 + .5); ctx.fillStyle = hsl(H, 80, 40 + act * 35); ctx.beginPath(); ctx.roundRect(hx - w * .04, sy - 9, w * .09, 18, 5); ctx.fill(); text(ctx, 'coup', hx + w * .005, sy, 9, '#0b211c'); });
+  text(ctx, '5 jeux, 1 réseau', w * .5, h * .94, 11, '#8fb09f');
 }
 
 // ---------- Zéro : un arbre de recherche (MCTS) qui pousse, puis le meilleur chemin ----------
@@ -66,8 +66,8 @@ function zero(ctx, w, h, t, S, H) {
   S.nodes.slice(0, upto).forEach((n, i) => { const [x, y] = P(n), r = 3 + Math.min(11, Math.sqrt(n.v) * 1.5), age = clamp((upto - i) / 8); ctx.fillStyle = best.has(i) && ph > .72 ? hsl(H, 90, 65) : hsl(H, 60, 30 + 30 * (n.v / S.nodes[0].v) ** .4, .9); ctx.beginPath(); ctx.arc(x, y, r * ease(Math.min(1, age + .3)), 0, TAU); ctx.fill(); });
   glow(ctx, w * .5, h * .08, 30, hsl(H, 90, 65, .3));
   text(ctx, `simulations : ${upto}`, w * .12, h * .94, 11, hsl(H, 70, 78), 'left');
-  text(ctx, ph > .72 ? 'meilleur chemin choisi' : 'la recherche explore…', w * .88, h * .94, 11, '#7a85a6', 'right');
-  text(ctx, 'auto-jeu → réseau → meilleure recherche → …', w * .5, h * .975, 9, '#4c5679');
+  text(ctx, ph > .72 ? 'meilleur chemin choisi' : 'la recherche explore…', w * .88, h * .94, 11, '#8fb09f', 'right');
+  text(ctx, 'auto-jeu → réseau → meilleure recherche → …', w * .5, h * .975, 9, '#5f8472');
 }
 
 // ---------- Maths : un calcul qui s'écrit étape par étape ----------
@@ -82,10 +82,10 @@ function maths(ctx, w, h, t, S, H) {
     const arrow = i > 0 ? clamp(loc * 3) : 0;
     if (i > 0) text(ctx, '↓', w * .5, y - h * .075, fs * .7, hsl(H, 80, 70, arrow));
     ctx.fillStyle = hsl(H, 70, 25, .35 * Math.min(1, loc * 2)); ctx.beginPath(); ctx.roundRect(w * .1, y - fs * .85, w * .8, fs * 1.7, 14); ctx.fill();
-    text(ctx, s.slice(0, n) + (!done && Math.floor(t * 4) % 2 ? '▍' : ''), w * .5, y, fs, i === steps.length - 1 && done ? hsl(H, 90, 78) : '#eef1fa', 'center', 'ui-monospace,Consolas,monospace');
-    if (done) { ctx.fillStyle = hsl(H, 80, 60); ctx.beginPath(); ctx.arc(w * .86, y, 7, 0, TAU); ctx.fill(); text(ctx, '✓', w * .86, y + .5, 10, '#05070d'); }
+    text(ctx, s.slice(0, n) + (!done && Math.floor(t * 4) % 2 ? '▍' : ''), w * .5, y, fs, i === steps.length - 1 && done ? hsl(H, 90, 78) : '#e9f3e2', 'center', 'ui-monospace,Consolas,monospace');
+    if (done) { ctx.fillStyle = hsl(H, 80, 60); ctx.beginPath(); ctx.arc(w * .86, y, 7, 0, TAU); ctx.fill(); text(ctx, '✓', w * .86, y + .5, 10, '#0b211c'); }
   });
-  text(ctx, 'étape suivante · vérifiée par un évaluateur indépendant', w * .5, h * .94, 11, '#7a85a6');
+  text(ctx, 'étape suivante · vérifiée par un évaluateur indépendant', w * .5, h * .94, 11, '#8fb09f');
 }
 
 // ---------- Loop : un sudoku 6x6 qui converge à chaque passe ----------
@@ -98,17 +98,17 @@ function loop(ctx, w, h, t, S, H) {
     const rr = Math.floor(i / 6), cc = i % 6, x = gx + cc * cs, y = gy + rr * cs; const ok = S.given[i] || pass >= S.conf[i];
     ctx.fillStyle = S.given[i] ? hsl(H, 30, 22) : ok ? hsl(H, 60, 30, .8) : hsl(25, 70, 40, .7); ctx.fillRect(x + 2, y + 2, cs - 4, cs - 4);
     const wrong = ((i * 7 + pass * 3) % 6) + 1, v = ok ? sol[rr][cc] : wrong;
-    text(ctx, String(v), x + cs / 2, y + cs / 2 + 1, cs * .5, S.given[i] ? '#eef1fa' : ok ? hsl(H, 90, 78) : hsl(25, 90, 75, .8), 'center', 'Inter,Arial');
+    text(ctx, String(v), x + cs / 2, y + cs / 2 + 1, cs * .5, S.given[i] ? '#e9f3e2' : ok ? hsl(H, 90, 78) : hsl(25, 90, 75, .8), 'center', 'Inter,Arial');
   }
   for (let k = 0; k < 7; k++) { const y = gy + k * cs, thick = k % 3 === 0 ? 2.6 : 1; line(ctx, [gx, y], [gx + 6 * cs, y], hsl(H, 40, 60, .6), thick); const x = gx + k * (cs); line(ctx, [x, gy], [x, gy + 6 * cs], hsl(H, 40, 60, .6), k % 2 === 0 ? 2.6 : 1); }
   // barres des cases fausses par passe
   const bx = w * .66, bw = w * .3, by = h * .14, bh = h * .52;
-  text(ctx, 'cases fausses par passe', bx + bw / 2, by - 14, 11, '#7a85a6');
+  text(ctx, 'cases fausses par passe', bx + bw / 2, by - 14, 11, '#8fb09f');
   for (let p = 0; p < N; p++) { const wrongN = S.given.reduce((a, g, i) => a + (!g && p < S.conf[i] ? 1 : 0), 0), nonGiven = S.given.filter((g) => !g).length || 1, bhh = (wrongN / nonGiven) * bh, x = bx + p * (bw / N); ctx.fillStyle = p <= pass ? hsl(p === pass ? 25 : H, 70, 55) : hsl(H, 30, 25, .5); ctx.fillRect(x, by + bh - bhh, bw / N - 3, bhh); }
   text(ctx, `passe ${pass}/${N}`, bx + bw / 2, h * .74, 20, hsl(H, 80, 78));
   // flèche récurrente
   ctx.strokeStyle = hsl(H, 80, 65, .8); ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(w * .5 - 4, h * .88, 16, -Math.PI * .8 + t * 3, Math.PI * .8 + t * 3); ctx.stroke();
-  text(ctx, 'mêmes poids, repassés', w * .5 + 28, h * .88, 11, '#7a85a6', 'left');
+  text(ctx, 'mêmes poids, repassés', w * .5 + 28, h * .88, 11, '#8fb09f', 'left');
 }
 
 // ---------- Graine : un réseau qui pousse puis s'élague ----------
@@ -121,7 +121,7 @@ function graine(ctx, w, h, t, S, H) {
   pts.forEach((col, i) => col.forEach((p, j) => { const newborn = i > 0 && i < 3 && j >= 2 && ph < .55; const dying = prune > 0 && i > 0 && i < 3 && j > col.length - 3; ctx.fillStyle = dying ? hsl(25, 80, 55, 1 - prune * .5) : newborn ? hsl(H, 90, 70) : hsl(H, 60, 45); ctx.beginPath(); ctx.arc(p[0], p[1], 6 + (newborn ? 2 * Math.sin(t * 6 + j) : 0), 0, TAU); ctx.fill(); if (newborn) glow(ctx, p[0], p[1], 18, hsl(H, 90, 70, .35)); }));
   const params = (3 * sizes[1] + sizes[1] * sizes[2] + sizes[2] * 2) + sizes[1] + sizes[2] + 2;
   text(ctx, `${sizes[1]} + ${sizes[2]} neurones · ${params} paramètres`, w * .5, h * .06, 12, hsl(H, 70, 78));
-  text(ctx, ph < .58 ? 'croissance : la validation stagne → +2 neurones' : 'élagage : extinction sans coût → on retire', w * .5, h * .93, 11, '#7a85a6');
+  text(ctx, ph < .58 ? 'croissance : la validation stagne → +2 neurones' : 'élagage : extinction sans coût → on retire', w * .5, h * .93, 11, '#8fb09f');
   ctx.strokeStyle = hsl(H, 60, 55, .8); ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(w * .1, h * .88); for (let x = 0; x <= 1; x += .02) { const y = .88 - .08 * (1 - Math.exp(-x * 5)) * (x <= ph ? 1 : 0); ctx.lineTo(w * (.1 + .8 * x), h * y); if (x > ph) break; } ctx.stroke();
 }
 
@@ -138,7 +138,7 @@ function moteurs(ctx, w, h, t, S, H) {
   for (let i = 0; i < L; i++) { const [r, c] = S.path[i], [x, y] = P(r, c); glow(ctx, x, y, hs * 1.3, hsl(H, 90, 65, .45)); if (i) line(ctx, P(...S.path[i - 1]), [x, y], hsl(H, 90, 75, .9), 3); ctx.fillStyle = hsl(H, 90, 78); ctx.beginPath(); ctx.arc(x, y, hs * .3, 0, TAU); ctx.fill(); }
   // bandeau alpha-bêta
   const by = h * .84; for (let i = 0; i < 9; i++) { const x = w * (.14 + i * .09), d = Math.sin(t * 2 + i) * .5 + .5; line(ctx, [w * .5, by - 12], [x, by + 12], hsl(H, 50, 60, .25)); ctx.fillStyle = i === Math.floor(t * 2) % 9 ? hsl(25, 80, 60) : hsl(H, 60, 30 + d * 25); ctx.beginPath(); ctx.arc(x, by + 14, 5, 0, TAU); ctx.fill(); }
-  text(ctx, 'alpha-bêta · coupures', w * .5, h * .95, 11, '#7a85a6');
+  text(ctx, 'alpha-bêta · coupures', w * .5, h * .95, 11, '#8fb09f');
   text(ctx, 'ponts et bords virtuels', w * .5, h * .06, 11, hsl(H, 70, 78));
 }
 

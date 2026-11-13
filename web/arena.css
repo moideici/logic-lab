@@ -1,0 +1,45 @@
+/* Arène : même identité que le Lab (vert profond, lime, orange) ; style.css reste la base, ceci le surcharge. */
+:root{--bg:#0d2621;--card:#123029;--line:#24493f;--ink:#eaf2e3;--muted:#86a595;--lime:#c0ed8d;--sage:#7f9c74}
+body{background:var(--bg);color:var(--ink)}
+body:before{content:'';position:fixed;inset:0 0 auto 94px;height:480px;background:radial-gradient(800px 360px at 70% 0,#2f6b4a38,transparent 70%);pointer-events:none}
+.rail{background:#0a1e1a;border-right:1px solid #ffffff0d}
+header{border-bottom:1px solid var(--line)}.wordmark{color:var(--ink)}.status-pill{background:#ffffff0a;border-color:var(--line);color:var(--muted)}.header-right>a{color:var(--muted)}
+.section-line{color:var(--sage)}.section-line span:first-child{color:var(--lime)}
+.eyebrow{color:var(--sage)}h2,h3{color:var(--ink)}
+/* jeux : cartes compactes */
+.games{grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:8px;margin-bottom:6px}
+.game-card{background:var(--card);border-color:var(--line);color:var(--ink);min-height:74px;padding:11px 12px;border-radius:10px;transition:transform .25s,background .25s,border-color .25s}
+.game-card:hover:not(:disabled){transform:translateY(-3px);border-color:var(--sage)}
+.game-card .game-icon{height:26px;font-size:20px;color:#79916f}.game-card small{color:var(--sage)}
+.game-card.selected{background:var(--lime);border-color:var(--lime);color:#14352e}.game-card.selected .game-icon,.game-card.selected small{color:#2c583a}.game-card.selected:after{color:#2c583a}
+/* barre de duel */
+.match{margin:4px 0 14px}.match .section-line{padding:14px 0 12px}
+.match-row{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:stretch}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;gap:10px;align-content:start;transition:border-color .3s,background .3s}
+.pcard.me{border-color:var(--lime);background:#16382f}
+.pc-top{display:flex;align-items:center;gap:10px}.pc-mark{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--lime);color:#14352e;font-weight:800;font-size:13px}
+#pc2 .pc-mark{background:var(--orange);color:#fff}.pc-role{font-weight:600}.pc-first{margin-left:auto;font:8px var(--mono);letter-spacing:.9px;color:var(--sage);text-transform:uppercase}
+.psel{width:100%;background:#0d2621;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:11px 12px;font-size:14px}
+.psel:focus{outline:2px solid var(--lime);outline-offset:2px}
+.phint{margin:0;font-size:11.5px;color:var(--muted);min-height:16px}
+.pc-level .label-row{font-size:12px;color:var(--muted)}.pc-level .label-row strong{color:var(--ink);font-size:20px;font-weight:500}.pc-level input{margin:10px 0 6px}.pc-level .range-captions{color:var(--sage)}
+.vs{align-self:center;font:700 13px var(--mono);letter-spacing:.2em;color:var(--sage);padding:0 4px}
+@media(max-width:800px){.match-row{grid-template-columns:1fr}.vs{justify-self:center}}
+/* plateau, réglages, mesures, journal */
+.play-panel,.controls,.event-panel{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:12px}
+.panel-head{padding:20px 24px}.turn{background:#ffffff0d;color:var(--ink)}
+.board-stage{background:radial-gradient(ellipse at center,#1c473d 0%,#123029 72%)}
+.play-toolbar .button.secondary,.icon-button{background:#ffffff0a;border-color:var(--line);color:var(--ink)}.primary{background:var(--lime);color:#14352e;border-color:var(--lime)}.primary:hover{background:#d3f4ad}
+#move-counter,#elapsed-counter{color:var(--sage)}.game-hint{color:var(--muted)}
+.controls{padding:20px}.control-head{margin-bottom:14px}.tiny-pill{border-color:var(--line);color:var(--sage)}.field-label,.fine-print,.model-status,.network-caption,.range-captions{color:var(--sage)}
+.controls select,.controls input[type=number]{background:#0d2621;color:var(--ink);border-color:var(--line)}
+.control-divider{background:var(--line)}.label-row{color:var(--ink)}.network-head button{color:var(--lime)}
+.planner-toggle{color:var(--ink)}.planner-toggle small{color:var(--muted)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);background:var(--card);border-radius:12px;margin:14px 0}
+.metrics>div{padding:16px 20px}.metrics>div+div:before{border-color:var(--line)}.metrics>div>span{color:var(--sage)}.metrics strong{font-size:22px;margin-top:8px;color:var(--ink)}.metrics strong>small{color:var(--muted)}.metrics p{display:none}.metrics p#score-caption{display:block;color:var(--muted);margin-top:4px}
+.event-panel{padding:0}.event-panel summary{cursor:pointer;list-style:none;padding:16px 22px;font:9px var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--sage)}.event-panel summary::-webkit-details-marker{display:none}
+.event-panel summary span{margin-left:10px;color:var(--muted)}.event-panel[open] summary{color:var(--lime)}.event-panel .event-head{padding:0 22px;justify-content:flex-end}.event-panel .events{padding:0 22px 20px}.event-row{background:#ffffff08;color:var(--ink)}
+.muted{color:var(--muted)}footer{border-color:var(--line);color:var(--muted)}
+/* autres onglets : cartes papier sur fond vert */
+.training-layout,.continuous-panel,.external-layout .play-panel,.json-grid,.protocol-intro{color:#14352e}
+@media(max-width:900px){.metrics{grid-template-columns:repeat(2,1fr)}}

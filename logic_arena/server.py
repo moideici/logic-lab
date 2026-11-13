@@ -24,6 +24,17 @@ class Handler(SimpleHTTPRequestHandler):
         self.arena = arena
         super().__init__(*args, directory=str(WEB), **kwargs)
 
+    def send_header(self, keyword, value):
+        if keyword.lower() == "cache-control":
+            self._cc = True
+        super().send_header(keyword, value)
+
+    def end_headers(self):
+        if not getattr(self, "_cc", False):  # fichiers statiques : toujours revalider (sinon un ancien module JS reste en cache)
+            super().send_header("Cache-Control", "no-cache")
+        self._cc = False
+        super().end_headers()
+
     def send_json(self, value, status=200):
         data = json.dumps(value, ensure_ascii=False, allow_nan=False).encode()
         self.send_response(status)
@@ -51,6 +62,17 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_json(payload, status)
 
     def do_POST(self):
+        if urlparse(self.path).path == "/api/player":
+            try:
+                size = int(self.headers.get("Content-Length", "0"))
+                if not 0 < size <= 1048576:
+                    raise ValueError("Taille JSON invalide")
+                data = json_line(self.rfile.read(size).decode("utf-8"))
+                from . import players
+                self.send_json({"ok": True, "action": players.choose(data["player"], data["observation"], data["legal"])})
+            except Exception as error:  # joueur absent, jeu non pris en charge, poids manquants
+                self.send_json({"ok": False, "error": str(error)}, 400)
+            return
         if urlparse(self.path).path.startswith('/api/lab/'):
             self.lab("POST");return
         if urlparse(self.path).path.startswith('/api/continuous/'):
@@ -151,6 +173,13 @@ class Handler(SimpleHTTPRequestHandler):
             except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
                 pass
             self.close_connection = True
+            return
+        if parsed.path == "/api/players":
+            try:
+                from . import players
+                self.send_json({"ok": True, "players": players.available()})
+            except Exception as error:
+                self.send_json({"ok": True, "players": {}, "note": str(error)})
             return
         if parsed.path == "/api/catalog":
             self.send_json(self.arena.dispatch({"op": "catalog"}))
