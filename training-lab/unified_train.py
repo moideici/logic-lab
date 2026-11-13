@@ -27,10 +27,11 @@ def main():
     ap.add_argument("--channels", type=int, default=64)
     ap.add_argument("--blocks", type=int, default=6)
     ap.add_argument("--log-every", type=int, default=2000)
+    ap.add_argument("--tag", default="1", help="suffixe des fichiers de donnees (ex. m = fusion, voir unified_merge_data.py) ; repli sur -1")
     a = ap.parse_args()
     out = Path(a.out) / f"{a.arm}-{a.seed}"
     out.mkdir(parents=True, exist_ok=True)
-    datas = {g: training.GameData(g, DATA / f"{g}-1.npz", "cuda") for g in GAMES}
+    datas = {g: training.GameData(g, DATA / (f"{g}-{a.tag}.npz" if (DATA / f"{g}-{a.tag}.npz").exists() else f"{g}-1.npz"), "cuda") for g in GAMES}
     plan = {"mono": [([g], a.steps // 5) for g in GAMES], "multi": [(list(GAMES), a.steps)],
             "family": [(["tictactoe", "connect4", "hex", "gomoku"], a.steps * 4 // 5), (["dames"], a.steps // 5)]}[a.arm]
     report = {"arm": a.arm, "seed": a.seed, "steps": a.steps, "models": []}

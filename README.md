@@ -14,6 +14,12 @@ Sudoku propose **Facile, Moyen, Difficile, Expert** : 45 grilles à solution uni
 
 Le taquin propose **3 × 3, 4 × 4 et 5 × 5**, avec quatre difficultés de grille. En 3 × 3, Expert demande exactement **31 coups** au minimum. Les niveaux 1 à 9 suivent le chemin optimal avec une probabilité croissante, de **55 % à 95 %** à chaque décision ; le niveau 10 choisit toujours un meilleur coup évalué, et le niveau 0 le pire. Les grandes grilles sont résolubles, mais leur recherche est bornée et leur difficulté maximale n’est pas certifiée. Sudoku et taquin restent jouables manuellement.
 
+## Le Lab
+
+`/lab.html` est l'entrée des modèles : une page par modèle (Garry, Garry Optimus, Zéro, Maths, Loop, Graine, moteurs à la main) avec son système, ses arguments étiquetés (établi, indicatif, non établi), les duels mesurés et ses benchmarks, plus la carte « qui joue contre qui ». Les données sont dans `web/lab-data.js`, chacune tirée d'un rapport du dépôt ; `tests/lab-site.test.mjs` vérifie leur cohérence. `/atelier.html` garde les expériences en direct (réseau observable, Graine, Loop).
+
+**2048 sans limite** : la partie ne s'arrête plus à la tuile 2048, seulement quand plus aucun coup n'est possible (la victoire reste « avoir atteint 2048 »).
+
 ## Entraînement continu et jeux réels
 
 L’onglet **Apprendre** lance une session locale bornée et montre son plateau en direct. Les nouveaux exemples sont séparés par familles entre apprentissage, validation et test. Un candidat doit préserver la validation fixe et récente avant installation ; les tests ne sélectionnent pas les poids. Les gains mesurés sont un accord avec un professeur borné, pas une garantie d’invincibilité. Le module central et les blocs des onze jeux antérieurs sont gelés lors des cycles Go, Hex et Gomoku.

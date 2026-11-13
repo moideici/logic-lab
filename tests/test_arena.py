@@ -131,7 +131,9 @@ class NeuralTests(unittest.TestCase):
         env.board=[[1024,1024,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
         d=NeuralAgent().choose(env.observation(),env.legal_actions())
         env.step(d.action)
-        self.assertEqual((env.winner,env.moves),(1,1))
+        self.assertEqual(env.moves,1)
+        self.assertGreaterEqual(max(map(max,env.board)),2048)
+        self.assertFalse(env.done)  # plus de limite a 2048 : la partie continue
 
     def test_saved_models_mask_actions_and_share_core(self):
         suite=NeuralSuite.load()

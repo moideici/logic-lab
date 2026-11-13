@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#183c35"><title>Atelier · Logic Lab</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="lab.css"></head>
+<body>
+<aside class="rail"><a href="/" class="logo" aria-label="Logic Lab accueil">L<span>✳</span></a><div class="rail-label">LOGIC LAB</div>
+<nav aria-label="Navigation principale"><a class="nav" href="/" title="Arène"><span>◫</span><small>Arène</small></a><a class="nav" href="/lab.html" title="Lab : modèles et benchmarks"><span aria-hidden="true">⚗</span><small>Lab</small></a><a class="nav active" href="/atelier.html" aria-current="page" title="Atelier : réseau en direct"><span aria-hidden="true">⚒</span><small>Atelier</small></a><a class="nav" id="input-link" href="http://127.0.0.1:8766/" title="Discuter en français"><span aria-hidden="true">Aa</span><small>Input</small></a></nav>
+<div class="rail-bottom"><i></i><small>LOCAL<br>INFERENCE</small></div></aside>
+<main>
+<header><a class="wordmark" href="/lab.html">logic<span>lab</span><sup> / atelier</sup></a><div class="header-right"><span class="status-pill"><i></i> <span id="net-shape">Réseau…</span></span></div></header>
+
+<section class="lab-intro"><p class="eyebrow">ATELIER · EXPÉRIENCES EN DIRECT · <a href="/lab.html">← retour au Lab</a></p><h1>Voir le réseau <span>penser.</span></h1>
+<p class="subtitle">Une copie en mémoire du réseau de Garry. Jouez un coup, regardez quels neurones s’activent, éteignez-en, et mesurez ce que ça change. Les poids du site ne sont jamais modifiés.</p></section>
+
+<section class="lab-bar" aria-label="Commandes">
+<label>Jeu <select id="game"></select></label>
+<label>Graine <input id="seed" type="number" min="0" max="999999999" value="0"></label>
+<button id="new" class="button">Nouvelle partie</button>
+<button id="step-net" class="button primary" title="Coup choisi par le réseau, neurones éteints compris">Coup du réseau</button>
+<button id="step-full" class="button" title="Coup choisi par le réseau complet, sans extinction">Coup du réseau complet</button>
+<button id="step-random" class="button">Coup au hasard</button>
+<button id="reset-mutes" class="button">Rallumer tout</button>
+</section>
+
+<section class="lab-grid">
+<div class="lab-card net-card"><div class="card-head"><h2>Réseau en direct</h2><p id="net-legend">Chaque rond est un neurone : vert = activé, orange = négatif. Cliquer pour sélectionner un neurone, puis l’éteindre ou le rallumer.</p></div>
+<svg id="net" viewBox="0 0 760 360" role="img" aria-label="Schéma du réseau : entrée, encodeur de 48 neurones, cœur de 48 neurones, sortie"></svg>
+<div class="net-foot"><button id="measure" class="button">Mesurer l’importance des neurones</button><span id="measure-note" class="muted">Éteint chaque neurone à tour de rôle sur 40 positions du jeu choisi.</span></div></div>
+
+<div class="lab-card side-card"><div class="card-head"><h2>Position</h2><p id="game-status" class="muted"></p></div>
+<div id="board" class="lab-board" aria-label="Plateau"></div>
+<h3>Coups préférés</h3><ol id="actions" class="actions"></ol><p id="choice-note" class="muted"></p>
+<h3>Neurone choisi</h3><div id="neuron-info" class="muted">Cliquez sur un neurone du schéma.</div></div>
+</section>
+
+<section class="lab-card curve-card"><div class="card-head"><h2>Courbe qualité / coût</h2><p>On éteint les neurones les moins sensibles d’abord : combien de paramètres retire-t-on avant que le réseau choisisse autre chose que le réseau complet ?</p></div>
+<div class="net-foot"><button id="curve-run" class="button">Tracer la courbe pour ce jeu</button><span id="curve-note" class="muted"></span></div>
+<svg id="curve" viewBox="0 0 760 260" role="img" aria-label="Accord avec le réseau complet selon le nombre de paramètres"></svg></section>
+
+<section class="lab-card train-card"><div class="card-head"><h2>Entraînement en direct</h2><p>Un petit réseau apprend à jouer comme le professeur. En mode <b>Graine</b>, il commence à 2 + 2 neurones, en gagne quand il stagne et en perd quand ils ne servent à rien. Comparez avec un réseau de taille fixe.</p></div>
+<div class="lab-bar train-bar"><label>Jeu <select id="train-game"><option value="tictactoe">tictactoe</option><option value="nim">nim</option><option value="connect4">connect4</option></select></label>
+<label>Réseau <select id="train-mode"><option value="graine-A">Graine A · prudente</option><option value="graine-B" selected>Graine B · croît vite, élague à la fin</option><option value="graine-C">Graine C · croît seule</option><option value="fixe-4">Fixe 4 + 4</option><option value="fixe-8">Fixe 8 + 8</option><option value="fixe-16">Fixe 16 + 16</option><option value="fixe-48">Fixe 48 + 48</option></select></label>
+<label>Pas <input id="train-steps" type="number" min="200" max="20000" step="100" value="3000"></label>
+<button id="train-start" class="button primary">Lancer</button><button id="train-stop" class="button" disabled>Arrêter</button></div>
+<p id="train-status" class="muted">Aucun entraînement.</p>
+<div class="train-grid"><svg id="train-net" viewBox="0 0 380 300" role="img" aria-label="Réseau en cours d'entraînement"></svg><svg id="train-chart" viewBox="0 0 380 300" role="img" aria-label="Accord avec le professeur et taille du réseau au fil des pas"></svg></div>
+<ul id="train-events" class="events"></ul>
+<h3>Comparaison des entraînements de cette session</h3><table id="train-compare" class="compare"><thead><tr><th>Jeu</th><th>Réseau</th><th>Tailles</th><th>Paramètres</th><th>Accord (test)</th></tr></thead><tbody></tbody></table>
+<p class="muted">Accord = part des positions de test où le réseau choisit le coup du professeur. Positions de test jamais vues à l'entraînement.</p></section>
+
+<section class="lab-card reason-card"><div class="card-head"><h2>Réflexion en direct · Loop</h2><p>Un petit réseau récurrent, entraîné de zéro, résout un sudoku 6×6. À chaque passe il propose une grille ; la couleur dit si la case est juste, l'opacité dit sa confiance. Plus le problème est dur, plus il lui faut de passes.</p><p id="reason-info" class="muted"></p></div>
+<div class="lab-bar train-bar"><label>Cases vides <span id="reason-empties-v">20</span><input id="reason-empties" type="range" min="6" max="27" value="20"></label>
+<label>Graine <input id="reason-seed" type="number" min="0" max="999999999" value="1"></label>
+<label>Passes <select id="reason-passes"><option>8</option><option selected>16</option><option>32</option></select></label>
+<button id="reason-new" class="button">Nouveau problème</button><button id="reason-think" class="button primary">Faire réfléchir</button></div>
+<p id="reason-status" class="muted">…</p>
+<div class="train-grid"><div id="reason-grid" class="rgrid" aria-label="Grille de sudoku 6 par 6"></div><div><svg id="reason-chart" viewBox="0 0 380 150" role="img" aria-label="Cases fausses à chaque passe"></svg>
+<div class="player"><button id="reason-play" class="button" disabled>▶ Rejouer</button><input id="reason-slider" type="range" min="1" max="16" value="1" disabled aria-label="Passe affichée"></div>
+<p class="muted">Vert = case juste, orange = case fausse (par rapport à la solution unique). Cliquer une barre affiche cette passe.</p></div></div></section>
+</main>
+<script type="module" src="lab.js"></script>
+<script type="module" src="lab-train.js"></script>
+<script type="module" src="lab-reason.js"></script>
+</body></html>

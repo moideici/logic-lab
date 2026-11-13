@@ -110,7 +110,7 @@ test('express search: shortest tactical wins, forced defense, and Sudoku without
  const cw=choose(c);assert.deepEqual(cw.action,{column:3});assert.equal(cw.info.remaining_moves,1);c.step(cw.action);assert.equal(c.winner,1);
  const block=new Game('connect4');for(const column of [6,0,6,1,5,2])block.step({column});assert.deepEqual(choose(block).action,{column:3});
  const tiles=new Game('2048');tiles.board=[[1024,1024,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
- const tw=choose(tiles);assert.equal(tw.info.remaining_moves,1);tiles.step(tw.action);assert.equal(tiles.winner,1);
+ const tw=choose(tiles);assert.equal(tw.info.remaining_moves,1);tiles.step(tw.action);assert(Math.max(...tiles.board.flat())>=2048);assert.equal(tiles.done,false);/* plus de limite à 2048 */
  for(const seed of [42,17,91]){const g=new Game('sudoku',seed),holes=g.board.flat().filter(v=>!v).length;
   while(!g.done&&g.moves<100){const d=choose(g);assert(!d.action.undo);g.step(d.action);}
   assert.equal(g.winner,1);assert.equal(g.moves,holes);

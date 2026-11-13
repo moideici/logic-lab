@@ -135,11 +135,11 @@ class Game2048(Game):
         self.board, gain = slide_2048(self.board, action["direction"])
         self.score += gain
         self.spawn()
-        if max(map(max, self.board)) >= 2048:
-            self.done, self.winner = True, 1
-        elif not self.legal_actions():
-            self.done, self.winner = True, 0
-        return gain / 2048.0 + (1.0 if self.winner == 1 else 0.0)
+        # Pas de limite : la partie ne s'arrete que bloquee. Atteindre 2048 = victoire.
+        if not self.legal_actions():
+            self.done = True
+            self.winner = 1 if max(map(max, self.board)) >= 2048 else 0
+        return gain / 2048.0 + (1.0 if self.done and self.winner == 1 else 0.0)
 
 
 def sudoku_candidates(board, r, c):

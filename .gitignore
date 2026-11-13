@@ -27,3 +27,4 @@ universel/data/*.pkl
 universel/models/*.pt
 universel/models/*.log
 universel/models/*.jsonl
+web/optimus-status.json
