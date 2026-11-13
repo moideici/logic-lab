@@ -9,7 +9,7 @@ import {hexValues} from './hex-engine.js';
 export const SIDES={1:'garry',2:'garry'};
 export const CATALOG=[
  {id:'garry',label:'Garry 0.6.0',games:'*',hint:'14 jeux · niveaux 0 à 10'},
- {id:'optimus',label:'Garry Optimus',games:['tictactoe','connect4','hex','gomoku'],server:true,hint:'multi-jeux · réseau seul'},
+ {id:'optimus',label:'Garry Optimus',games:['tictactoe','connect4','hex','gomoku','2048'],server:true,hint:'réseau seul, sans recherche'},
  {id:'zero',label:'Garry Zéro',games:['connect4'],server:true,hint:'auto-apprentissage · recherche 200 simulations'},
  {id:'engine',label:'Moteur à la main',games:['gomoku','hex'],hint:'tables de motifs / ponts, sans entraînement'},
  {id:'random',label:'Hasard',games:'*',hint:'coup légal au hasard'}];

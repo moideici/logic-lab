@@ -28,3 +28,5 @@ universel/models/*.pt
 universel/models/*.log
 universel/models/*.jsonl
 web/optimus-status.json
+logic_arena/t2048.dll
+web/optimus-2048-status.json

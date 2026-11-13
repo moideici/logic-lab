@@ -10,6 +10,7 @@ MODELS = Path(__file__).resolve().parents[1] / "training-lab" / "models"
 _cache: dict = {}
 
 GAMES = {"zero": ["connect4"], "optimus": ["tictactoe", "connect4", "hex", "gomoku"]}
+DIRECTIONS = ("up", "down", "left", "right")
 
 
 def available():
@@ -17,9 +18,20 @@ def available():
     out = {}
     if (MODELS / "zero-c4" / "dernier.pt").exists():
         out["zero"] = {"games": GAMES["zero"], "label": "Garry Zéro"}
-    if _optimus_dir():
-        out["optimus"] = {"games": GAMES["optimus"], "label": "Garry Optimus", "weights": _optimus_dir().parent.name + "/" + _optimus_dir().name}
+    games = list(GAMES["optimus"]) if _optimus_dir() else []
+    if _w2048():
+        games.append("2048")
+    if games:
+        out["optimus"] = {"games": games, "label": "Garry Optimus", "weights": (_optimus_dir().parent.name + "/" + _optimus_dir().name) if _optimus_dir() else "2048 seul"}
     return out
+
+
+def _w2048():
+    for name in ("best.pt", "last.pt"):
+        path = MODELS / "unified" / "optimus-2048" / name
+        if path.exists():
+            return path
+    return None
 
 
 def _optimus_dir():
@@ -60,10 +72,35 @@ def _optimus():
     return _cache["optimus"]
 
 
+def _optimus_2048():
+    if "o2048" not in _cache:
+        import torch
+        from .unified.net2048 import Net2048
+        blob = torch.load(_w2048(), map_location="cpu", weights_only=True)
+        net = Net2048(blob.get("channels", 128), blob.get("blocks", 6))
+        net.load_state_dict(blob["net"])
+        net.eval()
+        _cache["o2048"] = net
+    return _cache["o2048"]
+
+
+def _choose_2048(obs, legal):
+    import torch
+    from . import t2048
+    net = _optimus_2048()
+    e = torch.from_numpy(t2048.exponents([t2048.pack(obs["board"])]))
+    with torch.no_grad():
+        logits = net(e)[0].numpy()
+    best = max(legal, key=lambda a: logits[DIRECTIONS.index(a["direction"])])
+    return best
+
+
 def choose(player, obs, legal):
     game = obs.get("game")
-    if player not in GAMES or game not in GAMES[player]:
+    if player not in GAMES or game not in (available().get(player, {}).get("games") or []):
         raise ValueError(f"{player} ne joue pas à {game}")
+    if player == "optimus" and game == "2048":
+        return _choose_2048(obs, legal)
     if not legal:
         raise ValueError("aucun coup légal")
     if player == "zero":
