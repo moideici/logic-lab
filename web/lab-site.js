@@ -69,7 +69,11 @@ function hub() {
 
   const st = h('div', { class: 'status' }, h('span', { class: 'pulse off' }), h('b', {}, 'Garry Optimus'), h('span', { id: 'opt-status', style: 'color:var(--muted)' }, '…'));
   main.append(line('04 / ENTRAÎNEMENT', 'EN COURS'), st);
-  fetch(OPTIMUS_STATUS, { cache: 'no-store' }).then((r) => r.ok ? r.json() : Promise.reject()).then((s) => { $('#opt-status').textContent = s.text; if (s.running) st.querySelector('.pulse').classList.remove('off'); }).catch(() => { $('#opt-status').textContent = 'aucun statut'; });
+  Promise.all([OPTIMUS_STATUS, '/optimus-2048-status.json'].map((u) => fetch(u, { cache: 'no-store' }).then((r) => r.ok ? r.json() : null).catch(() => null))).then(([multi, t48]) => {
+    const parts = [multi && `multi-jeux : ${multi.text}`, t48 && `2048 : ${t48.text}`].filter(Boolean);
+    $('#opt-status').textContent = parts.length ? parts.join('  ·  ') : 'aucun statut';
+    if ((multi && multi.running) || (t48 && t48.running)) st.querySelector('.pulse').classList.remove('off');
+  });
   mount($('#hero-canvas'), 'field', { hue: 96 });
   reveals();
 }
