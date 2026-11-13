@@ -19,8 +19,8 @@ h3{font-size:15px;font-weight:600;margin:0}
 .sub{color:var(--muted);font-size:clamp(15px,1.5vw,18px);margin:18px 0 0;max-width:560px}
 .center{text-align:center;display:flex;flex-direction:column;align-items:center}
 .hero{padding-top:clamp(40px,7vw,90px);padding-bottom:0}
-.hero>*{opacity:0;transform:translateY(22px);animation:rise 1s cubic-bezier(.2,.8,.2,1) forwards}.hero>*:nth-child(2){animation-delay:.1s}.hero>*:nth-child(3){animation-delay:.2s}.hero>*:nth-child(4){animation-delay:.3s}.hero>*:nth-child(5){animation-delay:.42s}
-@keyframes rise{to{opacity:1;transform:none}}
+.hero>*{animation:rise .8s cubic-bezier(.2,.8,.2,1) backwards}.hero>*:nth-child(2){animation-delay:.08s}.hero>*:nth-child(3){animation-delay:.16s}.hero>*:nth-child(4){animation-delay:.24s}
+@keyframes rise{from{opacity:.25;transform:translateY(22px)}}
 .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:30px}
 .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:999px;background:#fff;color:#05070d;font-weight:600;font-size:14px;border:1px solid #fff;transition:.25s}
 .btn:hover{transform:translateY(-3px);box-shadow:0 14px 40px #4d7cff40}.btn.blue{background:var(--blue);border-color:var(--blue);color:#fff}.btn.ghost{background:#0a0f1d;color:var(--ink);border-color:var(--line)}
