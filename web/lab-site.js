@@ -117,6 +117,7 @@ function modelPage(id) {
       h('div', { class: 'btns' }, h('a', { class: 'button primary', href: '#systeme' }, 'Le système'), h('a', { class: 'button', href: '#bench' }, 'Les benchmarks'))),
     h('div', { class: 'stage' }, h('canvas', { id: 'scene' }))), stats);
   m.stats.forEach((s, k) => counter(stats.children[k].lastChild, s.v, s.fmt));
+  if (id === 'maths') { const host = h('div', { id: 'essai' }); main.append(line('00 / ESSAYER UN CALCUL', 'LE MODÈLE ÉCRIT LES ÉTAPES'), host); import('./lab-maths.js').then((m) => m.mountMathsTester(host)); }
 
   const pipe = h('div', { class: 'pipe' }, m.system.map(([t]) => h('div', { class: 'step' }, h('i'), t))), desc = h('div', { id: 'step-desc' });
   main.append(h('div', { id: 'systeme' }, line('01 / LE SYSTÈME', `${m.system.length} ÉTAPES`)), pipe, desc);
@@ -128,7 +129,7 @@ function modelPage(id) {
     h('div', { class: 'acc reveal' }, m.args.map(([t, d, c], k) => h('details', k === 0 ? { open: '' } : {}, h('summary', {}, h('span', { class: 'badge ' + c, title: CONF[c][1] }, CONF[c][0]), t), h('p', {}, d)))));
   main.append(line('03 / CONTRE QUI', `${m.duels.length} DUELS`),
     h('div', { class: 'duels reveal' }, m.duels.map(([a, b, g, r]) => h('div', { class: 'duel' }, h('div', {}, h('b', {}, a), h('span', { class: 'vs' }, '  contre  '), h('b', {}, b)), h('div', { class: 'g' }, g), h('div', { class: 'r' }, r)))));
-  main.append(h('div', { id: 'bench' }, line('04 / BENCHMARKS', 'SOURCES EN BAS')), m.bench.map(benchBlock));
+  main.append(h('div', { id: 'bench' }, line('04 / BENCHMARKS', 'SOURCES EN BAS')), ...m.bench.map(benchBlock));
 
   const prev = MODELS[(i + MODELS.length - 1) % MODELS.length], next = MODELS[(i + 1) % MODELS.length];
   main.append(h('details', { class: 'more', style: 'margin-top:28px' }, h('summary', {}, 'Limites et sources'), h('ul', {}, m.limits.map((l) => h('li', {}, l))), h('p', {}, m.src.map((s) => [h('code', {}, s), ' ']))),

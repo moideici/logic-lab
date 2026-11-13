@@ -62,6 +62,26 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_json(payload, status)
 
     def do_POST(self):
+        if urlparse(self.path).path == "/api/maths/solve":
+            try:
+                size = int(self.headers.get("Content-Length", "0"))
+                if not 0 < size <= 4096:
+                    raise ValueError("Taille JSON invalide")
+                data = json_line(self.rfile.read(size).decode("utf-8"))
+                from . import maths_api
+                model, verified = data.get("model", "best"), bool(data.get("verified"))
+                if model == "best":
+                    result = maths_api.solve_best(data["expression"])
+                elif model == "all":
+                    result = maths_api.solve_all(data["expression"], verified)
+                else:
+                    result = maths_api.solve(data["expression"], model, verified)
+                self.send_json({"ok": True, "result": result})
+            except (ValueError, KeyError) as error:
+                self.send_json({"ok": False, "error": str(error)}, 400)
+            except Exception as error:
+                self.send_json({"ok": False, "error": "Calcul impossible : " + str(error)}, 500)
+            return
         if urlparse(self.path).path == "/api/player":
             try:
                 size = int(self.headers.get("Content-Length", "0"))
@@ -173,6 +193,13 @@ class Handler(SimpleHTTPRequestHandler):
             except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError):
                 pass
             self.close_connection = True
+            return
+        if parsed.path == "/api/maths/models":
+            try:
+                from . import maths_api
+                self.send_json({"ok": True, "models": maths_api.models()})
+            except Exception as error:
+                self.send_json({"ok": True, "models": [], "note": str(error)})
             return
         if parsed.path == "/api/players":
             try:

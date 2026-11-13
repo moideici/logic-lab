@@ -121,6 +121,7 @@ export const MODELS = [
       ['Étape exacte ≥ 0,998', 'Une faute sur 806 états en N1, deux sur 1 000 en N5.', 'ok'],
       ['N2 et N3 : preuve faible', 'Seulement 118 et 66 états de test : le majorant d’échec à 95 % est 2,5 % et 4,5 %.', 'mid'],
       ['Généralisation', 'Nombres à 4 chiffres : ~0 %. Le test a été regardé plusieurs fois : un banc neuf est nécessaire.', 'low'],
+      ['Vagues 2 à 4 : testez-les ci-dessus', 'Exposants, fractions, racines, équations : les modèles existent (jusqu’à 2,4 M de paramètres) mais leurs rapports de test ne sont pas écrits. À l’essai, les fractions à plusieurs termes échouent encore parfois : le vérificateur le dit.', 'low'],
     ],
     bench: [
       { title: 'Problème résolu par niveau (test, recette D)', note: 'Majorant à 95 % du taux d’échec en légende : N2 2,5 %, N3 4,5 %, autres 0,6 %.', unit: '', max: 1, rows: [['N1 · + et −', 1.0, 1], ['N2 · multiplications', 1.0, 1], ['N3 · divisions exactes', 1.0, 1], ['N4 · priorités', 1.0, 1], ['N5 · parenthèses', 1.0, 1], ['N6 · équations', 1.0, 1]] },
