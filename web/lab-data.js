@@ -57,9 +57,12 @@ export const MODELS = [
       ['Pas moins bon que les réseaux séparés', 'Devant sur 3 jeux sur 5, derrière aux dames, égal ailleurs, mais aucun écart n’est significatif.', 'mid'],
       ['Le multi-jeux améliore les jeux', 'Non démontré : l’écart-type d’une mesure est d’environ 0,09 ; la validation hors-ligne ne montre aucun gain.', 'low'],
       ['Sans recherche, égale Garry au Puissance 4', '1,5 à 2,3 % de coups fautifs contre 2,4 % pour Garry 0.6.0 niveau 10.', 'mid'],
+      ['Plus de pas et de données : pas de gain net', '90 000 pas et 6 fois plus de données Hex et Gomoku : Hex 0,667, Gomoku 0,167 (inchangé), dames normal 0,567, Puissance 4 3,4 % de coups fautifs (un peu pire). Le Gomoku n’est donc pas limité que par les données.', 'mid'],
+      ['2048 : il apprend, loin du professeur', 'Réseau seul sans recherche, 16 itérations de distillation + DAgger : au mieux 21 % des parties dépassent 2048 et 71 % dépassent 1024, aucune n’atteint 4096. Le professeur expectimax dépasse 2048 dans 100 % des parties.', 'mid'],
     ],
     bench: [
       { title: 'Puissance 4 : coups fautifs (réseau seul)', note: 'Plus bas est mieux. Moyenne de 2 graines, 24 parties.', unit: '%', max: 8, lower: true, rows: [['Hasard', 7.3], ['Garry 0.6.0 niveau 10', 2.4], ['Optimus · mono-jeu', 2.3], ['Optimus · famille', 2.1], ['Optimus · multi-jeux', 1.5, 1]] },
+      { title: '2048 : parties du réseau seul qui atteignent la tuile', note: '48 parties par mesure, sans recherche ; meilleur point de contrôle (itération 8) et dernier. Le professeur expectimax : 100 % ≥ 2048, 84 % ≥ 4096.', unit: '%', max: 100, rows: [['Réseau · ≥ 1024', 70.8], ['Réseau · ≥ 2048', 18.8, 1], ['Réseau · ≥ 4096', 0], ['Professeur · ≥ 2048', 100], ['Professeur · ≥ 4096', 84.4]] },
       { title: 'Score contre le juge (1 = victoire, 0,5 = égalité)', note: 'Hex et Gomoku : moteur à la main, 100 ms par coup. Dames : bot normal de multi.', unit: '', max: 1, rows: [['Hex · mono', 0.58], ['Hex · famille', 0.70, 1], ['Hex · multi', 0.62], ['Gomoku · mono', 0.10], ['Gomoku · multi', 0.17, 1], ['Dames normal · multi', 0.39], ['Dames normal · mono', 0.43], ['Dames normal · professeur', 0.93]] },
     ],
     duels: [
